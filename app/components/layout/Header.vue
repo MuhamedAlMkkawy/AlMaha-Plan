@@ -174,14 +174,14 @@
             </div>
 
             <!-- Guest -->
-            <NuxtLink
+            <!-- <NuxtLink
               v-else
               to="/login"
               class="px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:text-[#7030A0] hover:bg-slate-100 transition-colors flex items-center gap-2 border border-slate-200"
             >
               <i class="pi pi-lock"></i>
               <span>دخول الإدارة</span>
-            </NuxtLink>
+            </NuxtLink> -->
 
             <!-- Mobile Menu Button -->
             <button
