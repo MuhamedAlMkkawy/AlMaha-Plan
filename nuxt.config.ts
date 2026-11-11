@@ -6,14 +6,19 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
 
   runtimeConfig: {
+    googleServiceAccountEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || '',
+    googlePrivateKey: process.env.GOOGLE_PRIVATE_KEY || '',
+    sheetId: process.env.SHEET_ID || '1ssX3tDc_2g1VBhckLHyewPhk2aQB0sQlTxHuKdwT75A',
+    sheetTabFinal: process.env.SHEET_TAB_FINAL || 'Final',
+    adminEmails: process.env.ADMIN_EMAILS || 'admin@example.com',
+    authSecret: process.env.AUTH_SECRET || 'maha-plan-secret-key-change-in-production',
+    revalidateSecret: process.env.REVALIDATE_SECRET || 'maha-revalidate-secret',
     public: {
-      // apiBase: "http://127.0.0.1:3000/api/",
-      // secretKey : "9e810ce4d7b9e83d7aaf208b3ecfd0488d6a1e5c67a6a72f384a1d3bcb40c012"
+      siteName: 'مخطط المها / مها الشرق',
+      planNo: '4047',
+      publicShowPrices: true,
     },
   },
-  // const config = useRuntimeConfig()
-
-  // console.log(config.public.apiBase)
 
   ssr: false,
 
@@ -23,14 +28,23 @@ export default defineNuxtConfig({
       mode: "out-in",
     },
     head: {
-      title: "مخطط المها",
-      htmlAttrs: { lang: "en" },
+      title: "مخطط المها / مها الشرق - بوابة المبيعات وعروض الأسعار",
+      htmlAttrs: { lang: "ar", dir: "rtl" },
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { name: "description", content: "Website Name" },
+        { name: "description", content: "بوابة مبيعات وعروض أسعار مخطط المها / مها الشرق - رقم 4047" },
+        { name: "robots", content: "noindex, nofollow" },
       ],
-      link: [{ rel: "icon", type: "image/x-icon", href: "/logo.ico" }],
+      link: [
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        { rel: "preconnect", href: "https://fonts.googleapis.com" },
+        { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap",
+        },
+      ],
     },
   },
 
@@ -103,10 +117,14 @@ export default defineNuxtConfig({
       },
     ],
     langDir: "../app/locales/",
-    defaultLocale: "en",
+    defaultLocale: "ar",
   },
 
-  css: ["@/assets/scss/main.scss", "primeicons/primeicons.css"],
+  css: [
+    "@/assets/scss/tailwind.css",
+    "@/assets/scss/main.scss",
+    "primeicons/primeicons.css",
+  ],
 
   vite: {
     css: {
