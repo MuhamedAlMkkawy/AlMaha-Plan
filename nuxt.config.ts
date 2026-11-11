@@ -1,22 +1,40 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import Aura from "@primeuix/themes/aura";
+import { createHash } from "node:crypto";
+
+// Set LOGIN_ROUTE_SECRET in your .env / hosting env vars
+const loginPath =
+  "/" +
+  createHash("sha256")
+    .update(process.env.LOGIN_ROUTE_SECRET || "change-me")
+    .digest("hex")
+    .slice(0, 16);
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: false },
 
   runtimeConfig: {
-    googleServiceAccountEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || '',
-    googlePrivateKey: process.env.GOOGLE_PRIVATE_KEY || '',
-    sheetId: process.env.SHEET_ID || '1ssX3tDc_2g1VBhckLHyewPhk2aQB0sQlTxHuKdwT75A',
-    sheetTabFinal: process.env.SHEET_TAB_FINAL || 'Final',
-    adminEmails: process.env.ADMIN_EMAILS || 'admin@example.com',
-    authSecret: process.env.AUTH_SECRET || 'maha-plan-secret-key-change-in-production',
-    revalidateSecret: process.env.REVALIDATE_SECRET || 'maha-revalidate-secret',
+    googleServiceAccountEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || "",
+    googlePrivateKey: process.env.GOOGLE_PRIVATE_KEY || "",
+    sheetId: process.env.SHEET_ID || "1ssX3tDc_2g1VBhckLHyewPhk2aQB0sQlTxHuKdwT75A",
+    sheetTabFinal: process.env.SHEET_TAB_FINAL || "Final",
+    adminEmails: process.env.ADMIN_EMAILS || "admin@example.com",
+    authSecret: process.env.AUTH_SECRET || "maha-plan-secret-key-change-in-production",
+    revalidateSecret: process.env.REVALIDATE_SECRET || "maha-revalidate-secret",
     public: {
-      siteName: 'مخطط المها / مها الشرق',
-      planNo: '4047',
+      siteName: "مخطط المها / مها الشرق",
+      planNo: "4047",
       publicShowPrices: true,
+      loginPath, // hashed login route, read with useRuntimeConfig().public.loginPath
+    },
+  },
+
+  // Rewrite pages/login.vue to the hashed path (so /login returns 404)
+  hooks: {
+    "pages:extend"(pages) {
+      const login = pages.find((p) => p.file?.endsWith("/pages/login.vue"));
+      if (login) login.path = loginPath;
     },
   },
 

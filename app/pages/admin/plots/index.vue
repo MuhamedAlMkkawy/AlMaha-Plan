@@ -80,7 +80,7 @@
               <th class="px-3 py-3">المساحة</th>
               <th class="px-3 py-3">سعر المتر</th>
               <th class="px-3 py-3">قيمة الأرض</th>
-              <th class="px-3 py-3 w-32">تعديل الحالة السريع</th>
+              <th class="px-3 py-3 w-32">تعديل الحالة </th>
               <th class="px-3 py-3">اسم المشتري</th>
               <th class="px-3 py-3">الجوال</th>
               <th class="px-3 py-3">رقم الصك</th>

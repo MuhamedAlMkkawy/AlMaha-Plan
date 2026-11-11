@@ -1,6 +1,7 @@
 <template>
   <footer class="bg-slate-900 text-slate-300 py-10 mt-16 border-t border-slate-800 print:hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
         <!-- Brand & Description -->
         <div>
@@ -30,10 +31,10 @@
               <span class="text-slate-200 font-medium">المسوق الحصري:</span>
               <span>{{ projectConfig.marketer }}</span>
             </li>
-            <li class="flex items-center gap-2">
+            <!-- <li class="flex items-center gap-2">
               <span class="text-slate-200 font-medium">المصدر الحي للبيانات:</span>
               <span>جدول Google Sheets المعتمد</span>
-            </li>
+            </li> -->
           </ul>
         </div>
 
@@ -43,13 +44,14 @@
           <div class="grid grid-cols-2 gap-2 text-sm">
             <NuxtLink to="/" class="hover:text-white transition-colors">الرئيسية</NuxtLink>
             <NuxtLink to="/plots" class="hover:text-white transition-colors">جدول القطع</NuxtLink>
-            <NuxtLink to="/blocks" class="hover:text-white transition-colors">البلوكات</NuxtLink>
-            <NuxtLink to="/zones" class="hover:text-white transition-colors">الزونات</NuxtLink>
+            <!-- <NuxtLink to="/blocks" class="hover:text-white transition-colors">البلوكات</NuxtLink>
+            <NuxtLink to="/zones" class="hover:text-white transition-colors">الزونات</NuxtLink> -->
             <NuxtLink to="/quote" class="hover:text-white transition-colors">صانع العروض</NuxtLink>
             <NuxtLink to="/login" class="hover:text-white transition-colors">بوابة الإدارة</NuxtLink>
           </div>
         </div>
       </div>
+
 
       <div class="pt-6 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
         <div>

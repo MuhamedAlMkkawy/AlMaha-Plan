@@ -13,14 +13,14 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <button
+        <!-- <button
           @click="syncFromSheet"
           :disabled="syncing"
           class="px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold text-xs sm:text-sm shadow-xs flex items-center gap-2"
         >
           <i :class="['pi pi-sync', syncing ? 'pi-spin text-[#7030A0]' : 'text-slate-400']"></i>
           <span>{{ syncing ? 'جاري المزامنة...' : 'مزامنة من Google Sheets' }}</span>
-        </button>
+        </button> -->
 
         <NuxtLink
           to="/admin/plots/new"

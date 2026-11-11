@@ -3,7 +3,7 @@
     <!-- Top Hero / Welcome Banner -->
     <div class="bg-gradient-to-r from-[#7030A0] to-[#532277] rounded-3xl p-6 sm:p-8 text-white shadow-lg relative overflow-hidden">
       <div class="absolute -left-10 -bottom-10 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
-      <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div class="relative z-10 flex md:flex-row md:items-center justify-between gap-6">
         <div>
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-purple-100 text-xs font-semibold mb-3">
             <i class="pi pi-check-circle text-xs"></i>
@@ -12,9 +12,9 @@
           <h1 class="text-2xl sm:text-4xl font-black mb-2 tracking-tight">
             {{ projectConfig.name }}
           </h1>
-          <p class="text-sm sm:text-base max-w-2xl leading-relaxed text-purple-100">
+          <!-- <p class="text-sm sm:text-base max-w-2xl leading-relaxed text-purple-100">
             لوحة الإحصائيات والمتابعة الحية لمبيعات الأراضي السكنية والتجارية والمرافق. البيانات متصلة مباشرة بجدول Google Sheets الرسمي.
-          </p>
+          </p> -->
         </div>
 
         <div class="flex flex-col sm:flex-wrap items-center gap-3">
