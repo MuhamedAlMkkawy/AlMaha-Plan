@@ -1,0 +1,28 @@
+{
+  "empty_component": {
+    "text": "No content Found!"
+  },
+  "error_page": {
+    "title": "Page Not Found",
+    "go_home": "Go To Home Page"
+  },
+  "validation": {
+    "nameRequired": "Name is required",
+    "nameMin": "Name must be at least 3 characters",
+    "nameMax": "Name must not exceed 30 characters",
+
+    "countryRequired": "Please select a country",
+
+    "promotionRequired": "Please select a promotion date",
+
+    "holidaysRequired": "Please select a holiday period",
+    "holidaysDateRequired": "Please select a valid date",
+    "holidaysMin": "Please select a start and end date",
+
+    "messageRequired": "Message is required",
+    "messageMin": "Message must be at least 10 characters",
+    "messageMax": "Message must not exceed 500 characters",
+
+    "countriesRequired": "Please select at least one country"
+  }
+}

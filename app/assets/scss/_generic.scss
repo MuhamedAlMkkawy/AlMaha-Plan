@@ -1,0 +1,132 @@
+@use "./variables" as *;
+
+@font-face {
+  font-family: "Expo Arabic";
+  src:
+    url("../fonts/ExpoArabic-Medium.woff2") format("woff2"),
+    url("../fonts/ExpoArabic-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Expo Arabic";
+  src:
+    url("../fonts/ExpoArabic-SemiBold.woff2") format("woff2"),
+    url("../fonts/ExpoArabic-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Expo Arabic Book";
+  src:
+    url("../fonts/ExpoArabic-Book.woff2") format("woff2"),
+    url("../fonts/ExpoArabic-Book.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Expo Arabic";
+  src:
+    url("../fonts/ExpoArabic-Light.woff2") format("woff2"),
+    url("../fonts/ExpoArabic-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+// RESET GLOBAL STYLES
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  // font-family: $fontFamily;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font-family: $fontFamily;
+
+  &:hover {
+    color: inherit;
+  }
+}
+
+img,
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+html {
+  background: rgba(#bababa, 0.2);
+}
+
+body {
+  font-family: $fontFamily;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  position: relative;
+}
+
+// CHANGE SCROLL BAR COLOR
+*::-webkit-scrollbar {
+  background-color: #fff;
+  width: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $mainColor;
+  border-radius: 25px;
+}
+
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px #fff;
+  width: 10px;
+}
+
+// button
+button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+::selection {
+  background: $secColor;
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f8f8ff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $secColor;
+  border-radius: 30px;
+}
+
+input[type="file" i]::-webkit-file-upload-button {
+  display: none;
+}
+
+section {
+  padding: 50px 0;
+}

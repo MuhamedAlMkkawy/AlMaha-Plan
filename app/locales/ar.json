@@ -1,0 +1,29 @@
+{
+  "empty_component": {
+    "text": "لا يوجد محتوي"
+  },
+  "error_page": {
+    "title": "الصفحة غير موجودة",
+    "go_home": "الذهاب إلى الرئيسية"
+  },
+  "validation": {
+    "nameRequired": "الاسم مطلوب",
+    "nameMin": "يجب ألا يقل الاسم عن 3 أحرف",
+    "nameMax": "يجب ألا يزيد الاسم عن 30 حرفًا",
+
+    "countryRequired": "يرجى اختيار الدولة",
+
+    "promotionRequired": "يرجى اختيار تاريخ العرض",
+
+    "holidaysRequired": "يرجى اختيار فترة الإجازة",
+    "holidaysDateRequired": "يرجى اختيار تاريخ صالح",
+    "holidaysMin": "يرجى اختيار تاريخ البداية والنهاية",
+
+    "messageRequired": "الرسالة مطلوبة",
+    "messageMin": "يجب ألا تقل الرسالة عن 10 أحرف",
+    "messageMax": "يجب ألا تزيد الرسالة عن 500 حرف",
+
+    
+    "countriesRequired": "يرجى اختيار دولة واحدة على الأقل"
+  }
+}
