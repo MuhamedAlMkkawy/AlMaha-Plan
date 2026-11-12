@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-6 max-w-5xl mx-auto">
+  <div class="space-y-6 mx-auto">
     <!-- Top Action & Navigation Bar -->
     <div class="flex flex-wrap items-center justify-between gap-4 print:hidden">
       <div class="flex items-center gap-3">
