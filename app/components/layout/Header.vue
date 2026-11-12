@@ -8,7 +8,7 @@
       leave-to-class="opacity-0 -translate-y-full"
     >
       <div v-if="adminUser" class="bg-gradient-to-l from-[#3b1659] via-[#532277] to-[#3b1659] text-purple-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-9 flex items-center justify-between text-xs">
+        <div class="max-w-7xl mx-auto h-9 flex items-center justify-between text-xs">
           <div class="flex items-center gap-2 min-w-0">
             <span class="relative flex w-2 h-2 shrink-0">
               <span class="absolute inline-flex w-full h-full rounded-full bg-emerald-400 opacity-60 animate-ping"></span>
@@ -41,7 +41,7 @@
     </Transition>
 
     <div class="bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
         <div class="flex items-center justify-between h-[72px] gap-4">
           <!-- Logo and Project Brand -->
           <NuxtLink to="/" class="flex items-center gap-3 group min-w-0">
@@ -84,7 +84,7 @@
           </nav>
 
           <!-- Account area -->
-          <div class="flex items-center gap-2 shrink-0">
+          <div class="flex items-center gap-2 shrink-0" v-if="adminUser">
             <!-- Auth check skeleton (prevents flicker) -->
             <div v-if="!authChecked" class="w-10 h-10 rounded-full bg-slate-200 animate-pulse"></div>
 
