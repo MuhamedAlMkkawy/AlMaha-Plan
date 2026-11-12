@@ -9,7 +9,7 @@
           <span class="text-xs font-bold text-[#7030A0]">سجل التدقيق</span>
         </div>
         <h1 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">
-          سجل التعديلات والعمليات (Audit Log)
+          سجل التعديلات والعمليات
         </h1>
         <p class="text-xs text-slate-500 mt-1">
           سجل غير قابل للتعديل لجميع عمليات الإنشاء والتعديل والحذف المنفذة عبر النظام

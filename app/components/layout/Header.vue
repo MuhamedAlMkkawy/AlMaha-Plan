@@ -1,29 +1,25 @@
 <template>
   <header class="sticky top-0 z-40 print:hidden">
-    <!-- ADMIN: same light bar as the public site, with a purple top edge and a mode badge -->
+    <!-- ADMIN: light bar, purple top edge, mode badge -->
     <div
       v-if="adminUser"
       class="bg-white/95 backdrop-blur-md text-slate-700 border-t-[3px] border-t-[#7030A0] border-b border-b-slate-200 transition-shadow duration-300"
       :class="scrolled ? 'shadow-[0_10px_24px_-18px_rgba(76,29,115,0.45)]' : ''"
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="h-14 flex items-center justify-between gap-4">
+      <div class="max-w-7xl mx-auto">
+        <div class="h-16 flex items-center justify-between gap-4">
           <!-- Brand + mode -->
           <NuxtLink
             to="/admin"
-            class="flex items-center gap-3 min-w-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/50 focus-visible:ring-offset-4"
+            aria-label="وضع الإدارة - الذهاب إلى لوحة الإدارة"
+            class="group inline-flex items-center gap-3 h-10 ps-3.5 pe-5 rounded-xl bg-[#7030A0]/[0.07] ring-1 ring-inset ring-[#7030A0]/15 text-[#4c1d73] text-[15px] font-bold whitespace-nowrap transition-all duration-300 hover:bg-[#7030A0]/[0.12] hover:ring-[#7030A0]/30 hover:shadow-[0_8px_20px_-12px_rgba(112,48,160,0.55)] active:scale-[0.98] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/60 focus-visible:ring-offset-2"
           >
-            <span class="grid grid-cols-2 gap-[2px] w-7 h-7 shrink-0" aria-hidden="true">
-              <span class="rounded-[3px] bg-[#7030A0]"></span>
-              <span class="rounded-[3px] bg-[#7030A0]/60"></span>
-              <span class="rounded-[3px] bg-[#7030A0]/60"></span>
-              <span class="rounded-[3px] bg-amber-400"></span>
+            <!-- gold square from the logo, with a soft live pulse -->
+            <span class="relative flex w-3 h-3 shrink-0" aria-hidden="true">
+              <span class="absolute inset-0 rounded-[3px] bg-amber-400/60 motion-safe:animate-ping"></span>
+              <span class="relative w-3 h-3 rounded-[3px] bg-amber-400 transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110 motion-reduce:transition-none"></span>
             </span>
-            <span class="hidden sm:block text-base font-black text-slate-900 truncate">{{ projectConfig.name }}</span>
-            <span class="inline-flex items-center gap-1.5 h-6 px-2.5 rounded-full bg-[#7030A0]/10 text-[#7030A0] text-xs font-bold whitespace-nowrap">
-              <span class="w-1.5 h-1.5 rounded-full bg-[#7030A0]"></span>
-              وضع الإدارة
-            </span>
+            <span>وضع الإدارة</span>
           </NuxtLink>
 
           <!-- Links: admin tools, then site pages in a quieter tone -->
@@ -32,13 +28,14 @@
               v-for="item in adminLinks"
               :key="item.to"
               :to="item.to"
-              class="relative flex items-center px-3.5 text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:bg-black/5"
+              class="group relative flex items-center px-4 text-[15px] transition-colors duration-200 focus-visible:outline-none focus-visible:bg-[#7030A0]/5"
               :class="isActive(item) ? 'text-[#7030A0] font-bold' : 'text-slate-700 font-medium hover:text-[#7030A0]'"
             >
               {{ item.label }}
               <span
-                v-if="isActive(item)"
-                class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[3px] w-7 rounded-t-full bg-amber-400"
+                aria-hidden="true"
+                class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[3px] w-7 rounded-t-full bg-amber-400 transition-transform duration-300 ease-out motion-reduce:transition-none"
+                :class="isActive(item) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'"
               ></span>
             </NuxtLink>
 
@@ -48,13 +45,14 @@
               v-for="item in navItems"
               :key="item.to"
               :to="item.to"
-              class="relative hidden lg:flex items-center px-3 text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:bg-black/5"
-              :class="isActive(item) ? 'text-[#7030A0] font-bold' : 'text-slate-400 font-medium hover:text-slate-700'"
+              class="group relative hidden lg:flex items-center px-3.5 text-[15px] transition-colors duration-200 focus-visible:outline-none focus-visible:bg-[#7030A0]/5"
+              :class="isActive(item) ? 'text-[#7030A0] font-bold' : 'text-slate-500 font-medium hover:text-[#7030A0]'"
             >
               {{ item.label }}
               <span
-                v-if="isActive(item)"
-                class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[3px] w-6 rounded-t-full bg-amber-400"
+                aria-hidden="true"
+                class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[3px] w-6 rounded-t-full bg-amber-400 transition-transform duration-300 ease-out motion-reduce:transition-none"
+                :class="isActive(item) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'"
               ></span>
             </NuxtLink>
           </nav>
@@ -64,9 +62,9 @@
               type="button"
               @click="handleLogout"
               :disabled="loggingOut"
-              class="hidden md:inline-flex items-center gap-2 h-9 px-3 rounded-lg text-sm text-slate-500 transition-colors duration-200 hover:bg-rose-50 hover:text-rose-600 disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-300"
+              class="hidden md:inline-flex items-center gap-2 h-10 px-3.5 rounded-xl text-[15px] font-medium text-slate-500 transition-colors duration-200 hover:bg-rose-50 hover:text-rose-600 active:bg-rose-100 disabled:opacity-60 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-300"
             >
-              <i :class="loggingOut ? 'pi pi-spin pi-spinner' : 'pi pi-sign-out'" class="text-xs"></i>
+              <i :class="loggingOut ? 'pi pi-spin pi-spinner' : 'pi pi-sign-out'" class="text-sm"></i>
               <span>تسجيل الخروج</span>
             </button>
 
@@ -75,7 +73,8 @@
               @click="mobileMenuOpen = !mobileMenuOpen"
               :aria-expanded="mobileMenuOpen"
               aria-label="القائمة"
-              class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg text-slate-700 transition-colors duration-200 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/50"
+              class="md:hidden w-11 h-11 flex items-center justify-center rounded-xl text-slate-700 transition-all duration-200 hover:bg-[#7030A0]/10 hover:text-[#7030A0] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/50"
+              :class="mobileMenuOpen ? 'bg-[#7030A0]/10 text-[#7030A0]' : ''"
             >
               <i :class="mobileMenuOpen ? 'pi pi-times' : 'pi pi-bars'"></i>
             </button>
@@ -89,38 +88,39 @@
           leave-active-class="transition duration-150 ease-in"
           leave-to-class="opacity-0 -translate-y-2"
         >
-          <div v-if="mobileMenuOpen" class="md:hidden pb-3 border-t border-slate-100">
+          <div v-if="mobileMenuOpen" class="md:hidden pb-4 border-t border-slate-100">
             <NuxtLink
               v-for="item in adminLinks"
               :key="item.to"
               :to="item.to"
-              class="flex items-center gap-3 py-3.5 border-b border-slate-100 text-sm"
+              class="group flex items-center gap-3 py-3.5 border-b border-slate-100 text-base transition-colors duration-200 hover:text-[#7030A0] active:bg-slate-50"
               :class="isActive(item) ? 'text-[#7030A0] font-bold' : 'text-slate-700 font-medium'"
+            >
+              <i :class="item.icon" class="text-base w-5"></i>
+              <span class="flex-1">{{ item.label }}</span>
+              <span v-if="isActive(item)" class="w-2 h-2 rounded-[3px] bg-amber-400"></span>
+            </NuxtLink>
+
+            <div class="pt-4 pb-1 text-sm text-slate-400">صفحات الموقع</div>
+            <NuxtLink
+              v-for="item in navItems"
+              :key="item.to"
+              :to="item.to"
+              class="group flex items-center gap-3 py-3 border-b border-slate-100 text-base transition-colors duration-200 hover:text-[#7030A0] active:bg-slate-50"
+              :class="isActive(item) ? 'text-[#7030A0] font-bold' : 'text-slate-500'"
             >
               <i :class="item.icon" class="text-sm w-5"></i>
               <span class="flex-1">{{ item.label }}</span>
               <span v-if="isActive(item)" class="w-2 h-2 rounded-[3px] bg-amber-400"></span>
             </NuxtLink>
 
-            <div class="pt-3 pb-1 text-[11px] text-slate-400">صفحات الموقع</div>
-            <NuxtLink
-              v-for="item in navItems"
-              :key="item.to"
-              :to="item.to"
-              class="flex items-center gap-3 py-3 border-b border-slate-100 text-sm"
-              :class="isActive(item) ? 'text-[#7030A0] font-bold' : 'text-slate-500'"
-            >
-              <i :class="item.icon" class="text-xs w-5"></i>
-              <span>{{ item.label }}</span>
-            </NuxtLink>
-
             <button
               type="button"
               @click="handleLogout"
               :disabled="loggingOut"
-              class="w-full flex items-center gap-3 pt-3.5 text-sm text-rose-600 disabled:opacity-60"
+              class="mt-3 w-full h-12 flex items-center gap-3 px-3 rounded-xl text-base font-medium text-rose-600 transition-colors duration-200 hover:bg-rose-50 active:bg-rose-100 disabled:opacity-60 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-300"
             >
-              <i :class="loggingOut ? 'pi pi-spin pi-spinner' : 'pi pi-sign-out'" class="text-xs w-5"></i>
+              <i :class="loggingOut ? 'pi pi-spin pi-spinner' : 'pi pi-sign-out'" class="text-sm w-5"></i>
               <span>تسجيل الخروج</span>
             </button>
           </div>
@@ -134,7 +134,7 @@
       class="bg-white/90 backdrop-blur-md text-slate-700 border-b border-[#7030A0]/10 transition-shadow duration-300"
       :class="scrolled ? 'shadow-[0_10px_24px_-18px_rgba(76,29,115,0.45)]' : ''"
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="max-w-7xl mx-auto">
         <div class="h-16 flex items-center justify-between gap-4">
           <NuxtLink
             to="/"
@@ -147,11 +147,11 @@
               <span class="rounded-[4px] bg-amber-400"></span>
             </span>
             <span class="min-w-0 leading-tight">
-              <span class="block text-base font-black text-slate-900 truncate">{{ projectConfig.name }}</span>
-              <span class="hidden sm:block text-[11px] text-slate-500 truncate">
+              <span class="block text-base font-black text-slate-900 truncate transition-colors duration-200 group-hover:text-[#7030A0]">{{ projectConfig.name }}</span>
+              <span class="hidden sm:block text-xs text-slate-500 truncate">
                 مخطط رقم {{ projectConfig.planNo }} &nbsp;|&nbsp; التسويق: {{ projectConfig.marketer }}
               </span>
-              <span class="block sm:hidden text-[11px] text-slate-500 truncate">مخطط رقم {{ projectConfig.planNo }}</span>
+              <span class="block sm:hidden text-xs text-slate-500 truncate">مخطط رقم {{ projectConfig.planNo }}</span>
             </span>
           </NuxtLink>
 
@@ -160,24 +160,34 @@
               v-for="item in navItems"
               :key="item.to"
               :to="item.to"
-              class="relative flex items-center px-4 text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:bg-black/5"
-              :class="isActive(item) ? 'text-[#7030A0] font-bold' : 'text-slate-600 font-medium hover:text-slate-900'"
+              class="group relative flex items-center px-4 text-[15px] transition-colors duration-200 focus-visible:outline-none focus-visible:bg-[#7030A0]/5"
+              :class="isActive(item) ? 'text-[#7030A0] font-bold' : 'text-slate-600 font-medium hover:text-[#7030A0]'"
             >
               {{ item.label }}
               <span
-                v-if="isActive(item)"
-                class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[3px] w-7 rounded-t-full bg-amber-400"
+                aria-hidden="true"
+                class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[3px] w-7 rounded-t-full bg-amber-400 transition-transform duration-300 ease-out motion-reduce:transition-none"
+                :class="isActive(item) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'"
               ></span>
             </NuxtLink>
           </nav>
 
           <div class="flex items-center gap-2 shrink-0">
+            <!-- Desktop CTA -->
             <NuxtLink
               to="/quote"
-              class="hidden md:inline-flex items-center gap-2 h-10 px-5 rounded-full bg-[#7030A0] text-white text-sm font-bold transition-colors duration-200 hover:bg-[#5b2486] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/50 focus-visible:ring-offset-2"
+              class="group relative hidden md:inline-flex items-center gap-3 h-11 ps-2 pe-5 overflow-hidden rounded-xl bg-[#7030A0] text-white text-[15px] font-bold shadow-md shadow-[#7030A0]/25 transition-all duration-300 ease-out hover:bg-[#5b2486] hover:shadow-lg hover:shadow-[#7030A0]/40 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] active:bg-[#4c1d73] motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/60 focus-visible:ring-offset-2"
             >
-              <i class="pi pi-file-edit text-xs"></i>
-              <span>صانع عروض الأسعار</span>
+              <!-- soft light sweep on hover -->
+              <span
+                aria-hidden="true"
+                class="pointer-events-none absolute inset-y-0 left-0 w-1/4 -translate-x-full -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-[450%] motion-reduce:hidden"
+              ></span>
+
+              <span class="relative w-8 h-8 rounded-lg bg-amber-400 text-[#3b1259] flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-amber-300 group-hover:scale-110 group-hover:-rotate-6 motion-reduce:transition-none motion-reduce:group-hover:transform-none">
+                <i class="pi pi-file-edit text-sm"></i>
+              </span>
+              <span class="relative">صانع عروض الأسعار</span>
             </NuxtLink>
 
             <button
@@ -185,38 +195,49 @@
               @click="mobileMenuOpen = !mobileMenuOpen"
               :aria-expanded="mobileMenuOpen"
               aria-label="القائمة"
-              class="md:hidden w-10 h-10 flex items-center justify-center rounded-full text-slate-700 transition-colors duration-200 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+              class="md:hidden w-11 h-11 flex items-center justify-center rounded-xl text-slate-700 transition-all duration-200 hover:bg-[#7030A0]/10 hover:text-[#7030A0] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/50"
+              :class="mobileMenuOpen ? 'bg-[#7030A0]/10 text-[#7030A0]' : ''"
             >
               <i :class="mobileMenuOpen ? 'pi pi-times' : 'pi pi-bars'"></i>
             </button>
           </div>
         </div>
 
+        <!-- Mobile drawer -->
         <Transition
           enter-active-class="transition duration-200 ease-out"
           enter-from-class="opacity-0 -translate-y-2"
           leave-active-class="transition duration-150 ease-in"
           leave-to-class="opacity-0 -translate-y-2"
         >
-          <div v-if="mobileMenuOpen" class="md:hidden pb-3 border-t border-slate-100">
+          <div v-if="mobileMenuOpen" class="md:hidden pb-4 border-t border-slate-100">
             <NuxtLink
               v-for="item in navItems"
               :key="item.to"
               :to="item.to"
-              class="flex items-center gap-3 py-3.5 border-b border-slate-100 text-sm transition-colors duration-200"
-              :class="isActive(item) ? 'text-[#7030A0] font-bold' : 'text-slate-700 font-medium hover:text-[#7030A0]'"
+              class="group flex items-center gap-3 py-3.5 border-b border-slate-100 text-base transition-colors duration-200 hover:text-[#7030A0] active:bg-slate-50"
+              :class="isActive(item) ? 'text-[#7030A0] font-bold' : 'text-slate-700 font-medium'"
             >
-              <i :class="item.icon" class="text-sm w-5"></i>
+              <i :class="item.icon" class="text-base w-5"></i>
               <span class="flex-1">{{ item.label }}</span>
               <span v-if="isActive(item)" class="w-2 h-2 rounded-[3px] bg-amber-400"></span>
             </NuxtLink>
 
+            <!-- Mobile CTA -->
             <NuxtLink
               to="/quote"
-              class="mt-3 h-11 rounded-full bg-[#7030A0] text-white text-sm font-bold flex items-center justify-center gap-2 transition-colors duration-200 hover:bg-[#5b2486]"
+              class="group relative mt-4 h-12 ps-2 pe-4 overflow-hidden rounded-xl bg-[#7030A0] text-white text-base font-bold flex items-center gap-3 shadow-md shadow-[#7030A0]/25 transition-all duration-300 ease-out hover:bg-[#5b2486] hover:shadow-lg hover:shadow-[#7030A0]/40 active:scale-[0.99] active:bg-[#4c1d73] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/60 focus-visible:ring-offset-2"
             >
-              <i class="pi pi-file-edit text-xs"></i>
-              <span>صانع عروض الأسعار</span>
+              <span
+                aria-hidden="true"
+                class="pointer-events-none absolute inset-y-0 left-0 w-1/4 -translate-x-full -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-[450%] motion-reduce:hidden"
+              ></span>
+
+              <span class="relative w-8 h-8 rounded-lg bg-amber-400 text-[#3b1259] flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-amber-300 group-hover:scale-110 group-hover:-rotate-6 motion-reduce:transition-none motion-reduce:group-hover:transform-none">
+                <i class="pi pi-file-edit text-sm"></i>
+              </span>
+              <span class="relative flex-1">صانع عروض الأسعار</span>
+              <i class="relative pi pi-arrow-left text-sm transition-transform duration-300 group-hover:-translate-x-1.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"></i>
             </NuxtLink>
           </div>
         </Transition>
