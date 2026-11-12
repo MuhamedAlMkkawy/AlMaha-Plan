@@ -214,7 +214,8 @@
               <th class="px-3 py-4">السعي (15% ضريبة)</th>
               <th class="px-3 py-4">ضريبة التصرفات (5%)</th>
               <th class="px-3 py-4">الحالة</th>
-              <th class="px-3 pe-5 py-4">عرض السعر</th>
+              <th class="px-3 py-4">عرض السعر</th>
+              <th class="px-3 pe-5 py-4">العقد</th>
             </tr>
           </thead>
 
@@ -284,6 +285,16 @@
                   class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-purple-50 text-[#7030A0] transition-all duration-300 hover:bg-[#7030A0] hover:text-white hover:shadow-md hover:shadow-[#7030A0]/25 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40"
                 >
                   <i class="pi pi-arrow-left text-[10px] transition-transform duration-300 group-hover:-translate-x-0.5"></i>
+                </NuxtLink>
+              </td>
+
+              <td class="px-3 pe-5 py-3.5" @click.stop>
+                <NuxtLink
+                  :to="`/contracts/${plot.plotNo}`"
+                  aria-label="عرض العقد"
+                  class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-purple-50 text-[#7030A0] transition-all duration-300 hover:bg-[#7030A0] hover:text-white hover:shadow-md hover:shadow-[#7030A0]/25 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40"
+                >
+                  <i class="pi pi-file text-[10px]"></i>
                 </NuxtLink>
               </td>
             </tr>
