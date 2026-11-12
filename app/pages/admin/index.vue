@@ -24,10 +24,48 @@
 
         <NuxtLink
           to="/admin/plots/new"
-          class="px-4 py-2.5 rounded-xl bg-[#7030A0] text-white hover:bg-[#532277] font-bold text-xs sm:text-sm shadow-md flex items-center gap-2"
+          class="group relative inline-flex items-center justify-center gap-2.5
+                overflow-hidden rounded-xl px-5 py-3
+                bg-gradient-to-r from-[#7030A0] via-[#8241B5] to-[#7030A0]
+                text-white text-xs sm:text-sm font-bold
+                shadow-lg shadow-purple-900/20
+                transition-all duration-300 ease-out
+                hover:-translate-y-1 hover:scale-[1.03]
+                hover:shadow-xl hover:shadow-purple-900/35
+                hover:from-[#8241B5] hover:via-[#963FD0] hover:to-[#7030A0]
+                active:translate-y-0 active:scale-[0.97]
+                focus:outline-none focus-visible:ring-4
+                focus-visible:ring-purple-400/40"
         >
-          <i class="pi pi-plus"></i>
-          <span>إضافة قطعة جديدة</span>
+          <!-- Animated shine -->
+          <span
+            class="absolute inset-0 -translate-x-[120%] skew-x-[-20deg]
+                  bg-gradient-to-r from-transparent via-white/20 to-transparent
+                  transition-transform duration-700
+                  group-hover:translate-x-[120%]"
+          ></span>
+
+          <!-- Icon container -->
+          <span
+            class="relative flex h-7 w-7 items-center justify-center
+                  rounded-lg bg-white/15 ring-1 ring-white/20
+                  transition-all duration-300
+                  group-hover:rotate-90 group-hover:bg-white/25"
+          >
+            <i class="pi pi-plus text-xs"></i>
+          </span>
+
+          <!-- Button text -->
+          <span class="relative tracking-wide">
+            إضافة قطعة جديدة
+          </span>
+
+          <!-- Arrow -->
+          <i
+            class="pi pi-arrow-left relative text-[10px] opacity-70
+                  transition-all duration-300
+                  group-hover:-translate-x-1 group-hover:opacity-100"
+          ></i>
         </NuxtLink>
       </div>
     </div>

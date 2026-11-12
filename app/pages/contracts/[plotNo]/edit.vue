@@ -540,7 +540,7 @@ const message = reactive<{
 });
 
 const save = async () => {
-  if (saving.value || idError.value || !dirty.value) return;
+  if (!isAdmin.value || saving.value || idError.value || !dirty.value) return;
 
   saving.value = true;
   message.text = '';

@@ -134,13 +134,6 @@
     <!-- Contract -->
     <div v-else class="space-y-4">
 
-      <p
-        v-if="!isAdmin"
-        class="text-xs text-slate-500 print:hidden"
-      >
-        بيانات المشتري لا تظهر إلا للمسؤولين، وستجد الحقول فارغة لتعبئتها يدويًا عند الطباعة.
-      </p>
-
       <ContractSheet
         :plot="plot"
         :buyer="buyer"
@@ -193,11 +186,11 @@ const plot = computed(() => response.value?.data ?? null);
 // Admin permission
 const isAdmin = computed(() => !!response.value?.isAdmin);
 
-// Buyer information (admin only)
+// Buyer information (all data shown to users)
 const buyer = computed(() => {
   const p = plot.value;
 
-  if (!p || !isAdmin.value) {
+  if (!p) {
     return {
       name: '',
       id: '',
@@ -216,17 +209,17 @@ const buyer = computed(() => {
 
 // Contract number
 const contractNo = computed(() =>
-  isAdmin.value ? plot.value?.contractNo || '' : ''
+  plot.value?.contractNo != null ? String(plot.value.contractNo) : ''
 );
 
 // Contract date
 const contractDate = computed(() =>
-  isAdmin.value ? plot.value?.contractDate || '' : ''
+  plot.value?.contractDate || ''
 );
 
 // Special note
 const specialNote = computed(() =>
-  isAdmin.value ? plot.value?.contractNote || '' : ''
+  plot.value?.contractNote || ''
 );
 
 // Contract terms

@@ -4,16 +4,16 @@
     <header class="cs-head">
       <div class="cs-brand">
         <div class="cs-brand-name">مشروع مخطط مها الشرق العقاري</div>
-        <div class="cs-brand-seller">{{ seller }}</div>
+        <div class="cs-brand-seller">{{ sellerName }}</div>
       </div>
       <dl class="cs-meta">
         <div>
           <dt>رقم العقد</dt>
-          <dd class="blank min-w-20">{{ contractNo }}</dd>
+          <dd class="blank min-w-20">{{ noText }}</dd>
         </div>
         <div>
           <dt>التاريخ</dt>
-          <dd class="blank min-w-24 tabular-nums">{{ contractDate }}</dd>
+          <dd class="blank min-w-24 tabular-nums">{{ dateText }}</dd>
         </div>
       </dl>
     </header>
@@ -25,7 +25,7 @@
     <section class="cs-parties">
       <div class="cs-party">
         <h2>البائع</h2>
-        <p class="cs-party-name">{{ seller }}.</p>
+        <p class="cs-party-name">{{ sellerName }}.</p>
       </div>
 
       <div class="cs-party cs-buyer">
@@ -33,19 +33,19 @@
         <dl class="cs-fields">
           <div class="cs-field cs-field-wide">
             <dt>الاسم</dt>
-            <dd class="blank">{{ buyer.name }}</dd>
+            <dd class="blank">{{ b.name }}</dd>
           </div>
           <div class="cs-field">
             <dt>الهوية الوطنية</dt>
-            <dd class="blank tabular-nums">{{ buyer.id }}</dd>
+            <dd class="blank tabular-nums">{{ b.id }}</dd>
           </div>
           <div class="cs-field">
             <dt>تاريخ الميلاد</dt>
-            <dd class="blank tabular-nums">{{ buyer.birthDate }}</dd>
+            <dd class="blank tabular-nums">{{ b.birthDate }}</dd>
           </div>
           <div class="cs-field">
             <dt>الهاتف المحمول</dt>
-            <dd class="blank tabular-nums" dir="ltr">{{ buyer.phone }}</dd>
+            <dd class="blank tabular-nums" dir="ltr">{{ b.phone }}</dd>
           </div>
         </dl>
       </div>
@@ -58,24 +58,24 @@
         <tr>
           <th>العقار</th>
           <td class="tabular-nums">
-            قطعة رقم {{ plot.plotNo }} بلك {{ plot.block }} / بمساحة {{ fmt(plot.area) }} م²
+            قطعة رقم {{ p.plotNo }} بلك {{ p.block }} / بمساحة {{ fmt(p.area) }} م²
           </td>
         </tr>
         <tr>
           <th>ثمن الشراء</th>
-          <td class="tabular-nums">{{ fmt(plot.landValue) }} ريال سعودي</td>
+          <td class="tabular-nums">{{ fmt(p.landValue) }} ريال سعودي</td>
         </tr>
         <tr>
           <th>مبلغ الضريبة</th>
-          <td class="tabular-nums">{{ fmt(plot.retTax) }} ريال سعودي</td>
+          <td class="tabular-nums">{{ fmt(p.retTax) }} ريال سعودي</td>
         </tr>
         <tr>
           <th>أتعاب الوساطة</th>
-          <td class="tabular-nums">{{ fmt(plot.brokerage) }} ريال سعودي</td>
+          <td class="tabular-nums">{{ fmt(p.brokerage) }} ريال سعودي</td>
         </tr>
         <tr>
           <th>بيان خاص</th>
-          <td class="cs-note">{{ specialNote }}</td>
+          <td class="cs-note">{{ noteText }}</td>
         </tr>
       </tbody>
     </table>
@@ -83,7 +83,7 @@
     <!-- Terms -->
     <h2 class="cs-section">الشروط والأحكام العامة</h2>
     <ol class="cs-terms">
-      <li v-for="(term, i) in terms" :key="i">{{ term }}</li>
+      <li v-for="(term, i) in termList" :key="i">{{ term }}</li>
     </ol>
 
     <p class="cs-closing">وبالله التوفيق، وهو خير الشاهدين.</p>
@@ -103,36 +103,70 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
 interface Props {
-  plot: {
-    plotNo: number | string;
-    block: string | number;
-    area: number;
-    landValue: number;
-    retTax: number;
-    brokerage: number;
-  };
-  buyer?: { name?: string; id?: string; birthDate?: string; phone?: string };
-  contractNo?: string | number;
-  contractDate?: string;
-  specialNote?: string;
-  terms: string[];
-  seller?: string;
+  plot?: {
+    plotNo?: number | string | null;
+    block?: string | number | null;
+    area?: number | string | null;
+    landValue?: number | string | null;
+    retTax?: number | string | null;
+    brokerage?: number | string | null;
+  } | null;
+  buyer?: {
+    name?: string | null;
+    id?: string | null;
+    birthDate?: string | null;
+    phone?: string | null;
+  } | null;
+  contractNo?: string | number | null;
+  contractDate?: string | null;
+  specialNote?: string | null;
+  terms?: string[] | null;
+  seller?: string | null;
   /** Pass your own formatter (e.g. formatCurrencyNumber) to keep numbers consistent with the rest of the app */
   format?: (n: number) => string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  buyer: () => ({ name: '', id: '', birthDate: '', phone: '' }),
+  plot: null,
+  buyer: null,
   contractNo: '',
   contractDate: '',
   specialNote: '',
+  terms: () => [],
   seller: 'شركة القادسية الأولى العقارية',
   format: undefined,
 });
 
-const fmt = (n: number) =>
-  props.format ? props.format(n) : new Intl.NumberFormat('en-US').format(Number(n) || 0);
+// withDefaults only covers `undefined`; the API may send `null`, so normalise everything here.
+const b = computed(() => ({
+  name: props.buyer?.name ?? '',
+  id: props.buyer?.id ?? '',
+  birthDate: props.buyer?.birthDate ?? '',
+  phone: props.buyer?.phone ?? '',
+}));
+
+const p = computed(() => ({
+  plotNo: props.plot?.plotNo ?? '',
+  block: props.plot?.block ?? '',
+  area: props.plot?.area ?? 0,
+  landValue: props.plot?.landValue ?? 0,
+  retTax: props.plot?.retTax ?? 0,
+  brokerage: props.plot?.brokerage ?? 0,
+}));
+
+const sellerName = computed(() => props.seller || 'شركة القادسية الأولى العقارية');
+const noText = computed(() => props.contractNo ?? '');
+const dateText = computed(() => props.contractDate ?? '');
+const noteText = computed(() => props.specialNote ?? '');
+const termList = computed(() => props.terms ?? []);
+
+const fmt = (n: number | string | null | undefined) => {
+  const v = Number(n) || 0;
+  return props.format ? props.format(v) : new Intl.NumberFormat('en-US').format(v);
+};
 </script>
 
 <style>
@@ -216,7 +250,7 @@ const fmt = (n: number) =>
   padding: 0 0.5rem;
   text-align: center;
   font-weight: 700;
-  border-bottom: 1px dotted #64748b;
+  border-bottom: 1px dotted #64748b7c;
 }
 
 /* Parties */
@@ -243,12 +277,14 @@ const fmt = (n: number) =>
 .contract-sheet .cs-fields {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.25rem 1.25rem;
+  gap: 2.25rem 1.25rem;
   margin: 0;
+  align-items: end;
 }
 .contract-sheet .cs-field {
   display: flex;
   flex-direction: column;
+  gap: 5px;
   min-width: 0;
 }
 .contract-sheet .cs-field-wide {

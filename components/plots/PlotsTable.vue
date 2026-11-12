@@ -96,6 +96,7 @@
                 <div class="flex items-center gap-1">
                   <NuxtLink :to="`/admin/plots/${plot.plotNo}/edit`" class="w-9 h-9 inline-flex items-center justify-center rounded-lg text-[#7030A0] hover:bg-[#7030A0]/10" title="تعديل كامل" :aria-label="`تعديل القطعة ${plot.plotNo}`"><i class="pi pi-pencil" /></NuxtLink>
                   <NuxtLink :to="`/plots/${plot.plotNo}`" class="w-9 h-9 inline-flex items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100" title="عرض السعر" :aria-label="`عرض سعر القطعة ${plot.plotNo}`"><i class="pi pi-eye" /></NuxtLink>
+                  <NuxtLink :to="`/contracts/${plot.plotNo}`" class="w-9 h-9 inline-flex items-center justify-center rounded-lg text-amber-600 hover:bg-amber-50" title="العقد" :aria-label="`عقد القطعة ${plot.plotNo}`"><i class="pi pi-file" /></NuxtLink>
                   <button type="button" class="w-9 h-9 inline-flex items-center justify-center rounded-lg text-rose-500 hover:bg-rose-50" title="أرشفة" :aria-label="`أرشفة القطعة ${plot.plotNo}`" @click="handleArchive(plot.plotNo)"><i class="pi pi-trash" /></button>
                 </div>
               </td>
