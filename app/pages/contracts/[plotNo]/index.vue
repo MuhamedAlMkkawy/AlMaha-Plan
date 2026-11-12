@@ -51,18 +51,63 @@
 
         <button
           @click="copyShareLink"
-          class="px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold text-xs sm:text-sm shadow-xs flex items-center gap-2 transition-colors"
+          :class="[
+            'group relative inline-flex items-center justify-center gap-2.5',
+            'overflow-hidden rounded-xl px-4 py-2.5',
+            'border font-bold text-xs sm:text-sm',
+            'shadow-sm transition-all duration-300 ease-out',
+            'hover:-translate-y-0.5 hover:shadow-lg',
+            'active:translate-y-0 active:scale-[0.97]',
+            'focus:outline-none focus-visible:ring-4',
+            copied
+              ? 'border-emerald-200 bg-emerald-50 text-emerald-700 shadow-emerald-100 hover:bg-emerald-100 hover:shadow-emerald-200/60 focus-visible:ring-emerald-400/20'
+              : 'border-purple-200/80 bg-gradient-to-br from-white via-white to-purple-50/70 text-[#7030A0] hover:border-purple-300 hover:from-purple-50 hover:to-purple-100/80 hover:shadow-purple-200/50 focus-visible:ring-purple-400/20'
+          ]"
           :title="copied ? 'تم النسخ!' : 'نسخ رابط العقد'"
         >
-          <i
-            :class="copied
-              ? 'pi pi-check text-emerald-600'
-              : 'pi pi-copy text-slate-500'"
-          ></i>
+          <!-- Animated background shine -->
+          <span
+            class="absolute inset-0 -translate-x-full skew-x-[-20deg]
+                  bg-gradient-to-r from-transparent via-white/70 to-transparent
+                  transition-transform duration-700
+                  group-hover:translate-x-full"
+          ></span>
 
-          <span class="hidden sm:inline">
-            {{ copied ? 'تم النسخ' : 'نسخ الرابط' }}
+          <!-- Icon -->
+          <span
+            class="relative flex h-7 w-7 items-center justify-center rounded-lg
+                  transition-all duration-300"
+            :class="copied
+              ? 'bg-emerald-100 text-emerald-600 scale-105'
+              : 'bg-purple-100 text-[#7030A0] group-hover:rotate-[-8deg] group-hover:scale-110'"
+          >
+            <i
+              :class="copied
+                ? 'pi pi-check'
+                : 'pi pi-copy'"
+              class="text-xs transition-all duration-300"
+            ></i>
           </span>
+
+          <!-- Label -->
+          <span class="relative tracking-wide whitespace-nowrap">
+            {{ copied ? 'تم النسخ بنجاح' : 'نسخ الرابط' }}
+          </span>
+
+          <!-- Success indicator -->
+          <span
+            v-if="copied"
+            class="relative h-1.5 w-1.5 rounded-full bg-emerald-500
+                  shadow-[0_0_8px_rgba(16,185,129,0.7)]"
+          ></span>
+
+          <i
+            v-else
+            class="pi pi-arrow-up-left relative text-[10px] opacity-50
+                  transition-all duration-300
+                  group-hover:-translate-y-0.5 group-hover:translate-x-0.5
+                  group-hover:opacity-100"
+          ></i>
         </button>
 
         <NuxtLink
