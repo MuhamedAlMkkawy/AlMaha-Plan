@@ -1,11 +1,14 @@
 import { defineEventHandler } from 'h3';
-import { getAdminSession } from '../../utils/auth';
+import { getLiveAuthSession } from '../../utils/auth';
+import { effectivePermissions } from '../../../shared/access';
 
-export default defineEventHandler((event) => {
-  const session = getAdminSession(event);
+export default defineEventHandler(async (event) => {
+  const session = await getLiveAuthSession(event);
   return {
     authenticated: !!session,
     user: session,
+    isAdmin: session?.role === 'admin',
+    isEmployee: session?.role === 'employee',
+    permissions: effectivePermissions(session),
   };
 });
-

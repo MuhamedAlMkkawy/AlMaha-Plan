@@ -1,12 +1,12 @@
 import { defineEventHandler, getRouterParam, readBody, createError } from 'h3';
-import { requireAdmin } from '../../../../utils/auth';
+import { requirePermission } from '../../../../utils/auth';
 import { ContractsRepository } from '../../../../services/contracts/contracts.repository';
 
 const str = (v: unknown, max: number) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
 
 export default defineEventHandler(async (event) => {
-  // 1. Strict admin check - only authenticated admin can edit contract
-  const admin = requireAdmin(event);
+  // 1. Permission check: Admin or Employee with 'edit_contracts'
+  const user = await requirePermission(event, 'edit_contracts');
 
   const plotNo = Number(getRouterParam(event, 'plotNo'));
   if (!Number.isInteger(plotNo) || plotNo < 1 || plotNo > 973) {
@@ -20,7 +20,6 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: 'رقم الهوية يجب أن يتكون من 10 أرقام' });
   }
 
-  // null means "use the default terms"
   let contractTerms: string[] | null = null;
   if (Array.isArray(body.contractTerms)) {
     contractTerms = body.contractTerms
@@ -43,9 +42,10 @@ export default defineEventHandler(async (event) => {
   };
 
   const clientIp = event.node.req.socket.remoteAddress || '';
+  const actorEmail = user.name ? `${user.name} (${user.email})` : user.email;
 
   // 2. Persist the contract changes
-  const saved = await ContractsRepository.saveContract(plotNo, update, admin.email, clientIp);
+  const saved = await ContractsRepository.saveContract(plotNo, update, actorEmail, clientIp);
 
   return { success: true, data: saved };
 });

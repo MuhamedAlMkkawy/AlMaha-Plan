@@ -1,7 +1,9 @@
 import { defineEventHandler, getRouterParam, createError } from 'h3';
 import { PlotsRepository } from '../../services/plots/plots.repository';
+import { PlotsMapper } from '../../services/plots/plots.mapper';
 import { ContractsRepository } from '../../services/contracts/contracts.repository';
-import { getAdminSession } from '../../utils/auth';
+import { getLiveAuthSession } from '../../utils/auth';
+import { userCan, userCanAny } from '../../../shared/access';
 
 export default defineEventHandler(async (event) => {
   const plotNoParam = getRouterParam(event, 'plotNo');
@@ -22,18 +24,56 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const admin = getAdminSession(event);
-  const isAdmin = !!admin;
+  const session = await getLiveAuthSession(event);
+  const isAdmin = session?.role === 'admin';
 
-  // Retrieve contract data (which merges custom contract metadata with plot values)
+  if (
+    session?.role === 'employee' &&
+    !userCanAny(session, [
+      'view_plots',
+      'view_contracts',
+      'edit_plots',
+      'edit_contracts',
+      'create_plots',
+      'delete_plots',
+    ])
+  ) {
+    throw createError({
+      statusCode: 403,
+      statusMessage: 'غير مصرح - ليس لديك صلاحية استعراض هذه القطعة',
+    });
+  }
+
+  const canSeePii =
+    isAdmin ||
+    userCan(session, 'view_contracts') ||
+    userCan(session, 'edit_contracts');
+  const canEditContract = isAdmin || userCan(session, 'edit_contracts');
+  const canEditPlot = isAdmin || userCan(session, 'edit_plots');
+
+  if (!canSeePii) {
+    return {
+      success: true,
+      isAdmin,
+      canEditContract: !!canEditContract,
+      canEditPlot: !!canEditPlot,
+      canSeePii: false,
+      user: session,
+      data: PlotsMapper.toPublic(plot),
+    };
+  }
+
   const contract = await ContractsRepository.getContract(plotNo, plot);
 
   return {
     success: true,
     isAdmin,
+    canEditContract: !!canEditContract,
+    canEditPlot: !!canEditPlot,
+    canSeePii: true,
+    user: session,
     data: {
       ...plot,
-      // Ensure all contract & buyer fields are provided for the contract sheet view
       buyerName: contract.buyerName || plot.buyerName || '',
       buyerId: contract.buyerId || plot.buyerId || '',
       buyerPhone: contract.buyerPhone || plot.buyerPhone || '',

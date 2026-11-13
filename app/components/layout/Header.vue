@@ -128,6 +128,63 @@
       </div>
     </div>
 
+    <!-- EMPLOYEE: indigo bar, employee badge -->
+    <div
+      v-else-if="authUser && authUser.role === 'employee'"
+      class="bg-white/95 backdrop-blur-md text-slate-700 border-t-[3px] border-t-indigo-600 border-b border-b-slate-200 transition-shadow duration-300"
+      :class="scrolled ? 'shadow-[0_10px_24px_-18px_rgba(79,70,229,0.45)]' : ''"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="h-16 flex items-center justify-between gap-4">
+          <!-- Brand + mode -->
+          <div class="inline-flex items-center gap-2.5 h-10 ps-3 pe-4 rounded-xl bg-indigo-50 ring-1 ring-inset ring-indigo-200 text-indigo-950 text-xs sm:text-sm font-bold">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>بوابة الموظف: {{ authUser.name || authUser.email }}</span>
+          </div>
+
+          <!-- Links -->
+          <nav class="hidden md:flex items-stretch h-full">
+            <NuxtLink
+              v-for="item in employeeNavItems"
+              :key="item.to"
+              :to="item.to"
+              class="group relative flex items-center px-4 text-sm font-medium transition-colors duration-200 hover:text-indigo-600"
+              :class="isActive(item) ? 'text-indigo-600 font-bold' : 'text-slate-600'"
+            >
+              {{ item.label }}
+              <span
+                class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[3px] w-6 rounded-t-full bg-indigo-600 transition-transform duration-300"
+                :class="isActive(item) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'"
+              ></span>
+            </NuxtLink>
+          </nav>
+
+          <div class="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              @click="handleLogout"
+              :disabled="loggingOut"
+              class="inline-flex items-center gap-2 h-9 px-3.5 rounded-xl text-xs font-semibold text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-colors"
+            >
+              <i class="pi pi-sign-out text-xs"></i>
+              <span>تسجيل الخروج</span>
+            </button>
+          </div>
+        </div>
+        <div v-if="employeeNavItems.length" class="md:hidden flex flex-wrap gap-2 pb-3">
+          <NuxtLink
+            v-for="item in employeeNavItems"
+            :key="item.to"
+            :to="item.to"
+            class="px-3 py-1.5 rounded-lg text-xs font-bold border"
+            :class="isActive(item) ? 'bg-indigo-50 text-indigo-700 border-indigo-200' : 'bg-white text-slate-600 border-slate-200'"
+          >
+            {{ item.label }}
+          </NuxtLink>
+        </div>
+      </div>
+    </div>
+
     <!-- PUBLIC: light bar, hairline border -->
     <div
       v-else
@@ -261,7 +318,8 @@ const mobileMenuOpen = ref(false);
 const loggingOut = ref(false);
 const scrolled = ref(false);
 
-const adminUser = ref<{ email: string; name?: string } | null>(null);
+const { user: authUser, isAdmin, refreshAuth, clearAuth, can, canAny } = useAuthSession();
+const adminUser = computed(() => (isAdmin.value ? authUser.value : null));
 
 // Public pages
 const navItems: NavItem[] = [
@@ -271,29 +329,41 @@ const navItems: NavItem[] = [
   { to: '/zones', label: 'الزونات', icon: 'pi pi-map' },
 ];
 
+const employeeNavItems = computed<NavItem[]>(() => {
+  const items: NavItem[] = [];
+  if (can('view_stats')) items.push({ to: '/', label: 'الإحصائيات', icon: 'pi pi-chart-bar', exact: true });
+  if (can('view_plots')) {
+    items.push(
+      { to: '/plots', label: 'جدول القطع', icon: 'pi pi-th-large' },
+      { to: '/blocks', label: 'البلوكات', icon: 'pi pi-objects-column' },
+      { to: '/zones', label: 'الزونات', icon: 'pi pi-map' },
+      { to: '/quote', label: 'عرض سعر', icon: 'pi pi-file-edit' },
+    );
+  }
+  if (canAny(['edit_plots', 'create_plots', 'delete_plots'])) {
+    items.push({ to: '/admin/plots', label: 'إدارة القطع', icon: 'pi pi-pencil' });
+  }
+  if (can('create_plots') && !can('edit_plots') && !can('delete_plots')) {
+    items.push({ to: '/admin/plots/new', label: 'إضافة قطعة', icon: 'pi pi-plus' });
+  }
+  return items;
+});
+
 // Admin tools. Add more here as the admin area grows.
 const adminLinks: NavItem[] = [
   { to: '/admin', label: 'لوحة الإدارة', icon: 'pi pi-sliders-h' },
+  { to: '/admin/employees', label: 'الموظفون والصلاحيات', icon: 'pi pi-users' },
   { to: '/quote', label: 'صانع عروض الأسعار', icon: 'pi pi-file-edit' },
 ];
 
 const isActive = (item: NavItem) =>
   item.exact ? route.path === item.to : route.path.startsWith(item.to);
 
-const checkAuth = async () => {
-  try {
-    const res = await $fetch<{ authenticated: boolean; user: any }>('/api/auth/me');
-    adminUser.value = res.authenticated ? res.user : null;
-  } catch {
-    adminUser.value = null;
-  }
-};
-
 const handleLogout = async () => {
   loggingOut.value = true;
   try {
     await $fetch('/api/auth/logout', { method: 'POST' });
-    adminUser.value = null;
+    clearAuth();
     mobileMenuOpen.value = false;
     await navigateTo('/');
   } catch (err) {
@@ -311,7 +381,7 @@ const onScroll = () => {
 };
 
 onMounted(() => {
-  checkAuth();
+  refreshAuth();
   onScroll();
   document.addEventListener('keydown', onKey);
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -327,7 +397,7 @@ watch(
   () => route.path,
   () => {
     mobileMenuOpen.value = false;
-    checkAuth();
+    refreshAuth();
   }
 );
 </script>

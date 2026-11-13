@@ -71,7 +71,7 @@
     </div>
 
     <!-- Quick Navigation Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <NuxtLink
         to="/admin/plots"
         class="bg-white rounded-2xl border border-slate-200 p-5 hover:border-[#7030A0] hover:shadow-md transition-all group"
@@ -88,8 +88,23 @@
       </NuxtLink>
 
       <NuxtLink
+        to="/admin/employees"
+        class="bg-white rounded-2xl border border-slate-200 p-5 hover:border-indigo-600 hover:shadow-md transition-all group"
+      >
+        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-lg mb-3 group-hover:scale-105 transition-transform">
+          <i class="pi pi-users"></i>
+        </div>
+        <h3 class="font-bold text-slate-900 text-base group-hover:text-indigo-700">
+          إدارة الموظفين والصلاحيات
+        </h3>
+        <p class="text-xs text-slate-500 mt-1">
+          إضافة حسابات الموظفين، تعيين كلمات المرور، والصلاحيات الخاصة بكل موظف
+        </p>
+      </NuxtLink>
+
+      <NuxtLink
         to="/admin/audit"
-        class="bg-white rounded-2xl border border-slate-200 p-5 hover:border-[#7030A0] hover:shadow-md transition-all group"
+        class="bg-white rounded-2xl border border-slate-200 p-5 hover:border-blue-600 hover:shadow-md transition-all group"
       >
         <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg mb-3 group-hover:scale-105 transition-transform">
           <i class="pi pi-history"></i>
@@ -98,13 +113,13 @@
           سجل العمليات والتغييرات
         </h3>
         <p class="text-xs text-slate-500 mt-1">
-          مراجعة التعديلات المضافة (Audit Log) والمسؤولين الذين قاموا بها
+          متابعة وتدقيق العمليات والتعديلات التي أجراها الموظفون والمسؤولون
         </p>
       </NuxtLink>
 
       <NuxtLink
         to="/plots"
-        class="bg-white rounded-2xl border border-slate-200 p-5 hover:border-[#7030A0] hover:shadow-md transition-all group"
+        class="bg-white rounded-2xl border border-slate-200 p-5 hover:border-emerald-600 hover:shadow-md transition-all group"
       >
         <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-lg mb-3 group-hover:scale-105 transition-transform">
           <i class="pi pi-eye"></i>

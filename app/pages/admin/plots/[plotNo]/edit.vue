@@ -113,7 +113,7 @@
         </section>
 
         <!-- Buyer + deed -->
-        <section class="p-5 sm:p-7 space-y-5">
+        <section v-if="canEditContracts" class="p-5 sm:p-7 space-y-5">
           <h2 class="flex items-center gap-2.5 text-lg font-bold text-slate-900">
             <span class="w-2.5 h-2.5 rounded-[3px] bg-amber-400"></span>
             بيانات المشتري والصك
@@ -209,6 +209,8 @@ import type { Plot } from '../../../../shared/types/plot';
 
 const route = useRoute();
 const plotNo = computed(() => parseInt(route.params.plotNo as string, 10));
+const { can } = useAuthSession();
+const canEditContracts = computed(() => can('edit_contracts'));
 
 // Shared field styles
 const labelCls = 'block text-sm font-semibold text-slate-700 mb-1.5';

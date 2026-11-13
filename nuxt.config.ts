@@ -2,13 +2,14 @@
 import Aura from "@primeuix/themes/aura";
 import { createHash } from "node:crypto";
 
-// Set LOGIN_ROUTE_SECRET in your .env / hosting env vars
-const loginPath =
-  "/" +
-  createHash("sha256")
-    .update(process.env.LOGIN_ROUTE_SECRET || "change-me")
-    .digest("hex")
-    .slice(0, 16);
+// Hashed login routes from environment or defaults
+const loginPath = (process.env.LOGIN_ROUTE_SECRET || "/c66dc3312779fefa").startsWith("/")
+  ? process.env.LOGIN_ROUTE_SECRET || "/c66dc3312779fefa"
+  : "/" + (process.env.LOGIN_ROUTE_SECRET || "c66dc3312779fefa");
+
+const employeeLoginPath = (process.env.EMPLOYEE_LOGIN_ROUTE_SECRET || "/3fe97eb46687f5af").startsWith("/")
+  ? process.env.EMPLOYEE_LOGIN_ROUTE_SECRET || "/3fe97eb46687f5af"
+  : "/" + (process.env.EMPLOYEE_LOGIN_ROUTE_SECRET || "3fe97eb46687f5af");
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -26,19 +27,32 @@ export default defineNuxtConfig({
       siteName: "مخطط المها / مها الشرق",
       planNo: "4047",
       publicShowPrices: true,
-      loginPath, // hashed login route, read with useRuntimeConfig().public.loginPath
+      loginPath, // hashed admin login route
+      employeeLoginPath, // hashed employee login route
     },
   },
 
-  // Rewrite pages/login.vue to the hashed path (so /login returns 404)
+  // Rewrite login pages to hashed paths
   hooks: {
     "pages:extend"(pages) {
       const login = pages.find((p) => p.file?.endsWith("/pages/login.vue"));
       if (login) login.path = loginPath;
+      const empLogin = pages.find((p) => p.file?.endsWith("/pages/employee-login.vue"));
+      if (empLogin) empLogin.path = employeeLoginPath;
     },
   },
 
   ssr: false,
+
+  sourcemap: {
+    server: false,
+    client: false,
+  },
+
+  nitro: {
+    minify: false,
+    sourceMap: false,
+  },
 
   app: {
     pageTransition: {

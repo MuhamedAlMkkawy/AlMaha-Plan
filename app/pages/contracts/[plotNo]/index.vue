@@ -118,9 +118,9 @@
           <span class="hidden sm:inline">عرض السعر</span>
         </NuxtLink>
 
-        <!-- Admin: edit contract -->
+        <!-- Edit contract (Admin or Authorized Staff) -->
         <NuxtLink
-          v-if="isAdmin"
+          v-if="canEditContract"
           :to="`/contracts/${currentPlotNo}/edit`"
           class="px-3.5 py-2.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 hover:bg-amber-100 font-bold text-xs sm:text-sm shadow-xs flex items-center gap-2"
         >
@@ -128,9 +128,9 @@
           <span class="hidden sm:inline">تعديل العقد</span>
         </NuxtLink>
 
-        <!-- Admin: edit plot -->
+        <!-- Edit plot (Admin or Authorized Staff) -->
         <NuxtLink
-          v-if="isAdmin"
+          v-if="canEditPlot"
           :to="`/admin/plots/${currentPlotNo}/edit`"
           class="px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold text-xs sm:text-sm shadow-xs flex items-center gap-2"
         >
@@ -230,6 +230,8 @@ const plot = computed(() => response.value?.data ?? null);
 
 // Admin permission
 const isAdmin = computed(() => !!response.value?.isAdmin);
+const canEditContract = computed(() => !!response.value?.canEditContract || !!response.value?.isAdmin);
+const canEditPlot = computed(() => !!response.value?.canEditPlot || !!response.value?.isAdmin);
 
 // Buyer information (all data shown to users)
 const buyer = computed(() => {

@@ -68,11 +68,11 @@
 
     <!-- Unauthorized -->
     <div
-      v-else-if="!isAdmin"
+      v-else-if="!canEdit"
       class="bg-amber-50 border border-amber-200 rounded-2xl p-8 text-center text-amber-900 font-bold"
     >
       <i class="pi pi-lock text-3xl mb-3"></i>
-      <p>هذه الصفحة للمسؤولين فقط.</p>
+      <p>هذه الصفحة للمسؤولين والموظفين المصرح لهم فقط.</p>
       <NuxtLink
         :to="`/contracts/${plotNo}`"
         class="inline-block mt-4 text-sm underline"
@@ -303,7 +303,7 @@
 
     <!-- Sticky save bar -->
     <div
-      v-if="plot && isAdmin && !pending && !error"
+      v-if="plot && canEdit && !pending && !error"
       class="fixed bottom-0 inset-x-0 z-30 bg-white/95 backdrop-blur border-t border-slate-200 px-4 py-3"
     >
       <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
@@ -386,6 +386,7 @@ const {
   success: boolean;
   data: ContractPlot;
   isAdmin: boolean;
+  canEditContract?: boolean;
 }>(
   () => `/api/plots/${plotNo.value}`,
   {
@@ -401,6 +402,10 @@ const plot = computed(() => response.value?.data ?? null);
 
 const isAdmin = computed(() =>
   !!response.value?.isAdmin
+);
+
+const canEdit = computed(() =>
+  !!response.value?.isAdmin || !!response.value?.canEditContract
 );
 
 const fmt = (
@@ -540,7 +545,7 @@ const message = reactive<{
 });
 
 const save = async () => {
-  if (!isAdmin.value || saving.value || idError.value || !dirty.value) return;
+  if (!canEdit.value || saving.value || idError.value || !dirty.value) return;
 
   saving.value = true;
   message.text = '';

@@ -1,10 +1,10 @@
 import { defineEventHandler, readBody, createError } from 'h3';
-import { requireAdmin } from '../../../utils/auth';
+import { requirePermission } from '../../../utils/auth';
 import { PlotsRepository } from '../../../services/plots/plots.repository';
 import { PlotInputSchema } from '../../../../schemas/plot';
 
 export default defineEventHandler(async (event) => {
-  const admin = requireAdmin(event);
+  const user = await requirePermission(event, 'create_plots');
   const body = await readBody(event);
 
   const parseResult = PlotInputSchema.safeParse(body);
@@ -16,9 +16,21 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  if (user.role === 'employee' && !user.permissions?.includes('edit_contracts')) {
+    parseResult.data.buyerName = undefined;
+    parseResult.data.buyerId = undefined;
+    parseResult.data.buyerPhone = undefined;
+    parseResult.data.deedNo = undefined;
+    parseResult.data.deedDate = undefined;
+    parseResult.data.invoice = undefined;
+    parseResult.data.notes = undefined;
+  }
+
   const clientIp = event.node.req.socket.remoteAddress || '';
+  const actorEmail = user.name ? `${user.name} (${user.email})` : user.email;
+
   try {
-    const created = await PlotsRepository.createPlot(parseResult.data, admin.email, clientIp);
+    const created = await PlotsRepository.createPlot(parseResult.data, actorEmail, clientIp);
     return {
       success: true,
       message: 'تم إضافة القطعة بنجاح',
@@ -31,4 +43,3 @@ export default defineEventHandler(async (event) => {
     });
   }
 });
-

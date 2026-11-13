@@ -1,18 +1,34 @@
-import { defineEventHandler, getQuery } from 'h3';
+import { defineEventHandler, getQuery, createError } from 'h3';
 import { PlotsRepository } from '../../services/plots/plots.repository';
-import { getAdminSession } from '../../utils/auth';
+import { getLiveAuthSession } from '../../utils/auth';
 import { normalizeArabic } from '../../../lib/arabic';
+import { userCan, userCanAny } from '../../../shared/access';
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event);
-  const admin = getAdminSession(event);
+  const session = await getLiveAuthSession(event);
 
-  // If authenticated admin, return full plots; otherwise return sanitized PublicPlots
-  const rawPlots = admin ? await PlotsRepository.getAllPlots() : await PlotsRepository.getAllPublicPlots();
+  if (
+    session?.role === 'employee' &&
+    !userCanAny(session, ['view_plots', 'view_contracts', 'edit_plots', 'edit_contracts'])
+  ) {
+    throw createError({
+      statusCode: 403,
+      statusMessage: 'غير مصرح - ليس لديك صلاحية استعراض القطع',
+    });
+  }
+
+  const canViewFull =
+    userCan(session, 'view_contracts') ||
+    userCan(session, 'edit_plots') ||
+    userCan(session, 'edit_contracts');
+
+  const rawPlots = canViewFull
+    ? await PlotsRepository.getAllPlots()
+    : await PlotsRepository.getAllPublicPlots();
 
   let filtered = rawPlots;
 
-  // Filter by block
   if (query.block) {
     const blockNum = parseInt(String(query.block), 10);
     if (!isNaN(blockNum)) {
@@ -20,7 +36,6 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  // Filter by zone
   if (query.zone) {
     const zoneStr = String(query.zone).trim();
     if (zoneStr) {
@@ -28,7 +43,6 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  // Filter by usage
   if (query.usage) {
     const usageStr = String(query.usage).trim();
     if (usageStr) {
@@ -36,7 +50,6 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  // Filter by status
   if (query.status) {
     const statusStr = String(query.status).trim();
     if (statusStr) {
@@ -44,7 +57,6 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  // Search by plot number, block, or normalized text
   if (query.search) {
     const s = normalizeArabic(String(query.search).trim()).toLowerCase();
     filtered = filtered.filter((p) => {
@@ -53,13 +65,12 @@ export default defineEventHandler(async (event) => {
       const zoneMatch = normalizeArabic(p.zone).toLowerCase().includes(s);
       const usageMatch = normalizeArabic(p.usage).toLowerCase().includes(s);
 
-      // If admin, also allow search by buyerName and buyerPhone
       let buyerMatch = false;
-      if (admin && 'buyerName' in p && p.buyerName) {
+      if (canViewFull && 'buyerName' in p && p.buyerName) {
         buyerMatch = normalizeArabic(p.buyerName).toLowerCase().includes(s);
       }
       let phoneMatch = false;
-      if (admin && 'buyerPhone' in p && p.buyerPhone) {
+      if (canViewFull && 'buyerPhone' in p && p.buyerPhone) {
         phoneMatch = p.buyerPhone.includes(s);
       }
 
@@ -67,7 +78,6 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  // Sort
   const sortBy = (query.sortBy as string) || 'plotNo';
   const sortOrder = (query.sortOrder as string) || 'asc';
   const orderMultiplier = sortOrder === 'desc' ? -1 : 1;
@@ -87,4 +97,3 @@ export default defineEventHandler(async (event) => {
     data: filtered,
   };
 });
-

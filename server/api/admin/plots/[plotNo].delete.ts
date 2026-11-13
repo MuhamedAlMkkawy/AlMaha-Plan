@@ -1,9 +1,9 @@
 import { defineEventHandler, getRouterParam, createError } from 'h3';
-import { requireAdmin } from '../../../utils/auth';
+import { requirePermission } from '../../../utils/auth';
 import { PlotsRepository } from '../../../services/plots/plots.repository';
 
 export default defineEventHandler(async (event) => {
-  const admin = requireAdmin(event);
+  const user = await requirePermission(event, 'delete_plots');
   const plotNoParam = getRouterParam(event, 'plotNo');
   const plotNo = parseInt(plotNoParam || '', 10);
 
@@ -15,8 +15,10 @@ export default defineEventHandler(async (event) => {
   }
 
   const clientIp = event.node.req.socket.remoteAddress || '';
+  const actorEmail = user.name ? `${user.name} (${user.email})` : user.email;
+
   try {
-    const archived = await PlotsRepository.archivePlot(plotNo, admin.email, clientIp);
+    const archived = await PlotsRepository.archivePlot(plotNo, actorEmail, clientIp);
     return {
       success: true,
       message: `تم أرشفة القطعة رقم ${plotNo} بنجاح`,
@@ -29,4 +31,3 @@ export default defineEventHandler(async (event) => {
     });
   }
 });
-

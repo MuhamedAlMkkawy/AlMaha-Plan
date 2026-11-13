@@ -55,9 +55,17 @@
           <span class="hidden sm:inline">{{ copied ? 'تم النسخ' : 'نسخ الرابط' }}</span>
         </button>
 
-        <!-- Admin Edit Button if Admin -->
         <NuxtLink
-          v-if="isAdmin"
+          v-if="canSeePii"
+          :to="`/contracts/${currentPlotNo}`"
+          class="px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold text-xs sm:text-sm shadow-xs flex items-center gap-2"
+        >
+          <i class="pi pi-file"></i>
+          <span class="hidden sm:inline">العقد</span>
+        </NuxtLink>
+
+        <NuxtLink
+          v-if="canEditPlot"
           :to="`/admin/plots/${currentPlotNo}/edit`"
           class="px-3.5 py-2.5 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 hover:bg-amber-100 font-bold text-xs sm:text-sm shadow-xs flex items-center gap-2"
         >
@@ -88,8 +96,8 @@
       <!-- 1. The Official Quotation Card (Sheet1 View) -->
       <PlotsQuotationView
         :items="quotationItems"
-        :buyer-name="isAdmin ? plot.buyerName : ''"
-        :buyer-phone="isAdmin ? plot.buyerPhone : ''"
+        :buyer-name="canSeePii ? plot.buyerName : ''"
+        :buyer-phone="canSeePii ? plot.buyerPhone : ''"
       />
 
       <!-- 2. Plot Facts Section (بيانات القطعة الإضافية) -->
@@ -141,7 +149,7 @@
       </div>
 
       <!-- 3. Admin-Only Secure Panel (PII, Deed, SharePoint link) -->
-      <div v-if="isAdmin" class="bg-purple-50/70 border-2 border-purple-200 rounded-2xl p-6 shadow-xs print:hidden space-y-4">
+      <div v-if="canSeePii" class="bg-purple-50/70 border-2 border-purple-200 rounded-2xl p-6 shadow-xs print:hidden space-y-4">
         <div class="flex items-center justify-between border-b border-purple-200 pb-3">
           <div class="flex items-center gap-2">
             <div class="w-8 h-8 rounded-lg bg-[#7030A0] text-white flex items-center justify-center text-sm font-bold">
@@ -153,6 +161,7 @@
             </div>
           </div>
           <NuxtLink
+            v-if="canEditPlot"
             :to="`/admin/plots/${currentPlotNo}/edit`"
             class="px-3 py-1.5 rounded-lg bg-[#7030A0] text-white text-xs font-bold hover:bg-[#532277]"
           >
@@ -206,10 +215,14 @@ const { data: response, pending, error } = await useFetch<{
   success: boolean;
   data: Plot;
   isAdmin: boolean;
+  canEditPlot?: boolean;
+  canSeePii?: boolean;
 }>(`/api/plots/${currentPlotNo.value}`);
 
 const plot = computed(() => response.value?.data);
 const isAdmin = computed(() => response.value?.isAdmin);
+const canEditPlot = computed(() => !!response.value?.canEditPlot || !!response.value?.isAdmin);
+const canSeePii = computed(() => !!response.value?.canSeePii || !!response.value?.isAdmin);
 
 const quotationItems = computed(() => {
   if (!plot.value) return [];

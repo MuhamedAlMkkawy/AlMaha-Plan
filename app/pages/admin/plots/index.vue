@@ -15,6 +15,7 @@
       </div>
 
       <NuxtLink
+        v-if="canCreate"
         to="/admin/plots/new"
         class="self-start sm:self-auto inline-flex items-center gap-2 h-11 px-6 rounded-full bg-[#7030A0] text-white text-base font-bold transition-colors hover:bg-[#5b2486] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/50 focus-visible:ring-offset-2"
       >
@@ -104,9 +105,9 @@
               <th scope="col" class="px-4 py-3.5 text-start">سعر المتر</th>
               <th scope="col" class="px-4 py-3.5 text-start">قيمة الأرض</th>
               <th scope="col" class="px-4 py-3.5 text-start">الحالة</th>
-              <th scope="col" class="px-4 py-3.5 text-start">اسم المشتري</th>
-              <th scope="col" class="px-4 py-3.5 text-start">الجوال</th>
-              <th scope="col" class="px-4 py-3.5 text-start">رقم الصك</th>
+              <th v-if="canSeePii" scope="col" class="px-4 py-3.5 text-start">اسم المشتري</th>
+              <th v-if="canSeePii" scope="col" class="px-4 py-3.5 text-start">الجوال</th>
+              <th v-if="canSeePii" scope="col" class="px-4 py-3.5 text-start">رقم الصك</th>
               <th scope="col" class="px-4 py-3.5 text-start">إجراءات</th>
             </tr>
           </thead>
@@ -127,8 +128,9 @@
                 <div class="relative w-40">
                   <select
                     :value="plot.status"
+                    :disabled="!canEdit"
                     :aria-label="`حالة القطعة ${plot.plotNo}`"
-                    class="w-full h-10 ps-4 pe-9 appearance-none rounded-xl border text-sm font-bold cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-[#7030A0]/30"
+                    class="w-full h-10 ps-4 pe-9 appearance-none rounded-xl border text-sm font-bold cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-[#7030A0]/30 disabled:cursor-not-allowed disabled:opacity-70"
                     :class="statusTone(plot.status)"
                     @change="handleQuickStatusChange(plot, ($event.target as HTMLSelectElement).value)"
                   >
@@ -140,18 +142,19 @@
                   <!-- <i class="pi pi-chevron-down absolute end-3 top-1/2 -translate-y-1/2 text-[10px] opacity-70 pointer-events-none"></i> -->
                 </div>
               </td>
-              <td class="px-4 py-3.5 font-semibold text-slate-800 truncate max-w-[14rem]">
+              <td v-if="canSeePii" class="px-4 py-3.5 font-semibold text-slate-800 truncate max-w-[14rem]">
                 {{ plot.buyerName || '—' }}
               </td>
-              <td class="px-4 py-3.5 text-slate-700 tabular-nums" dir="ltr">
+              <td v-if="canSeePii" class="px-4 py-3.5 text-slate-700 tabular-nums" dir="ltr">
                 <div class="text-end">{{ plot.buyerPhone || '—' }}</div>
               </td>
-              <td class="px-4 py-3.5 text-slate-600 tabular-nums" dir="ltr">
+              <td v-if="canSeePii" class="px-4 py-3.5 text-slate-600 tabular-nums" dir="ltr">
                 <div class="text-end">{{ plot.deedNo || '—' }}</div>
               </td>
               <td class="px-4 py-3.5">
                 <div class="flex items-center gap-1">
                   <NuxtLink
+                    v-if="canEdit"
                     :to="`/admin/plots/${plot.plotNo}/edit`"
                     class="w-9 h-9 inline-flex items-center justify-center rounded-lg text-[#7030A0] transition-colors hover:bg-[#7030A0]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40"
                     title="تعديل كامل"
@@ -168,6 +171,7 @@
                     <i class="pi pi-eye"></i>
                   </NuxtLink>
                   <button
+                    v-if="canDelete"
                     type="button"
                     class="w-9 h-9 inline-flex items-center justify-center rounded-lg text-rose-500 transition-colors hover:bg-rose-50 hover:text-rose-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-300"
                     title="أرشفة"
@@ -224,6 +228,11 @@ import type { Plot } from '../../../shared/types/plot';
 
 const { data: response, pending, refresh } = await useFetch<{ success: boolean; data: Plot[] }>('/api/plots');
 const plots = computed(() => response.value?.data || []);
+const { can } = useAuthSession();
+const canEdit = computed(() => can('edit_plots'));
+const canCreate = computed(() => can('create_plots'));
+const canDelete = computed(() => can('delete_plots'));
+const canSeePii = computed(() => can('view_contracts') || can('edit_contracts'));
 
 // Shared field styles
 const labelCls = 'block text-sm font-semibold text-slate-700 mb-1.5';

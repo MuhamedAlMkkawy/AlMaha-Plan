@@ -17,6 +17,7 @@
       </div>
 
       <button
+        v-if="canExport"
         type="button"
         @click="exportToCSV"
         class="group self-start inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-white ring-1 ring-slate-200 text-slate-700 font-semibold text-xs sm:text-sm shadow-sm transition-all duration-300 ease-out motion-reduce:transition-none hover:-translate-y-0.5 hover:ring-[#7030A0]/30 hover:text-[#7030A0] hover:shadow-md hover:shadow-[#7030A0]/10 active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40"
@@ -394,6 +395,8 @@ import type { PublicPlot } from '../../shared/types/plot';
 
 const route = useRoute();
 const router = useRouter();
+const { isEmployee, can } = useAuthSession();
+const canExport = computed(() => !isEmployee.value || can('export_data'));
 
 // Fetch plots
 const { data: plotsResponse, pending } = await useFetch<{ success: boolean; data: PublicPlot[] }>('/api/plots');

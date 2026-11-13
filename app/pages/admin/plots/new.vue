@@ -136,6 +136,7 @@
       </div>
 
       <!-- Buyer Information -->
+      <template v-if="canEditContracts">
       <h2 class="font-bold text-slate-900 text-base border-t border-b border-slate-100 py-3 flex items-center gap-2">
         <i class="pi pi-user text-[#7030A0]"></i>
         <span>بيانات المشتري والصك (خاص بالإدارة)</span>
@@ -190,6 +191,7 @@
           class="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm resize-y focus:border-[#7030A0] focus:ring-2 focus:ring-purple-100 outline-none"
         ></textarea>
       </div>
+      </template>
 
       <!-- Form Actions -->
       <div class="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
@@ -288,6 +290,9 @@
 <script setup lang="ts">
 import { calculatePlotPricing } from '../../../../lib/pricing';
 import { formatCurrency } from '../../../../lib/format';
+
+const { can } = useAuthSession();
+const canEditContracts = computed(() => can('edit_contracts'));
 
 const form = reactive({
   plotNo: 974,
