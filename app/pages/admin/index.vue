@@ -4,10 +4,10 @@
 
     <!-- ================= PAGE HEADER ================= -->
     <header class="relative overflow-hidden rounded-[28px] bg-[#171023] text-white shadow-xl shadow-purple-950/10">
-      <div class="absolute inset-0 pointer-events-none">
+      <div class="pointer-events-none absolute inset-0">
         <div class="absolute -top-32 -left-20 h-80 w-80 rounded-full bg-purple-600/20 blur-[90px]"></div>
         <div class="absolute -bottom-40 right-1/3 h-80 w-80 rounded-full bg-amber-400/10 blur-[100px]"></div>
-        <div class="absolute inset-0 opacity-[0.06] admin-grid"></div>
+        <div class="admin-grid absolute inset-0 opacity-[0.06]"></div>
       </div>
 
       <div class="relative z-10 flex flex-col gap-7 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between lg:p-10">
@@ -29,7 +29,7 @@
 
           <p class="mt-2 max-w-2xl text-xs leading-7 text-white/55 sm:text-sm sm:leading-8">
             منصة موحدة لإدارة القطع والأسعار والموظفين والصلاحيات،
-            مع متابعة دقيقة لجميع العمليات والتغييرات داخل النظام.
+            مع متابعة التعديلات والعمليات الإدارية المهمة داخل النظام.
           </p>
 
           <div class="mt-5 flex flex-wrap items-center gap-3 text-[10px] font-semibold text-white/50">
@@ -89,10 +89,7 @@
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
 
         <!-- Plots -->
-        <NuxtLink
-          to="/admin/plots"
-          class="nav-card group"
-        >
+        <NuxtLink to="/admin/plots" class="nav-card group">
           <div class="nav-card-top">
             <div class="nav-icon bg-purple-50 text-[#7030A0] group-hover:bg-[#7030A0] group-hover:text-white">
               <i class="pi pi-map text-xl"></i>
@@ -117,10 +114,7 @@
         </NuxtLink>
 
         <!-- Employees -->
-        <NuxtLink
-          to="/admin/employees"
-          class="nav-card group"
-        >
+        <NuxtLink to="/admin/employees" class="nav-card group">
           <div class="nav-card-top">
             <div class="nav-icon bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white">
               <i class="pi pi-users text-xl"></i>
@@ -134,7 +128,7 @@
             </h3>
 
             <p class="mt-2 text-xs leading-7 text-slate-500">
-              إضافة حسابات الموظفين وتعيين كلمات المرور وإدارة صلاحيات الوصول.
+              إضافة حسابات الموظفين وتعيين كلمات المرور وإدارة صلاحيات الوصول ومراجعة نشاط كل موظف.
             </p>
           </div>
 
@@ -145,10 +139,7 @@
         </NuxtLink>
 
         <!-- Audit -->
-        <NuxtLink
-          to="/admin/audit"
-          class="nav-card group"
-        >
+        <NuxtLink to="/admin/audit" class="nav-card group">
           <div class="nav-card-top">
             <div class="nav-icon bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white">
               <i class="pi pi-history text-xl"></i>
@@ -162,21 +153,18 @@
             </h3>
 
             <p class="mt-2 text-xs leading-7 text-slate-500">
-              مراجعة وتدقيق جميع العمليات والتعديلات التي نفذها الموظفون والمسؤولون.
+              مراجعة التعديلات الإدارية المهمة وعمليات إدارة القطع والأسعار والموظفين.
             </p>
           </div>
 
           <div class="nav-card-footer">
-            <span>مراقبة النشاط</span>
+            <span>مراقبة التعديلات</span>
             <i class="pi pi-arrow-left transition-transform group-hover:-translate-x-1"></i>
           </div>
         </NuxtLink>
 
         <!-- Public View -->
-        <NuxtLink
-          to="/plots"
-          class="nav-card group"
-        >
+        <NuxtLink to="/plots" class="nav-card group">
           <div class="nav-card-top">
             <div class="nav-icon bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-white">
               <i class="pi pi-eye text-xl"></i>
@@ -228,7 +216,7 @@
               </div>
 
               <p class="mt-1 text-xs leading-6 text-slate-500">
-                متابعة أحدث الأنشطة والتغييرات داخل النظام
+                متابعة أحدث التعديلات الإدارية المهمة فقط
               </p>
             </div>
           </div>
@@ -258,10 +246,10 @@
         <div class="mt-5 flex flex-wrap items-center gap-2 text-[10px] font-semibold text-slate-400">
           <span class="inline-flex items-center gap-1.5">
             <i class="pi pi-shield text-[#7030A0]"></i>
-            سجل تدقيق النظام
+            سجل تعديلات النظام
           </span>
           <span class="text-slate-200">/</span>
-          <span>أحدث العمليات المسجلة</span>
+          <span>أحدث العمليات الإدارية</span>
         </div>
       </div>
 
@@ -277,7 +265,7 @@
         </div>
 
         <p class="mt-5 text-sm font-black text-slate-800">
-          جارٍ تحميل سجل العمليات
+          جارٍ تحميل التعديلات الإدارية
         </p>
 
         <p class="mt-2 text-xs text-slate-400">
@@ -322,11 +310,12 @@
         </div>
 
         <p class="mt-5 text-sm font-black text-slate-800">
-          لا توجد عمليات مسجلة حتى الآن
+          لا توجد تعديلات إدارية لعرضها
         </p>
 
         <p class="mt-2 max-w-sm text-xs leading-7 text-slate-400">
-          ستظهر هنا جميع العمليات والتعديلات التي يتم تنفيذها داخل النظام.
+          ستظهر هنا عمليات إدارة القطع والأسعار والموظفين والتعديلات المهمة.
+          يتم الاحتفاظ بسجلات الدخول والخروج ضمن تفاصيل الموظفين.
         </p>
       </div>
 
@@ -346,7 +335,7 @@
 
           <tbody class="divide-y divide-slate-100">
             <tr
-              v-for="(log, idx) in auditLogs.slice(0, 10)"
+              v-for="(log, idx) in displayedAuditLogs"
               :key="log.timestamp + '-' + idx"
               class="audit-row"
             >
@@ -423,10 +412,10 @@
       >
         <span class="text-[10px] font-semibold text-slate-400">
           عرض أحدث
-          <strong class="text-slate-700">{{ Math.min(auditLogs.length, 10) }}</strong>
+          <strong class="text-slate-700">{{ displayedAuditLogs.length }}</strong>
           من أصل
           <strong class="text-slate-700">{{ auditLogs.length }}</strong>
-          عملية مسجلة
+          عملية إدارية
         </span>
 
         <NuxtLink
@@ -451,7 +440,7 @@
             بيئة الإدارة المحمية
           </p>
           <p class="mt-1 text-[10px] leading-5 text-slate-500">
-            يتم تسجيل العمليات والتعديلات للمساعدة في متابعة نشاط النظام.
+            يتم الاحتفاظ بسجلات النشاط، مع تخصيص سجل الموظف لعرض عمليات الدخول والخروج.
           </p>
         </div>
       </div>
@@ -484,7 +473,101 @@ const {
   data: AuditLogEntry[];
 }>('/api/admin/audit');
 
-const auditLogs = computed(() => auditResponse.value?.data || []);
+// ==========================================
+// AUDIT FILTERING
+// ==========================================
+
+// Authentication events belong to employee details,
+// not the main administration dashboard.
+
+const authenticationActions = new Set([
+  'LOGIN',
+  'LOGOUT',
+  'EMPLOYEE_LOGIN',
+  'EMPLOYEE_LOGOUT',
+]);
+
+// Roles that should not appear in the dashboard audit.
+
+const adminRoles = new Set([
+  'ADMIN',
+  'SUPER_ADMIN',
+  'SUPERADMIN',
+  'ADMINISTRATOR',
+]);
+
+// Read the actor role from the available audit record fields.
+// The API should provide one of these fields for reliable filtering.
+
+type ExtendedAuditLog = AuditLogEntry & {
+  actorRole?: string;
+  userRole?: string;
+  role?: string;
+  performedByRole?: string;
+  actor?: {
+    role?: string;
+  };
+  user?: {
+    role?: string;
+  };
+  performedBy?: {
+    role?: string;
+  };
+  isAdmin?: boolean;
+};
+
+const isAuthenticationLog = (log: AuditLogEntry): boolean => {
+  const action = String(log.action || '').trim().toUpperCase();
+
+  return authenticationActions.has(action);
+};
+
+const isAdminAuditLog = (log: AuditLogEntry): boolean => {
+  const record = log as ExtendedAuditLog;
+
+  if (record.isAdmin === true) {
+    return true;
+  }
+
+  const role = String(
+    record.actorRole ||
+    record.userRole ||
+    record.performedByRole ||
+    record.role ||
+    record.actor?.role ||
+    record.user?.role ||
+    record.performedBy?.role ||
+    ''
+  ).trim().toUpperCase();
+
+  return adminRoles.has(role);
+};
+
+// All eligible audit operations.
+
+const auditLogs = computed<AuditLogEntry[]>(() => {
+  const logs = auditResponse.value?.data || [];
+
+  return logs.filter((log) => {
+    // Remove login/logout events.
+    if (isAuthenticationLog(log)) {
+      return false;
+    }
+
+    // Remove administrator-performed operations.
+    if (isAdminAuditLog(log)) {
+      return false;
+    }
+
+    return true;
+  });
+});
+
+// Display only the latest 10 eligible records.
+
+const displayedAuditLogs = computed(() => {
+  return auditLogs.value.slice(0, 10);
+});
 
 // ==========================================
 // ACTION TRANSLATIONS
@@ -494,6 +577,7 @@ const auditActionTranslations: Record<string, string> = {
   CREATE: 'إنشاء جديد',
   UPDATE: 'تعديل البيانات',
   DELETE: 'حذف',
+
   LOGIN: 'تسجيل الدخول',
   LOGOUT: 'تسجيل الخروج',
 
@@ -887,6 +971,7 @@ const syncFromSheet = async () => {
   font-weight: 900;
 }
 
+/* Audit rows */
 .audit-row {
   transition: background-color 200ms ease;
 }

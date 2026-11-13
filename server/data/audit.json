@@ -1,0 +1,171 @@
+[
+  {
+    "adminEmail": "muhamedalmkkawy@gmail.com",
+    "userName": "محمد المكاوي",
+    "userRole": "employee",
+    "action": "LOGIN",
+    "target": "تسجيل دخول موظف: محمد المكاوي (موظف مبيعات)",
+    "afterData": "{\"ip\":\"\",\"time\":\"2026-11-13T22:25:37.340Z\"}",
+    "ipAddress": "",
+    "id": "audit-1794608737341-ncs2k",
+    "timestamp": "2026-11-13T22:25:37.341Z"
+  },
+  {
+    "adminEmail": "manager@almaha-plan.sa",
+    "userName": "manager@almaha-plan.sa",
+    "userRole": "admin",
+    "action": "EMPLOYEE_UPDATE",
+    "target": "تعديل موظف: محمد المكاوي (muhamedalmkkawy@gmail.com)",
+    "beforeData": "{\"id\":\"emp_6bce5bce3180\",\"name\":\"محمد المكاوي\",\"username\":\"muhamedalmkkawy@gmail.com\",\"password\":\"123456\",\"role\":\"employee\",\"status\":\"active\",\"permissions\":[\"view_plots\",\"create_plots\",\"create_plot_page\",\"view_contracts\"],\"title\":\"موظف مبيعات\",\"phone\":\"\",\"createdAt\":\"2026-11-12T12:10:53.757Z\",\"lastLoginAt\":\"2026-11-13T22:24:34.607Z\",\"updatedAt\":\"2026-11-13T22:22:20.430Z\"}",
+    "afterData": "{\"id\":\"emp_6bce5bce3180\",\"name\":\"محمد المكاوي\",\"username\":\"muhamedalmkkawy@gmail.com\",\"title\":\"موظف مبيعات\",\"status\":\"active\",\"permissions\":[\"view_plots\",\"create_plots\",\"create_plot_page\",\"view_contracts\"]}",
+    "ipAddress": "",
+    "id": "audit-1794608719777-fzaa4",
+    "timestamp": "2026-11-13T22:25:19.777Z"
+  },
+  {
+    "adminEmail": "muhamedalmkkawy@gmail.com",
+    "userName": "محمد المكاوي",
+    "userRole": "employee",
+    "action": "LOGIN",
+    "target": "تسجيل دخول موظف: محمد المكاوي (موظف مبيعات)",
+    "afterData": "{\"ip\":\"\",\"time\":\"2026-11-13T22:24:34.607Z\"}",
+    "ipAddress": "",
+    "id": "audit-1794608674607-6u0xm",
+    "timestamp": "2026-11-13T22:24:34.607Z"
+  },
+  {
+    "adminEmail": "manager@almaha-plan.sa",
+    "userName": "manager@almaha-plan.sa",
+    "userRole": "admin",
+    "action": "EMPLOYEE_UPDATE",
+    "target": "تعديل موظف: محمد المكاوي (muhamedalmkkawy@gmail.com)",
+    "beforeData": "{\"id\":\"emp_6bce5bce3180\",\"name\":\"محمد المكاوي\",\"username\":\"muhamedalmkkawy@gmail.com\",\"password\":\"123456\",\"role\":\"employee\",\"status\":\"active\",\"permissions\":[\"view_plots\",\"create_plots\"],\"title\":\"موظف مبيعات\",\"phone\":\"\",\"createdAt\":\"2026-11-12T12:10:53.757Z\",\"lastLoginAt\":\"2026-11-13T13:46:35.779Z\",\"updatedAt\":\"2026-11-13T13:47:00.687Z\"}",
+    "afterData": "{\"id\":\"emp_6bce5bce3180\",\"name\":\"محمد المكاوي\",\"username\":\"muhamedalmkkawy@gmail.com\",\"title\":\"موظف مبيعات\",\"status\":\"active\",\"permissions\":[\"view_plots\",\"create_plots\",\"create_plot_page\",\"view_contracts\"]}",
+    "ipAddress": "",
+    "id": "audit-1794608540432-b8vhk",
+    "timestamp": "2026-11-13T22:22:20.433Z"
+  },
+  {
+    "adminEmail": "manager@almaha-plan.sa",
+    "userName": "manager@almaha-plan.sa",
+    "userRole": "admin",
+    "action": "EMPLOYEE_UPDATE",
+    "target": "تعديل موظف: محمد المكاوي (muhamedalmkkawy@gmail.com)",
+    "beforeData": "{\"id\":\"emp_6bce5bce3180\",\"name\":\"محمد المكاوي\",\"username\":\"muhamedalmkkawy@gmail.com\",\"password\":\"123456\",\"role\":\"employee\",\"status\":\"active\",\"permissions\":[\"view_plots\"],\"title\":\"موظف مبيعات\",\"phone\":\"\",\"createdAt\":\"2026-11-12T12:10:53.757Z\",\"lastLoginAt\":\"2026-11-13T13:46:35.779Z\",\"updatedAt\":\"2026-11-12T12:25:07.631Z\"}",
+    "afterData": "{\"id\":\"emp_6bce5bce3180\",\"name\":\"محمد المكاوي\",\"username\":\"muhamedalmkkawy@gmail.com\",\"title\":\"موظف مبيعات\",\"status\":\"active\",\"permissions\":[\"view_plots\",\"create_plots\"]}",
+    "ipAddress": "",
+    "id": "audit-1794577620688-j1pxl",
+    "timestamp": "2026-11-13T13:47:00.688Z"
+  },
+  {
+    "adminEmail": "muhamedalmkkawy@gmail.com",
+    "userName": "محمد المكاوي",
+    "userRole": "employee",
+    "action": "LOGIN",
+    "target": "تسجيل دخول موظف: محمد المكاوي (موظف مبيعات)",
+    "afterData": "{\"ip\":\"\",\"time\":\"2026-11-13T13:46:35.779Z\"}",
+    "ipAddress": "",
+    "id": "audit-1794577595779-r2rjj",
+    "timestamp": "2026-11-13T13:46:35.779Z"
+  },
+  {
+    "adminEmail": "muhamedalmkkawy@gmail.com",
+    "userName": "محمد المكاوي",
+    "userRole": "employee",
+    "action": "LOGIN",
+    "target": "تسجيل دخول موظف: محمد المكاوي (موظف مبيعات)",
+    "afterData": "{\"ip\":\"\",\"time\":\"2026-11-13T13:23:53.421Z\"}",
+    "ipAddress": "",
+    "id": "audit-1794576233422-8aynh",
+    "timestamp": "2026-11-13T13:23:53.423Z"
+  },
+  {
+    "adminEmail": "muhamedalmkkawy@gmail.com",
+    "userName": "محمد المكاوي",
+    "userRole": "employee",
+    "action": "LOGIN",
+    "target": "تسجيل دخول موظف: محمد المكاوي (موظف مبيعات)",
+    "afterData": "{\"ip\":\"\",\"time\":\"2026-11-13T13:07:33.506Z\"}",
+    "ipAddress": "",
+    "id": "audit-1794575253507-kiktp",
+    "timestamp": "2026-11-13T13:07:33.507Z"
+  },
+  {
+    "adminEmail": "muhamedalmkkawy@gmail.com",
+    "userName": "محمد المكاوي",
+    "userRole": "employee",
+    "action": "LOGIN",
+    "target": "تسجيل دخول موظف: محمد المكاوي (موظف مبيعات)",
+    "afterData": "{\"ip\":\"\",\"time\":\"2026-11-13T12:58:20.531Z\"}",
+    "ipAddress": "",
+    "id": "audit-1794574700533-v9qeo",
+    "timestamp": "2026-11-13T12:58:20.533Z"
+  },
+  {
+    "adminEmail": "muhamedalmkkawy@gmail.com",
+    "userName": "محمد المكاوي",
+    "userRole": "employee",
+    "action": "LOGIN",
+    "target": "تسجيل دخول موظف: محمد المكاوي (موظف مبيعات)",
+    "afterData": "{\"ip\":\"\",\"time\":\"2026-11-13T12:50:55.050Z\"}",
+    "ipAddress": "",
+    "id": "audit-1794574255051-t21st",
+    "timestamp": "2026-11-13T12:50:55.051Z"
+  },
+  {
+    "adminEmail": "muhamedalmkkawy@gmail.com",
+    "userName": "محمد المكاوي",
+    "userRole": "employee",
+    "action": "LOGIN",
+    "target": "تسجيل دخول موظف: محمد المكاوي (موظف مبيعات)",
+    "afterData": "{\"ip\":\"\",\"time\":\"2026-11-13T12:46:27.395Z\"}",
+    "ipAddress": "",
+    "id": "audit-1794573987396-sw0pq",
+    "timestamp": "2026-11-13T12:46:27.396Z"
+  },
+  {
+    "adminEmail": "muhamedalmkkawy@gmail.com",
+    "userName": "محمد المكاوي",
+    "userRole": "employee",
+    "action": "LOGIN",
+    "target": "تسجيل دخول موظف: محمد المكاوي (موظف مبيعات)",
+    "afterData": "{\"ip\":\"\",\"time\":\"2026-11-13T12:41:19.631Z\"}",
+    "ipAddress": "",
+    "id": "audit-1794573679633-u5j3b",
+    "timestamp": "2026-11-13T12:41:19.633Z"
+  },
+  {
+    "adminEmail": "manager@almaha-plan.sa",
+    "userName": "manager@almaha-plan.sa",
+    "userRole": "admin",
+    "action": "EMPLOYEE_UPDATE",
+    "target": "تعديل موظف: محمد المكاوي (muhamedalmkkawy@gmail.com)",
+    "beforeData": "{\"id\":\"emp_6bce5bce3180\",\"name\":\"محمد المكاوي\",\"username\":\"muhamedalmkkawy@gmail.com\",\"password\":\"123456\",\"role\":\"employee\",\"status\":\"active\",\"permissions\":[\"view_plots\",\"view_contracts\",\"view_stats\"],\"title\":\"موظف مبيعات\",\"phone\":\"\",\"createdAt\":\"2026-11-12T12:10:53.757Z\",\"lastLoginAt\":\"2026-11-12T12:24:35.862Z\"}",
+    "afterData": "{\"id\":\"emp_6bce5bce3180\",\"name\":\"محمد المكاوي\",\"username\":\"muhamedalmkkawy@gmail.com\",\"title\":\"موظف مبيعات\",\"status\":\"active\",\"permissions\":[\"view_plots\"]}",
+    "ipAddress": "",
+    "id": "audit-1794486307631-nn3vo",
+    "timestamp": "2026-11-12T12:25:07.631Z"
+  },
+  {
+    "adminEmail": "muhamedalmkkawy@gmail.com",
+    "userName": "محمد المكاوي",
+    "userRole": "employee",
+    "action": "LOGIN",
+    "target": "تسجيل دخول موظف: محمد المكاوي (موظف مبيعات)",
+    "afterData": "{\"ip\":\"\",\"time\":\"2026-11-12T12:24:35.862Z\"}",
+    "ipAddress": "",
+    "id": "audit-1794486275863-39vac",
+    "timestamp": "2026-11-12T12:24:35.863Z"
+  },
+  {
+    "adminEmail": "manager@almaha-plan.sa",
+    "userName": "manager@almaha-plan.sa",
+    "userRole": "admin",
+    "action": "EMPLOYEE_CREATE",
+    "target": "إضافة موظف: محمد المكاوي (muhamedalmkkawy@gmail.com)",
+    "afterData": "{\"id\":\"emp_6bce5bce3180\",\"name\":\"محمد المكاوي\",\"username\":\"muhamedalmkkawy@gmail.com\",\"title\":\"موظف مبيعات\",\"status\":\"active\",\"permissions\":[\"view_plots\",\"view_contracts\",\"view_stats\"]}",
+    "ipAddress": "",
+    "id": "audit-1794485453759-8ckek",
+    "timestamp": "2026-11-12T12:10:53.759Z"
+  }
+]

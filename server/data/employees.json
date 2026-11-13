@@ -8,12 +8,14 @@
     "status": "active",
     "permissions": [
       "view_plots",
-      "create_plots"
+      "create_plots",
+      "create_plot_page",
+      "view_contracts"
     ],
     "title": "موظف مبيعات",
     "phone": "",
     "createdAt": "2026-11-12T12:10:53.757Z",
-    "lastLoginAt": "2026-11-13T13:46:35.779Z",
-    "updatedAt": "2026-11-13T13:47:00.687Z"
+    "lastLoginAt": "2026-11-13T22:25:37.340Z",
+    "updatedAt": "2026-11-13T22:25:19.777Z"
   }
 ]

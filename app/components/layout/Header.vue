@@ -1,132 +1,195 @@
 <template>
   <header class="sticky top-0 z-40 print:hidden">
-    <!-- ADMIN: light bar, purple top edge, mode badge -->
-    <div
-      v-if="adminUser"
-      class="bg-white/95 backdrop-blur-md text-slate-700 border-t-[3px] border-t-[#7030A0] border-b border-b-slate-200 transition-shadow duration-300"
-      :class="scrolled ? 'shadow-[0_10px_24px_-18px_rgba(76,29,115,0.45)]' : ''"
-    >
-      <div class="max-w-7xl mx-auto">
-        <div class="h-16 flex items-center justify-between gap-4">
-          <!-- Brand + mode -->
-          <NuxtLink
-            to="/admin"
-            aria-label="وضع الإدارة - الذهاب إلى لوحة الإدارة"
-            class="group inline-flex items-center gap-3 h-10 ps-3.5 pe-5 rounded-xl bg-[#7030A0]/[0.07] ring-1 ring-inset ring-[#7030A0]/15 text-[#4c1d73] text-[15px] font-bold whitespace-nowrap transition-all duration-300 hover:bg-[#7030A0]/[0.12] hover:ring-[#7030A0]/30 hover:shadow-[0_8px_20px_-12px_rgba(112,48,160,0.55)] active:scale-[0.98] motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/60 focus-visible:ring-offset-2"
-          >
-            <!-- gold square from the logo, with a soft live pulse -->
-            <span class="relative flex w-3 h-3 shrink-0" aria-hidden="true">
-              <span class="absolute inset-0 rounded-[3px] bg-amber-400/60 motion-safe:animate-ping"></span>
-              <span class="relative w-3 h-3 rounded-[3px] bg-amber-400 transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110 motion-reduce:transition-none"></span>
-            </span>
-            <span>وضع الإدارة</span>
-          </NuxtLink>
+<!-- ================= ADMIN HEADER ================= -->
+<div
+  v-if="adminUser"
+  class="relative border-b border-[#7030A0]/10 bg-white/95 text-slate-700 backdrop-blur-xl transition-all duration-300"
+  :class="scrolled
+    ? 'shadow-[0_12px_35px_-20px_rgba(70,25,105,0.35)]'
+    : 'shadow-[0_4px_20px_-18px_rgba(70,25,105,0.12)]'"
+>
+  <!-- Brand accent -->
+  <div class="absolute inset-x-0 top-0 h-[3px] overflow-hidden">
+    <div class="h-full w-full bg-gradient-to-l from-[#7030A0] via-[#9B6BC0] to-amber-400"></div>
+  </div>
 
-          <!-- Links: admin tools, then site pages in a quieter tone -->
-          <nav class="hidden md:flex items-stretch h-full">
-            <NuxtLink
-              v-for="item in adminLinks"
-              :key="item.to"
-              :to="item.to"
-              class="group relative flex items-center px-4 text-[15px] transition-colors duration-200 focus-visible:outline-none focus-visible:bg-[#7030A0]/5"
-              :class="isActive(item) ? 'text-[#7030A0] font-bold' : 'text-slate-700 font-medium hover:text-[#7030A0]'"
-            >
-              {{ item.label }}
-              <span
-                aria-hidden="true"
-                class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[3px] w-7 rounded-t-full bg-amber-400 transition-transform duration-300 ease-out motion-reduce:transition-none"
-                :class="isActive(item) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'"
-              ></span>
-            </NuxtLink>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="flex h-[76px] items-center justify-between gap-4">
 
-            <span class="self-center mx-2 h-5 w-px bg-slate-200"></span>
+      <!-- ADMIN BRAND -->
+      <NuxtLink
+        to="/admin"
+        aria-label="الذهاب إلى لوحة الإدارة"
+        class="group relative flex shrink-0 items-center gap-3.5 rounded-2xl outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[#7030A0] focus-visible:ring-offset-4"
+      >
+        <!-- Brand icon -->
+        <div
+          class="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-[15px] bg-gradient-to-br from-[#8443B1] via-[#7030A0] to-[#4C1D73] shadow-[0_5px_15px_-5px_rgba(112,48,160,0.55)] transition-all duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_9px_20px_-5px_rgba(112,48,160,0.4)]"
+        >
+          <div class="absolute inset-0 bg-gradient-to-tr from-white/15 to-transparent"></div>
 
-            <NuxtLink
-              v-for="item in navItems"
-              :key="item.to"
-              :to="item.to"
-              class="group relative hidden lg:flex items-center px-3.5 text-[15px] transition-colors duration-200 focus-visible:outline-none focus-visible:bg-[#7030A0]/5"
-              :class="isActive(item) ? 'text-[#7030A0] font-bold' : 'text-slate-500 font-medium hover:text-[#7030A0]'"
-            >
-              {{ item.label }}
-              <span
-                aria-hidden="true"
-                class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[3px] w-6 rounded-t-full bg-amber-400 transition-transform duration-300 ease-out motion-reduce:transition-none"
-                :class="isActive(item) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'"
-              ></span>
-            </NuxtLink>
-          </nav>
+          <i class="pi pi-shield relative text-xl text-white"></i>
 
-          <div class="flex items-center gap-1 shrink-0">
-            <button
-              type="button"
-              @click="handleLogout"
-              :disabled="loggingOut"
-              class="hidden md:inline-flex items-center gap-2 h-10 px-3.5 rounded-xl text-[15px] font-medium text-slate-500 transition-colors duration-200 hover:bg-rose-50 hover:text-rose-600 active:bg-rose-100 disabled:opacity-60 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-300"
-            >
-              <i :class="loggingOut ? 'pi pi-spin pi-spinner' : 'pi pi-sign-out'" class="text-sm"></i>
-              <span>تسجيل الخروج</span>
-            </button>
-
-            <button
-              type="button"
-              @click="mobileMenuOpen = !mobileMenuOpen"
-              :aria-expanded="mobileMenuOpen"
-              aria-label="القائمة"
-              class="md:hidden w-11 h-11 flex items-center justify-center rounded-xl text-slate-700 transition-all duration-200 hover:bg-[#7030A0]/10 hover:text-[#7030A0] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/50"
-              :class="mobileMenuOpen ? 'bg-[#7030A0]/10 text-[#7030A0]' : ''"
-            >
-              <i :class="mobileMenuOpen ? 'pi pi-times' : 'pi pi-bars'"></i>
-            </button>
-          </div>
+          <span class="absolute bottom-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-amber-400 shadow-[0_0_7px_rgba(251,191,36,0.9)]"></span>
         </div>
 
-        <!-- Mobile drawer -->
-        <Transition
-          enter-active-class="transition duration-200 ease-out"
-          enter-from-class="opacity-0 -translate-y-2"
-          leave-active-class="transition duration-150 ease-in"
-          leave-to-class="opacity-0 -translate-y-2"
+        <!-- Brand text -->
+        <div class="flex flex-col gap-1">
+          <span class="text-[15px] font-black leading-none tracking-tight text-[#4C1D73] transition-colors duration-200 group-hover:text-[#7030A0]">
+            لوحة التحكم
+          </span>
+
+          <span class="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.13em] text-slate-400">
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+            ADMINISTRATION
+          </span>
+        </div>
+      </NuxtLink>
+
+      <!-- DESKTOP NAVIGATION -->
+      <nav class="hidden md:flex h-full min-w-0 flex-1 items-center justify-center gap-1 px-2">
+        <NuxtLink
+          v-for="item in adminLinks"
+          :key="item.to"
+          :to="item.to"
+          class="group relative flex h-11 items-center gap-2.5 whitespace-nowrap rounded-xl px-4 text-[13px] font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40"
+          :class="isActive(item)
+            ? 'bg-[#7030A0]/[0.075] text-[#7030A0]'
+            : 'text-slate-500 hover:bg-slate-50 hover:text-[#7030A0]'"
         >
-          <div v-if="mobileMenuOpen" class="md:hidden pb-4 border-t border-slate-100">
-            <NuxtLink
-              v-for="item in adminLinks"
-              :key="item.to"
-              :to="item.to"
-              class="group flex items-center gap-3 py-3.5 border-b border-slate-100 text-base transition-colors duration-200 hover:text-[#7030A0] active:bg-slate-50"
-              :class="isActive(item) ? 'text-[#7030A0] font-bold' : 'text-slate-700 font-medium'"
-            >
-              <i :class="item.icon" class="text-base w-5"></i>
-              <span class="flex-1">{{ item.label }}</span>
-              <span v-if="isActive(item)" class="w-2 h-2 rounded-[3px] bg-amber-400"></span>
-            </NuxtLink>
+          <i
+            :class="item.icon"
+            class="text-[14px] transition-transform duration-200 group-hover:scale-110"
+          ></i>
 
-            <div class="pt-4 pb-1 text-sm text-slate-400">صفحات الموقع</div>
-            <NuxtLink
-              v-for="item in navItems"
-              :key="item.to"
-              :to="item.to"
-              class="group flex items-center gap-3 py-3 border-b border-slate-100 text-base transition-colors duration-200 hover:text-[#7030A0] active:bg-slate-50"
-              :class="isActive(item) ? 'text-[#7030A0] font-bold' : 'text-slate-500'"
-            >
-              <i :class="item.icon" class="text-sm w-5"></i>
-              <span class="flex-1">{{ item.label }}</span>
-              <span v-if="isActive(item)" class="w-2 h-2 rounded-[3px] bg-amber-400"></span>
-            </NuxtLink>
+          <span>{{ item.label }}</span>
 
-            <button
-              type="button"
-              @click="handleLogout"
-              :disabled="loggingOut"
-              class="mt-3 w-full h-12 flex items-center gap-3 px-3 rounded-xl text-base font-medium text-rose-600 transition-colors duration-200 hover:bg-rose-50 active:bg-rose-100 disabled:opacity-60 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-300"
-            >
-              <i :class="loggingOut ? 'pi pi-spin pi-spinner' : 'pi pi-sign-out'" class="text-sm w-5"></i>
-              <span>تسجيل الخروج</span>
-            </button>
-          </div>
-        </Transition>
+          <span
+            v-if="isActive(item)"
+            class="absolute inset-x-4 -bottom-[13px] h-[3px] rounded-t-full bg-gradient-to-r from-[#7030A0] to-amber-400"
+          ></span>
+        </NuxtLink>
+      </nav>
+
+      <!-- ACTIONS -->
+      <div class="flex shrink-0 items-center gap-2">
+
+        <!-- Admin status -->
+        <div class="hidden xl:flex items-center gap-2 rounded-xl border border-emerald-100 bg-emerald-50/70 px-3 py-2">
+          <span class="relative flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-40"></span>
+            <span class="relative h-2 w-2 rounded-full bg-emerald-500"></span>
+          </span>
+
+          <span class="text-[11px] font-bold text-emerald-700">
+            متصل الآن
+          </span>
+        </div>
+
+        <!-- Logout -->
+        <button
+          type="button"
+          @click="handleLogout"
+          :disabled="loggingOut"
+          class="group hidden md:inline-flex h-10 items-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 text-[12px] font-bold text-slate-500 shadow-sm transition-all duration-200 hover:border-rose-200 hover:bg-rose-50 hover:text-rose-600 hover:shadow-[0_5px_15px_-8px_rgba(225,29,72,0.3)] active:scale-[0.97] disabled:pointer-events-none disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-300"
+        >
+          <i
+            :class="loggingOut ? 'pi pi-spin pi-spinner' : 'pi pi-sign-out'"
+            class="text-[13px] transition-transform duration-200 group-hover:translate-x-0.5"
+          ></i>
+
+          <span>خروج</span>
+        </button>
+
+        <!-- Mobile menu -->
+        <button
+          type="button"
+          @click="mobileMenuOpen = !mobileMenuOpen"
+          :aria-expanded="mobileMenuOpen"
+          aria-label="القائمة"
+          class="flex h-10 w-10 items-center justify-center rounded-xl border border-[#7030A0]/15 bg-[#7030A0]/[0.045] text-[#7030A0] transition-all duration-200 hover:bg-[#7030A0]/10 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40 md:hidden"
+          :class="mobileMenuOpen ? 'bg-[#7030A0] text-white' : ''"
+        >
+          <i :class="mobileMenuOpen ? 'pi pi-times' : 'pi pi-bars'" class="text-base"></i>
+        </button>
       </div>
     </div>
+
+    <!-- MOBILE ADMIN MENU -->
+    <Transition
+      enter-active-class="transition duration-200 ease-out"
+      enter-from-class="opacity-0 -translate-y-2"
+      leave-active-class="transition duration-150 ease-in"
+      leave-to-class="opacity-0 -translate-y-2"
+    >
+      <div
+        v-if="mobileMenuOpen"
+        class="border-t border-slate-100 py-4 md:hidden"
+      >
+        <!-- Section heading -->
+        <div class="mb-3 flex items-center justify-between">
+          <span class="text-[11px] font-black tracking-wider text-slate-400">
+            أدوات الإدارة
+          </span>
+
+          <span class="rounded-md bg-[#7030A0]/[0.07] px-2 py-1 text-[10px] font-bold text-[#7030A0]">
+            ADMIN
+          </span>
+        </div>
+
+        <!-- Navigation -->
+        <div class="grid gap-1.5">
+          <NuxtLink
+            v-for="item in adminLinks"
+            :key="item.to"
+            :to="item.to"
+            class="group flex items-center gap-3 rounded-xl px-3.5 py-3 transition-all duration-200"
+            :class="isActive(item)
+              ? 'bg-[#7030A0]/[0.075] text-[#7030A0]'
+              : 'text-slate-600 hover:bg-slate-50 hover:text-[#7030A0]'"
+          >
+            <span
+              class="flex h-9 w-9 items-center justify-center rounded-xl transition-colors duration-200"
+              :class="isActive(item)
+                ? 'bg-[#7030A0] text-white shadow-sm shadow-[#7030A0]/20'
+                : 'bg-slate-100 text-slate-500 group-hover:bg-[#7030A0]/10 group-hover:text-[#7030A0]'"
+            >
+              <i :class="item.icon" class="text-sm"></i>
+            </span>
+
+            <span class="flex-1 text-sm font-bold">
+              {{ item.label }}
+            </span>
+
+            <i
+              v-if="isActive(item)"
+              class="pi pi-check-circle text-sm text-[#7030A0]"
+            ></i>
+          </NuxtLink>
+        </div>
+
+        <!-- Mobile logout -->
+        <div class="mt-4 border-t border-slate-100 pt-4">
+          <button
+            type="button"
+            @click="handleLogout"
+            :disabled="loggingOut"
+            class="flex h-12 w-full items-center gap-3 rounded-xl border border-rose-100 bg-rose-50/70 px-3.5 text-sm font-bold text-rose-600 transition-all duration-200 hover:border-rose-200 hover:bg-rose-100 active:scale-[0.99] disabled:pointer-events-none disabled:opacity-50"
+          >
+            <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-rose-500 shadow-sm">
+              <i :class="loggingOut ? 'pi pi-spin pi-spinner' : 'pi pi-sign-out'" class="text-sm"></i>
+            </span>
+
+            <span>تسجيل الخروج</span>
+
+            <i class="pi pi-arrow-left ms-auto text-xs opacity-60"></i>
+          </button>
+        </div>
+      </div>
+    </Transition>
+  </div>
+</div>
+
 
     <!-- EMPLOYEE: indigo bar, employee badge -->
     <div
@@ -662,20 +725,32 @@ const handleLogout = async () => {
   if (loggingOut.value) return;
 
   loggingOut.value = true;
+
   try {
-    await $fetch('/api/auth/logout', { method: 'POST' });
+    // Attempt to invalidate the server session.
+    await $fetch('/api/auth/logout', {
+      method: 'POST',
+    });
+  } catch (err) {
+    console.error('Logout API failed:', err);
+  } finally {
+    // Always clear the local authentication state.
     clearAuth();
+
+    // Close all navigation menus.
     mobileMenuOpen.value = false;
     openGroup.value = null;
     mobileOpenGroup.value = null;
-    await navigateTo('/', { replace: true });
-  } catch (err) {
-    console.error('Logout failed:', err);
-  } finally {
+
+    // Always return to the public home page.
+    await navigateTo('/', {
+      replace: true,
+      external: false,
+    });
+
     loggingOut.value = false;
   }
 };
-
 const onKey = (e: KeyboardEvent) => {
   if (e.key === 'Escape') {
     mobileMenuOpen.value = false;
