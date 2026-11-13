@@ -271,11 +271,11 @@
                   </div>
                 </div>
 
-                <p
+                <!-- <p
                   class="mb-3 text-[10px] font-extrabold tracking-[0.2em] text-[#8546ad]"
                 >
                   ADMINISTRATOR ACCESS
-                </p>
+                </p> -->
 
                 <h2
                   class="text-[30px] font-black leading-[1.55] tracking-tight text-[#21172c] sm:text-[36px]"
