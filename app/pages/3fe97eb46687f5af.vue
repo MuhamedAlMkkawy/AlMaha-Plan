@@ -1,182 +1,289 @@
+
 <template>
-  <div class="min-h-screen w-full grid lg:grid-cols-2 bg-slate-50">
-    <!-- Brand panel (right side in RTL) -->
-    <aside class="relative hidden lg:flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[#1e1b4b] via-[#312e81] to-[#4338ca] text-white p-12 xl:p-16">
-      <!-- decorative shapes -->
-      <div class="absolute -top-32 -start-32 w-[28rem] h-[28rem] rounded-full bg-indigo-400/20 blur-3xl pointer-events-none"></div>
-      <div class="absolute -bottom-40 -end-24 w-[32rem] h-[32rem] rounded-full bg-emerald-400/15 blur-3xl pointer-events-none"></div>
-      <div class="absolute inset-0 opacity-[0.06] pointer-events-none"
-          style="background-image: radial-gradient(circle at 1px 1px, #fff 1px, transparent 0); background-size: 28px 28px;"></div>
+  <main
+    dir="rtl"
+    class="employee-login relative isolate flex min-h-screen w-full items-center justify-center overflow-hidden px-4 py-10 sm:px-6"
+  >
+    <!-- Background -->
+    <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      <div class="absolute inset-0 bg-[#101329]"></div>
 
+      <!-- Architectural background lines -->
+      <div class="absolute inset-0 opacity-[0.055]">
+        <div
+          class="absolute inset-0"
+          style="
+            background-image:
+              linear-gradient(rgba(255,255,255,.7) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,.7) 1px, transparent 1px);
+            background-size: 76px 76px;
+          "
+        ></div>
+      </div>
+
+      <!-- Ambient lighting -->
+      <div
+        class="absolute -right-40 -top-48 h-[620px] w-[620px] rounded-full bg-indigo-600/20 blur-[150px]"
+      ></div>
+
+      <div
+        class="absolute -bottom-56 -left-40 h-[650px] w-[650px] rounded-full bg-violet-700/20 blur-[160px]"
+      ></div>
+
+      <div
+        class="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/[0.07] blur-[130px]"
+      ></div>
+
+      <!-- Decorative rings -->
+      <div
+        class="absolute -right-24 top-1/2 h-[480px] w-[480px] -translate-y-1/2 rounded-full border border-white/[0.045]"
+      ></div>
+
+      <div
+        class="absolute -right-12 top-1/2 h-[380px] w-[380px] -translate-y-1/2 rounded-full border border-white/[0.045]"
+      ></div>
+
+      <div
+        class="absolute -left-32 bottom-[-100px] h-[400px] w-[400px] rounded-full border border-white/[0.04]"
+      ></div>
+
+      <!-- Top and bottom highlights -->
+      <div
+        class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-indigo-400/50 to-transparent"
+      ></div>
+
+      <div
+        class="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-violet-400/40 to-transparent"
+      ></div>
+    </div>
+
+    <!-- Main layout -->
+    <div class="relative z-10 mx-auto w-full max-w-[470px]">
       <!-- Brand -->
-      <NuxtLink to="/" class="relative flex items-center gap-3 w-fit group">
-        <div class="w-12 h-12 rounded-xl bg-white/15 border border-white/25 backdrop-blur flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-          <i class="pi pi-briefcase text-2xl text-indigo-200"></i>
-        </div>
-        <div>
-          <div class="text-xl font-black leading-tight">{{ projectConfig.name }}</div>
-          <div class="text-xs text-indigo-200 font-medium">
-            بوابة فريق العمل والمبيعات • مخطط رقم {{ projectConfig.planNo }}
-          </div>
-        </div>
-      </NuxtLink>
+      <header class="mb-8 text-center">
+        <div class="relative mx-auto mb-5 flex h-[76px] w-[76px] items-center justify-center">
+          <div
+            class="absolute inset-0 rounded-[25px] bg-indigo-500/25 blur-xl"
+          ></div>
 
-      <!-- Message -->
-      <div class="relative max-w-md">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/30 text-indigo-200 text-xs font-semibold mb-4 border border-indigo-400/20">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          نظام الموظفين المعتمد
+          <div
+            class="relative flex h-[68px] w-[68px] items-center justify-center rounded-[23px] border border-white/15 bg-gradient-to-br from-indigo-500 via-indigo-600 to-violet-700 shadow-[0_12px_40px_rgba(79,70,229,.35)]"
+          >
+            <i class="pi pi-building text-[28px] text-white"></i>
+          </div>
+
+          <span
+            class="absolute -bottom-1 -left-1 flex h-5 w-5 items-center justify-center rounded-full border-[3px] border-[#101329] bg-emerald-400"
+          >
+            <span class="h-1.5 w-1.5 rounded-full bg-white"></span>
+          </span>
         </div>
-        <h2 class="text-4xl xl:text-5xl font-black leading-tight tracking-tight text-white">
-          بوابة الموظفين
-        </h2>
-        <p class="mt-4 text-indigo-100/90 leading-relaxed text-sm">
-          مرحبًا بك في بوابة الموظفين الخاصة بمشروع مخطط المها. يمكنك الوصول إلى لوحة المبيعات والقطع والعقود وفق الصلاحيات المخصصة لحسابك.
+
+        <p class="text-[11px] font-bold uppercase tracking-[0.25em] text-indigo-300/80">
+          EMPLOYEE WORKSPACE
         </p>
 
-        <ul class="mt-8 space-y-3 text-sm">
-          <li class="flex items-center gap-3">
-            <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-emerald-300">
-              <i class="pi pi-check text-sm"></i>
-            </span>
-            <span class="text-indigo-50">تحديث حالات القطع وعروض الأسعار</span>
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-emerald-300">
-              <i class="pi pi-file-edit text-sm"></i>
-            </span>
-            <span class="text-indigo-50">تحرير عقود الشراء والإفراغ الفوري</span>
-          </li>
-          <li class="flex items-center gap-3">
-            <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 text-emerald-300">
-              <i class="pi pi-shield text-sm"></i>
-            </span>
-            <span class="text-indigo-50">تسجيل آمن وتوثيق كامل لكافة العمليات</span>
-          </li>
-        </ul>
-      </div>
+        <h1 class="mt-3 text-3xl font-black tracking-tight text-white sm:text-[34px]">
+          بوابة الموظفين
+        </h1>
 
-      <div class="relative text-xs text-indigo-300/80">
-        © {{ new Date().getFullYear() }} {{ projectConfig.name }} • بوابة الموظفين
-      </div>
-    </aside>
+        <p class="mt-2 text-sm text-slate-400">
+          {{ projectConfig.name }}
+        </p>
+      </header>
 
-    <!-- Form side -->
-    <main class="relative flex items-center justify-center px-5 sm:px-8 py-10">
-      <!-- Back to site -->
-      <NuxtLink
-        to="/"
-        class="absolute top-5 end-5 sm:top-6 sm:end-8 text-xs font-semibold text-slate-500 hover:text-indigo-600 transition-colors flex items-center gap-1.5"
+      <!-- Login card -->
+      <section
+        class="login-card relative overflow-hidden rounded-[28px] border border-white/[0.12] bg-[#fdfdff] shadow-[0_35px_100px_rgba(0,0,0,.42)]"
       >
-        <span>العودة للموقع الرئيسي</span>
-        <i class="pi pi-arrow-left text-[10px]"></i>
-      </NuxtLink>
+        <!-- Card accent -->
+        <div
+          class="absolute inset-x-0 top-0 h-[4px] bg-gradient-to-l from-violet-500 via-indigo-500 to-blue-400"
+        ></div>
 
-      <div class="relative w-full max-w-md bg-white p-7 sm:p-9 rounded-3xl border border-slate-200/80 shadow-sm">
-        <!-- Brand on mobile -->
-        <div class="lg:hidden text-center mb-6">
-          <div class="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-indigo-700 to-indigo-900 text-white flex items-center justify-center shadow-lg shadow-indigo-900/20 mb-3">
-            <i class="pi pi-briefcase text-2xl"></i>
-          </div>
-          <div class="text-base font-black text-slate-900">{{ projectConfig.name }}</div>
-          <div class="text-xs text-slate-500">بوابة الموظفين</div>
-        </div>
-
-        <div class="mb-6 text-center lg:text-start">
-          <h1 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">تسجيل دخول الموظف</h1>
-          <p class="text-xs sm:text-sm text-slate-500 mt-1.5">أدخل بيانات الاعتماد الممنوحة لك من مدير النظام</p>
-        </div>
-
-        <!-- Error alert -->
-        <Transition
-          enter-active-class="transition duration-200"
-          enter-from-class="opacity-0 -translate-y-1"
-          leave-active-class="transition duration-150"
-          leave-to-class="opacity-0"
-        >
-          <div
-            v-if="errorMessage"
-            role="alert"
-            class="mb-5 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs sm:text-sm flex items-start gap-2.5"
-          >
-            <i class="pi pi-exclamation-circle text-rose-600 mt-0.5 shrink-0"></i>
-            <div>
-              <strong class="block font-bold">تعذر تسجيل الدخول</strong>
-              <span>{{ errorMessage }}</span>
-            </div>
-          </div>
-        </Transition>
-
-        <form @submit.prevent="handleLogin" class="space-y-4" novalidate>
-          <!-- Username / Email -->
-          <div>
-            <label for="emp-username" class="block text-xs font-bold text-slate-700 mb-1.5">
-              اسم المستخدم أو البريد
-            </label>
-            <div class="relative" dir="ltr">
-              <span class="absolute inset-y-0 left-0 w-11 flex items-center justify-center text-slate-400 pointer-events-none">
-                <i class="pi pi-user text-sm"></i>
-              </span>
-              <input
-                id="emp-username"
-                v-model="username"
-                type="text"
-                required
-                autocomplete="username"
-                placeholder="اسم المستخدم المعتمد"
-                class="w-full h-12 ps-11 pe-4 rounded-xl border border-slate-200 bg-slate-50/50 text-sm text-slate-900 placeholder:text-slate-400 transition-all hover:border-slate-300 focus:bg-white focus:border-indigo-600 focus:outline-hidden focus:ring-4 focus:ring-indigo-600/10 text-left"
-              />
-            </div>
-          </div>
-
-          <!-- Password -->
-          <div>
-            <label for="emp-password" class="block text-xs font-bold text-slate-700 mb-1.5">
-              كلمة المرور
-            </label>
-            <div class="relative" dir="ltr">
-              <span class="absolute inset-y-0 left-0 w-11 flex items-center justify-center text-slate-400 pointer-events-none">
-                <i class="pi pi-lock text-sm"></i>
-              </span>
-              <input
-                id="emp-password"
-                v-model="password"
-                :type="showPassword ? 'text' : 'password'"
-                autocomplete="current-password"
-                placeholder="••••••••"
-                class="w-full h-12 ps-11 pe-12 rounded-xl border border-slate-200 bg-slate-50/50 text-sm text-slate-900 placeholder:text-slate-400 transition-all hover:border-slate-300 focus:bg-white focus:border-indigo-600 focus:outline-hidden focus:ring-4 focus:ring-indigo-600/10"
-              />
-              <button
-                type="button"
-                @click="showPassword = !showPassword"
-                class="absolute inset-y-0 right-0 w-12 flex items-center justify-center rounded-e-xl text-slate-400 hover:text-indigo-600 transition-colors"
-                tabindex="-1"
+        <div class="p-6 sm:p-9">
+          <!-- Card heading -->
+          <div class="mb-8">
+            <div class="mb-5 flex items-center justify-between gap-3">
+              <div
+                class="inline-flex items-center gap-2 rounded-lg border border-indigo-100 bg-indigo-50 px-3 py-2 text-[11px] font-extrabold text-indigo-700"
               >
-                <i :class="['pi text-base', showPassword ? 'pi-eye-slash' : 'pi-eye']"></i>
-              </button>
+                <i class="pi pi-lock text-xs"></i>
+                منطقة دخول محمية
+              </div>
+
+              <div class="flex items-center gap-1.5 text-[10px] font-semibold text-slate-400">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                نظام آمن
+              </div>
             </div>
+
+            <h2 class="text-[27px] font-black tracking-tight text-[#171a32]">
+              أهلًا بعودتك
+            </h2>
+
+            <p class="mt-2 text-[13px] leading-7 text-slate-500">
+              سجّل الدخول باستخدام بيانات حسابك للوصول إلى أدوات العمل
+              ولوحة الموظف.
+            </p>
           </div>
 
-          <!-- Submit -->
-          <button
-            type="submit"
-            :disabled="loading"
-            class="w-full h-12 mt-2 px-4 rounded-xl bg-gradient-to-l from-indigo-700 to-indigo-900 hover:from-indigo-800 hover:to-indigo-950 text-white font-bold text-sm shadow-lg shadow-indigo-900/25 active:scale-[0.99] transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
-          >
-            <i v-if="loading" class="pi pi-spin pi-spinner"></i>
-            <i v-else class="pi pi-sign-in"></i>
-            <span>{{ loading ? 'جاري التحقق...' : 'دخول الموظف' }}</span>
-          </button>
-        </form>
+          <!-- Error message -->
+          <Transition name="error">
+            <div
+              v-if="errorMessage"
+              role="alert"
+              class="mb-6 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3.5 text-sm text-red-700"
+            >
+              <div
+                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100"
+              >
+                <i class="pi pi-exclamation-circle"></i>
+              </div>
 
-        <div class="mt-6 pt-5 border-t border-slate-100 text-center">
-          <p class="text-xs text-slate-400">
-            إذا نسيت كلمة المرور أو واجهت مشكلة في الدخول، يرجى التواصل مع إدارة النظام.
-          </p>
+              <div class="min-w-0 pt-1 leading-6">
+                {{ errorMessage }}
+              </div>
+            </div>
+          </Transition>
+
+          <!-- Form -->
+          <form @submit.prevent="handleLogin" class="space-y-5">
+            <!-- Username -->
+            <div>
+              <label
+                for="username"
+                class="mb-2.5 block text-[12px] font-extrabold text-slate-700"
+              >
+                اسم المستخدم
+                <span class="text-red-500">*</span>
+              </label>
+
+              <div class="login-input relative">
+                <div
+                  class="absolute right-4 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg bg-slate-100 text-slate-400 transition-colors"
+                >
+                  <i class="pi pi-user text-sm"></i>
+                </div>
+
+                <input
+                  id="username"
+                  v-model="username"
+                  type="text"
+                  autocomplete="username"
+                  placeholder="أدخل اسم المستخدم أو البريد الإلكتروني"
+                  required
+                  class="h-[54px] w-full rounded-xl border border-slate-200 bg-[#f8f9fc] pr-[62px] pl-4 text-[13px] font-semibold text-slate-800 outline-none transition-all placeholder:font-normal placeholder:text-slate-400 focus:border-indigo-400 focus:bg-white focus:ring-[4px] focus:ring-indigo-500/[0.09]"
+                />
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div>
+              <div class="mb-2.5 flex items-center justify-between gap-3">
+                <label
+                  for="password"
+                  class="text-[12px] font-extrabold text-slate-700"
+                >
+                  كلمة المرور
+                  <span class="text-red-500">*</span>
+                </label>
+              </div>
+
+              <div class="login-input relative">
+                <div
+                  class="absolute right-4 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg bg-slate-100 text-slate-400 transition-colors"
+                >
+                  <i class="pi pi-key text-sm"></i>
+                </div>
+
+                <input
+                  id="password"
+                  v-model="password"
+                  :type="showPassword ? 'text' : 'password'"
+                  autocomplete="current-password"
+                  placeholder="أدخل كلمة المرور"
+                  required
+                  class="h-[54px] w-full rounded-xl border border-slate-200 bg-[#f8f9fc] pr-[62px] pl-[52px] text-[13px] font-semibold text-slate-800 outline-none transition-all placeholder:font-normal placeholder:text-slate-400 focus:border-indigo-400 focus:bg-white focus:ring-[4px] focus:ring-indigo-500/[0.09]"
+                />
+
+                <button
+                  type="button"
+                  @click="showPassword = !showPassword"
+                  :aria-label="showPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'"
+                  class="absolute left-4 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg text-slate-400 transition-all hover:bg-indigo-50 hover:text-indigo-600"
+                >
+                  <i
+                    :class="showPassword ? 'pi pi-eye-slash' : 'pi pi-eye'"
+                    class="text-sm"
+                  ></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <button
+              type="submit"
+              :disabled="loading"
+              class="login-submit group relative mt-3 flex h-[55px] w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-gradient-to-l from-[#4f46e5] via-[#5145cf] to-[#673ab7] px-5 text-sm font-extrabold text-white shadow-[0_9px_24px_rgba(79,70,229,.23)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_13px_30px_rgba(79,70,229,.34)] disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              <span
+                class="absolute inset-0 translate-x-full bg-gradient-to-l from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-[-100%]"
+              ></span>
+
+              <i
+                :class="loading ? 'pi pi-spin pi-spinner' : 'pi pi-sign-in'"
+                class="relative text-sm"
+              ></i>
+
+              <span class="relative">
+                {{ loading ? 'جارٍ التحقق من بياناتك...' : 'تسجيل الدخول إلى حسابي' }}
+              </span>
+
+              <i
+                v-if="!loading"
+                class="pi pi-arrow-left relative text-xs transition-transform duration-300 group-hover:-translate-x-1"
+              ></i>
+            </button>
+          </form>
+
+          <!-- Security information -->
+          <div
+            class="mt-7 flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50/80 p-3.5"
+          >
+            <div
+              class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600"
+            >
+              <i class="pi pi-shield text-sm"></i>
+            </div>
+
+            <div>
+              <p class="text-[11px] font-extrabold text-slate-700">
+                حماية بيانات حسابك
+              </p>
+              <p class="mt-1 text-[10px] leading-5 text-slate-400">
+                يتم تأمين الوصول وفق صلاحيات الموظف المعتمدة.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-    </main>
-  </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="mt-7 text-center">
+        <div class="flex items-center justify-center gap-2 text-[11px] text-slate-400">
+          <i class="pi pi-lock text-[10px] text-indigo-300"></i>
+          <span>بوابة داخلية مخصصة للموظفين</span>
+        </div>
+
+        <p class="mt-3 text-[10px] text-slate-500">
+          © {{ new Date().getFullYear() }} {{ projectConfig.name }}
+          <span class="mx-1.5 text-slate-600">·</span>
+          جميع الحقوق محفوظة
+        </p>
+      </footer>
+    </div>
+  </main>
 </template>
 
 <script setup lang="ts">
@@ -222,10 +329,16 @@ const handleLogin = async () => {
 
     if (res.success) {
       await refreshAuth();
-      await navigateTo(firstAllowedPath((res.user.permissions || []) as EmployeePermission[]));
+
+      await navigateTo(
+        firstAllowedPath(
+          (res.user.permissions || []) as EmployeePermission[],
+        ),
+      );
     }
   } catch (err: any) {
     console.error('Employee login error:', err);
+
     errorMessage.value =
       err.data?.statusMessage ||
       err.statusMessage ||
@@ -237,3 +350,52 @@ const handleLogin = async () => {
 };
 </script>
 
+<style scoped>
+.employee-login {
+  font-family: inherit;
+}
+
+.login-card {
+  animation: card-enter 650ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.login-input:focus-within > div {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.error-enter-active,
+.error-leave-active {
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.error-enter-from,
+.error-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-card {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>

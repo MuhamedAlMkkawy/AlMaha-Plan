@@ -1,58 +1,74 @@
+
 <template>
-  <div class="space-y-6">
+  <div class="space-y-6" dir="rtl">
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <header class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div>
-        <div class="flex items-center gap-2">
-          <NuxtLink to="/admin" class="text-xs text-slate-400 hover:text-[#7030A0]">الإدارة</NuxtLink>
-          <span class="text-xs text-slate-300">/</span>
-          <span class="text-xs font-bold text-[#7030A0]">فريق العمل</span>
+        <div class="mb-2 flex items-center gap-2 text-xs">
+          <NuxtLink to="/admin" class="font-medium text-slate-400 transition hover:text-[#7030A0]">
+            الإدارة
+          </NuxtLink>
+          <i class="pi pi-angle-left text-[10px] text-slate-300"></i>
+          <span class="font-bold text-[#7030A0]">فريق العمل</span>
         </div>
-        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">
-          إدارة الموظفين والصلاحيات
-        </h1>
-        <p class="text-xs sm:text-sm text-slate-500 mt-1">
-          إضافة حسابات الموظفين، تخصيص الصلاحيات بدقة، ومراقبة كافة العمليات المسجلة في النظام
-        </p>
+
+        <div class="flex items-center gap-3">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#8546B5] to-[#5B2188] text-white shadow-lg shadow-purple-900/15">
+            <i class="pi pi-users text-lg"></i>
+          </div>
+          <div>
+            <h1 class="text-xl font-black text-slate-900 sm:text-2xl">
+              إدارة الموظفين والصلاحيات
+            </h1>
+            <p class="mt-1 text-xs text-slate-500 sm:text-sm">
+              إدارة حسابات الموظفين ومتابعة نشاط الدخول والخروج والصلاحيات
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div class="flex items-center gap-3">
+      <div class="flex flex-wrap gap-2">
         <NuxtLink
           to="/admin/audit"
-          class="px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs sm:text-sm font-semibold shadow-xs flex items-center gap-2"
+          class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold text-slate-600 shadow-sm transition hover:border-violet-200 hover:bg-violet-50 hover:text-[#7030A0]"
         >
-          <i class="pi pi-history text-slate-400"></i>
-          <span>سجل نشاط الموظفين</span>
+          <i class="pi pi-history"></i>
+          سجل النشاط
         </NuxtLink>
 
         <button
           type="button"
           @click="openAddModal"
-          class="px-4 py-2.5 rounded-xl bg-[#7030A0] text-white hover:bg-[#532277] text-xs sm:text-sm font-bold shadow-md shadow-purple-900/20 flex items-center gap-2"
+          class="inline-flex items-center gap-2 rounded-xl bg-[#7030A0] px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-purple-900/20 transition hover:bg-[#532277] active:scale-[.98]"
         >
-          <i class="pi pi-user-plus text-xs"></i>
-          <span>إضافة موظف جديد</span>
+          <i class="pi pi-user-plus"></i>
+          إضافة موظف
         </button>
       </div>
-    </div>
+    </header>
 
-    <!-- Employee Login Link Banner -->
-    <div class="rounded-2xl bg-gradient-to-l from-indigo-50 via-purple-50 to-white border border-indigo-200/80 p-5 shadow-xs">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div class="flex items-start gap-3">
-          <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-md">
-            <i class="pi pi-link text-base"></i>
+    <!-- Employee Login URL -->
+    <section class="relative overflow-hidden rounded-2xl border border-violet-200 bg-gradient-to-l from-violet-50 via-white to-indigo-50 p-4 shadow-sm sm:p-5">
+      <div class="pointer-events-none absolute -left-10 -top-16 h-40 w-40 rounded-full bg-indigo-100/60 blur-3xl"></div>
+
+      <div class="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div class="flex min-w-0 items-start gap-3">
+          <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-lg">
+            <i class="pi pi-link"></i>
           </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <span class="font-bold text-slate-900 text-sm">رابط بوابة تسجيل دخول الموظفين (المسار الخاص)</span>
-              <span class="px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 text-2xs font-extrabold">منفصل عن الإدارة</span>
+          <div class="min-w-0">
+            <div class="flex flex-wrap items-center gap-2">
+              <h2 class="text-sm font-black text-slate-900">بوابة تسجيل دخول الموظفين</h2>
+              <span class="rounded-full bg-indigo-100 px-2 py-1 text-[10px] font-bold text-indigo-700">
+                بوابة منفصلة
+              </span>
             </div>
-            <p class="text-xs text-slate-600 mt-0.5">
-              شارك هذا الرابط السري مع الموظفين فقط لتسجيل الدخول إلى حساباتهم واستخدام النظام حسب الصلاحيات المحددة لهم:
+            <p class="mt-1 text-xs leading-relaxed text-slate-500">
+              شارك الرابط مع الموظفين للدخول إلى حساباتهم وفق الصلاحيات الممنوحة لهم.
             </p>
-            <div class="mt-2 font-mono text-xs text-indigo-900 bg-white/90 border border-indigo-200 px-3 py-1.5 rounded-lg inline-flex items-center gap-2 max-w-full overflow-x-auto" dir="ltr">
-              <span>{{ employeeLoginUrl }}</span>
+            <div class="mt-3 inline-flex max-w-full items-center gap-2 overflow-x-auto rounded-lg border border-indigo-100 bg-white px-3 py-2 font-mono text-xs text-indigo-900" dir="ltr">
+              <i class="pi pi-globe shrink-0 text-indigo-400"></i>
+              <span class="whitespace-nowrap">{{ employeeLoginUrl }}</span>
             </div>
           </div>
         </div>
@@ -60,186 +76,189 @@
         <button
           type="button"
           @click="copyEmployeeLoginUrl"
-          class="self-start md:self-center px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition-all shadow-xs flex items-center gap-2"
+          class="inline-flex shrink-0 items-center justify-center gap-2 self-start rounded-xl bg-indigo-600 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-indigo-700 md:self-center"
         >
-          <i :class="copiedUrl ? 'pi pi-check text-emerald-300' : 'pi pi-copy'"></i>
-          <span>{{ copiedUrl ? 'تم نسخ الرابط!' : 'نسخ رابط الدخول' }}</span>
+          <i :class="copiedUrl ? 'pi pi-check' : 'pi pi-copy'"></i>
+          {{ copiedUrl ? 'تم نسخ الرابط' : 'نسخ رابط الدخول' }}
         </button>
       </div>
-    </div>
+    </section>
 
-    <!-- Stats summary -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+    <!-- Statistics -->
+    <section class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+      <div
+        v-for="stat in stats"
+        :key="stat.label"
+        class="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md"
+      >
         <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-slate-500">إجمالي الموظفين</span>
-          <span class="w-8 h-8 rounded-lg bg-purple-50 text-[#7030A0] flex items-center justify-center">
-            <i class="pi pi-users text-sm"></i>
-          </span>
+          <div>
+            <p class="text-xs font-bold text-slate-500">{{ stat.label }}</p>
+            <p class="mt-2 text-3xl font-black tabular-nums" :class="stat.valueColor">
+              {{ stat.value }}
+            </p>
+          </div>
+          <div class="flex h-11 w-11 items-center justify-center rounded-xl" :class="stat.iconBg">
+            <i :class="[stat.icon, stat.iconColor, 'text-lg']"></i>
+          </div>
         </div>
-        <div class="mt-2 text-2xl font-black text-slate-900 tabular-nums">
-          {{ employees.length }}
+        <div class="mt-3 h-1 overflow-hidden rounded-full bg-slate-100">
+          <div class="h-full rounded-full transition-all" :class="stat.barColor" :style="{ width: `${stat.percentage}%` }"></div>
         </div>
       </div>
-
-      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-slate-500">الموظفون النشطون</span>
-          <span class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
-            <i class="pi pi-check-circle text-sm"></i>
-          </span>
-        </div>
-        <div class="mt-2 text-2xl font-black text-emerald-600 tabular-nums">
-          {{ activeCount }}
-        </div>
-      </div>
-
-      <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-slate-500">حسابات معطلة</span>
-          <span class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center">
-            <i class="pi pi-lock text-sm"></i>
-          </span>
-        </div>
-        <div class="mt-2 text-2xl font-black text-slate-700 tabular-nums">
-          {{ inactiveCount }}
-        </div>
-      </div>
-    </div>
+    </section>
 
     <!-- Employees Table -->
-    <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-      <div class="p-5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div class="flex items-center gap-2">
-          <i class="pi pi-id-card text-[#7030A0]"></i>
-          <h2 class="font-bold text-slate-900 text-base">قائمة حسابات الموظفين والصلاحيات</h2>
-          <span class="text-xs text-slate-400">({{ employees.length }} موظف)</span>
+    <section class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div class="flex flex-col gap-3 border-b border-slate-100 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
+        <div class="flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 text-[#7030A0]">
+            <i class="pi pi-id-card"></i>
+          </div>
+          <div>
+            <h2 class="text-sm font-black text-slate-900 sm:text-base">حسابات الموظفين</h2>
+            <p class="mt-0.5 text-[11px] text-slate-400">
+              {{ employees.length }} حساب مسجل في النظام
+            </p>
+          </div>
         </div>
 
         <button
           type="button"
           @click="refresh"
-          class="text-xs font-semibold text-slate-500 hover:text-[#7030A0] flex items-center gap-1 self-start"
+          :disabled="pending"
+          class="inline-flex items-center gap-2 self-start rounded-lg px-3 py-2 text-xs font-bold text-slate-500 transition hover:bg-violet-50 hover:text-[#7030A0] disabled:opacity-50"
         >
-          <i class="pi pi-refresh text-xs"></i>
-          <span>تحديث القائمة</span>
+          <i :class="pending ? 'pi pi-spin pi-spinner' : 'pi pi-refresh'"></i>
+          تحديث القائمة
         </button>
       </div>
 
-      <div v-if="pending" class="p-8 text-center text-slate-400">
-        <i class="pi pi-spin pi-spinner text-2xl text-[#7030A0] mb-2"></i>
-        <p>جاري تحميل قائمة الموظفين...</p>
+      <div v-if="pending" class="flex flex-col items-center justify-center px-4 py-16">
+        <i class="pi pi-spin pi-spinner text-3xl text-[#7030A0]"></i>
+        <p class="mt-4 text-sm font-bold text-slate-700">جاري تحميل الموظفين</p>
+        <p class="mt-1 text-xs text-slate-400">يرجى الانتظار...</p>
       </div>
 
-      <div v-else-if="employees.length === 0" class="p-12 text-center text-slate-500">
-        <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-purple-50 text-[#7030A0] flex items-center justify-center text-2xl">
-          <i class="pi pi-users"></i>
+      <div v-else-if="employees.length === 0" class="flex flex-col items-center justify-center px-4 py-16 text-center">
+        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-violet-50 text-[#7030A0]">
+          <i class="pi pi-users text-2xl"></i>
         </div>
-        <h3 class="font-bold text-slate-900 text-base">لا يوجد موظفون مسجلون بعد</h3>
-        <p class="text-xs text-slate-500 mt-1 mb-4">أضف اسم الموظف وبيانات دخوله، ثم حدد الصلاحيات المناسبة لحسابه</p>
-        <button
-          type="button"
-          @click="openAddModal"
-          class="px-4 py-2 rounded-xl bg-[#7030A0] text-white text-xs font-bold"
-        >
-          إضافة أول موظف الآن
+        <h3 class="mt-4 text-base font-black text-slate-900">لا يوجد موظفون حتى الآن</h3>
+        <p class="mt-1 max-w-sm text-xs leading-relaxed text-slate-500">
+          أضف حسابات فريق العمل وحدد لكل موظف المسمى الوظيفي والصلاحيات المناسبة.
+        </p>
+        <button @click="openAddModal" class="mt-5 inline-flex items-center gap-2 rounded-xl bg-[#7030A0] px-5 py-3 text-xs font-bold text-white transition hover:bg-[#532277]">
+          <i class="pi pi-user-plus"></i>
+          إضافة أول موظف
         </button>
       </div>
 
       <div v-else class="overflow-x-auto">
-        <table class="w-full text-start border-collapse text-xs sm:text-sm">
+        <table class="w-full min-w-[1100px] border-collapse text-start text-xs sm:text-sm">
           <thead>
-            <tr class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
-              <th class="px-4 py-3.5 text-start">الموظف</th>
-              <th class="px-4 py-3.5 text-start">اسم المستخدم</th>
-              <th class="px-4 py-3.5 text-center">الحالة</th>
-              <th class="px-4 py-3.5 text-start">الصلاحيات الممنوحة</th>
-              <th class="px-4 py-3.5 text-start">آخر دخول</th>
-              <th class="px-4 py-3.5 text-center">إجراءات</th>
+            <tr class="border-b border-slate-200 bg-slate-50/80 text-slate-500">
+              <th class="px-4 py-4 text-center font-extrabold">الموظف</th>
+              <th class="px-4 py-4 text-center font-extrabold">اسم المستخدم</th>
+              <th class="px-4 py-4 text-center font-extrabold">الحالة</th>
+              <th class="px-4 py-4 text-center font-extrabold">الصلاحيات</th>
+              <!-- <th class="px-4 py-4 text-start font-extrabold">نشاط الدخول والخروج</th> -->
+              <th class="px-4 py-4 text-center font-extrabold">الإجراءات</th>
             </tr>
           </thead>
+
           <tbody class="divide-y divide-slate-100">
-            <tr v-for="emp in employees" :key="emp.id" class="hover:bg-slate-50/70 transition-colors">
-              <!-- Name & Title -->
-              <td class="px-4 py-3.5">
-                <div class="font-bold text-slate-900">{{ emp.name }}</div>
-                <div class="text-2xs text-slate-500 mt-0.5 flex items-center gap-2">
-                  <span v-if="emp.title">{{ emp.title }}</span>
-                  <span v-if="emp.phone" class="font-mono" dir="ltr">{{ emp.phone }}</span>
-                </div>
-              </td>
-
-              <!-- Username -->
-              <td class="px-4 py-3.5 font-mono text-xs font-semibold text-indigo-900" dir="ltr">
-                {{ emp.username }}
-              </td>
-
-              <!-- Status -->
-              <td class="px-4 py-3.5 text-center">
-                <button
-                  type="button"
-                  @click="toggleStatus(emp)"
-                  class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold transition-all"
-                  :class="emp.status === 'active'
-                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100'
-                    : 'bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100'"
-                  :title="emp.status === 'active' ? 'انقر للتعطيل' : 'انقر للتفعيل'"
-                >
-                  <span class="w-1.5 h-1.5 rounded-full" :class="emp.status === 'active' ? 'bg-emerald-500' : 'bg-rose-500'"></span>
-                  <span>{{ emp.status === 'active' ? 'نشط' : 'معطل' }}</span>
+            <tr v-for="emp in employees" :key="emp.id" class="transition hover:bg-violet-50/30">
+              <td class="px-4 py-4">
+                <button type="button" @click="openDetails(emp)" class="flex items-center justify-center gap-3 text-start">
+                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-100 to-indigo-50 font-black text-[#7030A0]">
+                    {{ getInitials(emp.name) }}
+                  </div>
+                  <div class="min-w-0">
+                    <p class="font-extrabold text-slate-900 transition hover:text-[#7030A0]">{{ emp.name }}</p>
+                    <p class="mt-1 text-[11px] text-slate-500">{{ emp.title || 'لم يحدد المسمى الوظيفي' }}</p>
+                    <p v-if="emp.phone" dir="ltr" class="mt-0.5 text-start font-mono text-[10px] text-slate-400">{{ emp.phone }}</p>
+                  </div>
                 </button>
               </td>
 
-              <!-- Permissions Chips -->
-              <td class="px-4 py-3.5 max-w-xs">
-                <div class="flex flex-wrap gap-1">
-                  <span
-                    v-for="p in emp.permissions"
-                    :key="p"
-                    class="px-2 py-0.5 rounded-md text-2xs font-bold bg-purple-50 text-[#7030A0] border border-purple-100"
-                  >
-                    {{ getPermissionLabel(p) }}
-                  </span>
-                  <span v-if="!emp.permissions?.length" class="text-2xs text-slate-400">
-                    بدون صلاحيات إضافية
-                  </span>
-                </div>
-              </td>
-
-              <!-- Last login -->
-              <td class="px-4 py-3.5 text-slate-500 text-xs whitespace-nowrap">
-                <span v-if="emp.lastLoginAt" class="font-mono text-2xs">
-                  {{ new Date(emp.lastLoginAt).toLocaleString('ar-SA') }}
+              <td class="px-4 py-4">
+                <span dir="ltr" class="inline-flex rounded-lg border border-slate-100 bg-slate-50 px-2.5 py-1.5 font-mono text-xs font-bold text-slate-700">
+                  {{ emp.username }}
                 </span>
-                <span v-else class="text-slate-400 text-2xs">لم يسجل الدخول بعد</span>
               </td>
 
-              <!-- Actions -->
-              <td class="px-4 py-3.5 text-center whitespace-nowrap">
-                <div class="inline-flex items-center gap-1">
-                  <button
-                    type="button"
-                    @click="openEditModal(emp)"
-                    class="w-8 h-8 rounded-lg text-[#7030A0] hover:bg-purple-50 flex items-center justify-center transition-colors"
-                    title="تعديل الموظف والصلاحيات"
+              <td class="px-4 py-4 text-center">
+                <button
+                  type="button"
+                  @click="requestStatusChange(emp)"
+                  class="inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-extrabold transition"
+                  :class="emp.status === 'active'
+                    ? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+                    : 'border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100'"
+                >
+                  <span class="h-1.5 w-1.5 rounded-full" :class="emp.status === 'active' ? 'bg-emerald-500' : 'bg-rose-500'"></span>
+                  {{ emp.status === 'active' ? 'نشط' : 'معطل' }}
+                </button>
+              </td>
+
+              <td class="max-w-xs px-4 py-4">
+                <div class="flex max-w-[240px] flex-wrap justify-center gap-1">
+                  <span
+                    v-for="permission in (emp.permissions || []).slice(0, 3)"
+                    :key="permission"
+                    class="rounded-md border border-violet-100 bg-violet-50 px-2 py-1 text-[10px] font-bold text-[#7030A0]"
                   >
+                    {{ getPermissionLabel(permission) }}
+                  </span>
+                  <span v-if="(emp.permissions?.length || 0) > 3" class="rounded-md border border-slate-200 bg-slate-50 px-2 py-1 text-[10px] font-bold text-slate-500">
+                    +{{ emp.permissions.length - 3 }}
+                  </span>
+                  <span v-if="!emp.permissions?.length" class="text-[11px] text-slate-400">بدون صلاحيات</span>
+                </div>
+                <!-- <p class="mt-1.5 text-[10px] text-slate-400">{{ emp.permissions?.length || 0 }} صلاحية</p> -->
+              </td>
+
+              <!-- Login / Logout in the same cell -->
+              <!-- <td class="px-4 py-4">
+                <div class="space-y-2">
+                  <div class="flex items-center gap-2 whitespace-nowrap">
+                    <span class="flex h-6 w-6 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+                      <i class="pi pi-sign-in text-[10px]"></i>
+                    </span>
+                    <div>
+                      <p class="text-[10px] font-bold text-slate-500">آخر دخول</p>
+                      <p class="text-[11px] font-semibold text-slate-700">
+                        {{ emp.lastLoginAt ? formatDate(emp.lastLoginAt) : 'لا يوجد سجل دخول' }}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2 whitespace-nowrap">
+                    <span class="flex h-6 w-6 items-center justify-center rounded-lg bg-rose-50 text-rose-600">
+                      <i class="pi pi-sign-out text-[10px]"></i>
+                    </span>
+                    <div>
+                      <p class="text-[10px] font-bold text-slate-500">آخر خروج</p>
+                      <p class="text-[11px] font-semibold text-slate-700">
+                        {{ emp.lastLogoutAt ? formatDate(emp.lastLogoutAt) : 'لا يوجد سجل خروج' }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </td> -->
+
+              <td class="px-4 py-4 text-center">
+                <div class="inline-flex items-center gap-1">
+                  <button type="button" @click="openDetails(emp)" class="flex h-9 w-9 items-center justify-center rounded-xl text-indigo-600 transition hover:bg-indigo-50" title="عرض التفاصيل">
+                    <i class="pi pi-eye text-xs"></i>
+                  </button>
+                  <button type="button" @click="openEditModal(emp)" class="flex h-9 w-9 items-center justify-center rounded-xl text-[#7030A0] transition hover:bg-violet-50" title="تعديل الموظف">
                     <i class="pi pi-pencil text-xs"></i>
                   </button>
-
-                  <NuxtLink
-                    :to="`/admin/audit?search=${encodeURIComponent(emp.username)}`"
-                    class="w-8 h-8 rounded-lg text-blue-600 hover:bg-blue-50 flex items-center justify-center transition-colors"
-                    title="استعراض سجلات هذا الموظف"
-                  >
+                  <NuxtLink :to="`/admin/audit?search=${encodeURIComponent(emp.username)}`" class="flex h-9 w-9 items-center justify-center rounded-xl text-blue-600 transition hover:bg-blue-50" title="سجل النشاط">
                     <i class="pi pi-history text-xs"></i>
                   </NuxtLink>
-
-                  <button
-                    type="button"
-                    @click="confirmDelete(emp)"
-                    class="w-8 h-8 rounded-lg text-rose-600 hover:bg-rose-50 flex items-center justify-center transition-colors"
-                    title="حذف الموظف"
-                  >
+                  <button type="button" @click="requestDelete(emp)" class="flex h-9 w-9 items-center justify-center rounded-xl text-rose-600 transition hover:bg-rose-50" title="حذف الموظف">
                     <i class="pi pi-trash text-xs"></i>
                   </button>
                 </div>
@@ -248,370 +267,615 @@
           </tbody>
         </table>
       </div>
-    </div>
+    </section>
 
     <!-- Add / Edit Modal -->
-    <div
-      v-if="showModal"
-      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs"
-      @click.self="closeModal"
-    >
-      <div class="employee-modal-scroll bg-white rounded-3xl border border-slate-200 shadow-2xl w-full max-w-[770px] max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-6">
-        <!-- Modal Header -->
-        <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-purple-100 text-[#7030A0] flex items-center justify-center font-bold">
-              <i :class="editingId ? 'pi pi-user-edit' : 'pi pi-user-plus'"></i>
-            </div>
-            <div>
-              <h3 class="font-black text-slate-900 text-lg">
-                {{ editingId ? 'تعديل بيانات وصلاحيات الموظف' : 'إضافة موظف جديد' }}
-              </h3>
-              <p class="text-xs text-slate-500">
-                حدد بيانات الدخول والصلاحيات الإجرائية المسموح للموظف بالقيام بها
-              </p>
+    <Teleport to="body">
+      <div v-if="showModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/60 p-3 backdrop-blur-sm sm:p-5" @click.self="closeModal" @keydown.esc="closeModal">
+        <div class="employee-modal-scroll flex max-h-[94vh] w-full max-w-[900px] flex-col overflow-hidden rounded-3xl border border-white/60 bg-white shadow-2xl" role="dialog" aria-modal="true">
+          <div class="relative shrink-0 overflow-hidden border-b border-slate-100 bg-gradient-to-l from-violet-50 via-white to-indigo-50 px-5 py-5 sm:px-7">
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#8546B5] to-[#5B2188] text-white shadow-lg">
+                  <i :class="editingId ? 'pi pi-user-edit' : 'pi pi-user-plus'" class="text-lg"></i>
+                </div>
+                <div>
+                  <h3 class="text-base font-black text-slate-900 sm:text-lg">
+                    {{ editingId ? 'تعديل بيانات الموظف' : 'إضافة موظف جديد' }}
+                  </h3>
+                  <p class="mt-1 text-[11px] text-slate-500">البيانات الوظيفية وبيانات الدخول والصلاحيات</p>
+                </div>
+              </div>
+              <button type="button" @click="closeModal" class="flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 transition hover:bg-white hover:text-slate-800">
+                <i class="pi pi-times"></i>
+              </button>
             </div>
           </div>
 
-          <button
-            type="button"
-            @click="closeModal"
-            class="w-8 h-8 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 flex items-center justify-center"
-          >
-            <i class="pi pi-times text-xs"></i>
-          </button>
-        </div>
+          <div class="min-h-0 flex-1 overflow-y-auto p-4 sm:p-6">
+            <form @submit.prevent="saveEmployee" class="space-y-5">
+              <!-- Personal information -->
+              <section class="overflow-hidden rounded-2xl border border-slate-200">
+                <div class="flex items-center gap-3 border-b border-slate-100 bg-slate-50/80 px-4 py-3.5">
+                  <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-100 text-indigo-700"><i class="pi pi-id-card"></i></div>
+                  <div>
+                    <h4 class="text-sm font-black text-slate-900">البيانات الشخصية والوظيفية</h4>
+                    <p class="mt-0.5 text-[10px] text-slate-500">المعلومات الأساسية للموظف</p>
+                  </div>
+                </div>
 
-        <!-- Form -->
-        <form @submit.prevent="saveEmployee" class="space-y-5">
-          <div class="rounded-2xl border border-slate-200 bg-slate-50/70 p-4 sm:p-5 space-y-4">
-            <div class="flex items-center gap-2">
-              <span class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center">
-                <i class="pi pi-key text-sm"></i>
-              </span>
-              <div>
-                <h4 class="text-sm font-black text-slate-900">بيانات تسجيل الدخول</h4>
-                <p class="text-xs text-slate-500 mt-0.5">البيانات الأساسية التي سيستخدمها الموظف للدخول إلى التطبيق</p>
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-1.5">
-                اسم الموظف <span class="text-rose-500">*</span>
-              </label>
-              <input
-                v-model.trim="form.name"
-                type="text"
-                required
-                autocomplete="name"
-                placeholder="مثال: أحمد عبد الله"
-                class="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-white text-sm focus:border-[#7030A0] focus:ring-4 focus:ring-[#7030A0]/10 outline-none transition-all"
-              />
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-xs font-bold text-slate-700 mb-1.5">
-                  اسم المستخدم <span class="text-rose-500">*</span>
-                </label>
-                <input
-                  v-model.trim="form.username"
-                  type="text"
-                  required
-                  autocomplete="username"
-                  dir="ltr"
-                  placeholder="username"
-                  class="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-white text-sm text-left focus:border-[#7030A0] focus:ring-4 focus:ring-[#7030A0]/10 outline-none transition-all"
-                />
-              </div>
-
-              <div>
-                <label class="block text-xs font-bold text-slate-700 mb-1.5">
-                  كلمة المرور <span v-if="!editingId" class="text-rose-500">*</span>
-                </label>
-                <input
-                  v-model="form.password"
-                  type="password"
-                  :required="!editingId"
-                  autocomplete="new-password"
-                  dir="ltr"
-                  :placeholder="editingId ? 'اتركها فارغة دون تغيير' : 'أنشئ كلمة مرور قوية'"
-                  class="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-white text-sm text-left font-mono focus:border-[#7030A0] focus:ring-4 focus:ring-[#7030A0]/10 outline-none transition-all"
-                />
-                <p v-if="editingId" class="text-[11px] text-slate-400 mt-1.5">
-                  لا تحتاج إلى إدخال كلمة المرور الحالية؛ اكتب كلمة جديدة فقط عند الرغبة في تغييرها.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Permissions Section -->
-          <section class="rounded-2xl border border-slate-200 overflow-hidden">
-            <div class="p-4 sm:p-5 bg-gradient-to-l from-violet-50 via-white to-indigo-50 border-b border-slate-100">
-              <div class="relative overflow-hidden rounded-2xl border border-violet-100 bg-white shadow-sm">
-
-                <!-- Decorative background -->
-                <div class="pointer-events-none absolute -right-16 -top-20 h-48 w-48 rounded-full bg-violet-100/50 blur-3xl"></div>
-
-                <div class="relative flex flex-col gap-5 p-4 sm:p-5">
-
-                  <!-- Section heading -->
-                  <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-
-                    <div class="flex min-w-0 items-center gap-3">
-                      <div class="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#8546B5] to-[#5B2188] text-white shadow-lg shadow-violet-900/20">
-                        <i class="pi pi-shield text-xl"></i>
-                        <span class="absolute -right-1 -top-1 h-3.5 w-3.5 rounded-full border-2 border-white bg-emerald-400"></span>
-                      </div>
-
-                      <div class="min-w-0">
-                        <div class="flex flex-wrap items-center gap-2">
-                          <h4 class="text-sm font-black text-slate-900 sm:text-base">
-                            صلاحيات الوصول للموظف
-                          </h4>
-                          <span class="inline-flex items-center gap-1 rounded-full border border-violet-100 bg-violet-50 px-2 py-1 text-[9px] font-extrabold tracking-wider text-[#7030A0]">
-                            <i class="pi pi-lock text-[9px]"></i>
-                            ACCESS CONTROL
-                          </span>
-                        </div>
-
-                        <p class="mt-1 text-xs leading-relaxed text-slate-500">
-                          حدد الصفحات والمهام التي يمكن لهذا الموظف الوصول إليها
-                        </p>
-                      </div>
-                    </div>
-
-                    <!-- Selection summary -->
-                    <div class="flex items-center gap-2 self-start rounded-xl border border-violet-100 bg-violet-50/70 px-3 py-2 sm:self-center">
-                      <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-white text-[#7030A0] shadow-sm">
-                        <i class="pi pi-check-circle text-sm"></i>
-                      </div>
-
-                      <div>
-                        <div class="flex items-baseline gap-1">
-                          <span class="text-lg font-black leading-none tabular-nums text-[#7030A0]">
-                            {{ form.permissions.length }}
-                          </span>
-                          <span class="text-[10px] font-bold text-slate-400">
-                            / {{ ALL_EMPLOYEE_PERMISSIONS.length }}
-                          </span>
-                        </div>
-                        <span class="text-[10px] font-semibold text-slate-500">
-                          صلاحية محددة
-                        </span>
-                      </div>
+                <div class="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-5">
+                  <div class="sm:col-span-2">
+                    <label class="mb-1.5 block text-xs font-bold text-slate-700">اسم الموظف <span class="text-rose-500">*</span></label>
+                    <div class="relative">
+                      <i class="pi pi-user absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-slate-400"></i>
+                      <input v-model.trim="form.name" required autocomplete="name" placeholder="مثال: أحمد عبد الله" class="form-input pe-10" />
                     </div>
                   </div>
 
-                  <!-- Access level -->
-                  <div class="rounded-xl border border-slate-100 bg-slate-50/80 p-3.5">
-
-                    <div class="mb-2.5 flex items-center justify-between gap-3">
-                      <div class="flex items-center gap-2">
-                        <i class="pi pi-chart-bar text-xs text-[#7030A0]"></i>
-                        <span class="text-xs font-bold text-slate-600">
-                          مستوى الوصول الممنوح
-                        </span>
-                      </div>
-
-                      <span class="rounded-lg bg-violet-100 px-2 py-1 text-[11px] font-black tabular-nums text-[#7030A0]">
-                        {{ Math.round(ALL_EMPLOYEE_PERMISSIONS.length
-                          ? (form.permissions.length / ALL_EMPLOYEE_PERMISSIONS.length) * 100
-                          : 0) }}%
-                      </span>
-                    </div>
-
-                    <div class="h-2 w-full overflow-hidden rounded-full bg-slate-200">
-                      <div
-                        class="h-full rounded-full bg-gradient-to-l from-violet-500 via-[#8546B5] to-[#5B2188] transition-all duration-500 ease-out"
-                        :style="{
-                          width: `${ALL_EMPLOYEE_PERMISSIONS.length
-                            ? (form.permissions.length / ALL_EMPLOYEE_PERMISSIONS.length) * 100
-                            : 0}%`
-                        }"
-                      ></div>
-                    </div>
-
-                    <div class="mt-2 flex items-center justify-between gap-2 text-[10px] text-slate-400">
-                      <span>بدون صلاحيات</span>
-                      <span>جميع الصلاحيات</span>
+                  <div>
+                    <label class="mb-1.5 block text-xs font-bold text-slate-700">المسمى الوظيفي <span class="text-rose-500">*</span></label>
+                    <div class="relative">
+                      <i class="pi pi-briefcase absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-slate-400"></i>
+                      <input v-model.trim="form.title" required placeholder="مثال: مسؤول مبيعات" class="form-input pe-10" />
                     </div>
                   </div>
 
-                  <!-- Quick actions -->
-                  <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <label class="mb-1.5 block text-xs font-bold text-slate-700">رقم الهاتف <span class="text-[10px] font-medium text-slate-400">(اختياري)</span></label>
+                    <input v-model.trim="form.phone" type="tel" dir="ltr" placeholder="05xxxxxxxx" class="form-input text-left font-mono" />
+                  </div>
+                </div>
+              </section>
 
-                    <div class="flex items-center gap-2">
-                      <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-slate-500">
-                        <i class="pi pi-sliders-h text-sm"></i>
-                      </div>
-                      <div>
-                        <p class="text-xs font-extrabold text-slate-800">
-                          إدارة الصلاحيات
-                        </p>
-                        <p class="text-[10px] text-slate-400">
-                          يمكنك تعديل الاختيارات في أي وقت
-                        </p>
-                      </div>
-                    </div>
+              <!-- Login information -->
+              <section class="overflow-hidden rounded-2xl border border-slate-200">
+                <div class="flex items-center gap-3 border-b border-slate-100 bg-slate-50/80 px-4 py-3.5">
+                  <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-100 text-blue-700"><i class="pi pi-key"></i></div>
+                  <div>
+                    <h4 class="text-sm font-black text-slate-900">بيانات تسجيل الدخول</h4>
+                    <p class="mt-0.5 text-[10px] text-slate-500">بيانات الدخول إلى بوابة الموظفين</p>
+                  </div>
+                </div>
 
-                    <div class="grid grid-cols-2 gap-2 sm:flex sm:items-center">
-
-                      <button
-                        type="button"
-                        @click="selectAllPermissions"
-                        :disabled="form.permissions.length === ALL_EMPLOYEE_PERMISSIONS.length"
-                        class="inline-flex items-center justify-center gap-2 rounded-xl border border-violet-200 bg-white px-4 py-2.5 text-xs font-extrabold text-[#7030A0] shadow-sm transition-all duration-200 hover:border-violet-300 hover:bg-violet-50 hover:shadow-md active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
-                      >
-                        <i class="pi pi-check-square text-sm"></i>
-                        تحديد الكل
-                      </button>
-
-                      <button
-                        type="button"
-                        @click="clearPermissions"
-                        :disabled="form.permissions.length === 0"
-                        class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-extrabold text-slate-500 shadow-sm transition-all duration-200 hover:border-rose-200 hover:bg-rose-50 hover:text-rose-600 hover:shadow-md active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
-                      >
-                        <i class="pi pi-eraser text-sm"></i>
-                        إلغاء الكل
-                      </button>
-
-                    </div>
+                <div class="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-5">
+                  <div>
+                    <label class="mb-1.5 block text-xs font-bold text-slate-700">اسم المستخدم <span class="text-rose-500">*</span></label>
+                    <input v-model.trim="form.username" required autocomplete="username" dir="ltr" placeholder="username" class="form-input text-left font-mono" />
                   </div>
 
-                  <!-- Security note -->
-                  <div class="flex items-start gap-2.5 rounded-xl border border-amber-100 bg-amber-50/70 px-3 py-2.5">
-                    <i class="pi pi-info-circle mt-0.5 shrink-0 text-xs text-amber-600"></i>
-                    <p class="text-[10px] leading-relaxed text-amber-800">
-                      <span class="font-extrabold">تنبيه أمني:</span>
-                      امنح الموظف الصلاحيات التي يحتاجها لأداء مهامه فقط، لتقليل الوصول غير الضروري إلى بيانات النظام.
+                  <div>
+                    <label class="mb-1.5 block text-xs font-bold text-slate-700">
+                      كلمة المرور
+                      <span v-if="!editingId" class="text-rose-500">*</span>
+                    </label>
+                    <input v-model="form.password" type="password" :required="!editingId" minlength="4" autocomplete="new-password" dir="ltr" :placeholder="editingId ? 'اتركها فارغة دون تغيير' : 'أدخل كلمة المرور'" class="form-input text-left font-mono" />
+                    <p class="mt-1.5 text-[10px] text-slate-400">
+                      {{ editingId ? 'اترك الحقل فارغًا للاحتفاظ بكلمة المرور الحالية.' : 'يجب ألا تقل كلمة المرور عن 4 خانات.' }}
                     </p>
                   </div>
 
+                  <div v-if="editingId" class="sm:col-span-2">
+                    <label class="mb-1.5 block text-xs font-bold text-slate-700">حالة الحساب</label>
+                    <div class="grid grid-cols-2 gap-2">
+                      <button type="button" @click="form.status = 'active'" class="rounded-xl border px-3 py-3 text-xs font-bold transition" :class="form.status === 'active' ? 'border-emerald-300 bg-emerald-50 text-emerald-700' : 'border-slate-200 bg-white text-slate-500'">
+                        <i class="pi pi-check-circle ms-1"></i> حساب نشط
+                      </button>
+                      <button type="button" @click="form.status = 'inactive'" class="rounded-xl border px-3 py-3 text-xs font-bold transition" :class="form.status === 'inactive' ? 'border-rose-300 bg-rose-50 text-rose-700' : 'border-slate-200 bg-white text-slate-500'">
+                        <i class="pi pi-lock ms-1"></i> حساب معطل
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Permissions -->
+              <section class="overflow-hidden rounded-2xl border border-slate-200">
+                <div class="border-b border-violet-100 bg-gradient-to-l from-violet-50 via-white to-indigo-50 p-4 sm:p-5">
+                  <div class="flex flex-col gap-4">
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <div class="flex items-center gap-3">
+                        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-[#8546B5] to-[#5B2188] text-white shadow-md"><i class="pi pi-shield text-lg"></i></div>
+                        <div>
+                          <h4 class="text-sm font-black text-slate-900 sm:text-base">صلاحيات الوصول</h4>
+                          <p class="mt-1 text-[11px] text-slate-500">حدد الصلاحيات حسب مهام الموظف</p>
+                        </div>
+                      </div>
+                      <div class="rounded-xl border border-violet-100 bg-white px-4 py-2 text-center">
+                        <span class="text-xl font-black text-[#7030A0]">{{ form.permissions.length }}</span>
+                        <span class="text-[10px] font-bold text-slate-400"> / {{ ALL_EMPLOYEE_PERMISSIONS.length }}</span>
+                        <p class="text-[10px] font-bold text-slate-500">صلاحية محددة</p>
+                      </div>
+                    </div>
+
+                    <div class="h-2 overflow-hidden rounded-full bg-slate-100">
+                      <div class="h-full rounded-full bg-gradient-to-l from-violet-500 to-[#5B2188] transition-all" :style="{ width: `${permissionPercentage}%` }"></div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <span class="text-[11px] font-bold text-slate-600">التحكم في الصلاحيات</span>
+                      <div class="flex gap-2">
+                        <button type="button" @click="selectAllPermissions" class="rounded-lg border border-violet-200 bg-white px-3 py-2 text-[10px] font-extrabold text-[#7030A0] transition hover:bg-violet-50">
+                          <i class="pi pi-check-square ms-1"></i> تحديد الكل
+                        </button>
+                        <button type="button" @click="clearPermissions" class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-[10px] font-extrabold text-slate-500 transition hover:bg-rose-50 hover:text-rose-600">
+                          <i class="pi pi-eraser ms-1"></i> إلغاء الكل
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="space-y-3 bg-slate-50/50 p-3 sm:p-4">
+                  <div v-for="group in permissionGroups" :key="group.id" class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                    <div class="flex flex-col gap-3 border-b border-slate-100 p-3.5 sm:flex-row sm:items-center sm:justify-between sm:p-4">
+                      <div class="flex items-center gap-3">
+                        <div class="flex h-10 w-10 items-center justify-center rounded-xl" :class="[group.iconBg, group.iconColor]">
+                          <i :class="[group.icon, 'text-base']"></i>
+                        </div>
+                        <div>
+                          <h5 class="text-xs font-black text-slate-900 sm:text-sm">{{ group.label }}</h5>
+                          <p class="mt-1 text-[10px] text-slate-500">{{ group.description }}</p>
+                          <span class="mt-1 inline-block text-[10px] font-bold text-[#7030A0]">{{ getGroupSelectedCount(group) }} من {{ group.keys.length }} محددة</span>
+                        </div>
+                      </div>
+                      <button type="button" @click="togglePermissionGroup(group)" class="rounded-lg border px-3 py-2 text-[10px] font-extrabold transition" :class="isGroupFullySelected(group) ? 'border-rose-200 bg-rose-50 text-rose-600' : 'border-violet-200 bg-violet-50 text-[#7030A0]'">
+                        <i :class="isGroupFullySelected(group) ? 'pi pi-minus-circle' : 'pi pi-check-circle'" class="ms-1"></i>
+                        {{ isGroupFullySelected(group) ? 'إلغاء المجموعة' : 'تحديد المجموعة' }}
+                      </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-2 p-3 sm:grid-cols-2 sm:p-4">
+                      <label v-for="permission in getGroupPermissions(group)" :key="permission.key" class="group flex cursor-pointer items-start gap-3 rounded-xl border p-3 transition" :class="form.permissions.includes(permission.key) ? 'border-violet-300 bg-violet-50/70' : 'border-slate-200 bg-white hover:border-violet-200 hover:bg-slate-50'">
+                        <input v-model="form.permissions" type="checkbox" :value="permission.key" class="sr-only" />
+                        <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border transition" :class="form.permissions.includes(permission.key) ? 'border-[#7030A0] bg-[#7030A0] text-white' : 'border-slate-300 bg-white text-transparent group-hover:border-violet-300'">
+                          <i class="pi pi-check text-[9px]"></i>
+                        </span>
+                        <span class="min-w-0 flex-1">
+                          <span class="block text-[11px] font-extrabold text-slate-800">{{ permission.label }}</span>
+                          <span class="mt-1 block text-[10px] leading-relaxed text-slate-500">{{ permission.description }}</span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="border-t border-amber-100 bg-amber-50/70 px-4 py-3">
+                  <p class="flex items-start gap-2 text-[10px] leading-relaxed text-amber-800">
+                    <i class="pi pi-shield mt-0.5"></i>
+                    <span><strong>ملاحظة أمنية:</strong> امنح الموظف أقل مجموعة من الصلاحيات اللازمة لأداء مهامه، وتأكد من التحقق من الصلاحيات داخل الخادم أيضًا.</span>
+                  </p>
+                </div>
+              </section>
+
+              <div v-if="modalError" class="flex items-start gap-2 rounded-xl border border-rose-200 bg-rose-50 p-3.5 text-xs font-semibold text-rose-700">
+                <i class="pi pi-exclamation-circle mt-0.5"></i>
+                {{ modalError }}
+              </div>
+
+              <div class="flex flex-col-reverse gap-2 border-t border-slate-100 pt-4 sm:flex-row sm:items-center sm:justify-between">
+                <p class="hidden text-[10px] text-slate-400 sm:block"><i class="pi pi-lock ms-1"></i> تحفظ الصلاحيات ضمن حساب الموظف</p>
+                <div class="flex justify-end gap-2">
+                  <button type="button" @click="closeModal" :disabled="saving" class="rounded-xl border border-slate-200 bg-white px-5 py-3 text-xs font-bold text-slate-600 transition hover:bg-slate-50 disabled:opacity-50">إلغاء</button>
+                  <button type="submit" :disabled="saving || !form.name.trim() || !form.title.trim() || !form.username.trim()" class="inline-flex items-center gap-2 rounded-xl bg-[#7030A0] px-6 py-3 text-xs font-extrabold text-white shadow-md transition hover:bg-[#532277] disabled:cursor-not-allowed disabled:opacity-50">
+                    <i v-if="saving" class="pi pi-spin pi-spinner"></i>
+                    <i v-else :class="editingId ? 'pi pi-save' : 'pi pi-user-plus'"></i>
+                    {{ saving ? 'جاري الحفظ...' : editingId ? 'حفظ التعديلات' : 'إضافة الموظف' }}
+                  </button>
                 </div>
               </div>
-
-
-            </div>
-
-            <div class="p-4 sm:p-5 bg-white">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                <label
-                  v-for="perm in ALL_EMPLOYEE_PERMISSIONS"
-                  :key="perm.key"
-                  class="group relative flex items-start gap-3 p-3.5 rounded-xl border cursor-pointer transition-all duration-200"
-                  :class="form.permissions.includes(perm.key)
-                    ? 'border-[#7030A0]/40 bg-violet-50/70 shadow-sm ring-1 ring-[#7030A0]/10'
-                    : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50'"
-                >
-                  <input
-                    type="checkbox"
-                    :value="perm.key"
-                    v-model="form.permissions"
-                    class="sr-only"
-                  />
-                  <span
-                    class="mt-0.5 w-5 h-5 shrink-0 rounded-md border flex items-center justify-center transition-all"
-                    :class="form.permissions.includes(perm.key)
-                      ? 'bg-[#7030A0] border-[#7030A0] text-white'
-                      : 'bg-white border-slate-300 text-transparent group-hover:border-slate-400'"
-                  >
-                    <i class="pi pi-check text-[10px] font-bold"></i>
-                  </span>
-                  <span class="min-w-0 flex-1">
-                    <span class="block text-xs font-extrabold text-slate-800">{{ perm.label }}</span>
-                    <span class="block text-[11px] text-slate-500 leading-relaxed mt-1">{{ perm.description }}</span>
-                  </span>
-                  <span
-                    v-if="form.permissions.includes(perm.key)"
-                    class="absolute top-2 end-2 w-1.5 h-1.5 rounded-full bg-[#7030A0]"
-                  ></span>
-                </label>
-              </div>
-
-              <div class="mt-4 flex items-start gap-2.5 p-3 rounded-xl bg-amber-50 border border-amber-100 text-amber-800">
-                <i class="pi pi-info-circle mt-0.5 text-sm shrink-0"></i>
-                <p class="text-[11px] leading-relaxed">
-                  امنح الموظف أقل مجموعة من الصلاحيات اللازمة لعمله. يمكن تعديل هذه الصلاحيات لاحقًا من صفحة إدارة الموظفين.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <!-- Error Alert -->
-          <div v-if="modalError" class="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-semibold">
-            {{ modalError }}
+            </form>
           </div>
-
-          <!-- Actions -->
-          <div class="flex items-center justify-end gap-3 pt-3 border-t border-slate-100">
-            <button
-              type="button"
-              @click="closeModal"
-              class="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-bold"
-            >
-              إلغاء
-            </button>
-
-            <button
-              type="submit"
-              :disabled="saving"
-              class="px-6 py-2.5 rounded-xl bg-[#7030A0] hover:bg-[#532277] text-white text-xs font-bold shadow-md shadow-purple-900/20 flex items-center gap-2 disabled:opacity-50"
-            >
-              <i v-if="saving" class="pi pi-spin pi-spinner text-xs"></i>
-              <span>{{ saving ? 'جاري الحفظ...' : (editingId ? 'حفظ التعديلات' : 'إضافة الموظف') }}</span>
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
-    </div>
+    </Teleport>
+
+    <!-- Employee Details Modal -->
+    <Teleport to="body">
+      <div v-if="detailsEmployee" class="fixed inset-0 z-[110] flex items-center justify-center bg-slate-950/60 p-3 backdrop-blur-sm sm:p-5" @click.self="detailsEmployee = null">
+        <div class="employee-modal-scroll flex max-h-[92vh] w-full max-w-2xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl" role="dialog" aria-modal="true">
+          <div class="flex items-center justify-between border-b border-slate-100 bg-gradient-to-l from-violet-50 via-white to-indigo-50 p-5">
+            <div class="flex items-center gap-3">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#8546B5] to-[#5B2188] text-white">
+                <i class="pi pi-user text-lg"></i>
+              </div>
+              <div>
+                <h3 class="text-base font-black text-slate-900">تفاصيل الموظف</h3>
+                <p class="mt-1 text-[11px] text-slate-500">عرض شامل لبيانات الحساب والنشاط والصلاحيات</p>
+              </div>
+            </div>
+            <button @click="detailsEmployee = null" class="flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 hover:bg-white hover:text-slate-800"><i class="pi pi-times"></i></button>
+          </div>
+
+          <div class="min-h-0 flex-1 space-y-5 overflow-y-auto p-4 sm:p-6">
+            <div class="flex flex-col gap-4 rounded-2xl border border-violet-100 bg-violet-50/50 p-4 sm:flex-row sm:items-center">
+              <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-100 to-indigo-100 text-xl font-black text-[#7030A0]">
+                {{ getInitials(detailsEmployee.name) }}
+              </div>
+              <div class="min-w-0 flex-1">
+                <h4 class="text-base font-black text-slate-900">{{ detailsEmployee.name }}</h4>
+                <p class="mt-1 text-xs font-semibold text-[#7030A0]">{{ detailsEmployee.title || 'لم يحدد المسمى الوظيفي' }}</p>
+                <span class="mt-2 inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-extrabold" :class="detailsEmployee.status === 'active' ? 'border-emerald-200 bg-emerald-50 text-emerald-700' : 'border-rose-200 bg-rose-50 text-rose-700'">
+                  <span class="h-1.5 w-1.5 rounded-full" :class="detailsEmployee.status === 'active' ? 'bg-emerald-500' : 'bg-rose-500'"></span>
+                  {{ detailsEmployee.status === 'active' ? 'الحساب نشط' : 'الحساب معطل' }}
+                </span>
+              </div>
+            </div>
+
+            <section>
+              <h4 class="mb-3 flex items-center gap-2 text-xs font-black text-slate-800">
+                <i class="pi pi-id-card text-[#7030A0]"></i>
+                البيانات الأساسية
+              </h4>
+              <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <div v-for="item in detailItems(detailsEmployee)" :key="item.label" class="rounded-xl border border-slate-100 bg-slate-50 p-3">
+                  <p class="text-[10px] font-bold text-slate-400">{{ item.label }}</p>
+                  <p class="mt-1 break-words text-xs font-bold text-slate-800" :dir="item.ltr ? 'ltr' : 'rtl'">{{ item.value }}</p>
+                </div>
+              </div>
+            </section>
+
+            <section>
+              <h4 class="mb-3 flex items-center gap-2 text-xs font-black text-slate-800">
+                <i class="pi pi-history text-[#7030A0]"></i>
+                سجل الدخول والخروج
+              </h4>
+              <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <div class="rounded-xl border border-emerald-100 bg-emerald-50/60 p-4">
+                  <div class="flex items-center gap-2 text-emerald-700">
+                    <i class="pi pi-sign-in"></i>
+                    <span class="text-xs font-extrabold">آخر تسجيل دخول</span>
+                  </div>
+                  <p class="mt-3 text-xs font-bold text-slate-800">{{ detailsEmployee.lastLoginAt ? formatDate(detailsEmployee.lastLoginAt) : 'لا توجد بيانات دخول' }}</p>
+                </div>
+                <div class="rounded-xl border border-rose-100 bg-rose-50/60 p-4">
+                  <div class="flex items-center gap-2 text-rose-700">
+                    <i class="pi pi-sign-out"></i>
+                    <span class="text-xs font-extrabold">آخر تسجيل خروج</span>
+                  </div>
+                  <p class="mt-3 text-xs font-bold text-slate-800">{{ detailsEmployee.lastLogoutAt ? formatDate(detailsEmployee.lastLogoutAt) : 'لا توجد بيانات خروج' }}</p>
+                </div>
+              </div>
+            </section>
+
+            <section>
+              <div class="mb-3 flex items-center justify-between gap-2">
+                <h4 class="flex items-center gap-2 text-xs font-black text-slate-800">
+                  <i class="pi pi-shield text-[#7030A0]"></i>
+                  الصلاحيات الممنوحة
+                </h4>
+                <span class="rounded-lg bg-violet-50 px-2.5 py-1 text-[10px] font-black text-[#7030A0]">{{ detailsEmployee.permissions?.length || 0 }} صلاحية</span>
+              </div>
+              <div v-if="detailsEmployee.permissions?.length" class="space-y-3">
+                <div v-for="group in permissionGroups" :key="group.id" class="rounded-xl border border-slate-100 p-3">
+                  <p class="mb-2 text-[11px] font-black text-slate-700">{{ group.label }}</p>
+                  <div class="flex flex-wrap gap-1.5">
+                    <span v-for="key in group.keys.filter(key => detailsEmployee?.permissions?.includes(key))" :key="key" class="rounded-lg border border-violet-100 bg-violet-50 px-2.5 py-1.5 text-[10px] font-bold text-[#7030A0]">
+                      {{ getPermissionLabel(key) }}
+                    </span>
+                    <span v-if="!group.keys.some(key => detailsEmployee?.permissions?.includes(key))" class="text-[10px] text-slate-400">لا توجد صلاحيات في هذه المجموعة</span>
+                  </div>
+                </div>
+              </div>
+              <div v-else class="rounded-xl border border-dashed border-slate-200 p-5 text-center text-xs text-slate-400">لا توجد صلاحيات إضافية ممنوحة لهذا الموظف</div>
+            </section>
+
+            <section>
+              <h4 class="mb-2 flex items-center gap-2 text-xs font-black text-slate-800">
+                <i class="pi pi-calendar text-[#7030A0]"></i>
+                معلومات الحساب
+              </h4>
+              <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                <div class="rounded-xl border border-slate-100 bg-slate-50 p-3">
+                  <p class="text-[10px] font-bold text-slate-400">تاريخ إنشاء الحساب</p>
+                  <p class="mt-1 text-xs font-bold text-slate-800">{{ detailsEmployee.createdAt ? formatDate(detailsEmployee.createdAt) : '—' }}</p>
+                </div>
+                <div class="rounded-xl border border-slate-100 bg-slate-50 p-3">
+                  <p class="text-[10px] font-bold text-slate-400">آخر تحديث للحساب</p>
+                  <p class="mt-1 text-xs font-bold text-slate-800">{{ detailsEmployee.updatedAt ? formatDate(detailsEmployee.updatedAt) : 'لم يتم تحديثه' }}</p>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="flex flex-wrap justify-between gap-2 border-t border-slate-100 p-4">
+            <NuxtLink :to="`/admin/audit?search=${encodeURIComponent(detailsEmployee.username)}`" class="inline-flex items-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-4 py-2.5 text-xs font-bold text-blue-700 transition hover:bg-blue-100">
+              <i class="pi pi-history"></i>
+              سجل نشاط الموظف
+            </NuxtLink>
+            <div class="flex gap-2">
+              <button @click="detailsEmployee = null" class="rounded-xl border border-slate-200 px-4 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-50">إغلاق</button>
+              <button @click="editFromDetails" class="inline-flex items-center gap-2 rounded-xl bg-[#7030A0] px-4 py-2.5 text-xs font-bold text-white hover:bg-[#532277]">
+                <i class="pi pi-pencil"></i>
+                تعديل البيانات
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Teleport>
+
+    <!-- Custom Confirmation Modal -->
+    <Teleport to="body">
+      <div v-if="confirmDialog.show" class="fixed inset-0 z-[130] flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm" @click.self="closeConfirm">
+        <div class="w-full max-w-md overflow-hidden rounded-3xl border border-white/60 bg-white shadow-2xl">
+          <div class="p-6 text-center">
+            <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl" :class="confirmDialog.type === 'delete' ? 'bg-rose-50 text-rose-600' : 'bg-amber-50 text-amber-600'">
+              <i :class="confirmDialog.type === 'delete' ? 'pi pi-trash' : 'pi pi-exclamation-triangle'" class="text-2xl"></i>
+            </div>
+            <h3 class="mt-4 text-base font-black text-slate-900">{{ confirmDialog.title }}</h3>
+            <p class="mt-2 text-xs leading-relaxed text-slate-500">{{ confirmDialog.message }}</p>
+          </div>
+          <div class="flex gap-2 border-t border-slate-100 bg-slate-50/70 p-4">
+            <button type="button" @click="closeConfirm" :disabled="confirmDialog.loading" class="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 disabled:opacity-50">تراجع</button>
+            <button type="button" @click="executeConfirm" :disabled="confirmDialog.loading" class="flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs font-extrabold text-white transition disabled:opacity-50" :class="confirmDialog.type === 'delete' ? 'bg-rose-600 hover:bg-rose-700' : 'bg-[#7030A0] hover:bg-[#532277]'">
+              <i v-if="confirmDialog.loading" class="pi pi-spin pi-spinner"></i>
+              <i v-else :class="confirmDialog.type === 'delete' ? 'pi pi-trash' : 'pi pi-check'"></i>
+              {{ confirmDialog.loading ? 'جاري التنفيذ...' : confirmDialog.confirmText }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </Teleport>
+
+    <!-- Toast Notifications -->
+    <Teleport to="body">
+      <Transition
+        enter-active-class="transition duration-300 ease-out"
+        enter-from-class="translate-y-3 opacity-0"
+        enter-to-class="translate-y-0 opacity-100"
+        leave-active-class="transition duration-200 ease-in"
+        leave-from-class="translate-y-0 opacity-100"
+        leave-to-class="translate-y-3 opacity-0"
+      >
+        <div v-if="toast.show" class="fixed bottom-5 left-5 z-[200] flex w-[min(420px,calc(100vw-40px))] items-start gap-3 rounded-2xl border bg-white p-4 shadow-2xl" :class="toast.type === 'success' ? 'border-emerald-200' : 'border-rose-200'">
+          <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl" :class="toast.type === 'success' ? 'bg-emerald-50 text-emerald-600' : 'bg-rose-50 text-rose-600'">
+            <i :class="toast.type === 'success' ? 'pi pi-check-circle' : 'pi pi-exclamation-circle'"></i>
+          </div>
+          <div class="min-w-0 flex-1">
+            <p class="text-xs font-black text-slate-900">{{ toast.type === 'success' ? 'تم بنجاح' : 'تعذر تنفيذ العملية' }}</p>
+            <p class="mt-1 text-xs leading-relaxed text-slate-500">{{ toast.message }}</p>
+          </div>
+          <button @click="toast.show = false" class="text-slate-400 hover:text-slate-700"><i class="pi pi-times text-xs"></i></button>
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ALL_EMPLOYEE_PERMISSIONS, type Employee, type EmployeePermission } from '../../../../shared/types/employee';
+import {
+  ALL_EMPLOYEE_PERMISSIONS,
+  type Employee,
+  type EmployeePermission,
+} from '../../../../shared/types/employee';
 
-const { data: response, pending, refresh } = await useFetch<{
-  success: boolean;
-  data: Employee[];
-}>('/api/admin/employees');
+type EmployeeWithActivity = Employee & {
+  lastLogoutAt?: string;
+};
+
+type PermissionGroup = {
+  id: string;
+  label: string;
+  description: string;
+  icon: string;
+  iconBg: string;
+  iconColor: string;
+  keys: EmployeePermission[];
+};
+
+const permissionGroups: PermissionGroup[] = [
+  {
+    id: 'plots',
+    label: 'إدارة القطع والأراضي',
+    description: 'التحكم في القطع وحالات البيع والحجز والأرشفة',
+    icon: 'pi pi-map',
+    iconBg: 'bg-violet-50',
+    iconColor: 'text-[#7030A0]',
+    keys: ['view_plots', 'create_plots', 'edit_plots', 'delete_plots'],
+  },
+  {
+    id: 'plot-pages',
+    label: 'صفحات تفاصيل القطع',
+    description: 'عرض وإنشاء وتعديل وحذف صفحات القطع',
+    icon: 'pi pi-file',
+    iconBg: 'bg-blue-50',
+    iconColor: 'text-blue-600',
+    keys: ['view_plot_page', 'create_plot_page', 'edit_plot_page', 'delete_plot_page'],
+  },
+  {
+    id: 'zones',
+    label: 'إدارة المناطق',
+    description: 'عرض وإنشاء وتعديل وحذف المناطق',
+    icon: 'pi pi-map-marker',
+    iconBg: 'bg-emerald-50',
+    iconColor: 'text-emerald-600',
+    keys: ['view_zone_page', 'create_zone_page', 'edit_zone_page', 'delete_zone_page'],
+  },
+  {
+    id: 'blocks',
+    label: 'إدارة البلوكات',
+    description: 'عرض وإنشاء وتعديل وحذف البلوكات',
+    icon: 'pi pi-th-large',
+    iconBg: 'bg-orange-50',
+    iconColor: 'text-orange-600',
+    keys: ['view_block_page', 'create_block_page', 'edit_block_page', 'delete_block_page'],
+  },
+  {
+    id: 'system',
+    label: 'العقود والإحصائيات والتقارير',
+    description: 'العقود والإحصائيات وتصدير البيانات',
+    icon: 'pi pi-chart-bar',
+    iconBg: 'bg-indigo-50',
+    iconColor: 'text-indigo-600',
+    keys: ['view_contracts', 'edit_contracts', 'view_stats', 'export_data'],
+  },
+];
+
+const {
+  data: response,
+  pending,
+  refresh,
+} = await useFetch<{ success: boolean; data: EmployeeWithActivity[] }>('/api/admin/employees');
 
 const employees = computed(() => response.value?.data || []);
 
-const activeCount = computed(() => employees.value.filter((e) => e.status === 'active').length);
-const inactiveCount = computed(() => employees.value.filter((e) => e.status !== 'active').length);
+const activeCount = computed(() =>
+  employees.value.filter(employee => employee.status === 'active').length,
+);
 
-const getPermissionLabel = (key: EmployeePermission) => {
-  const p = ALL_EMPLOYEE_PERMISSIONS.find((item) => item.key === key);
-  return p ? p.label : key;
+const inactiveCount = computed(() =>
+  employees.value.filter(employee => employee.status !== 'active').length,
+);
+
+const stats = computed(() => [
+  {
+    label: 'إجمالي الموظفين',
+    value: employees.value.length,
+    percentage: employees.value.length ? 100 : 0,
+    icon: 'pi pi-users',
+    iconBg: 'bg-violet-50',
+    iconColor: 'text-[#7030A0]',
+    valueColor: 'text-slate-900',
+    barColor: 'bg-[#7030A0]',
+  },
+  {
+    label: 'الموظفون النشطون',
+    value: activeCount.value,
+    percentage: employees.value.length ? (activeCount.value / employees.value.length) * 100 : 0,
+    icon: 'pi pi-check-circle',
+    iconBg: 'bg-emerald-50',
+    iconColor: 'text-emerald-600',
+    valueColor: 'text-emerald-600',
+    barColor: 'bg-emerald-500',
+  },
+  {
+    label: 'الحسابات المعطلة',
+    value: inactiveCount.value,
+    percentage: employees.value.length ? (inactiveCount.value / employees.value.length) * 100 : 0,
+    icon: 'pi pi-lock',
+    iconBg: 'bg-rose-50',
+    iconColor: 'text-rose-600',
+    valueColor: 'text-rose-600',
+    barColor: 'bg-rose-500',
+  },
+]);
+
+// Permission helpers
+const getPermissionLabel = (key: EmployeePermission) =>
+  ALL_EMPLOYEE_PERMISSIONS.find(item => item.key === key)?.label || key;
+
+const getGroupPermissions = (group: PermissionGroup) =>
+  group.keys
+    .map(key => ALL_EMPLOYEE_PERMISSIONS.find(permission => permission.key === key))
+    .filter((permission): permission is (typeof ALL_EMPLOYEE_PERMISSIONS)[number] => Boolean(permission));
+
+const getGroupSelectedCount = (group: PermissionGroup) =>
+  group.keys.filter(key => form.permissions.includes(key)).length;
+
+const isGroupFullySelected = (group: PermissionGroup) =>
+  group.keys.length > 0 && group.keys.every(key => form.permissions.includes(key));
+
+const togglePermissionGroup = (group: PermissionGroup) => {
+  if (isGroupFullySelected(group)) {
+    form.permissions = form.permissions.filter(key => !group.keys.includes(key));
+  } else {
+    form.permissions = [...new Set([...form.permissions, ...group.keys])];
+  }
 };
 
-// Login link
+const permissionPercentage = computed(() =>
+  ALL_EMPLOYEE_PERMISSIONS.length
+    ? Math.round((form.permissions.length / ALL_EMPLOYEE_PERMISSIONS.length) * 100)
+    : 0,
+);
+
+const selectAllPermissions = () => {
+  form.permissions = ALL_EMPLOYEE_PERMISSIONS.map(permission => permission.key);
+};
+
+const clearPermissions = () => {
+  form.permissions = [];
+};
+
+// Display helpers
+const getInitials = (name: string) =>
+  name?.trim().split(/\s+/).slice(0, 2).map(part => part.charAt(0)).join('') || '؟';
+
+const formatDate = (date?: string) => {
+  if (!date) return '—';
+  const parsed = new Date(date);
+  if (Number.isNaN(parsed.getTime())) return '—';
+
+  return parsed.toLocaleString('ar-SA', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+};
+
+const detailItems = (employee: EmployeeWithActivity) => [
+  { label: 'اسم المستخدم', value: employee.username || '—', ltr: true },
+  { label: 'المسمى الوظيفي', value: employee.title || 'غير محدد' },
+  { label: 'رقم الهاتف', value: employee.phone || 'غير مسجل', ltr: true },
+  { label: 'معرف الحساب', value: employee.id || '—', ltr: true },
+  { label: 'نوع الحساب', value: employee.role === 'employee' ? 'موظف' : employee.role || '—' },
+  { label: 'حالة الحساب', value: employee.status === 'active' ? 'نشط' : 'معطل' },
+];
+
+// Login URL
 const config = useRuntimeConfig();
 const employeeLoginPath = (config.public.employeeLoginPath as string) || '/employee-login';
 const employeeLoginUrl = ref(employeeLoginPath);
 const copiedUrl = ref(false);
 
+let copyFeedbackTimer: ReturnType<typeof setTimeout> | undefined;
+let toastTimer: ReturnType<typeof setTimeout> | undefined;
+
 onMounted(() => {
-  if (typeof window !== 'undefined') {
-    employeeLoginUrl.value = `${window.location.origin}${employeeLoginPath}`;
-  }
+  employeeLoginUrl.value = `${window.location.origin}${employeeLoginPath}`;
 });
+
+onBeforeUnmount(() => {
+  if (copyFeedbackTimer) clearTimeout(copyFeedbackTimer);
+  if (toastTimer) clearTimeout(toastTimer);
+});
+
+const toast = reactive({
+  show: false,
+  type: 'success' as 'success' | 'error',
+  message: '',
+});
+
+const showToast = (message: string, type: 'success' | 'error' = 'success') => {
+  toast.message = message;
+  toast.type = type;
+  toast.show = true;
+
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.show = false;
+  }, 3500);
+};
 
 const copyEmployeeLoginUrl = async () => {
   try {
     await navigator.clipboard.writeText(employeeLoginUrl.value);
     copiedUrl.value = true;
-    setTimeout(() => {
+    showToast('تم نسخ رابط بوابة الموظفين بنجاح');
+
+    if (copyFeedbackTimer) clearTimeout(copyFeedbackTimer);
+    copyFeedbackTimer = setTimeout(() => {
       copiedUrl.value = false;
     }, 2500);
-  } catch (err) {
-    console.error('Failed to copy employee url:', err);
+  } catch {
+    showToast('تعذر نسخ الرابط. تحقق من صلاحية الوصول إلى الحافظة.', 'error');
   }
 };
 
-// Modal State
+// Form state
 const showModal = ref(false);
 const editingId = ref<string | null>(null);
 const saving = ref(false);
@@ -619,118 +883,241 @@ const modalError = ref('');
 
 const form = reactive({
   name: '',
+  title: '',
+  phone: '',
   username: '',
   password: '',
   status: 'active' as 'active' | 'inactive',
   permissions: [] as EmployeePermission[],
 });
 
-const selectAllPermissions = () => {
-  form.permissions = ALL_EMPLOYEE_PERMISSIONS.map((p) => p.key);
-};
-
-const clearPermissions = () => {
+const resetForm = () => {
+  form.name = '';
+  form.title = '';
+  form.phone = '';
+  form.username = '';
+  form.password = '';
+  form.status = 'active';
   form.permissions = [];
 };
 
 const openAddModal = () => {
   editingId.value = null;
-  form.name = '';
-  form.username = '';
-  form.password = '';
-  form.status = 'active';
+  resetForm();
   form.permissions = ['view_plots', 'view_contracts', 'view_stats'];
   modalError.value = '';
   showModal.value = true;
 };
 
-const openEditModal = (emp: Employee) => {
-  editingId.value = emp.id;
-  form.name = emp.name;
-  form.username = emp.username;
-  // Never load or display an existing password in the browser.
+const openEditModal = (employee: EmployeeWithActivity) => {
+  editingId.value = employee.id;
+  form.name = employee.name || '';
+  form.title = employee.title || '';
+  form.phone = employee.phone || '';
+  form.username = employee.username || '';
   form.password = '';
-  form.status = emp.status;
-  form.permissions = [...(emp.permissions || [])];
+  form.status = employee.status || 'active';
+  form.permissions = [...(employee.permissions || [])];
   modalError.value = '';
   showModal.value = true;
 };
 
 const closeModal = () => {
+  if (saving.value) return;
   showModal.value = false;
+  editingId.value = null;
   modalError.value = '';
 };
 
+// Save employee
 const saveEmployee = async () => {
-  saving.value = true;
   modalError.value = '';
 
+  const name = form.name.trim();
+  const title = form.title.trim();
+  const username = form.username.trim();
+  const password = form.password;
+
+  if (!name) return (modalError.value = 'يرجى إدخال اسم الموظف');
+  if (!title) return (modalError.value = 'يرجى إدخال المسمى الوظيفي للموظف');
+  if (!username) return (modalError.value = 'يرجى إدخال اسم المستخدم');
+  if (!editingId.value && password.length < 4) {
+    return (modalError.value = 'كلمة المرور يجب ألا تقل عن 4 خانات');
+  }
+  if (password && password.length < 4) {
+    return (modalError.value = 'كلمة المرور الجديدة يجب ألا تقل عن 4 خانات');
+  }
+
+  saving.value = true;
+
   try {
+    const employeeData = {
+      name,
+      title,
+      phone: form.phone.trim(),
+      username,
+      status: form.status,
+      permissions: [...new Set(form.permissions)],
+    };
+
     if (editingId.value) {
-      // Update
       await $fetch(`/api/admin/employees/${editingId.value}`, {
         method: 'PUT',
         body: {
-          name: form.name,
-          username: form.username,
-          ...(form.password ? { password: form.password } : {}),
-          status: form.status,
-          permissions: form.permissions,
+          ...employeeData,
+          ...(password ? { password } : {}),
         },
       });
     } else {
-      // Create
       await $fetch('/api/admin/employees', {
         method: 'POST',
-        body: {
-          name: form.name,
-          username: form.username,
-          password: form.password,
-          status: 'active',
-          permissions: form.permissions,
-        },
+        body: { ...employeeData, password },
       });
     }
 
     await refresh();
-    closeModal();
-  } catch (err: any) {
-    modalError.value = err.data?.statusMessage || err.message || 'حدث خطأ أثناء حفظ بيانات الموظف';
+    showModal.value = false;
+    editingId.value = null;
+    resetForm();
+    showToast(editingId.value ? 'تم تحديث بيانات الموظف' : 'تمت إضافة الموظف بنجاح');
+  } catch (error: any) {
+    modalError.value =
+      error?.data?.statusMessage ||
+      error?.data?.message ||
+      error?.message ||
+      'حدث خطأ أثناء حفظ بيانات الموظف';
   } finally {
     saving.value = false;
   }
 };
 
-const toggleStatus = async (emp: Employee) => {
-  const nextStatus = emp.status === 'active' ? 'inactive' : 'active';
-  const label = nextStatus === 'active' ? 'تفعيل' : 'تعطيل';
+// Employee details
+const detailsEmployee = ref<EmployeeWithActivity | null>(null);
 
-  if (!confirm(`هل أنت متأكد من ${label} حساب الموظف ${emp.name}؟`)) return;
+const openDetails = (employee: EmployeeWithActivity) => {
+  detailsEmployee.value = employee;
+};
 
+const editFromDetails = () => {
+  if (!detailsEmployee.value) return;
+  const employee = detailsEmployee.value;
+  detailsEmployee.value = null;
+  openEditModal(employee);
+};
+
+// Custom confirmation dialog
+const confirmDialog = reactive({
+  show: false,
+  loading: false,
+  type: 'status' as 'status' | 'delete',
+  title: '',
+  message: '',
+  confirmText: 'تأكيد',
+  action: null as null | (() => Promise<void>),
+});
+
+const closeConfirm = () => {
+  if (confirmDialog.loading) return;
+  confirmDialog.show = false;
+  confirmDialog.action = null;
+};
+
+const executeConfirm = async () => {
+  if (!confirmDialog.action || confirmDialog.loading) return;
+
+  confirmDialog.loading = true;
   try {
-    await $fetch(`/api/admin/employees/${emp.id}`, {
+    await confirmDialog.action();
+    confirmDialog.show = false;
+    confirmDialog.action = null;
+  } catch (error: any) {
+    showToast(
+      error?.data?.statusMessage ||
+      error?.data?.message ||
+      error?.message ||
+      'حدث خطأ أثناء تنفيذ العملية',
+      'error',
+    );
+  } finally {
+    confirmDialog.loading = false;
+  }
+};
+
+const requestStatusChange = (employee: EmployeeWithActivity) => {
+  const nextStatus = employee.status === 'active' ? 'inactive' : 'active';
+  const actionLabel = nextStatus === 'active' ? 'تفعيل' : 'تعطيل';
+
+  confirmDialog.type = 'status';
+  confirmDialog.title = `تأكيد ${actionLabel} الحساب`;
+  confirmDialog.message = `هل تريد بالفعل ${actionLabel} حساب الموظف "${employee.name}"؟`;
+  confirmDialog.confirmText = `تأكيد ${actionLabel}`;
+  confirmDialog.action = async () => {
+    await $fetch(`/api/admin/employees/${employee.id}`, {
       method: 'PUT',
       body: { status: nextStatus },
     });
-    emp.status = nextStatus;
-  } catch (err: any) {
-    alert(err.data?.statusMessage || 'حدث خطأ أثناء تغيير الحالة');
-  }
+    await refresh();
+    showToast(`تم ${actionLabel} حساب الموظف بنجاح`);
+  };
+  confirmDialog.show = true;
 };
 
-const confirmDelete = async (emp: Employee) => {
-  if (!confirm(`هل أنت متأكد من حذف حساب الموظف "${emp.name}" نهائياً من النظام؟`)) {
-    return;
-  }
-
-  try {
-    await $fetch(`/api/admin/employees/${emp.id}`, {
+const requestDelete = (employee: EmployeeWithActivity) => {
+  confirmDialog.type = 'delete';
+  confirmDialog.title = 'حذف حساب الموظف';
+  confirmDialog.message = `هل أنت متأكد من حذف حساب "${employee.name}" نهائيًا؟ لا يمكن التراجع عن هذا الإجراء.`;
+  confirmDialog.confirmText = 'حذف الموظف';
+  confirmDialog.action = async () => {
+    await $fetch(`/api/admin/employees/${employee.id}`, {
       method: 'DELETE',
     });
     await refresh();
-  } catch (err: any) {
-    alert(err.data?.statusMessage || 'حدث خطأ أثناء حذف الموظف');
-  }
+    showToast('تم حذف حساب الموظف بنجاح');
+  };
+  confirmDialog.show = true;
 };
 </script>
 
+<style scoped>
+.form-input {
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  background: #fff;
+  padding: 0.75rem 0.875rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input::placeholder {
+  color: #cbd5e1;
+}
+
+.form-input:focus {
+  border-color: #7030a0;
+  box-shadow: 0 0 0 4px rgb(112 48 160 / 10%);
+}
+
+.employee-modal-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #d8c6e8 transparent;
+}
+
+.employee-modal-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.employee-modal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.employee-modal-scroll::-webkit-scrollbar-thumb {
+  background: #d8c6e8;
+  border-radius: 999px;
+}
+
+.employee-modal-scroll::-webkit-scrollbar-thumb:hover {
+  background: #b99bcf;
+}
+</style>

@@ -411,18 +411,32 @@
             <!-- Desktop CTA -->
             <NuxtLink
               to="/quote"
-              class="group relative hidden md:inline-flex items-center gap-3 h-11 ps-2 pe-5 overflow-hidden rounded-xl bg-[#7030A0] text-white text-[15px] font-bold shadow-md shadow-[#7030A0]/25 transition-all duration-300 ease-out hover:bg-[#5b2486] hover:shadow-lg hover:shadow-[#7030A0]/40 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] active:bg-[#4c1d73] motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/60 focus-visible:ring-offset-2"
+              class="group relative hidden md:inline-flex h-11 items-center gap-3 overflow-hidden rounded-xl border border-[#7030A0]/20 bg-gradient-to-l from-[#7030A0] to-[#5b2486] ps-2 pe-5 text-[14px] font-bold text-white shadow-sm shadow-[#7030A0]/20 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#7030A0]/40 hover:shadow-lg hover:shadow-[#7030A0]/25 active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/50 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none"
             >
-              <!-- soft light sweep on hover -->
+              <!-- Subtle hover highlight -->
               <span
                 aria-hidden="true"
-                class="pointer-events-none absolute inset-y-0 left-0 w-1/4 -translate-x-full -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-[450%] motion-reduce:hidden"
+                class="pointer-events-none absolute inset-0 bg-gradient-to-l from-white/[0.08] via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
               ></span>
 
-              <span class="relative w-8 h-8 rounded-lg bg-amber-400 text-[#3b1259] flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-amber-300 group-hover:scale-110 group-hover:-rotate-6 motion-reduce:transition-none motion-reduce:group-hover:transform-none">
-                <i class="pi pi-file-edit text-sm"></i>
+              <!-- Icon -->
+              <span
+                class="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-white/10 text-amber-300 shadow-inner transition-all duration-300 group-hover:border-amber-300/40 group-hover:bg-amber-300 group-hover:text-[#4c1d73]"
+              >
+                <i class="pi pi-file-edit text-[14px]"></i>
               </span>
-              <span class="relative">صانع عروض الأسعار</span>
+
+              <!-- Label -->
+              <span
+                class="relative whitespace-nowrap tracking-tight text-white transition-colors duration-300 group-hover:text-white"
+              >
+                صانع عروض الأسعار
+              </span>
+
+              <!-- Arrow -->
+              <i
+                class="pi pi-arrow-left relative text-[10px] text-white/60 transition-all duration-300 group-hover:-translate-x-1 group-hover:text-amber-300"
+              ></i>
             </NuxtLink>
 
             <button

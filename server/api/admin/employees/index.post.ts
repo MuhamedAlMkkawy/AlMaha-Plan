@@ -15,6 +15,15 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 400, statusMessage: 'يرجى إدخال اسم المستخدم أو البريد' });
   }
 
+
+  if (!body?.title?.trim()) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'يرجى إدخال المسمى الوظيفي للموظف',
+    });
+  }
+
+
   if (!body?.password || body.password.length < 4) {
     throw createError({ statusCode: 400, statusMessage: 'كلمة المرور يجب أن لا تقل عن 4 خانات' });
   }

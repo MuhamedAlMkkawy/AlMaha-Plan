@@ -96,17 +96,29 @@ export function employeePermissionForPublicPath(
 
   if (p === '/') return ['view_stats'];
 
-  if (/^\/plots\/\d+/.test(p)) {
-    return ['view_plots', 'view_contracts', 'edit_plots'];
-  }
+  // Single plot page (view individual plot details)
+if (/^\/plots\/\d+$/.test(p)) {
+  return ['view_plot_page'];
+}
 
-  if (
-    p.startsWith('/plots') ||
-    p.startsWith('/blocks') ||
-    p.startsWith('/zones')
-  ) {
-    return ['view_plots'];
-  }
+// Single zone page
+if (/^\/zones\/\d+$/.test(p)) {
+  return ['view_zone_page'];
+}
+
+// Single block page
+if (/^\/blocks\/\d+$/.test(p)) {
+  return ['view_block_page'];
+}
+
+// General listings for plots, blocks, zones (list pages)
+if (
+  (p.startsWith('/plots') && !p.startsWith('/plots/')) ||
+  (p.startsWith('/blocks') && !p.startsWith('/blocks/')) ||
+  (p.startsWith('/zones') && !p.startsWith('/zones/'))
+) {
+  return ['view_plots'];
+}
   // Quote builder requires contract view permission
   if (p.startsWith('/quote')) {
     return ['view_contracts'];

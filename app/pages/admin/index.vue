@@ -1,244 +1,313 @@
 
 <template>
-  <div class="space-y-8" dir="rtl">
+  <div class="admin-dashboard space-y-8 sm:space-y-10" dir="rtl">
 
-    <!-- ================= ADMIN HEADER ================= -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-      <div>
-        <div class="flex items-center gap-2">
-          <span class="px-2.5 py-1 rounded-md bg-[#7030A0] text-white text-xs font-bold">
-            لوحة الإدارة
-          </span>
-          <span class="text-xs text-slate-400">
-            إدارة مبيعات وتعديلات مخطط المها
-          </span>
-        </div>
-
-        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">
-          مركز تحكم المسؤول
-        </h1>
+    <!-- ================= PAGE HEADER ================= -->
+    <header class="relative overflow-hidden rounded-[28px] bg-[#171023] text-white shadow-xl shadow-purple-950/10">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute -top-32 -left-20 h-80 w-80 rounded-full bg-purple-600/20 blur-[90px]"></div>
+        <div class="absolute -bottom-40 right-1/3 h-80 w-80 rounded-full bg-amber-400/10 blur-[100px]"></div>
+        <div class="absolute inset-0 opacity-[0.06] admin-grid"></div>
       </div>
 
-      <div class="flex items-center gap-3">
-        <NuxtLink
-          to="/admin/plots/new"
-          class="group relative inline-flex items-center justify-center gap-2.5
-                 overflow-hidden rounded-xl px-5 py-3
-                 bg-gradient-to-r from-[#7030A0] via-[#8241B5] to-[#7030A0]
-                 text-white text-xs sm:text-sm font-bold
-                 shadow-lg shadow-purple-900/20
-                 transition-all duration-300 ease-out
-                 hover:-translate-y-1 hover:scale-[1.03]
-                 hover:shadow-xl hover:shadow-purple-900/35
-                 hover:from-[#8241B5] hover:via-[#963FD0] hover:to-[#7030A0]
-                 active:translate-y-0 active:scale-[0.97]
-                 focus:outline-none focus-visible:ring-4
-                 focus-visible:ring-purple-400/40"
-        >
-          <span
-            class="absolute inset-0 -translate-x-[120%] skew-x-[-20deg]
-                   bg-gradient-to-r from-transparent via-white/20 to-transparent
-                   transition-transform duration-700
-                   group-hover:translate-x-[120%]"
-          ></span>
+      <div class="relative z-10 flex flex-col gap-7 p-6 sm:p-8 lg:flex-row lg:items-center lg:justify-between lg:p-10">
+        <div class="min-w-0">
+          <div class="flex flex-wrap items-center gap-2.5">
+            <span class="inline-flex items-center gap-2 rounded-full border border-amber-300/25 bg-amber-300/10 px-3 py-1.5 text-[10px] font-black tracking-wider text-amber-300">
+              <i class="pi pi-shield text-[10px]"></i>
+              لوحة الإدارة
+            </span>
 
-          <span
-            class="relative flex h-7 w-7 items-center justify-center
-                   rounded-lg bg-white/15 ring-1 ring-white/20
-                   transition-all duration-300
-                   group-hover:rotate-90 group-hover:bg-white/25"
-          >
-            <i class="pi pi-plus text-xs"></i>
-          </span>
-
-          <span class="relative tracking-wide">
-            إضافة قطعة جديدة
-          </span>
-
-          <i
-            class="pi pi-arrow-left relative text-[10px] opacity-70
-                   transition-all duration-300
-                   group-hover:-translate-x-1 group-hover:opacity-100"
-          ></i>
-        </NuxtLink>
-      </div>
-    </div>
-
-    <!-- ================= QUICK NAVIGATION ================= -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-
-      <!-- Plots -->
-      <NuxtLink
-        to="/admin/plots"
-        class="bg-white rounded-2xl border border-slate-200 p-5
-               hover:border-[#7030A0] hover:shadow-md transition-all group"
-      >
-        <div
-          class="w-10 h-10 rounded-xl bg-purple-100 text-[#7030A0]
-                 flex items-center justify-center font-bold text-lg mb-3
-                 group-hover:scale-105 transition-transform"
-        >
-          <i class="pi pi-table"></i>
-        </div>
-
-        <h3 class="font-bold text-slate-900 text-base group-hover:text-[#7030A0]">
-          إدارة القطع والأسعار
-        </h3>
-
-        <p class="text-xs text-slate-500 mt-1 leading-6">
-          تعديل الحالات، والمشتري، ورقم الصك، والأسعار مع المزامنة مع جداول البيانات.
-        </p>
-      </NuxtLink>
-
-      <!-- Employees -->
-      <NuxtLink
-        to="/admin/employees"
-        class="bg-white rounded-2xl border border-slate-200 p-5
-               hover:border-indigo-600 hover:shadow-md transition-all group"
-      >
-        <div
-          class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700
-                 flex items-center justify-center font-bold text-lg mb-3
-                 group-hover:scale-105 transition-transform"
-        >
-          <i class="pi pi-users"></i>
-        </div>
-
-        <h3 class="font-bold text-slate-900 text-base group-hover:text-indigo-700">
-          إدارة الموظفين والصلاحيات
-        </h3>
-
-        <p class="text-xs text-slate-500 mt-1 leading-6">
-          إضافة حسابات الموظفين، وتعيين كلمات المرور، وإدارة صلاحيات كل موظف.
-        </p>
-      </NuxtLink>
-
-      <!-- Audit -->
-      <NuxtLink
-        to="/admin/audit"
-        class="bg-white rounded-2xl border border-slate-200 p-5
-               hover:border-blue-600 hover:shadow-md transition-all group"
-      >
-        <div
-          class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600
-                 flex items-center justify-center font-bold text-lg mb-3
-                 group-hover:scale-105 transition-transform"
-        >
-          <i class="pi pi-history"></i>
-        </div>
-
-        <h3 class="font-bold text-slate-900 text-base group-hover:text-blue-600">
-          سجل العمليات والتغييرات
-        </h3>
-
-        <p class="text-xs text-slate-500 mt-1 leading-6">
-          متابعة وتدقيق جميع العمليات والتعديلات التي أجراها الموظفون والمسؤولون.
-        </p>
-      </NuxtLink>
-
-      <!-- Public View -->
-      <NuxtLink
-        to="/plots"
-        class="bg-white rounded-2xl border border-slate-200 p-5
-               hover:border-emerald-600 hover:shadow-md transition-all group"
-      >
-        <div
-          class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800
-                 flex items-center justify-center font-bold text-lg mb-3
-                 group-hover:scale-105 transition-transform"
-        >
-          <i class="pi pi-eye"></i>
-        </div>
-
-        <h3 class="font-bold text-slate-900 text-base group-hover:text-emerald-800">
-          معاينة الواجهة العامة
-        </h3>
-
-        <p class="text-xs text-slate-500 mt-1 leading-6">
-          مشاهدة ما يراه العملاء والزوار دون إظهار بيانات المشتري الحساسة.
-        </p>
-      </NuxtLink>
-    </div>
-
-    <!-- ================= AUDIT LOG ================= -->
-    <div
-      class="bg-white rounded-2xl border border-slate-200/80
-             shadow-sm overflow-hidden"
-    >
-
-      <!-- Audit Header -->
-      <div
-        class="p-5 border-b border-slate-100
-               flex flex-col sm:flex-row sm:items-center
-               justify-between gap-3"
-      >
-        <div class="flex items-center gap-3">
-          <div
-            class="w-10 h-10 rounded-xl bg-purple-50
-                   flex items-center justify-center"
-          >
-            <i class="pi pi-history text-[#7030A0] text-lg"></i>
+            <span class="text-xs font-medium text-white/45">
+              إدارة مبيعات وتعديلات مخطط المها
+            </span>
           </div>
 
-          <div>
-            <h3 class="font-bold text-slate-900 text-base">
-              سجل العمليات والتعديلات
+          <h1 class="mt-5 text-2xl font-black leading-relaxed sm:text-3xl lg:text-[38px]">
+            مركز تحكم المسؤول
+          </h1>
+
+          <p class="mt-2 max-w-2xl text-xs leading-7 text-white/55 sm:text-sm sm:leading-8">
+            منصة موحدة لإدارة القطع والأسعار والموظفين والصلاحيات،
+            مع متابعة دقيقة لجميع العمليات والتغييرات داخل النظام.
+          </p>
+
+          <div class="mt-5 flex flex-wrap items-center gap-3 text-[10px] font-semibold text-white/50">
+            <span class="inline-flex items-center gap-2">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.8)]"></span>
+              النظام الإداري
+            </span>
+            <span class="h-1 w-1 rounded-full bg-white/25"></span>
+            <span>إدارة ومراقبة مركزية</span>
+          </div>
+        </div>
+
+        <div class="flex shrink-0 flex-col gap-3 sm:flex-row sm:items-center">
+          <NuxtLink
+            to="/admin/plots/new"
+            class="add-plot-btn group relative inline-flex min-h-[54px] items-center justify-center gap-3 overflow-hidden rounded-2xl bg-gradient-to-l from-[#ffc928] via-[#ffda64] to-[#ffc928] px-6 text-sm font-black text-[#281a32] shadow-lg shadow-amber-500/15 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/25 active:translate-y-0"
+          >
+            <span class="absolute inset-0 -translate-x-full skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 group-hover:translate-x-full"></span>
+
+            <span class="relative flex h-8 w-8 items-center justify-center rounded-xl bg-[#171023]/10 transition-transform duration-300 group-hover:rotate-90">
+              <i class="pi pi-plus text-sm"></i>
+            </span>
+
+            <span class="relative">إضافة قطعة جديدة</span>
+            <i class="pi pi-arrow-left relative text-[10px] transition-transform group-hover:-translate-x-1"></i>
+          </NuxtLink>
+        </div>
+      </div>
+
+      <div class="absolute inset-x-0 bottom-0 h-[3px] bg-gradient-to-l from-transparent via-[#ffc928] to-transparent opacity-80"></div>
+    </header>
+
+    <!-- ================= SECTION INTRO ================= -->
+    <section>
+      <div class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.18em] text-[#7030A0]">
+            <span class="h-px w-6 bg-[#ffc928]"></span>
+            Workspace navigation
+          </div>
+
+          <h2 class="mt-2 text-lg font-black text-slate-900 sm:text-xl">
+            الوصول السريع
+          </h2>
+
+          <p class="mt-1 text-xs leading-6 text-slate-500">
+            انتقل مباشرة إلى القسم الذي ترغب في إدارته.
+          </p>
+        </div>
+
+        <span class="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-2 text-[10px] font-bold text-slate-500">
+          <i class="pi pi-th-large text-[#7030A0]"></i>
+          الأقسام الرئيسية
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+
+        <!-- Plots -->
+        <NuxtLink
+          to="/admin/plots"
+          class="nav-card group"
+        >
+          <div class="nav-card-top">
+            <div class="nav-icon bg-purple-50 text-[#7030A0] group-hover:bg-[#7030A0] group-hover:text-white">
+              <i class="pi pi-map text-xl"></i>
+            </div>
+            <span class="nav-number text-purple-100">01</span>
+          </div>
+
+          <div class="mt-5">
+            <h3 class="text-sm font-black text-slate-900 transition-colors group-hover:text-[#7030A0] sm:text-base">
+              إدارة القطع والأسعار
             </h3>
 
-            <p class="text-xs text-slate-400 mt-1">
-              متابعة أحدث الأنشطة والتغييرات داخل النظام
+            <p class="mt-2 text-xs leading-7 text-slate-500">
+              تعديل الحالات والمشتري ورقم الصك والأسعار، مع المزامنة مع جداول البيانات.
             </p>
+          </div>
+
+          <div class="nav-card-footer">
+            <span>إدارة الأراضي</span>
+            <i class="pi pi-arrow-left transition-transform group-hover:-translate-x-1"></i>
+          </div>
+        </NuxtLink>
+
+        <!-- Employees -->
+        <NuxtLink
+          to="/admin/employees"
+          class="nav-card group"
+        >
+          <div class="nav-card-top">
+            <div class="nav-icon bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white">
+              <i class="pi pi-users text-xl"></i>
+            </div>
+            <span class="nav-number text-indigo-100">02</span>
+          </div>
+
+          <div class="mt-5">
+            <h3 class="text-sm font-black text-slate-900 transition-colors group-hover:text-indigo-600 sm:text-base">
+              إدارة الموظفين والصلاحيات
+            </h3>
+
+            <p class="mt-2 text-xs leading-7 text-slate-500">
+              إضافة حسابات الموظفين وتعيين كلمات المرور وإدارة صلاحيات الوصول.
+            </p>
+          </div>
+
+          <div class="nav-card-footer">
+            <span>إدارة الفريق</span>
+            <i class="pi pi-arrow-left transition-transform group-hover:-translate-x-1"></i>
+          </div>
+        </NuxtLink>
+
+        <!-- Audit -->
+        <NuxtLink
+          to="/admin/audit"
+          class="nav-card group"
+        >
+          <div class="nav-card-top">
+            <div class="nav-icon bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white">
+              <i class="pi pi-history text-xl"></i>
+            </div>
+            <span class="nav-number text-blue-100">03</span>
+          </div>
+
+          <div class="mt-5">
+            <h3 class="text-sm font-black text-slate-900 transition-colors group-hover:text-blue-600 sm:text-base">
+              سجل العمليات والتغييرات
+            </h3>
+
+            <p class="mt-2 text-xs leading-7 text-slate-500">
+              مراجعة وتدقيق جميع العمليات والتعديلات التي نفذها الموظفون والمسؤولون.
+            </p>
+          </div>
+
+          <div class="nav-card-footer">
+            <span>مراقبة النشاط</span>
+            <i class="pi pi-arrow-left transition-transform group-hover:-translate-x-1"></i>
+          </div>
+        </NuxtLink>
+
+        <!-- Public View -->
+        <NuxtLink
+          to="/plots"
+          class="nav-card group"
+        >
+          <div class="nav-card-top">
+            <div class="nav-icon bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-white">
+              <i class="pi pi-eye text-xl"></i>
+            </div>
+            <span class="nav-number text-amber-100">04</span>
+          </div>
+
+          <div class="mt-5">
+            <h3 class="text-sm font-black text-slate-900 transition-colors group-hover:text-amber-600 sm:text-base">
+              معاينة الواجهة العامة
+            </h3>
+
+            <p class="mt-2 text-xs leading-7 text-slate-500">
+              معاينة تجربة العملاء والزوار دون إظهار بيانات المشتري الحساسة.
+            </p>
+          </div>
+
+          <div class="nav-card-footer">
+            <span>عرض الموقع</span>
+            <i class="pi pi-arrow-left transition-transform group-hover:-translate-x-1"></i>
+          </div>
+        </NuxtLink>
+
+      </div>
+    </section>
+
+    <!-- ================= AUDIT LOG ================= -->
+    <section class="overflow-hidden rounded-[26px] border border-slate-200/80 bg-white shadow-sm">
+
+      <!-- Audit Header -->
+      <div class="relative overflow-hidden border-b border-slate-100 bg-gradient-to-l from-[#faf7fc] via-white to-white px-5 py-6 sm:px-7">
+        <div class="absolute right-0 top-0 h-full w-1 bg-gradient-to-b from-[#ffc928] to-[#7030A0]"></div>
+
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div class="flex items-center gap-4">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#7030A0] text-white shadow-lg shadow-purple-900/15">
+              <i class="pi pi-history text-xl"></i>
+            </div>
+
+            <div>
+              <div class="flex flex-wrap items-center gap-2">
+                <h2 class="text-base font-black text-slate-900 sm:text-lg">
+                  سجل العمليات والتعديلات
+                </h2>
+
+                <span class="rounded-full border border-purple-100 bg-purple-50 px-2.5 py-1 text-[9px] font-black text-[#7030A0]">
+                  AUDIT LOG
+                </span>
+              </div>
+
+              <p class="mt-1 text-xs leading-6 text-slate-500">
+                متابعة أحدث الأنشطة والتغييرات داخل النظام
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button
+              type="button"
+              @click="refreshLogs"
+              :disabled="logsPending"
+              class="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 text-xs font-bold text-slate-600 transition-all hover:border-purple-200 hover:bg-purple-50 hover:text-[#7030A0] disabled:cursor-not-allowed disabled:opacity-50"
+              title="تحديث السجل"
+            >
+              <i :class="logsPending ? 'pi pi-spin pi-spinner' : 'pi pi-refresh'"></i>
+              تحديث
+            </button>
+
+            <NuxtLink
+              to="/admin/audit"
+              class="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#7030A0] px-4 text-xs font-bold text-white shadow-md shadow-purple-900/15 transition-all hover:-translate-y-0.5 hover:bg-[#57227f] hover:shadow-lg"
+            >
+              عرض السجل كاملاً
+              <i class="pi pi-arrow-left text-[10px]"></i>
+            </NuxtLink>
           </div>
         </div>
 
-        <NuxtLink
-          to="/admin/audit"
-          class="inline-flex items-center gap-2 text-xs
-                 text-[#7030A0] font-bold hover:underline"
-        >
-          عرض السجل كاملاً
-          <i class="pi pi-arrow-left text-[10px]"></i>
-        </NuxtLink>
+        <div class="mt-5 flex flex-wrap items-center gap-2 text-[10px] font-semibold text-slate-400">
+          <span class="inline-flex items-center gap-1.5">
+            <i class="pi pi-shield text-[#7030A0]"></i>
+            سجل تدقيق النظام
+          </span>
+          <span class="text-slate-200">/</span>
+          <span>أحدث العمليات المسجلة</span>
+        </div>
       </div>
 
       <!-- Loading -->
       <div
         v-if="logsPending"
-        class="p-12 text-center text-slate-400"
+        class="flex min-h-[280px] flex-col items-center justify-center px-6 py-12 text-center"
       >
-        <i class="pi pi-spin pi-spinner text-2xl mb-3 block text-[#7030A0]"></i>
+        <div class="relative flex h-16 w-16 items-center justify-center">
+          <div class="absolute inset-0 rounded-full border-4 border-purple-100"></div>
+          <div class="absolute inset-0 animate-spin rounded-full border-4 border-transparent border-t-[#7030A0]"></div>
+          <i class="pi pi-history text-xl text-[#7030A0]"></i>
+        </div>
 
-        <p class="text-sm font-semibold">
-          جارٍ تحميل سجل العمليات...
+        <p class="mt-5 text-sm font-black text-slate-800">
+          جارٍ تحميل سجل العمليات
         </p>
 
-        <p class="text-xs mt-1">
-          يرجى الانتظار قليلاً
+        <p class="mt-2 text-xs text-slate-400">
+          يرجى الانتظار قليلاً حتى يتم تحميل أحدث البيانات
         </p>
       </div>
 
       <!-- Error -->
       <div
         v-else-if="auditError"
-        class="p-10 text-center"
+        class="flex min-h-[280px] flex-col items-center justify-center px-6 py-12 text-center"
       >
-        <i class="pi pi-exclamation-circle text-3xl text-rose-400 mb-3 block"></i>
+        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-rose-50 text-rose-500">
+          <i class="pi pi-exclamation-triangle text-2xl"></i>
+        </div>
 
-        <p class="text-sm font-bold text-slate-700">
+        <p class="mt-5 text-sm font-black text-slate-800">
           تعذر تحميل سجل العمليات
         </p>
 
-        <p class="text-xs text-slate-400 mt-1">
-          يرجى المحاولة مرة أخرى
+        <p class="mt-2 max-w-sm text-xs leading-7 text-slate-400">
+          حدث خطأ أثناء جلب البيانات. يمكنك المحاولة مرة أخرى.
         </p>
 
         <button
+          type="button"
           @click="refreshLogs"
-          class="mt-4 px-4 py-2 rounded-lg bg-purple-50
-                 text-[#7030A0] text-xs font-bold
-                 hover:bg-purple-100 transition-colors"
+          class="mt-5 inline-flex h-10 items-center gap-2 rounded-xl bg-[#7030A0] px-5 text-xs font-bold text-white transition-all hover:bg-[#57227f]"
         >
-          <i class="pi pi-refresh ms-1"></i>
+          <i class="pi pi-refresh"></i>
           إعادة المحاولة
         </button>
       </div>
@@ -246,86 +315,64 @@
       <!-- Empty -->
       <div
         v-else-if="auditLogs.length === 0"
-        class="p-12 text-center text-slate-500"
+        class="flex min-h-[280px] flex-col items-center justify-center px-6 py-12 text-center"
       >
-        <div
-          class="w-16 h-16 mx-auto rounded-2xl bg-slate-50
-                 flex items-center justify-center mb-4"
-        >
-          <i class="pi pi-inbox text-3xl text-slate-300"></i>
+        <div class="flex h-20 w-20 items-center justify-center rounded-[26px] bg-slate-50 text-slate-300">
+          <i class="pi pi-inbox text-3xl"></i>
         </div>
 
-        <p class="text-sm font-bold text-slate-700">
+        <p class="mt-5 text-sm font-black text-slate-800">
           لا توجد عمليات مسجلة حتى الآن
         </p>
 
-        <p class="text-xs text-slate-400 mt-2">
-          ستظهر هنا جميع العمليات والتعديلات التي يتم تنفيذها في النظام.
+        <p class="mt-2 max-w-sm text-xs leading-7 text-slate-400">
+          ستظهر هنا جميع العمليات والتعديلات التي يتم تنفيذها داخل النظام.
         </p>
       </div>
 
       <!-- Audit Table -->
       <div v-else class="overflow-x-auto">
-        <table class="w-full text-center border-collapse text-xs sm:text-sm">
+        <table class="w-full min-w-[850px] border-collapse text-center text-xs sm:text-sm">
 
           <thead>
-            <tr
-              class="bg-slate-50 text-slate-600 font-bold
-                     border-b border-slate-200"
-            >
-              <th class="px-4 py-4 whitespace-nowrap">
-                التاريخ والوقت
-              </th>
-
-              <th class="px-4 py-4 whitespace-nowrap">
-                منفذ العملية
-              </th>
-
-              <th class="px-4 py-4 whitespace-nowrap">
-                نوع العملية
-              </th>
-
-              <th class="px-4 py-4 whitespace-nowrap">
-                رقم القطعة
-              </th>
-
-              <th class="px-4 py-4 text-start min-w-[240px]">
-                تفاصيل العملية
-              </th>
+            <tr class="border-b border-slate-100 bg-[#faf9fc] text-[10px] font-black text-slate-500 sm:text-[11px]">
+              <th class="whitespace-nowrap px-5 py-5">التاريخ والوقت</th>
+              <th class="whitespace-nowrap px-5 py-5">منفذ العملية</th>
+              <th class="whitespace-nowrap px-5 py-5">نوع العملية</th>
+              <th class="whitespace-nowrap px-5 py-5">رقم القطعة</th>
+              <th class="min-w-[260px] px-5 py-5 text-start">تفاصيل العملية</th>
             </tr>
           </thead>
 
           <tbody class="divide-y divide-slate-100">
-
             <tr
               v-for="(log, idx) in auditLogs.slice(0, 10)"
               :key="log.timestamp + '-' + idx"
-              class="hover:bg-purple-50/40 transition-colors"
+              class="audit-row"
             >
-
               <!-- Date -->
-              <td class="px-4 py-4 whitespace-nowrap">
-                <div class="flex flex-col items-center gap-1">
-                  <span class="font-semibold text-slate-700 text-xs">
+              <td class="whitespace-nowrap px-5 py-5">
+                <div class="inline-flex flex-col items-center gap-1">
+                  <span class="font-bold text-slate-700">
                     {{ formatAuditDate(log.timestamp) }}
+                  </span>
+                  <span class="text-[9px] font-medium text-slate-400">
+                    وقت تسجيل العملية
                   </span>
                 </div>
               </td>
 
               <!-- User -->
-              <td class="px-4 py-4">
-                <div class="flex flex-col items-center gap-1.5">
-                  <div
-                    class="w-8 h-8 rounded-full bg-indigo-50
-                           text-indigo-600 flex items-center
-                           justify-center"
-                  >
-                    <i class="pi pi-user text-xs"></i>
+              <td class="px-5 py-5">
+                <div class="flex min-w-[150px] flex-col items-center gap-2">
+                  <div class="flex h-9 w-9 items-center justify-center rounded-xl border border-indigo-100 bg-indigo-50 text-indigo-600">
+                    <i class="pi pi-user text-sm"></i>
                   </div>
 
                   <span
-                    class="font-semibold text-slate-800 text-xs"
+                    class="max-w-[180px] truncate text-[11px] font-bold text-slate-700"
                     dir="ltr"
+                    :title="log.adminEmail || 'غير محدد'"
                   >
                     {{ log.adminEmail || 'غير محدد' }}
                   </span>
@@ -333,71 +380,88 @@
               </td>
 
               <!-- Action -->
-              <td class="px-4 py-4">
+              <td class="px-5 py-5">
                 <span
                   :class="[
-                    'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap',
+                    'inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-[10px] font-black whitespace-nowrap',
                     getAuditActionStyle(log.action)
                   ]"
                 >
                   <i :class="getAuditActionIcon(log.action)"></i>
-
                   {{ translateAuditAction(log.action) }}
                 </span>
               </td>
 
               <!-- Plot -->
-              <td class="px-4 py-4">
+              <td class="px-5 py-5">
                 <span
                   v-if="log.plotNo"
-                  class="inline-flex items-center px-3 py-1.5
-                         rounded-lg bg-purple-50 text-[#7030A0]
-                         font-black whitespace-nowrap"
+                  class="inline-flex items-center gap-1.5 rounded-xl border border-purple-100 bg-purple-50 px-3 py-2 font-black text-[#7030A0] whitespace-nowrap"
                 >
+                  <i class="pi pi-map-marker text-[10px]"></i>
                   قطعة {{ log.plotNo }}
                 </span>
 
-                <span v-else class="text-slate-400">
-                  —
-                </span>
+                <span v-else class="text-slate-300">—</span>
               </td>
 
               <!-- Details -->
-              <td class="px-4 py-4 text-start">
-                <div
-                  class="max-w-sm text-xs text-slate-600
-                         leading-6 whitespace-pre-line break-words"
-                >
+              <td class="px-5 py-5 text-start">
+                <div class="max-w-md whitespace-pre-line break-words text-[11px] leading-7 text-slate-600">
                   {{ formatAuditDetails(log.afterData) }}
                 </div>
               </td>
-
             </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- Footer -->
+      <!-- Audit Footer -->
       <div
         v-if="!logsPending && !auditError && auditLogs.length > 0"
-        class="px-5 py-3 bg-slate-50/70 border-t border-slate-100
-               flex items-center justify-between"
+        class="flex flex-col gap-3 border-t border-slate-100 bg-[#faf9fc] px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-7"
       >
-        <span class="text-xs text-slate-400">
-          عرض أحدث {{ Math.min(auditLogs.length, 10) }}
-          من أصل {{ auditLogs.length }} عملية
+        <span class="text-[10px] font-semibold text-slate-400">
+          عرض أحدث
+          <strong class="text-slate-700">{{ Math.min(auditLogs.length, 10) }}</strong>
+          من أصل
+          <strong class="text-slate-700">{{ auditLogs.length }}</strong>
+          عملية مسجلة
         </span>
 
         <NuxtLink
           to="/admin/audit"
-          class="text-xs font-bold text-[#7030A0] hover:underline"
+          class="inline-flex items-center gap-2 text-xs font-black text-[#7030A0] transition-colors hover:text-[#57227f]"
         >
-          عرض المزيد
-          <i class="pi pi-arrow-left text-[9px] mr-1"></i>
+          عرض جميع العمليات
+          <i class="pi pi-arrow-left text-[10px]"></i>
         </NuxtLink>
       </div>
+    </section>
 
+    <!-- ================= BOTTOM NOTE ================= -->
+    <div class="flex flex-col gap-3 rounded-2xl border border-purple-100/80 bg-gradient-to-l from-purple-50/70 via-white to-amber-50/40 p-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <div class="flex items-center gap-3">
+        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#7030A0] text-white">
+          <i class="pi pi-lock text-sm"></i>
+        </div>
+
+        <div>
+          <p class="text-xs font-black text-slate-800">
+            بيئة الإدارة المحمية
+          </p>
+          <p class="mt-1 text-[10px] leading-5 text-slate-500">
+            يتم تسجيل العمليات والتعديلات للمساعدة في متابعة نشاط النظام.
+          </p>
+        </div>
+      </div>
+
+      <span class="inline-flex items-center gap-2 text-[10px] font-bold text-[#7030A0]">
+        <i class="pi pi-shield"></i>
+        إدارة ومراقبة مركزية
+      </span>
     </div>
+
   </div>
 </template>
 
@@ -460,32 +524,32 @@ const auditActionTranslations: Record<string, string> = {
 // ==========================================
 
 const auditActionStyles: Record<string, string> = {
-  CREATE: 'bg-emerald-50 text-emerald-700',
-  EMPLOYEE_CREATE: 'bg-emerald-50 text-emerald-700',
-  PLOT_CREATE: 'bg-emerald-50 text-emerald-700',
+  CREATE: 'border-emerald-100 bg-emerald-50 text-emerald-700',
+  EMPLOYEE_CREATE: 'border-emerald-100 bg-emerald-50 text-emerald-700',
+  PLOT_CREATE: 'border-emerald-100 bg-emerald-50 text-emerald-700',
 
-  UPDATE: 'bg-blue-50 text-blue-700',
-  EMPLOYEE_UPDATE: 'bg-blue-50 text-blue-700',
-  PERMISSION_UPDATE: 'bg-blue-50 text-blue-700',
-  PERMISSIONS_UPDATE: 'bg-blue-50 text-blue-700',
-  EMPLOYEE_PERMISSION_UPDATE: 'bg-blue-50 text-blue-700',
-  PLOT_UPDATE: 'bg-blue-50 text-blue-700',
-  PRICE_UPDATE: 'bg-blue-50 text-blue-700',
-  STATUS_UPDATE: 'bg-blue-50 text-blue-700',
-  BUYER_UPDATE: 'bg-blue-50 text-blue-700',
+  UPDATE: 'border-blue-100 bg-blue-50 text-blue-700',
+  EMPLOYEE_UPDATE: 'border-blue-100 bg-blue-50 text-blue-700',
+  PERMISSION_UPDATE: 'border-blue-100 bg-blue-50 text-blue-700',
+  PERMISSIONS_UPDATE: 'border-blue-100 bg-blue-50 text-blue-700',
+  EMPLOYEE_PERMISSION_UPDATE: 'border-blue-100 bg-blue-50 text-blue-700',
+  PLOT_UPDATE: 'border-blue-100 bg-blue-50 text-blue-700',
+  PRICE_UPDATE: 'border-blue-100 bg-blue-50 text-blue-700',
+  STATUS_UPDATE: 'border-blue-100 bg-blue-50 text-blue-700',
+  BUYER_UPDATE: 'border-blue-100 bg-blue-50 text-blue-700',
 
-  LOGIN: 'bg-indigo-50 text-indigo-700',
-  EMPLOYEE_LOGIN: 'bg-indigo-50 text-indigo-700',
+  LOGIN: 'border-indigo-100 bg-indigo-50 text-indigo-700',
+  EMPLOYEE_LOGIN: 'border-indigo-100 bg-indigo-50 text-indigo-700',
 
-  LOGOUT: 'bg-slate-100 text-slate-600',
-  EMPLOYEE_LOGOUT: 'bg-slate-100 text-slate-600',
+  LOGOUT: 'border-slate-200 bg-slate-100 text-slate-600',
+  EMPLOYEE_LOGOUT: 'border-slate-200 bg-slate-100 text-slate-600',
 
-  DELETE: 'bg-rose-50 text-rose-700',
-  EMPLOYEE_DELETE: 'bg-rose-50 text-rose-700',
-  PLOT_DELETE: 'bg-rose-50 text-rose-700',
+  DELETE: 'border-rose-100 bg-rose-50 text-rose-700',
+  EMPLOYEE_DELETE: 'border-rose-100 bg-rose-50 text-rose-700',
+  PLOT_DELETE: 'border-rose-100 bg-rose-50 text-rose-700',
 
-  SYNC: 'bg-amber-50 text-amber-700',
-  GOOGLE_SHEETS_SYNC: 'bg-amber-50 text-amber-700',
+  SYNC: 'border-amber-100 bg-amber-50 text-amber-700',
+  GOOGLE_SHEETS_SYNC: 'border-amber-100 bg-amber-50 text-amber-700',
 };
 
 // ==========================================
@@ -534,7 +598,7 @@ const translateAuditAction = (action: string) => {
 const getAuditActionStyle = (action: string) => {
   const key = String(action || '').toUpperCase();
 
-  return auditActionStyles[key] || 'bg-slate-100 text-slate-600';
+  return auditActionStyles[key] || 'border-slate-200 bg-slate-100 text-slate-600';
 };
 
 const getAuditActionIcon = (action: string) => {
@@ -726,3 +790,125 @@ const syncFromSheet = async () => {
   }
 };
 </script>
+
+<style scoped>
+.admin-dashboard {
+  --admin-purple: #7030a0;
+  --admin-purple-dark: #57227f;
+  --admin-gold: #ffc928;
+}
+
+/* Subtle architectural grid */
+.admin-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+/* Navigation cards */
+.nav-card {
+  position: relative;
+  display: flex;
+  min-height: 245px;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #e8e8ef;
+  border-radius: 23px;
+  background: #fff;
+  padding: 22px;
+  box-shadow: 0 2px 8px rgba(20, 15, 35, 0.025);
+  transition:
+    transform 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.nav-card::before {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #7030a0, #ffc928, transparent);
+  content: "";
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.nav-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(112, 48, 160, 0.25);
+  box-shadow: 0 16px 36px rgba(55, 30, 80, 0.09);
+}
+
+.nav-card:hover::before {
+  opacity: 1;
+}
+
+.nav-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-icon {
+  display: flex;
+  width: 49px;
+  height: 49px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  transition:
+    background-color 300ms ease,
+    color 300ms ease,
+    transform 300ms ease;
+}
+
+.nav-card:hover .nav-icon {
+  transform: rotate(-5deg) scale(1.06);
+}
+
+.nav-number {
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+.nav-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 17px;
+  color: #7030a0;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.audit-row {
+  transition: background-color 200ms ease;
+}
+
+.audit-row:hover {
+  background: #faf7fc;
+}
+
+@media (max-width: 640px) {
+  .nav-card {
+    min-height: 220px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-card,
+  .nav-card::before,
+  .nav-icon,
+  .add-plot-btn,
+  .audit-row {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+</style>

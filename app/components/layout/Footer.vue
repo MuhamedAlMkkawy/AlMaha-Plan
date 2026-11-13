@@ -196,20 +196,38 @@ const modeStyles = computed(() => {
     };
   }
 
+  // Public visitor — matches the main system branding
   return {
     label: 'زائر',
-    accent: 'bg-gradient-to-r from-emerald-300 via-emerald-500 to-emerald-300',
-    glow: 'bg-emerald-300',
-    logo: 'bg-gradient-to-br from-emerald-500 to-emerald-700 shadow-emerald-900/15',
-    icon: 'text-emerald-600',
+
+    // Purple primary + golden accent
+    accent:
+      'bg-gradient-to-r from-[#7030A0] via-[#a35bd1] to-[#ffc928]',
+
+    glow: 'bg-[#a35bd1]',
+
+    logo:
+      'bg-gradient-to-br from-[#8546ad] to-[#57227f] shadow-purple-900/15',
+
+    icon: 'text-[#7030A0]',
+
     modeIcon: 'pi pi-user',
-    iconBox: 'bg-emerald-100 text-emerald-700',
-    card: 'border-emerald-200 bg-gradient-to-r from-emerald-50 to-white',
-    caption: 'text-emerald-600',
-    title: 'text-emerald-950',
-    status: 'bg-emerald-100',
-    dot: 'bg-emerald-600',
-    systemDot: 'bg-emerald-500',
+
+    iconBox:
+      'bg-purple-50 text-[#7030A0] ring-1 ring-inset ring-purple-100',
+
+    card:
+      'border-purple-200/80 bg-gradient-to-r from-purple-50 via-white to-amber-50/70',
+
+    caption: 'text-[#8546ad]',
+
+    title: 'text-purple-950',
+
+    status: 'bg-amber-50 ring-1 ring-inset ring-amber-200',
+
+    dot: 'bg-[#ffc928]',
+
+    systemDot: 'bg-[#7030A0]',
   };
 });
 
