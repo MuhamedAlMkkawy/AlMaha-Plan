@@ -110,7 +110,7 @@
             </span>
 
             <span class="text-[10px] font-extrabold tracking-[0.17em] text-amber-200">
-              ADMINISTRATION CONTROL CENTER
+              بوابة الإدارة
             </span>
           </div>
 
