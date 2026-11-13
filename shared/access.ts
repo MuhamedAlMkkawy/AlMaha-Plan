@@ -103,10 +103,13 @@ export function employeePermissionForPublicPath(
   if (
     p.startsWith('/plots') ||
     p.startsWith('/blocks') ||
-    p.startsWith('/zones') ||
-    p.startsWith('/quote')
+    p.startsWith('/zones')
   ) {
     return ['view_plots'];
+  }
+  // Quote builder requires contract view permission
+  if (p.startsWith('/quote')) {
+    return ['view_contracts'];
   }
 
   return null;

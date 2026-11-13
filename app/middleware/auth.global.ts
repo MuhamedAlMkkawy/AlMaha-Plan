@@ -1,4 +1,9 @@
-import { defineNuxtRouteMiddleware, navigateTo, useRuntimeConfig } from 'nuxt/app';
+import {
+  defineNuxtRouteMiddleware,
+  navigateTo,
+  useRuntimeConfig,
+} from 'nuxt/app';
+
 import {
   employeePermissionForPublicPath,
   firstAllowedPath,
@@ -8,53 +13,85 @@ import {
 
 export default defineNuxtRouteMiddleware(async (to) => {
   const config = useRuntimeConfig();
-  const loginPath = String(config.public.loginPath || '/login');
-  const employeeLoginPath = String(config.public.employeeLoginPath || '/portal');
 
+  const loginPath = String(config.public.loginPath || '/login');
+  const employeeLoginPath = String(
+    config.public.employeeLoginPath || '/portal'
+  );
+  const homePath = '/';
+
+  // 1. Routes accessible without authentication
   const openPaths = new Set([
+    homePath, // <-- homepage is public, so logout can land here
     loginPath,
     employeeLoginPath,
-    '/portal',
     '/no-access',
   ]);
 
-  if (openPaths.has(to.path)) return;
+  if (openPaths.has(to.path)) {
+    return;
+  }
 
-  const { refreshAuth, user, isAdmin, isEmployee, permissions } = useAuthSession();
+  // 2. Load authentication state
+  const { refreshAuth, user, isAdmin, isEmployee, permissions } =
+    useAuthSession();
 
   if (!user.value) {
     await refreshAuth();
   }
 
-  const access = getRouteAccess(to.path);
-
-  if (isAdmin.value) return;
-
-  if (access.type === 'admin') {
-    if (isEmployee.value) {
-      return navigateTo(firstAllowedPath(permissions.value), { replace: true });
-    }
-    return navigateTo(loginPath);
+  // 3. Not logged in -> login page
+  if (!user.value) {
+    return navigateTo(loginPath, { replace: true });
   }
 
-  if (access.type === 'permission') {
-    if (isEmployee.value && userCanAny(user.value, access.anyOf)) {
-      return;
-    }
-    if (isEmployee.value) {
-      return navigateTo(firstAllowedPath(permissions.value), { replace: true });
-    }
-    return navigateTo(loginPath);
+  // 4. Admin: full access
+  if (isAdmin.value) {
+    return;
   }
 
-  if (isEmployee.value) {
-    const needed = employeePermissionForPublicPath(to.path);
-    if (needed && !userCanAny(user.value, needed)) {
-      const fallback = firstAllowedPath(permissions.value);
-      if (fallback === to.path) {
-        return navigateTo('/no-access', { replace: true });
-      }
+  // 5. Authenticated but no valid role
+  if (!isEmployee.value) {
+    return navigateTo(loginPath, { replace: true });
+  }
+
+  // Helper to avoid repeating the fallback logic
+  const redirectToFallback = () => {
+    const fallback = firstAllowedPath(permissions.value);
+
+    if (fallback && fallback !== to.path) {
       return navigateTo(fallback, { replace: true });
     }
+
+    return navigateTo('/no-access', { replace: true });
+  };
+
+  // 6. Determine route access requirements
+  const access = getRouteAccess(to.path);
+
+  // 7. Admin-only routes
+  if (access.type === 'admin') {
+    return redirectToFallback();
   }
-});
+
+  // 8. Routes with explicit permission requirements
+  if (access.type === 'permission') {
+    return userCanAny(user.value, access.anyOf)
+      ? undefined
+      : redirectToFallback();
+  }
+
+  // 9. Employee public/application routes (unknown routes denied by default)
+  const requiredPermissions = employeePermissionForPublicPath(to.path);
+
+  if (!requiredPermissions?.length) {
+    return navigateTo('/no-access', { replace: true });
+  }
+
+  if (userCanAny(user.value, requiredPermissions)) {
+    return;
+  }
+
+  // 10. Unauthorized employee
+  return redirectToFallback();
+});``

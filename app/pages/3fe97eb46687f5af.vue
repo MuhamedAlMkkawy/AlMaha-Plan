@@ -6,7 +6,7 @@
       <div class="absolute -top-32 -start-32 w-[28rem] h-[28rem] rounded-full bg-indigo-400/20 blur-3xl pointer-events-none"></div>
       <div class="absolute -bottom-40 -end-24 w-[32rem] h-[32rem] rounded-full bg-emerald-400/15 blur-3xl pointer-events-none"></div>
       <div class="absolute inset-0 opacity-[0.06] pointer-events-none"
-           style="background-image: radial-gradient(circle at 1px 1px, #fff 1px, transparent 0); background-size: 28px 28px;"></div>
+          style="background-image: radial-gradient(circle at 1px 1px, #fff 1px, transparent 0); background-size: 28px 28px;"></div>
 
       <!-- Brand -->
       <NuxtLink to="/" class="relative flex items-center gap-3 w-fit group">

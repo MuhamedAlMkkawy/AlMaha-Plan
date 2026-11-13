@@ -7,12 +7,13 @@
     "role": "employee",
     "status": "active",
     "permissions": [
-      "view_plots"
+      "view_plots",
+      "create_plots"
     ],
     "title": "موظف مبيعات",
     "phone": "",
     "createdAt": "2026-11-12T12:10:53.757Z",
-    "lastLoginAt": "2026-11-12T12:24:35.862Z",
-    "updatedAt": "2026-11-12T12:25:07.631Z"
+    "lastLoginAt": "2026-11-13T13:46:35.779Z",
+    "updatedAt": "2026-11-13T13:47:00.687Z"
   }
 ]

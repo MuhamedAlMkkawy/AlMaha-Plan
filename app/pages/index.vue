@@ -77,60 +77,130 @@
 
     <div v-else-if="stats" class="space-y-10">
       <!-- ================= KPI CARDS ================= -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <NuxtLink
-          to="/plots"
-          class="group relative overflow-hidden rounded-3xl bg-white border border-slate-200/70 p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-1 hover:border-[#7030A0]/30 hover:shadow-[0_20px_40px_-16px_rgba(112,48,160,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40"
-        >
-          <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-[#7030A0] to-[#a35bd1]"></span>
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-500">إجمالي القطع</span>
-            <div class="w-10 h-10 rounded-2xl bg-purple-50 text-[#7030A0] flex items-center justify-center transition-all duration-300 group-hover:bg-[#7030A0] group-hover:text-white group-hover:scale-105">
-              <i class="pi pi-map-marker"></i>
-            </div>
-          </div>
-          <div class="mt-4 text-3xl font-black text-slate-900 tracking-tight">{{ formatInteger(stats.totalPlots) }}</div>
-          <div class="mt-1 text-xs text-slate-400 font-medium">
-            موزعة على {{ stats.blocksCount }} بلك • {{ stats.zonesCount }} زون
-          </div>
-        </NuxtLink>
 
-        <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-200/70 p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
-          <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-blue-500 to-sky-400"></span>
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-500">إجمالي المساحة</span>
-            <div class="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
-              <i class="pi pi-compass"></i>
-            </div>
-          </div>
-          <div class="mt-4 text-3xl font-black text-slate-900 tracking-tight">{{ formatCurrencyNumber(stats.totalArea) }}</div>
-          <div class="mt-1 text-xs text-slate-400 font-medium">متر مربع (م²) مساحة الأراضي</div>
-        </div>
 
-        <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-200/70 p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
-          <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-emerald-500 to-teal-400"></span>
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-500">القيمة الإجمالية</span>
-            <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-              <i class="pi pi-wallet"></i>
-            </div>
-          </div>
-          <div class="mt-4 text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{{ formatCurrencyNumber(stats.totalLandValue) }}</div>
-          <div class="mt-1 text-xs text-slate-400 font-medium">ريال سعودي (بدون الضريبة والسعي)</div>
-        </div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
 
-        <div class="relative overflow-hidden rounded-3xl bg-white border border-slate-200/70 p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
-          <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-amber-400 to-orange-300"></span>
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-500">متوسط سعر المتر</span>
-            <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center">
-              <i class="pi pi-chart-line"></i>
-            </div>
-          </div>
-          <div class="mt-4 text-3xl font-black text-slate-900 tracking-tight">{{ formatCurrencyNumber(stats.averagePricePerM2) }}</div>
-          <div class="mt-1 text-xs text-slate-400 font-medium">ر.س / م² متوسط لكامل المخطط</div>
-        </div>
+  <!-- Total Plots: Purple Spotlight -->
+  <NuxtLink
+    to="/plots"
+    class="group relative isolate overflow-hidden rounded-3xl bg-white border border-slate-200/70 p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-500 hover:-translate-y-1.5 hover:border-[#7030A0]/40 hover:shadow-[0_22px_45px_-16px_rgba(112,48,160,0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40"
+  >
+    <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-[#7030A0] to-[#a35bd1]"></span>
+
+    <div class="absolute -right-16 -top-16 -z-10 h-48 w-48 rounded-full bg-purple-500 opacity-0 blur-3xl transition-all duration-700 group-hover:scale-150 group-hover:opacity-30"></div>
+    <div class="absolute inset-0 -z-10 bg-gradient-to-br from-[#7030A0] via-[#7936a6] to-[#a35bd1] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+
+    <div class="flex items-center justify-between">
+      <span class="text-xs font-bold text-slate-500 transition-colors duration-300 group-hover:text-white/85">إجمالي القطع</span>
+      <div class="w-10 h-10 rounded-2xl bg-purple-50 text-[#7030A0] flex items-center justify-center transition-all duration-500 group-hover:rotate-12 group-hover:scale-110 group-hover:bg-white/20 group-hover:text-white">
+        <i class="pi pi-map-marker"></i>
       </div>
+    </div>
+
+    <div class="mt-4 text-3xl font-black text-slate-900 tracking-tight transition-colors duration-300 group-hover:text-white">
+      {{ formatInteger(stats.totalPlots) }}
+    </div>
+
+    <div class="mt-1 text-xs text-slate-400 font-medium transition-colors duration-300 group-hover:text-white/75">
+      موزعة على {{ stats.blocksCount }} بلك • {{ stats.zonesCount }} زون
+    </div>
+
+    <div class="mt-4 flex items-center justify-between">
+      <span class="text-[10px] font-bold text-[#7030A0] transition-colors duration-300 group-hover:text-white">استعراض القطع</span>
+      <i class="pi pi-arrow-left text-[10px] text-[#7030A0] transition-all duration-300 group-hover:-translate-x-1 group-hover:text-white"></i>
+    </div>
+  </NuxtLink>
+
+  <!-- Total Area: Blue Light Sweep -->
+  <div
+    class="group relative isolate overflow-hidden rounded-3xl bg-white border border-slate-200/70 p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-500 hover:-translate-y-1.5 hover:border-blue-300 hover:shadow-[0_22px_45px_-16px_rgba(37,99,235,0.3)]"
+  >
+    <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-blue-500 to-sky-400"></span>
+
+    <div class="absolute inset-0 -z-10 bg-gradient-to-br from-blue-600 to-sky-400 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+
+    <!-- Diagonal light sweep -->
+    <div class="pointer-events-none absolute -left-1/2 top-0 -z-0 h-full w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-all duration-700 group-hover:left-[120%]"></div>
+
+    <div class="flex items-center justify-between">
+      <span class="text-xs font-bold text-slate-500 transition-colors duration-300 group-hover:text-white/85">إجمالي المساحة</span>
+      <div class="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center transition-all duration-500 group-hover:-rotate-12 group-hover:scale-110 group-hover:bg-white/20 group-hover:text-white">
+        <i class="pi pi-compass"></i>
+      </div>
+    </div>
+
+    <div class="mt-4 text-3xl font-black text-slate-900 tracking-tight transition-colors duration-300 group-hover:text-white">
+      {{ formatCurrencyNumber(stats.totalArea) }}
+    </div>
+
+    <div class="mt-1 text-xs text-slate-400 font-medium transition-colors duration-300 group-hover:text-white/75">
+      متر مربع (م²) مساحة الأراضي
+    </div>
+
+    <div class="mt-4 h-[18px]"></div>
+  </div>
+
+  <!-- Total Value: Emerald Glow -->
+  <div
+    class="group relative isolate overflow-hidden rounded-3xl bg-white border border-slate-200/70 p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-500 hover:-translate-y-1.5 hover:border-emerald-300 hover:shadow-[0_22px_45px_-16px_rgba(16,185,129,0.3)]"
+  >
+    <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-emerald-500 to-teal-400"></span>
+
+    <div class="absolute inset-0 -z-10 bg-gradient-to-br from-emerald-600 to-teal-400 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+
+    <div class="absolute -bottom-16 -left-12 -z-10 h-40 w-40 rounded-full bg-teal-300 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-40"></div>
+
+    <div class="flex items-center justify-between">
+      <span class="text-xs font-bold text-slate-500 transition-colors duration-300 group-hover:text-white/85">القيمة الإجمالية</span>
+      <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-white/20 group-hover:text-white group-hover:shadow-[0_0_20px_rgba(255,255,255,0.25)]">
+        <i class="pi pi-wallet"></i>
+      </div>
+    </div>
+
+    <div class="mt-4 text-2xl sm:text-3xl font-black text-slate-900 tracking-tight transition-colors duration-300 group-hover:text-white">
+      {{ formatCurrencyNumber(stats.totalLandValue) }}
+    </div>
+
+    <div class="mt-1 text-xs text-slate-400 font-medium transition-colors duration-300 group-hover:text-white/75">
+      ريال سعودي (بدون الضريبة والسعي)
+    </div>
+
+    <div class="mt-4 h-[18px]"></div>
+  </div>
+
+  <!-- Average Price: Amber Animated Accent -->
+  <div
+    class="group relative isolate overflow-hidden rounded-3xl bg-white border border-slate-200/70 p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] transition-all duration-500 hover:-translate-y-1.5 hover:border-amber-300 hover:shadow-[0_22px_45px_-16px_rgba(245,158,11,0.3)]"
+  >
+    <span class="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-amber-400 to-orange-300"></span>
+
+    <div class="absolute inset-0 -z-10 bg-gradient-to-br from-amber-500 to-orange-400 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+
+    <div class="absolute inset-x-0 bottom-0 h-1 origin-right scale-x-0 bg-gradient-to-l from-white/20 via-white/80 to-white/20 transition-transform duration-700 group-hover:scale-x-100"></div>
+
+    <div class="flex items-center justify-between">
+      <span class="text-xs font-bold text-slate-500 transition-colors duration-300 group-hover:text-white/85">متوسط سعر المتر</span>
+      <div class="w-10 h-10 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center transition-all duration-500 group-hover:rotate-12 group-hover:scale-110 group-hover:bg-white/20 group-hover:text-white">
+        <i class="pi pi-chart-line"></i>
+      </div>
+    </div>
+
+    <div class="mt-4 text-3xl font-black text-slate-900 tracking-tight transition-colors duration-300 group-hover:text-white">
+      {{ formatCurrencyNumber(stats.averagePricePerM2) }}
+    </div>
+
+    <div class="mt-1 text-xs text-slate-400 font-medium transition-colors duration-300 group-hover:text-white/75">
+      ر.س / م² متوسط لكامل المخطط
+    </div>
+
+    <div class="mt-4 h-[18px]"></div>
+  </div>
+
+</div>
+
+
+
 
       <!-- ================= SALES STATUS ================= -->
       <section class="relative overflow-hidden rounded-3xl bg-white border border-slate-200/70 p-6 sm:p-8 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
