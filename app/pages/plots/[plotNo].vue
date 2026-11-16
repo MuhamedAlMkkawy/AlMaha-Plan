@@ -39,7 +39,7 @@
         <!-- Print / PDF Button -->
         <button
           @click="handlePrint"
-          class="px-4 py-2.5 rounded-xl bg-[#7030A0] hover:bg-[#532277] text-white font-bold text-xs sm:text-sm shadow-md flex items-center gap-2 transition-all"
+          class="px-4 py-2.5 rounded-xl bg-[#126B58] hover:bg-[#174A40] text-white font-bold text-xs sm:text-sm shadow-md flex items-center gap-2 transition-all"
         >
           <i class="pi pi-print"></i>
           <span>طباعة / حفظ PDF</span>
@@ -77,7 +77,7 @@
 
     <!-- Loading State -->
     <div v-if="pending" class="bg-white rounded-2xl p-12 text-center text-slate-500 animate-pulse">
-      <i class="pi pi-spin pi-spinner text-3xl text-[#7030A0] mb-3"></i>
+      <i class="pi pi-spin pi-spinner text-3xl text-[#126B58] mb-3"></i>
       <div class="font-bold">جاري تحميل عرض السعر للقطعة {{ currentPlotNo }}...</div>
     </div>
 
@@ -86,7 +86,7 @@
       <i class="pi pi-exclamation-triangle text-3xl mb-2"></i>
       <h3 class="font-bold text-lg mb-1">تعذر العثور على القطعة رقم {{ currentPlotNo }}</h3>
       <p class="text-xs sm:text-sm mb-4">يرجى التحقق من صحة رقم القطعة في الرابط</p>
-      <NuxtLink to="/plots" class="px-4 py-2 bg-[#7030A0] text-white rounded-xl text-sm font-semibold">
+      <NuxtLink to="/plots" class="px-4 py-2 bg-[#126B58] text-white rounded-xl text-sm font-semibold">
         العودة لجدول القطع
       </NuxtLink>
     </div>
@@ -104,7 +104,7 @@
       <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs print:hidden space-y-4">
         <div class="flex items-center justify-between border-b border-slate-100 pb-3">
           <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
-            <i class="pi pi-info-circle text-[#7030A0]"></i>
+            <i class="pi pi-info-circle text-[#126B58]"></i>
             <span>بيانات ومعلومات القطعة</span>
           </h3>
           <PlotsStatusBadge :status="plot.status" />
@@ -149,53 +149,53 @@
       </div>
 
       <!-- 3. Admin-Only Secure Panel (PII, Deed, SharePoint link) -->
-      <div v-if="canSeePii" class="bg-purple-50/70 border-2 border-purple-200 rounded-2xl p-6 shadow-xs print:hidden space-y-4">
-        <div class="flex items-center justify-between border-b border-purple-200 pb-3">
+      <div v-if="canSeePii" class="bg-emerald-/70 border-2 border-emerald- rounded-2xl p-6 shadow-xs print:hidden space-y-4">
+        <div class="flex items-center justify-between border-b border-emerald- pb-3">
           <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-lg bg-[#7030A0] text-white flex items-center justify-center text-sm font-bold">
+            <div class="w-8 h-8 rounded-lg bg-[#126B58] text-white flex items-center justify-center text-sm font-bold">
               <i class="pi pi-shield"></i>
             </div>
             <div>
-              <h3 class="font-bold text-purple-950 text-base">لوحة بيانات الإدارة الحصرية (سري)</h3>
-              <p class="text-xs text-purple-700">هذه البيانات مشفرة وتظهر فقط للمسؤولين المعتمدين</p>
+              <h3 class="font-bold text-emerald- text-base">لوحة بيانات الإدارة الحصرية (سري)</h3>
+              <p class="text-xs text-emerald-">هذه البيانات مشفرة وتظهر فقط للمسؤولين المعتمدين</p>
             </div>
           </div>
           <NuxtLink
             v-if="canEditPlot"
             :to="`/admin/plots/${currentPlotNo}/edit`"
-            class="px-3 py-1.5 rounded-lg bg-[#7030A0] text-white text-xs font-bold hover:bg-[#532277]"
+            class="px-3 py-1.5 rounded-lg bg-[#126B58] text-white text-xs font-bold hover:bg-[#174A40]"
           >
             تعديل السجل
           </NuxtLink>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs sm:text-sm">
-          <div class="bg-white p-3.5 rounded-xl border border-purple-100 shadow-2xs">
+          <div class="bg-white p-3.5 rounded-xl border border-emerald- shadow-2xs">
             <div class="text-slate-500 text-xs mb-1">اسم المشتري</div>
             <div class="font-bold text-slate-900">{{ plot.buyerName || '—' }}</div>
           </div>
 
-          <div class="bg-white p-3.5 rounded-xl border border-purple-100 shadow-2xs">
+          <div class="bg-white p-3.5 rounded-xl border border-emerald- shadow-2xs">
             <div class="text-slate-500 text-xs mb-1">الهوية / السجل التجاري</div>
             <div class="font-bold text-slate-900">{{ plot.buyerId || '—' }}</div>
           </div>
 
-          <div class="bg-white p-3.5 rounded-xl border border-purple-100 shadow-2xs">
+          <div class="bg-white p-3.5 rounded-xl border border-emerald- shadow-2xs">
             <div class="text-slate-500 text-xs mb-1">رقم الجوال</div>
             <div class="font-bold text-slate-900 dir-ltr text-end">{{ plot.buyerPhone || '—' }}</div>
           </div>
 
-          <div class="bg-white p-3.5 rounded-xl border border-purple-100 shadow-2xs">
+          <div class="bg-white p-3.5 rounded-xl border border-emerald- shadow-2xs">
             <div class="text-slate-500 text-xs mb-1">رقم صك القطعة</div>
             <div class="font-bold text-slate-900 tracking-wider">{{ plot.deedNo || '—' }}</div>
           </div>
 
-          <div class="bg-white p-3.5 rounded-xl border border-purple-100 shadow-2xs">
+          <div class="bg-white p-3.5 rounded-xl border border-emerald- shadow-2xs">
             <div class="text-slate-500 text-xs mb-1">تاريخ الصك</div>
             <div class="font-bold text-slate-900">{{ plot.deedDate || '—' }}</div>
           </div>
 
-          <div class="bg-white p-3.5 rounded-xl border border-purple-100 shadow-2xs">
+          <div class="bg-white p-3.5 rounded-xl border border-emerald- shadow-2xs">
             <div class="text-slate-500 text-xs mb-1">الفاتورة الضريبية</div>
             <div class="font-bold text-slate-900">{{ plot.invoice || '—' }}</div>
           </div>

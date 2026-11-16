@@ -16,21 +16,23 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const plot = await PlotsRepository.getPlotByNumber(plotNo);
-  if (!plot) {
+  const session = await getLiveAuthSession(event);
+
+  // Unauthenticated requests must receive 401
+  if (!session) {
     throw createError({
-      statusCode: 404,
-      statusMessage: `القطعة رقم ${plotNo} غير موجودة`,
+      statusCode: 401,
+      statusMessage: 'يرجى تسجيل الدخول أولاً للوصول إلى تفاصيل القطعة',
     });
   }
 
-  const session = await getLiveAuthSession(event);
-  const isAdmin = session?.role === 'admin';
+  const isAdmin = session.role === 'admin';
 
   if (
-    session?.role === 'employee' &&
+    session.role === 'employee' &&
     !userCanAny(session, [
       'view_plots',
+      'view_plot_page',
       'view_contracts',
       'edit_plots',
       'edit_contracts',
@@ -41,6 +43,14 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 403,
       statusMessage: 'غير مصرح - ليس لديك صلاحية استعراض هذه القطعة',
+    });
+  }
+
+  const plot = await PlotsRepository.getPlotByNumber(plotNo);
+  if (!plot) {
+    throw createError({
+      statusCode: 404,
+      statusMessage: `القطعة رقم ${plotNo} غير موجودة`,
     });
   }
 

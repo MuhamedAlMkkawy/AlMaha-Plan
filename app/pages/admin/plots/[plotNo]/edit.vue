@@ -4,14 +4,14 @@
     <header class="space-y-4">
       <NuxtLink
         to="/admin/plots"
-        class="group inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-[#7030A0] transition-colors rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40"
+        class="group inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-[#126B58] transition-colors rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#126B58]/40"
       >
         <i class="pi pi-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-300 motion-reduce:transition-none"></i>
         <span>العودة للجدول</span>
       </NuxtLink>
 
       <div class="flex items-center gap-4">
-        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#7030A0] text-white flex items-center justify-center shrink-0">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-[#126B58] text-white flex items-center justify-center shrink-0">
           <span class="text-2xl sm:text-3xl font-black">{{ plotNo }}</span>
         </div>
         <div class="min-w-0">
@@ -156,14 +156,14 @@
         <div class="px-5 sm:px-7 py-4 bg-slate-50 flex items-center justify-end gap-2">
           <NuxtLink
             to="/admin/plots"
-            class="h-11 px-5 inline-flex items-center rounded-full text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40"
+            class="h-11 px-5 inline-flex items-center rounded-full text-base font-semibold text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#126B58]/40"
           >
             إلغاء
           </NuxtLink>
           <button
             type="submit"
             :disabled="saving"
-            class="h-11 px-7 inline-flex items-center gap-2 rounded-full bg-[#7030A0] text-white text-base font-bold transition-colors hover:bg-[#5b2486] disabled:opacity-60 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/50 focus-visible:ring-offset-2"
+            class="h-11 px-7 inline-flex items-center gap-2 rounded-full bg-[#126B58] text-white text-base font-bold transition-colors hover:bg-[#126B58] disabled:opacity-60 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#126B58]/50 focus-visible:ring-offset-2"
           >
             <i v-if="saving" class="pi pi-spin pi-spinner text-sm"></i>
             <span>{{ saving ? 'جاري الحفظ في الشيت...' : 'حفظ التعديلات' }}</span>
@@ -172,7 +172,7 @@
       </form>
 
       <!-- Live calculations with their equations -->
-      <aside class="lg:sticky lg:top-24 rounded-2xl bg-white border border-slate-200 border-t-[3px] border-t-[#7030A0] p-5 sm:p-6">
+      <aside class="lg:sticky lg:top-24 rounded-2xl bg-white border border-slate-200 border-t-[3px] border-t-[#126B58] p-5 sm:p-6">
         <h3 class="text-lg font-bold text-slate-900">معاينة الحسابات</h3>
         <p class="mt-1 text-sm text-slate-500">تتحدّث الأرقام والمعادلات تلقائيًا أثناء التعديل.</p>
 
@@ -189,9 +189,9 @@
           </li>
         </ol>
 
-        <div class="mt-2 rounded-xl bg-[#7030A0]/5 p-4">
-          <div class="text-sm font-semibold text-[#7030A0]">الإجمالي الشامل</div>
-          <div class="mt-1 text-2xl font-black text-[#7030A0]">{{ formatCurrency(calcs.totalWithTax) }}</div>
+        <div class="mt-2 rounded-xl bg-[#126B58]/5 p-4">
+          <div class="text-sm font-semibold text-[#126B58]">الإجمالي الشامل</div>
+          <div class="mt-1 text-2xl font-black text-[#126B58]">{{ formatCurrency(calcs.totalWithTax) }}</div>
           <div v-if="totalEquation" class="mt-3 text-sm leading-relaxed">
             <div class="text-slate-500">{{ totalEquation.formula }}</div>
             <div dir="ltr" class="mt-1 text-end font-semibold text-slate-700 tabular-nums">{{ totalEquation.numbers }}</div>
@@ -215,7 +215,7 @@ const canEditContracts = computed(() => can('edit_contracts'));
 // Shared field styles
 const labelCls = 'block text-sm font-semibold text-slate-700 mb-1.5';
 const inputCls =
-  'w-full h-11 px-3.5 rounded-xl border border-slate-300 bg-white text-base text-slate-900 placeholder:text-slate-400 transition-colors hover:border-slate-400 focus:outline-none focus:border-[#7030A0] focus:ring-2 focus:ring-[#7030A0]/20';
+  'w-full h-11 px-3.5 rounded-xl border border-slate-300 bg-white text-base text-slate-900 placeholder:text-slate-400 transition-colors hover:border-slate-400 focus:outline-none focus:border-[#126B58] focus:ring-2 focus:ring-[#126B58]/20';
 
 const { data: response, pending } = await useFetch<{
   success: boolean;

@@ -32,7 +32,7 @@
           @click="tab = t.key"
           class="px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition-colors"
           :class="tab === t.key
-            ? 'bg-[#7030A0] text-white'
+            ? 'bg-[#126B58] text-white'
             : 'text-slate-600 hover:bg-slate-100'"
         >
           {{ t.label }}
@@ -45,7 +45,7 @@
       v-if="pending"
       class="bg-white rounded-2xl p-12 text-center text-slate-500"
     >
-      <i class="pi pi-spin pi-spinner text-3xl text-[#7030A0]"></i>
+      <i class="pi pi-spin pi-spinner text-3xl text-[#126B58]"></i>
       <p class="mt-3 font-bold">جاري تحميل بيانات العقد...</p>
     </div>
 
@@ -227,7 +227,7 @@
               class="flex gap-3 items-start"
             >
               <span
-                class="mt-2 grid place-items-center w-7 h-7 shrink-0 rounded-full bg-[#f4edf9] text-[#532277] text-xs font-extrabold"
+                class="mt-2 grid place-items-center w-7 h-7 shrink-0 rounded-full bg-[#f4edf9] text-[#174A40] text-xs font-extrabold"
               >
                 {{ i + 1 }}
               </span>
@@ -653,7 +653,7 @@ onBeforeUnmount(() => {
 .panel-title {
   margin-bottom: 1rem;
   padding-inline-start: 0.75rem;
-  border-inline-start: 4px solid #7030a0;
+  border-inline-start: 4px solid #126B58;
   font-size: 1rem;
   font-weight: 800;
   color: #0f172a;
@@ -682,7 +682,7 @@ onBeforeUnmount(() => {
 
 .input:focus {
   outline: none;
-  border-color: #7030a0;
+  border-color: #126B58;
   box-shadow: 0 0 0 3px rgb(112 48 160 / 0.15);
 }
 
@@ -720,7 +720,7 @@ onBeforeUnmount(() => {
   gap: 0.5rem;
   padding: 0.65rem 1.25rem;
   border-radius: 0.75rem;
-  background: #7030a0;
+  background: #126B58;
   color: #fff;
   font-size: 0.875rem;
   font-weight: 700;
@@ -729,7 +729,7 @@ onBeforeUnmount(() => {
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #532277;
+  background: #174A40;
 }
 
 .btn-primary:disabled {

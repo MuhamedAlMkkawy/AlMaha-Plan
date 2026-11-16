@@ -43,7 +43,7 @@
 
         <button
           @click="handlePrint"
-          class="px-4 py-2.5 rounded-xl bg-[#7030A0] hover:bg-[#532277] text-white font-bold text-xs sm:text-sm shadow-md flex items-center gap-2 transition-all"
+          class="px-4 py-2.5 rounded-xl bg-[#126B58] hover:bg-[#174A40] text-white font-bold text-xs sm:text-sm shadow-md flex items-center gap-2 transition-all"
         >
           <i class="pi pi-print"></i>
           <span>طباعة / حفظ PDF</span>
@@ -61,7 +61,7 @@
             'focus:outline-none focus-visible:ring-4',
             copied
               ? 'border-emerald-200 bg-emerald-50 text-emerald-700 shadow-emerald-100 hover:bg-emerald-100 hover:shadow-emerald-200/60 focus-visible:ring-emerald-400/20'
-              : 'border-purple-200/80 bg-gradient-to-br from-white via-white to-purple-50/70 text-[#7030A0] hover:border-purple-300 hover:from-purple-50 hover:to-purple-100/80 hover:shadow-purple-200/50 focus-visible:ring-purple-400/20'
+              : 'border-emerald-/80 bg-gradient-to-br from-white via-white to-emerald-/70 text-[#126B58] hover:border-emerald- hover:from-emerald- hover:to-emerald-/80 hover:shadow-emerald-/50 focus-visible:ring-emerald-/20'
           ]"
           :title="copied ? 'تم النسخ!' : 'نسخ رابط العقد'"
         >
@@ -79,7 +79,7 @@
                   transition-all duration-300"
             :class="copied
               ? 'bg-emerald-100 text-emerald-600 scale-105'
-              : 'bg-purple-100 text-[#7030A0] group-hover:rotate-[-8deg] group-hover:scale-110'"
+              : 'bg-emerald- text-[#126B58] group-hover:rotate-[-8deg] group-hover:scale-110'"
           >
             <i
               :class="copied
@@ -146,7 +146,7 @@
       v-if="pending"
       class="bg-white rounded-2xl p-12 text-center text-slate-500 animate-pulse"
     >
-      <i class="pi pi-spin pi-spinner text-3xl text-[#7030A0] mb-3"></i>
+      <i class="pi pi-spin pi-spinner text-3xl text-[#126B58] mb-3"></i>
 
       <div class="font-bold">
         جاري تحميل العقد للقطعة {{ currentPlotNo }}...
@@ -170,7 +170,7 @@
 
       <NuxtLink
         to="/plots"
-        class="px-4 py-2 bg-[#7030A0] text-white rounded-xl text-sm font-semibold"
+        class="px-4 py-2 bg-[#126B58] text-white rounded-xl text-sm font-semibold"
       >
         العودة لجدول القطع
       </NuxtLink>

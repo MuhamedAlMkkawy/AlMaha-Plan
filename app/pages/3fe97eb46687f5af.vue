@@ -288,11 +288,12 @@
 
 <script setup lang="ts">
 import { projectConfig } from '../config/project';
-import { firstAllowedPath } from '../../shared/access';
+import { firstAllowedPath, getRouteAccess, employeePermissionForPublicPath, userCanAny } from '../../shared/access';
 import type { EmployeePermission } from '../../shared/types/employee';
 
 definePageMeta({ layout: false });
 
+const route = useRoute();
 const { refreshAuth } = useAuthSession();
 
 const username = ref('');
@@ -330,11 +331,40 @@ const handleLogin = async () => {
     if (res.success) {
       await refreshAuth();
 
-      await navigateTo(
-        firstAllowedPath(
-          (res.user.permissions || []) as EmployeePermission[],
-        ),
-      );
+      const userPermissions = (res.user.permissions || []) as EmployeePermission[];
+      const authLikeUser = { role: 'employee' as const, permissions: userPermissions };
+
+      // Check if there is an intended redirect destination
+      const redirectParam = typeof route.query.redirect === 'string' ? route.query.redirect : null;
+      let targetPath: string | null = null;
+
+      if (redirectParam && redirectParam.startsWith('/') && !redirectParam.startsWith('//')) {
+        const access = getRouteAccess(redirectParam);
+        const reqPub = employeePermissionForPublicPath(redirectParam);
+
+        let allowed = false;
+        if (access.type === 'permission') {
+          allowed = userCanAny(authLikeUser, access.anyOf);
+        } else if (access.type === 'admin') {
+          allowed = false;
+        } else if (reqPub?.length) {
+          allowed = userCanAny(authLikeUser, reqPub);
+        }
+
+        if (allowed) {
+          targetPath = redirectParam;
+        }
+      }
+
+      if (!targetPath) {
+        targetPath = firstAllowedPath(userPermissions);
+      }
+
+      if (res.user.role === 'admin') {
+        await navigateTo('/')
+      } else {
+        await navigateTo(targetPath || '/no-access')
+      }
     }
   } catch (err: any) {
     console.error('Employee login error:', err);

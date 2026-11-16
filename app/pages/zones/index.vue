@@ -15,7 +15,7 @@
         to="/plots"
         class="px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 font-semibold text-xs sm:text-sm hover:bg-slate-50 shadow-xs flex items-center gap-2 self-start"
       >
-        <i class="pi pi-th-large text-[#7030A0]"></i>
+        <i class="pi pi-th-large text-[#126B58]"></i>
         <span>عرض جدول القطع الشامل</span>
       </NuxtLink>
     </div>
@@ -36,7 +36,7 @@
         <div class="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-xs">
           <div class="flex items-center justify-between mb-2">
             <span class="text-xs font-bold text-slate-500">عدد الزونات</span>
-            <span class="w-8 h-8 rounded-lg bg-purple-50 text-[#7030A0] flex items-center justify-center">
+            <span class="w-8 h-8 rounded-lg bg-emerald- text-[#126B58] flex items-center justify-center">
               <i class="pi pi-map text-sm"></i>
             </span>
           </div>
@@ -104,7 +104,7 @@
             v-for="(z, i) in zones"
             :key="z.zone"
             :to="`/plots?zone=${encodeURIComponent(z.zone)}`"
-            class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-xs hover:border-[#7030A0] hover:shadow-md transition-all group flex flex-col justify-between"
+            class="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-xs hover:border-[#126B58] hover:shadow-md transition-all group flex flex-col justify-between"
           >
             <div>
               <div class="flex items-center justify-between mb-4">
@@ -133,7 +133,7 @@
                       :class="
                         !z.zone || z.zone === 'غير محدد'
                           ? 'text-slate-600'
-                          : 'text-slate-900 group-hover:text-[#7030A0]'
+                          : 'text-slate-900 group-hover:text-[#126B58]'
                       "
                     >
                       {{ z.zone === 'غير محدد' || !z.zone ? 'غير محدد' : `زون ${z.zone}` }}
@@ -146,7 +146,7 @@
                 </div>
 
                 </div>
-                <i class="pi pi-arrow-left text-slate-300 group-hover:text-[#7030A0] group-hover:-translate-x-1 transition-all"></i>
+                <i class="pi pi-arrow-left text-slate-300 group-hover:text-[#126B58] group-hover:-translate-x-1 transition-all"></i>
               </div>
 
               <!-- Stacked status bar -->
@@ -174,7 +174,7 @@
 
             <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
               <div>المساحة: <strong class="text-slate-800">{{ formatCurrencyNumber(z.totalArea) }} م²</strong></div>
-              <div class="text-[#7030A0] font-bold">استعراض القطع ←</div>
+              <div class="text-[#126B58] font-bold">استعراض القطع ←</div>
             </div>
           </NuxtLink>
         </div>
@@ -198,7 +198,7 @@ const STATUS_DEFS = [
   { key: 'soldCount', label: 'مباع', color: '#f43f5e' },
 ] as const;
 
-const ZONE_COLORS = ['#7030A0', '#3b82f6', '#10b981', '#f59e0b', '#f43f5e', '#64748b'];
+const ZONE_COLORS = ['#126B58', '#3b82f6', '#10b981', '#f59e0b', '#f43f5e', '#64748b'];
 const zoneColor = (i: number) => ZONE_COLORS[i % ZONE_COLORS.length];
 
 const pct = (part: number, total: number) => (total ? (Number(part) / Number(total)) * 100 : 0);

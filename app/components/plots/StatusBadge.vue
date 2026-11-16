@@ -1,57 +1,48 @@
 <template>
   <span
     :class="[
-      'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border shadow-xs transition-colors',
-      badgeClasses
+      'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold transition-colors',
+      badgeClass
     ]"
   >
-    <span :class="['w-1.5 h-1.5 rounded-full', dotClasses]"></span>
-    <span>{{ label }}</span>
+    <span :class="['w-1.5 h-1.5 rounded-full', dotClass]"></span>
+    <span>{{ status }}</span>
   </span>
 </template>
 
 <script setup lang="ts">
-const props = withDefaults(
-  defineProps<{
-    status: string;
-  }>(),
-  {
-    status: 'متاح للبيع',
-  }
-);
+import { computed } from 'vue';
 
-const label = computed(() => {
-  const s = props.status?.trim() || '';
-  if (s.includes('مباع')) return 'مباع';
-  if (s.includes('محجوز')) return 'محجوز';
-  if (s.includes('أرشيف') || s.includes('مؤرشف')) return 'مؤرشف';
-  return 'متاح للبيع';
-});
+const props = defineProps<{
+  status?: string;
+}>();
 
-const badgeClasses = computed(() => {
-  switch (label.value) {
-    case 'مباع':
-      return 'bg-rose-50 text-rose-700 border-rose-200';
+const badgeClass = computed(() => {
+  switch (props.status) {
+    case 'متاح للبيع':
+      // Emerald Green
+      return 'bg-[#E5EEE9] text-[#126B58] border border-[#126B58]/20';
     case 'محجوز':
-      return 'bg-amber-50 text-amber-800 border-amber-200';
-    case 'مؤرشف':
-      return 'bg-slate-100 text-slate-600 border-slate-200';
+      // Sand Gold
+      return 'bg-[#F5F1E8] text-[#B89A68] border border-[#B89A68]/30';
+    case 'مباع':
+      // Muted soft red
+      return 'bg-rose-50 text-rose-700 border border-rose-200';
     default:
-      return 'bg-emerald-50 text-emerald-800 border-emerald-200';
+      return 'bg-slate-100 text-slate-600 border border-slate-200';
   }
 });
 
-const dotClasses = computed(() => {
-  switch (label.value) {
+const dotClass = computed(() => {
+  switch (props.status) {
+    case 'متاح للبيع':
+      return 'bg-[#126B58]';
+    case 'محجوز':
+      return 'bg-[#B89A68]';
     case 'مباع':
       return 'bg-rose-500';
-    case 'محجوز':
-      return 'bg-amber-500';
-    case 'مؤرشف':
-      return 'bg-slate-400';
     default:
-      return 'bg-emerald-500';
+      return 'bg-slate-400';
   }
 });
 </script>
-

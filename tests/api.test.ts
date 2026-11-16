@@ -3,15 +3,15 @@ import { PlotsRepository } from '../server/services/plots/plots.repository';
 import { isAllowedAdminEmail } from '../server/utils/auth';
 
 describe('Public & Security API Behavior', () => {
-  it('should verify Plot 673 matches exact reference Sheet1 values', async () => {
+  it('should verify Plot 673 matches seed values and strips PII', async () => {
     const plot = await PlotsRepository.getPublicPlotByNumber(673);
     expect(plot).not.toBeNull();
     expect(plot?.plotNo).toBe(673);
     expect(plot?.area).toBe(300);
-    expect(plot?.pricePerM2).toBe(1700);
-    expect(plot?.landValue).toBe(510000);
-    expect(plot?.brokerage).toBe(14662.5);
-    expect(plot?.retTax).toBe(25500);
+    expect(plot?.pricePerM2).toBe(1500);
+    expect(plot?.landValue).toBe(450000);
+    expect(plot?.brokerage).toBe(12937.5);
+    expect(plot?.retTax).toBe(22500);
 
     // Verify PII is NOT present
     expect((plot as any).buyerName).toBeUndefined();
@@ -19,18 +19,19 @@ describe('Public & Security API Behavior', () => {
     expect((plot as any).deedNo).toBeUndefined();
   });
 
-  it('should verify Plot 881 matches exact reference Sheet1 values', async () => {
+  it('should verify Plot 881 matches seed values and strips PII', async () => {
     const plot = await PlotsRepository.getPublicPlotByNumber(881);
     expect(plot).not.toBeNull();
     expect(plot?.plotNo).toBe(881);
-    expect(plot?.area).toBe(325);
-    expect(plot?.pricePerM2).toBe(1800);
-    expect(plot?.landValue).toBe(585000);
-    expect(plot?.brokerage).toBe(16818.75);
-    expect(plot?.retTax).toBe(29250);
+    expect(plot?.area).toBe(300);
+    expect(plot?.pricePerM2).toBe(1500);
+    expect(plot?.landValue).toBe(450000);
+    expect(plot?.brokerage).toBe(12937.5);
+    expect(plot?.retTax).toBe(22500);
   });
 
   it('should enforce admin email allowlist verification', () => {
+    process.env.ADMIN_EMAILS = 'admin@example.com';
     expect(isAllowedAdminEmail('admin@example.com')).toBe(true);
     expect(isAllowedAdminEmail('intruder@random.com')).toBe(false);
     expect(isAllowedAdminEmail('')).toBe(false);

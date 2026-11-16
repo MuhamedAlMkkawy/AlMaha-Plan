@@ -3,8 +3,8 @@
     <!-- Header -->
     <header class="flex flex-col lg:flex-row lg:items-end justify-between gap-5 pb-6 border-b border-slate-200/70">
       <div>
-        <span class="inline-flex items-center gap-2 text-[11px] font-semibold tracking-wide text-[#7030A0]">
-          <span class="w-6 h-px bg-[#7030A0]/50"></span>
+        <span class="inline-flex items-center gap-2 text-[11px] font-semibold tracking-wide text-[#126B58]">
+          <span class="w-6 h-px bg-[#126B58]/50"></span>
           مخطط المها
         </span>
         <h1 class="mt-2 text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
@@ -28,7 +28,7 @@
             :aria-selected="view === opt.value"
             class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300"
             :class="view === opt.value
-              ? 'bg-white text-[#7030A0] shadow-sm'
+              ? 'bg-white text-[#126B58] shadow-sm'
               : 'text-slate-500 hover:text-slate-800'"
             @click="view = opt.value"
           >
@@ -39,7 +39,7 @@
 
         <NuxtLink
           to="/plots"
-          class="group inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-slate-900 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-slate-900/10 hover:bg-[#7030A0] hover:shadow-[#7030A0]/25 transition-all duration-300"
+          class="group inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-slate-900 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-slate-900/10 hover:bg-[#126B58] hover:shadow-[#126B58]/25 transition-all duration-300"
         >
           <i class="pi pi-th-large text-xs opacity-80"></i>
           <span>عرض جدول القطع الشامل</span>
@@ -62,11 +62,11 @@
         v-for="b in blocks"
         :key="b.block"
         :to="`/blocks/${b.block}`"
-        class="group relative overflow-hidden flex flex-col justify-between rounded-3xl bg-white border border-slate-200/70 p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:-translate-y-1 hover:border-[#7030A0]/30 hover:shadow-[0_20px_40px_-16px_rgba(112,48,160,0.25)] transition-all duration-300"
+        class="group relative overflow-hidden flex flex-col justify-between rounded-3xl bg-white border border-slate-200/70 p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:-translate-y-1 hover:border-[#126B58]/30 hover:shadow-[0_20px_40px_-16px_rgba(112,48,160,0.25)] transition-all duration-300"
       >
-        <div class="pointer-events-none absolute -top-16 -left-16 w-44 h-44 rounded-full bg-gradient-to-br from-[#7030A0]/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div class="pointer-events-none absolute -top-16 -left-16 w-44 h-44 rounded-full bg-gradient-to-br from-[#126B58]/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-        <span class="pointer-events-none select-none absolute -bottom-6 -left-2 text-[110px] leading-none font-black text-slate-900/[0.03] group-hover:text-[#7030A0]/[0.06] transition-colors duration-500">
+        <span class="pointer-events-none select-none absolute -bottom-6 -left-2 text-[110px] leading-none font-black text-slate-900/[0.03] group-hover:text-[#126B58]/[0.06] transition-colors duration-500">
           {{ b.block }}
         </span>
 
@@ -74,7 +74,7 @@
           <div class="flex items-start justify-between">
             <div>
               <span class="text-[11px] font-semibold tracking-wide text-slate-400">بلك</span>
-              <h3 class="text-3xl font-black text-slate-900 leading-none mt-1 group-hover:text-[#7030A0] transition-colors duration-300">
+              <h3 class="text-3xl font-black text-slate-900 leading-none mt-1 group-hover:text-[#126B58] transition-colors duration-300">
                 {{ b.block }}
               </h3>
               <p class="text-xs text-slate-500 mt-2 font-medium">{{ b.totalPlots }} قطعة أرض</p>
@@ -85,7 +85,7 @@
                 <circle cx="22" cy="22" r="18" fill="none" stroke-width="3.5" class="stroke-slate-100" />
                 <circle
                   cx="22" cy="22" r="18" fill="none" stroke-width="3.5" stroke-linecap="round"
-                  class="stroke-[#7030A0] transition-all duration-700"
+                  class="stroke-[#126B58] transition-all duration-700"
                   :stroke-dasharray="CIRC"
                   :stroke-dashoffset="ringOffset(b.soldPercent)"
                 />
@@ -131,7 +131,7 @@
               المساحة
               <span class="font-semibold text-slate-600">{{ formatCurrencyNumber(b.totalArea) }}</span> م²
             </span>
-            <span class="inline-flex items-center gap-1.5 font-semibold text-[#7030A0]">
+            <span class="inline-flex items-center gap-1.5 font-semibold text-[#126B58]">
               <span>عرض البلك</span>
               <i class="pi pi-arrow-left text-[10px] group-hover:-translate-x-1 transition-transform duration-300"></i>
             </span>
@@ -232,7 +232,7 @@ const totals = computed(() => {
 });
 
 const kpis = computed(() => [
-  { label: 'عدد البلوكات', value: blocks.value.length, icon: 'pi-th-large', tint: 'bg-purple-50 text-[#7030A0]', hint: '' },
+  { label: 'عدد البلوكات', value: blocks.value.length, icon: 'pi-th-large', tint: 'bg-emerald- text-[#126B58]', hint: '' },
   { label: 'إجمالي القطع', value: totals.value.plots, icon: 'pi-map', tint: 'bg-slate-100 text-slate-600', hint: `${totals.value.available} متاحة` },
   { label: 'نسبة المباع', value: `${totals.value.soldPercent}%`, icon: 'pi-chart-line', tint: 'bg-rose-50 text-rose-600', hint: `${totals.value.sold} قطعة مباعة` },
   { label: 'إجمالي المساحة', value: `${formatCurrencyNumber(totals.value.area)} م²`, icon: 'pi-expand', tint: 'bg-emerald-50 text-emerald-600', hint: '' },
@@ -245,7 +245,7 @@ const percentEl = ref<HTMLCanvasElement | null>(null);
 let charts: any[] = [];
 let renderToken = 0;
 
-const COLORS = { sold: '#f43f5e', reserved: '#fbbf24', available: '#10b981', brand: '#7030A0', grid: '#f1f5f9', text: '#64748b' };
+const COLORS = { sold: '#f43f5e', reserved: '#fbbf24', available: '#10b981', brand: '#126B58', grid: '#f1f5f9', text: '#64748b' };
 
 function destroyCharts() {
   charts.forEach((c) => c?.destroy());

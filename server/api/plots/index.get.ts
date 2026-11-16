@@ -8,9 +8,18 @@ export default defineEventHandler(async (event) => {
   const query = getQuery(event);
   const session = await getLiveAuthSession(event);
 
+  // Unauthenticated requests must receive 401
+  if (!session) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: 'يرجى تسجيل الدخول أولاً للوصول إلى بيانات القطع',
+    });
+  }
+
+  // Employees must possess at least one plot-related reading permission
   if (
-    session?.role === 'employee' &&
-    !userCanAny(session, ['view_plots', 'view_contracts', 'edit_plots', 'edit_contracts'])
+    session.role === 'employee' &&
+    !userCanAny(session, ['view_plots', 'view_plot_page', 'view_contracts', 'edit_plots', 'edit_contracts'])
   ) {
     throw createError({
       statusCode: 403,
@@ -19,6 +28,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const canViewFull =
+    session.role === 'admin' ||
     userCan(session, 'view_contracts') ||
     userCan(session, 'edit_plots') ||
     userCan(session, 'edit_contracts');

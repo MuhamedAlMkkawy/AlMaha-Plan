@@ -4,17 +4,17 @@
 
     <!-- ================= HEADER ================= -->
     <header class="relative overflow-hidden rounded-3xl border border-violet-100 bg-white shadow-sm print:hidden">
-      <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-[#7030A0] via-violet-500 to-purple-200"></div>
+      <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-l from-[#126B58] via-violet-500 to-emerald-"></div>
 
       <div class="relative flex flex-col gap-5 p-5 sm:p-7 lg:flex-row lg:items-center lg:justify-between">
         <div class="flex min-w-0 items-start gap-4">
-          <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#7030A0] to-[#512078] text-white shadow-lg shadow-purple-900/20">
+          <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#126B58] to-[#512078] text-white shadow-lg shadow-emerald-/20">
             <i class="pi pi-file-edit text-2xl"></i>
           </div>
 
           <div class="min-w-0">
             <div class="mb-1 flex flex-wrap items-center gap-2">
-              <span class="text-[10px] font-extrabold tracking-widest text-[#7030A0]">
+              <span class="text-[10px] font-extrabold tracking-widest text-[#126B58]">
                 QUOTATION BUILDER
               </span>
               <span class="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-700">
@@ -37,7 +37,7 @@
           <button
             @click="handlePrint"
             :disabled="quotationItems.length === 0"
-            class="group inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#7030A0] px-5 text-xs font-extrabold !text-white shadow-lg shadow-purple-900/15 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#592581] hover:!text-white hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 sm:text-sm"
+            class="group inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#126B58] px-5 text-xs font-extrabold !text-white shadow-lg shadow-emerald-/15 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#592581] hover:!text-white hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 sm:text-sm"
           >
             <i class="pi pi-print text-sm text-white transition-transform group-hover:scale-110"></i>
             <span class="text-white">طباعة / حفظ PDF</span>
@@ -92,7 +92,7 @@
       <!-- Section Heading -->
       <div class="flex items-center justify-between gap-3 border-b border-slate-100 px-5 py-5 sm:px-7">
         <div class="flex min-w-0 items-center gap-3">
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-[#7030A0]">
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald- text-[#126B58]">
             <i class="pi pi-user-edit text-lg"></i>
           </div>
           <div class="min-w-0">
@@ -105,7 +105,7 @@
           </div>
         </div>
 
-        <span class="hidden shrink-0 rounded-lg border border-purple-100 bg-purple-50 px-3 py-1.5 text-[10px] font-extrabold text-[#7030A0] sm:inline-flex">
+        <span class="hidden shrink-0 rounded-lg border border-emerald- bg-emerald- px-3 py-1.5 text-[10px] font-extrabold text-[#126B58] sm:inline-flex">
           <i class="pi pi-sliders-h ms-1"></i>
           إعداد العرض
         </span>
@@ -117,7 +117,7 @@
 <!-- ================= BUYER INFORMATION ================= -->
 <div>
   <div class="mb-4 flex items-center gap-2">
-    <span class="h-5 w-1 rounded-full bg-[#7030A0]"></span>
+    <span class="h-5 w-1 rounded-full bg-[#126B58]"></span>
     <h3 class="text-xs font-extrabold text-slate-800">
       معلومات المشتري
     </h3>
@@ -135,10 +135,10 @@
       </label>
 
       <div
-        class="flex h-12 w-full items-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 transition-all duration-200 hover:border-purple-300 hover:bg-white focus-within:border-[#7030A0] focus-within:bg-white focus-within:ring-4 focus-within:ring-purple-100"
+        class="flex h-12 w-full items-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 transition-all duration-200 hover:border-emerald- hover:bg-white focus-within:border-[#126B58] focus-within:bg-white focus-within:ring-4 focus-within:ring-emerald-"
       >
         <!-- Icon -->
-        <div class="flex h-full w-12 shrink-0 items-center justify-center border-l border-slate-100 bg-slate-100/70 text-slate-400 transition-colors duration-200 group-focus-within:text-[#7030A0]">
+        <div class="flex h-full w-12 shrink-0 items-center justify-center border-l border-slate-100 bg-slate-100/70 text-slate-400 transition-colors duration-200 group-focus-within:text-[#126B58]">
           <i class="pi pi-user text-sm"></i>
         </div>
 
@@ -164,7 +164,7 @@
       </label>
 
       <div
-        class="flex h-12 w-full items-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 transition-all duration-200 hover:border-purple-300 hover:bg-white focus-within:border-[#7030A0] focus-within:bg-white focus-within:ring-4 focus-within:ring-purple-100"
+        class="flex h-12 w-full items-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 transition-all duration-200 hover:border-emerald- hover:bg-white focus-within:border-[#126B58] focus-within:bg-white focus-within:ring-4 focus-within:ring-emerald-"
       >
         <!-- Icon -->
         <div class="flex h-full w-12 shrink-0 items-center justify-center border-l border-slate-100 bg-slate-100/70 text-slate-400">
@@ -192,7 +192,7 @@
 <div>
   <div class="mb-4 flex items-center justify-between gap-2">
     <div class="flex items-center gap-2">
-      <span class="h-5 w-1 rounded-full bg-[#7030A0]"></span>
+      <span class="h-5 w-1 rounded-full bg-[#126B58]"></span>
       <h3 class="text-xs font-extrabold text-slate-800">
         إضافة قطع الأراضي
       </h3>
@@ -203,17 +203,17 @@
     </span>
   </div>
 
-  <div class="rounded-2xl border border-purple-100 bg-gradient-to-l from-purple-50/80 to-white p-4 sm:p-5">
+  <div class="rounded-2xl border border-emerald- bg-gradient-to-l from-emerald-/80 to-white p-4 sm:p-5">
 
     <div class="flex flex-col gap-3 sm:flex-row">
 
       <!-- Plot Number Input -->
       <div class="min-w-0 flex-1">
         <div
-          class="group flex h-12 w-full items-center overflow-hidden rounded-xl border border-slate-200 bg-white transition-all duration-200 hover:border-purple-300 focus-within:border-[#7030A0] focus-within:ring-4 focus-within:ring-purple-100"
+          class="group flex h-12 w-full items-center overflow-hidden rounded-xl border border-slate-200 bg-white transition-all duration-200 hover:border-emerald- focus-within:border-[#126B58] focus-within:ring-4 focus-within:ring-emerald-"
         >
           <!-- Icon -->
-          <div class="flex h-full w-12 shrink-0 items-center justify-center border-l border-slate-100 bg-slate-50 text-slate-400 transition-colors duration-200 group-focus-within:text-[#7030A0]">
+          <div class="flex h-full w-12 shrink-0 items-center justify-center border-l border-slate-100 bg-slate-50 text-slate-400 transition-colors duration-200 group-focus-within:text-[#126B58]">
             <i class="pi pi-search text-sm"></i>
           </div>
 
@@ -234,7 +234,7 @@
       <button
         @click="addPlotByNumber"
         :disabled="selectedPlotsList.length >= 10"
-        class="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl border border-[#7030A0] bg-[#7030A0] px-6 text-sm font-extrabold text-white shadow-md shadow-purple-900/10 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#592581] hover:bg-[#592581] hover:text-white hover:shadow-lg focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-purple-200 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 disabled:hover:bg-[#7030A0] sm:min-w-40"
+        class="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl border border-[#126B58] bg-[#126B58] px-6 text-sm font-extrabold text-white shadow-md shadow-emerald-/10 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#592581] hover:bg-[#592581] hover:text-white hover:shadow-lg focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald- disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 disabled:hover:bg-[#126B58] sm:min-w-40"
       >
         <i class="pi pi-plus-circle text-white"></i>
         <span class="whitespace-nowrap text-white">
@@ -251,7 +251,7 @@
         أدخل رقم الأرض لإضافتها مباشرة إلى العرض
       </p>
 
-      <span class="shrink-0 text-[10px] font-bold text-[#7030A0]">
+      <span class="shrink-0 text-[10px] font-bold text-[#126B58]">
         {{ selectedPlotsList.length }} / 10
       </span>
     </div>
@@ -273,11 +273,11 @@
         <div>
           <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
             <div class="flex items-center gap-2">
-              <span class="h-5 w-1 rounded-full bg-[#7030A0]"></span>
+              <span class="h-5 w-1 rounded-full bg-[#126B58]"></span>
               <h3 class="text-xs font-extrabold text-slate-800">
                 القطع المدرجة في العرض
               </h3>
-              <span class="rounded-md bg-purple-50 px-2 py-1 text-[10px] font-extrabold text-[#7030A0]">
+              <span class="rounded-md bg-emerald- px-2 py-1 text-[10px] font-extrabold text-[#126B58]">
                 {{ selectedPlotsList.length }}
               </span>
             </div>
@@ -307,10 +307,10 @@
                   <tr
                     v-for="(p, idx) in selectedPlotsList"
                     :key="p.plotNo"
-                    class="group transition-colors duration-200 hover:bg-purple-50/50"
+                    class="group transition-colors duration-200 hover:bg-emerald-/50"
                   >
                     <td class="px-4 py-4">
-                      <span class="inline-flex min-w-10 items-center justify-center rounded-lg bg-purple-50 px-2.5 py-2 font-black text-[#7030A0] transition-colors group-hover:bg-purple-100">
+                      <span class="inline-flex min-w-10 items-center justify-center rounded-lg bg-emerald- px-2.5 py-2 font-black text-[#126B58] transition-colors group-hover:bg-emerald-">
                         {{ p.plotNo }}
                       </span>
                     </td>
@@ -330,7 +330,7 @@
                         type="number"
                         min="0"
                         step="10"
-                        class="h-10 w-28 rounded-lg border border-purple-200 bg-purple-50/60 px-2 text-center font-black tabular-nums text-[#7030A0] outline-none transition-all duration-200 hover:border-[#7030A0] hover:bg-white focus:border-[#7030A0] focus:bg-white focus:ring-4 focus:ring-purple-100"
+                        class="h-10 w-28 rounded-lg border border-emerald- bg-emerald-/60 px-2 text-center font-black tabular-nums text-[#126B58] outline-none transition-all duration-200 hover:border-[#126B58] hover:bg-white focus:border-[#126B58] focus:bg-white focus:ring-4 focus:ring-emerald-"
                       />
                     </td>
 
@@ -362,11 +362,11 @@
 
             <div class="flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 bg-slate-50/70 px-4 py-3">
               <span class="text-[10px] font-semibold text-slate-500">
-                <i class="pi pi-info-circle ms-1 text-[#7030A0]"></i>
+                <i class="pi pi-info-circle ms-1 text-[#126B58]"></i>
                 يمكنك تعديل سعر المتر لكل قطعة بشكل مستقل
               </span>
 
-              <span class="text-[10px] font-extrabold text-[#7030A0]">
+              <span class="text-[10px] font-extrabold text-[#126B58]">
                 {{ selectedPlotsList.length }} قطع مختارة
               </span>
             </div>
@@ -377,7 +377,7 @@
             v-else
             class="flex flex-col items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-slate-50/60 px-5 py-10 text-center"
           >
-            <div class="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-50 text-[#7030A0]">
+            <div class="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald- text-[#126B58]">
               <i class="pi pi-map text-xl"></i>
             </div>
 
@@ -437,7 +437,7 @@
       >
         <!-- Background decoration -->
         <div
-          class="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-[#7030A0]/[0.06] blur-3xl"
+          class="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-[#126B58]/[0.06] blur-3xl"
         ></div>
 
         <div
@@ -445,7 +445,7 @@
         ></div>
 
         <div
-          class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#7030A0]/30 to-transparent"
+          class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#126B58]/30 to-transparent"
         ></div>
 
         <div class="relative mx-auto flex max-w-lg flex-col items-center text-center">
@@ -453,16 +453,16 @@
           <!-- Icon -->
           <div class="relative mb-7">
             <div
-              class="absolute -inset-4 rounded-[2rem] bg-[#7030A0]/[0.07] blur-xl"
+              class="absolute -inset-4 rounded-[2rem] bg-[#126B58]/[0.07] blur-xl"
             ></div>
 
             <div
-              class="relative flex h-24 w-24 items-center justify-center rounded-[1.8rem] border border-[#7030A0]/10 bg-gradient-to-br from-white via-purple-50 to-violet-100 text-[#7030A0] shadow-[0_10px_35px_rgba(112,48,160,0.12)]"
+              class="relative flex h-24 w-24 items-center justify-center rounded-[1.8rem] border border-[#126B58]/10 bg-gradient-to-br from-white via-emerald- to-violet-100 text-[#126B58] shadow-[0_10px_35px_rgba(112,48,160,0.12)]"
             >
               <i class="pi pi-file-edit text-[2.4rem]"></i>
 
               <span
-                class="absolute -bottom-2 -right-2 flex h-8 w-8 items-center justify-center rounded-xl border-[3px] border-white bg-[#7030A0] text-white shadow-md"
+                class="absolute -bottom-2 -right-2 flex h-8 w-8 items-center justify-center rounded-xl border-[3px] border-white bg-[#126B58] text-white shadow-md"
               >
                 <i class="pi pi-plus text-xs"></i>
               </span>
@@ -471,10 +471,10 @@
 
           <!-- Label -->
           <div
-            class="mb-4 inline-flex items-center gap-2 rounded-full border border-[#7030A0]/10 bg-purple-50/80 px-3.5 py-1.5"
+            class="mb-4 inline-flex items-center gap-2 rounded-full border border-[#126B58]/10 bg-emerald-/80 px-3.5 py-1.5"
           >
-            <span class="h-1.5 w-1.5 rounded-full bg-[#7030A0]"></span>
-            <span class="text-[10px] font-black tracking-[0.12em] text-[#7030A0]">
+            <span class="h-1.5 w-1.5 rounded-full bg-[#126B58]"></span>
+            <span class="text-[10px] font-black tracking-[0.12em] text-[#126B58]">
               QUOTATION PREVIEW
             </span>
           </div>
@@ -495,7 +495,7 @@
           <!-- Button -->
           <NuxtLink
             to="/plots"
-            class="group relative mt-8 inline-flex h-12 items-center justify-center gap-3 overflow-hidden rounded-2xl bg-[#7030A0] px-6 text-sm font-extrabold !text-white shadow-lg shadow-[#7030A0]/20 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#592581] hover:!text-white hover:shadow-xl hover:shadow-[#7030A0]/25 active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#7030A0]/20"
+            class="group relative mt-8 inline-flex h-12 items-center justify-center gap-3 overflow-hidden rounded-2xl bg-[#126B58] px-6 text-sm font-extrabold !text-white shadow-lg shadow-[#126B58]/20 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#592581] hover:!text-white hover:shadow-xl hover:shadow-[#126B58]/25 active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#126B58]/20"
           >
             <span
               class="flex h-7 w-7 items-center justify-center rounded-lg bg-white/15 transition-colors duration-300 group-hover:bg-white/25"
@@ -512,7 +512,7 @@
 
           <!-- Supporting note -->
           <div class="mt-5 flex items-center gap-2 text-[10px] font-semibold text-slate-400">
-            <i class="pi pi-info-circle text-xs text-[#7030A0]/60"></i>
+            <i class="pi pi-info-circle text-xs text-[#126B58]/60"></i>
             <span>يمكنك إضافة عدة قطع إلى عرض سعر واحد</span>
           </div>
         </div>
@@ -722,7 +722,7 @@ const handlePrint = () => {
 }
 
 .quotation-builder button:focus-visible {
-  outline: 2px solid #7030a0;
+  outline: 2px solid #126B58;
   outline-offset: 3px;
 }
 
@@ -733,8 +733,8 @@ const handlePrint = () => {
 }
 
 /* Preserve white text on primary buttons */
-.quotation-builder button.bg-\[\#7030A0\],
-.quotation-builder button.bg-\[\#7030A0\] span {
+.quotation-builder button.bg-\[\#126B58\],
+.quotation-builder button.bg-\[\#126B58\] span {
   color: #fff;
 }
 

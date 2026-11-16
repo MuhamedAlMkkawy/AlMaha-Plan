@@ -1,235 +1,204 @@
-
 <template>
-  <footer
-    class="relative mt-16 overflow-hidden border-t border-slate-200/80 bg-white print:hidden"
-  >
-    <!-- Accent line -->
-    <div
-      class="absolute inset-x-0 top-0 h-[3px]"
-      :class="modeStyles.accent"
-      aria-hidden="true"
-    ></div>
+  <footer class="relative mt-20 border-t border-[#E5E9E5] bg-[#174A40] text-white print:hidden">
+    <!-- Sand Gold accent line -->
+    <div class="h-[3px] w-full bg-gradient-to-l from-[#B89A68] via-[#D8C5A0] to-[#B89A68]"></div>
 
-    <!-- Decorative glow -->
-    <div
-      class="pointer-events-none absolute -top-24 left-1/2 h-48 w-[min(80%,42rem)] -translate-x-1/2 rounded-full opacity-20 blur-3xl"
-      :class="modeStyles.glow"
-      aria-hidden="true"
-    ></div>
-
-    <div class="relative mx-auto w-full max-w-7xl px-4 pb-6 pt-10 sm:px-6 lg:px-8">
-      <div class="mx-auto flex max-w-3xl flex-col items-center text-center">
-
-        <!-- Brand mark -->
-        <div
-          class="mb-4 grid h-12 w-12 place-items-center rounded-2xl text-white shadow-lg ring-4 ring-white"
-          :class="modeStyles.logo"
-          aria-hidden="true"
-        >
-          <i class="pi pi-building text-xl"></i>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+        
+        <!-- Column 1: Brand & identity -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-[#126B58] flex items-center justify-center text-white border border-[#B89A68]/30">
+              <i class="pi pi-building text-lg"></i>
+            </div>
+            <div>
+              <h3 class="font-black text-lg text-white">{{ projectConfig.name }}</h3>
+              <p class="text-xs text-[#D8C5A0] font-semibold">مخطط معتمد برقم {{ projectConfig.planNo }}</p>
+            </div>
+          </div>
+          <p class="text-xs text-[#D5E4DC]/80 leading-relaxed max-w-sm">
+            بوابة إدارة المبيعات وعروض الأسعار الرسمية لمشروع مخطط المها، مصممة وفق أحدث المعايير العقارية لدعم فريق المبيعات والإدارة.
+          </p>
         </div>
 
-        <p class="text-base font-black tracking-tight text-slate-900 sm:text-lg">
-          {{ projectConfig.name }}
-        </p>
 
-        <p class="mt-1 text-xs font-medium tracking-wide text-slate-500">
-          مخطط معتمد برقم {{ projectConfig.planNo }}
-        </p>
+<!-- Column 2: Entities & Partners -->
+<div class="relative space-y-4">
 
-        <p class="mt-5 max-w-2xl text-sm leading-7 text-slate-500">
-          منظومة مبيعات وعروض أسعار متكاملة لمشروع مخطط المها (مها الشرق)،
-          لخدمة العملاء وفريق المبيعات وتسهيل استعراض الأراضي وإصدار عروض الأسعار.
-        </p>
+  <!-- Section Heading -->
+  <div class="flex items-center gap-3">
+    <div class="flex h-8 w-8 items-center justify-center rounded-xl bg-[#D8C5A0]/10 ring-1 ring-[#D8C5A0]/20">
+      <i class="pi pi-building text-sm text-[#D8C5A0]"></i>
+    </div>
 
-        <!-- Project information -->
-        <div class="mt-6 flex flex-wrap items-center justify-center gap-2">
-          <div
-            class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3.5 py-2 text-xs shadow-sm shadow-slate-900/[0.03]"
-          >
-            <i
-              class="pi pi-briefcase text-[11px]"
-              :class="modeStyles.icon"
-              aria-hidden="true"
-            ></i>
-            <span class="font-semibold text-slate-600">
-              الجهة المالكة / البائع
-            </span>
-            <span class="text-slate-400">{{ projectConfig.seller }}</span>
-          </div>
+    <div class="space-y-0.5">
+      <h4 class="text-sm font-extrabold tracking-wide text-white">
+        الجهات المشرفة
+      </h4>
+      <p class="text-[10px] font-medium text-white/45">
+        الجهات المسؤولة عن المشروع
+      </p>
+    </div>
+  </div>
 
-          <div
-            class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3.5 py-2 text-xs shadow-sm shadow-slate-900/[0.03]"
-          >
-            <i
-              class="pi pi-megaphone text-[11px]"
-              :class="modeStyles.icon"
-              aria-hidden="true"
-            ></i>
-            <span class="font-semibold text-slate-600">المسوق الحصري</span>
-            <span class="text-slate-400">{{ projectConfig.marketer }}</span>
-          </div>
-        </div>
+  <!-- Entity Cards -->
+  <div class="grid grid-cols-1 gap-2.5">
+
+    <!-- Seller -->
+    <div
+      class="group relative flex items-center gap-3.5 overflow-hidden rounded-2xl border border-white/[0.09] bg-white/[0.035] p-3.5 transition-all duration-300 hover:border-[#D8C5A0]/30 hover:bg-white/[0.07] hover:shadow-lg hover:shadow-black/10"
+    >
+      <div
+        class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D8C5A0]/15 bg-[#D8C5A0]/[0.09] transition-all duration-300 group-hover:border-[#D8C5A0]/30 group-hover:bg-[#D8C5A0]/15"
+      >
+        <i class="pi pi-briefcase text-base text-[#D8C5A0]"></i>
       </div>
 
-      <!-- Bottom bar -->
-      <div class="mt-9 border-t border-slate-100 pt-5">
-        <div
-          class="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-start"
+      <div class="min-w-0 flex-1 space-y-1">
+        <span class="block text-[10px] font-semibold tracking-wide text-white/45">
+          الجهة المالكة / البائع
+        </span>
+        <span class="block truncate text-[13px] font-bold leading-relaxed text-white">
+          {{ projectConfig.seller }}
+        </span>
+      </div>
+
+      <i class="pi pi-angle-left shrink-0 text-xs text-white/20 transition-all duration-300 group-hover:-translate-x-1 group-hover:text-[#D8C5A0]"></i>
+
+      <div class="absolute bottom-0 right-0 h-[2px] w-0 bg-[#D8C5A0]/70 transition-all duration-300 group-hover:w-full"></div>
+    </div>
+
+    <!-- Exclusive Marketer -->
+    <div
+      class="group relative flex items-center gap-3.5 overflow-hidden rounded-2xl border border-white/[0.09] bg-white/[0.035] p-3.5 transition-all duration-300 hover:border-[#D8C5A0]/30 hover:bg-white/[0.07] hover:shadow-lg hover:shadow-black/10"
+    >
+      <div
+        class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#D8C5A0]/15 bg-[#D8C5A0]/[0.09] transition-all duration-300 group-hover:border-[#D8C5A0]/30 group-hover:bg-[#D8C5A0]/15"
+      >
+        <i class="pi pi-megaphone text-base text-[#D8C5A0]"></i>
+      </div>
+
+      <div class="min-w-0 flex-1 space-y-1">
+        <span class="block text-[10px] font-semibold tracking-wide text-white/45">
+          المسوق الحصري
+        </span>
+        <span class="block truncate text-[13px] font-bold leading-relaxed text-white">
+          {{ projectConfig.marketer }}
+        </span>
+      </div>
+
+      <i class="pi pi-angle-left shrink-0 text-xs text-white/20 transition-all duration-300 group-hover:-translate-x-1 group-hover:text-[#D8C5A0]"></i>
+
+      <div class="absolute bottom-0 right-0 h-[2px] w-0 bg-[#D8C5A0]/70 transition-all duration-300 group-hover:w-full"></div>
+    </div>
+
+  </div>
+</div>
+
+
+
+  <!-- Column 3: Quick Links & Portal Access -->
+  <div class="relative space-y-4">
+
+    <!-- Section Heading -->
+    <div class="flex items-center gap-3">
+      <div class="flex h-8 w-8 items-center justify-center rounded-xl border border-[#D8C5A0]/20 bg-[#D8C5A0]/10">
+        <i class="pi pi-compass text-sm text-[#D8C5A0]"></i>
+      </div>
+
+      <div class="space-y-0.5">
+        <h4 class="text-sm font-extrabold tracking-wide text-white">
+          روابط البوابة
+        </h4>
+        <p class="text-[10px] font-medium text-white/45">
+          الوصول السريع إلى خدمات البوابة
+        </p>
+      </div>
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="space-y-2">
+
+      <!-- Homepage -->
+      <li>
+        <NuxtLink
+          to="/"
+          class="group flex items-center gap-3 rounded-xl border border-transparent px-3 py-2.5 transition-all duration-300 hover:border-white/[0.09] hover:bg-white/[0.06]"
         >
-          <!-- Copyright -->
-          <p class="text-[11px] leading-5 text-slate-400">
-            جميع الحقوق محفوظة © {{ currentYear }} — {{ projectConfig.marketer }}
-          </p>
-
-          <!-- User mode indicator -->
-          <div
-            class="inline-flex max-w-full items-center gap-3 rounded-2xl border px-3.5 py-2.5 shadow-sm transition-all duration-200"
-            :class="modeStyles.card"
+          <span
+            class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.05] text-white/55 transition-all duration-300 group-hover:bg-[#D8C5A0]/10 group-hover:text-[#D8C5A0]"
           >
-            <!-- Mode icon -->
-            <div
-              class="grid h-9 w-9 shrink-0 place-items-center rounded-xl text-sm shadow-sm"
-              :class="modeStyles.iconBox"
-            >
-              <i :class="modeStyles.modeIcon" aria-hidden="true"></i>
-            </div>
+            <i class="pi pi-home text-sm"></i>
+          </span>
 
-            <!-- Mode details -->
-            <div class="min-w-0 text-start">
-              <p
-                class="text-[9px] font-bold uppercase tracking-[0.13em]"
-                :class="modeStyles.caption"
-              >
-                CURRENT ACCESS MODE
-              </p>
+          <span class="flex-1 text-xs font-semibold text-white/65 transition-colors duration-300 group-hover:text-white">
+            الرئيسية
+          </span>
 
-              <p
-                class="truncate text-xs font-extrabold"
-                :class="modeStyles.title"
-              >
-                {{ modeStyles.label }}
-              </p>
-            </div>
+          <i class="pi pi-angle-left text-[10px] text-white/20 transition-all duration-300 group-hover:-translate-x-1 group-hover:text-[#D8C5A0]"></i>
+        </NuxtLink>
+      </li>
 
-            <!-- Status -->
-            <div
-              class="ms-2 flex shrink-0 items-center gap-1.5 rounded-full px-2 py-1"
-              :class="modeStyles.status"
-            >
-              <span
-                class="h-1.5 w-1.5 rounded-full"
-                :class="modeStyles.dot"
-                aria-hidden="true"
-              ></span>
-              <span class="text-[10px] font-bold">
-                نشط
-              </span>
-            </div>
-          </div>
-
-          <!-- System identity -->
-          <div
-            class="inline-flex items-center gap-2 rounded-full bg-slate-50 px-3 py-1.5 text-[11px] font-medium text-slate-500 ring-1 ring-inset ring-slate-200/70"
+      <!-- Employee Portal -->
+      <li>
+        <NuxtLink
+          to="/3fe97eb46687f5af"
+          class="group flex items-center gap-3 rounded-xl border border-[#D8C5A0]/15 bg-[#D8C5A0]/[0.06] px-3 py-2.5 transition-all duration-300 hover:border-[#D8C5A0]/30 hover:bg-[#D8C5A0]/[0.10]"
+        >
+          <span
+            class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[#D8C5A0]/15 bg-[#D8C5A0]/10 text-[#D8C5A0] transition-all duration-300 group-hover:bg-[#D8C5A0]/20"
           >
-            <span
-              class="h-1.5 w-1.5 rounded-full"
-              :class="modeStyles.systemDot"
-              aria-hidden="true"
-            ></span>
-            <span>بوابة مبيعات مخطط المها</span>
-            <span class="text-slate-300">•</span>
-            <span>إصدار الإنتاج المعتمد</span>
-          </div>
-        </div>
+            <i class="pi pi-user text-sm"></i>
+          </span>
+
+          <span class="flex-1 space-y-0.5">
+            <span class="block text-xs font-bold text-white transition-colors group-hover:text-[#E8D8B8]">
+              بوابة دخول الموظفين
+            </span>
+            <span class="block text-[9px] font-medium text-white/40">
+              الدخول إلى حساب الموظف
+            </span>
+          </span>
+
+          <i class="pi pi-angle-left text-[10px] text-[#D8C5A0]/50 transition-all duration-300 group-hover:-translate-x-1 group-hover:text-[#D8C5A0]"></i>
+        </NuxtLink>
+      </li>
+
+      <!-- Admin Portal: Temporarily Hidden -->
+      <!--
+      <li>
+        <NuxtLink
+          to="/c66dc3312779fefa"
+          class="group flex items-center gap-3 rounded-xl border border-transparent px-3 py-2.5 transition-all duration-300 hover:border-white/[0.09] hover:bg-white/[0.06]"
+        >
+          <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/[0.05] text-white/45">
+            <i class="pi pi-shield text-sm"></i>
+          </span>
+
+          <span class="flex-1 text-xs font-semibold text-white/55">
+            دخول الإدارة
+          </span>
+
+          <i class="pi pi-angle-left text-[10px] text-white/20"></i>
+        </NuxtLink>
+      </li>
+      -->
+
+    </ul>
+  </div>
+
+      </div>
+
+      <!-- Copyright row -->
+      <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#D5E4DC]/60">
+        <p>جميع الحقوق محفوظة © {{ new Date().getFullYear() }} — {{ projectConfig.name }}</p>
+        <p class="text-[11px] font-medium text-[#D8C5A0]/80">التسويق الحصري: {{ projectConfig.marketer }}</p>
       </div>
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { projectConfig } from '../../config/project';
-
-const { user: authUser, isAdmin } = useAuthSession();
-
-const isEmployee = computed(
-  () => !isAdmin.value && authUser.value?.role === 'employee',
-);
-
-const isAdministrator = computed(() => isAdmin.value);
-
-const modeStyles = computed(() => {
-  if (isAdministrator.value) {
-    return {
-      label: 'مدير النظام',
-      accent: 'bg-gradient-to-r from-purple-300 via-[#7030A0] to-purple-300',
-      glow: 'bg-purple-300',
-      logo: 'bg-gradient-to-br from-[#8546ad] to-[#57227f] shadow-purple-900/15',
-      icon: 'text-[#7030A0]',
-      modeIcon: 'pi pi-shield',
-      iconBox: 'bg-purple-100 text-[#7030A0]',
-      card: 'border-purple-200 bg-gradient-to-r from-purple-50 to-white',
-      caption: 'text-purple-500',
-      title: 'text-purple-950',
-      status: 'bg-purple-100',
-      dot: 'bg-purple-600',
-      systemDot: 'bg-purple-500',
-    };
-  }
-
-  if (isEmployee.value) {
-    return {
-      label: 'موظف',
-      accent: 'bg-gradient-to-r from-indigo-300 via-indigo-600 to-indigo-300',
-      glow: 'bg-indigo-300',
-      logo: 'bg-gradient-to-br from-indigo-500 to-indigo-700 shadow-indigo-900/15',
-      icon: 'text-indigo-600',
-      modeIcon: 'pi pi-briefcase',
-      iconBox: 'bg-indigo-100 text-indigo-700',
-      card: 'border-indigo-200 bg-gradient-to-r from-indigo-50 to-white',
-      caption: 'text-indigo-500',
-      title: 'text-indigo-950',
-      status: 'bg-indigo-100',
-      dot: 'bg-indigo-600',
-      systemDot: 'bg-indigo-500',
-    };
-  }
-
-  // Public visitor — matches the main system branding
-  return {
-    label: 'زائر',
-
-    // Purple primary + golden accent
-    accent:
-      'bg-gradient-to-r from-[#7030A0] via-[#a35bd1] to-[#ffc928]',
-
-    glow: 'bg-[#a35bd1]',
-
-    logo:
-      'bg-gradient-to-br from-[#8546ad] to-[#57227f] shadow-purple-900/15',
-
-    icon: 'text-[#7030A0]',
-
-    modeIcon: 'pi pi-user',
-
-    iconBox:
-      'bg-purple-50 text-[#7030A0] ring-1 ring-inset ring-purple-100',
-
-    card:
-      'border-purple-200/80 bg-gradient-to-r from-purple-50 via-white to-amber-50/70',
-
-    caption: 'text-[#8546ad]',
-
-    title: 'text-purple-950',
-
-    status: 'bg-amber-50 ring-1 ring-inset ring-amber-200',
-
-    dot: 'bg-[#ffc928]',
-
-    systemDot: 'bg-[#7030A0]',
-  };
-});
-
-const currentYear = new Date().getFullYear();
 </script>

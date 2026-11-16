@@ -4,9 +4,9 @@
     <header class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
       <div class="min-w-0">
         <nav class="flex items-center gap-2 text-sm" aria-label="مسار الصفحة">
-          <NuxtLink to="/admin" class="text-slate-500 hover:text-[#7030A0] transition-colors">الإدارة</NuxtLink>
+          <NuxtLink to="/admin" class="text-slate-500 hover:text-[#126B58] transition-colors">الإدارة</NuxtLink>
           <span class="text-slate-300">/</span>
-          <span class="font-bold text-[#7030A0]">القطع والمبيعات</span>
+          <span class="font-bold text-[#126B58]">القطع والمبيعات</span>
         </nav>
         <h1 class="mt-1.5 text-2xl sm:text-3xl font-black text-slate-900">إدارة القطع والأسعار</h1>
         <p class="mt-1 text-sm sm:text-base text-slate-500">
@@ -17,7 +17,7 @@
       <NuxtLink
         v-if="canCreate"
         to="/admin/plots/new"
-        class="self-start sm:self-auto inline-flex items-center gap-2 h-11 px-6 rounded-full bg-[#7030A0] text-white text-base font-bold transition-colors hover:bg-[#5b2486] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/50 focus-visible:ring-offset-2"
+        class="self-start sm:self-auto inline-flex items-center gap-2 h-11 px-6 rounded-full bg-[#126B58] text-white text-base font-bold transition-colors hover:bg-[#126B58] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#126B58]/50 focus-visible:ring-offset-2"
       >
         <i class="pi pi-plus text-sm"></i>
         <span>إضافة قطعة جديدة</span>
@@ -69,7 +69,7 @@
         </span>
         <button
           type="button"
-          class="inline-flex items-center gap-1.5 font-semibold text-[#7030A0] hover:underline rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40"
+          class="inline-flex items-center gap-1.5 font-semibold text-[#126B58] hover:underline rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#126B58]/40"
           @click="clearFilters"
         >
           <i class="pi pi-times text-xs"></i>
@@ -115,10 +115,10 @@
             <tr
               v-for="plot in paginatedPlots"
               :key="plot.plotNo"
-              class="transition-colors hover:bg-[#7030A0]/[0.03]"
+              class="transition-colors hover:bg-[#126B58]/[0.03]"
               :class="plot.status === 'مؤرشف' ? 'bg-slate-50/70' : ''"
             >
-              <td class="px-4 py-3.5 text-lg font-black text-[#7030A0] tabular-nums">{{ plot.plotNo }}</td>
+              <td class="px-4 py-3.5 text-lg font-black text-[#126B58] tabular-nums">{{ plot.plotNo }}</td>
               <td class="px-4 py-3.5 font-bold text-slate-800 tabular-nums">{{ plot.block }}</td>
               <td class="px-4 py-3.5 text-slate-700">{{ plot.usage }}</td>
               <td class="px-4 py-3.5 text-slate-700 whitespace-nowrap tabular-nums">{{ plot.area }} م²</td>
@@ -130,7 +130,7 @@
                     :value="plot.status"
                     :disabled="!canEdit"
                     :aria-label="`حالة القطعة ${plot.plotNo}`"
-                    class="w-full h-10 ps-4 pe-9 appearance-none rounded-xl border text-sm font-bold cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-[#7030A0]/30 disabled:cursor-not-allowed disabled:opacity-70"
+                    class="w-full h-10 ps-4 pe-9 appearance-none rounded-xl border text-sm font-bold cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-[#126B58]/30 disabled:cursor-not-allowed disabled:opacity-70"
                     :class="statusTone(plot.status)"
                     @change="handleQuickStatusChange(plot, ($event.target as HTMLSelectElement).value)"
                   >
@@ -156,7 +156,7 @@
                   <NuxtLink
                     v-if="canEdit"
                     :to="`/admin/plots/${plot.plotNo}/edit`"
-                    class="w-9 h-9 inline-flex items-center justify-center rounded-lg text-[#7030A0] transition-colors hover:bg-[#7030A0]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40"
+                    class="w-9 h-9 inline-flex items-center justify-center rounded-lg text-[#126B58] transition-colors hover:bg-[#126B58]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#126B58]/40"
                     title="تعديل كامل"
                     :aria-label="`تعديل القطعة ${plot.plotNo}`"
                   >
@@ -201,7 +201,7 @@
           <button
             type="button"
             :disabled="page === 1"
-            class="h-10 px-5 rounded-full border border-slate-300 bg-white font-semibold text-slate-700 transition-colors hover:border-[#7030A0]/50 hover:text-[#7030A0] disabled:opacity-40 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40"
+            class="h-10 px-5 rounded-full border border-slate-300 bg-white font-semibold text-slate-700 transition-colors hover:border-[#126B58]/50 hover:text-[#126B58] disabled:opacity-40 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#126B58]/40"
             @click="page = Math.max(1, page - 1)"
           >
             السابق
@@ -210,7 +210,7 @@
           <button
             type="button"
             :disabled="page === totalPages"
-            class="h-10 px-5 rounded-full border border-slate-300 bg-white font-semibold text-slate-700 transition-colors hover:border-[#7030A0]/50 hover:text-[#7030A0] disabled:opacity-40 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40"
+            class="h-10 px-5 rounded-full border border-slate-300 bg-white font-semibold text-slate-700 transition-colors hover:border-[#126B58]/50 hover:text-[#126B58] disabled:opacity-40 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#126B58]/40"
             @click="page = Math.min(totalPages, page + 1)"
           >
             التالي
@@ -237,7 +237,7 @@ const canSeePii = computed(() => can('view_contracts') || can('edit_contracts'))
 // Shared field styles
 const labelCls = 'block text-sm font-semibold text-slate-700 mb-1.5';
 const inputCls =
-  'w-full h-11 px-3.5 rounded-xl border border-slate-300 bg-white text-base text-slate-900 placeholder:text-slate-400 transition-colors hover:border-slate-400 focus:outline-none focus:border-[#7030A0] focus:ring-2 focus:ring-[#7030A0]/20';
+  'w-full h-11 px-3.5 rounded-xl border border-slate-300 bg-white text-base text-slate-900 placeholder:text-slate-400 transition-colors hover:border-slate-400 focus:outline-none focus:border-[#126B58] focus:ring-2 focus:ring-[#126B58]/20';
 
 // Status colour for the quick-edit select
 const statusTone = (status: string) => {

@@ -1,9 +1,9 @@
 <template>
   <div class="quotation-card bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden text-slate-800 print:border-none print:shadow-none print:rounded-none">
-    <!-- Purple Header Bar (Exact match to Sheet1 reference #7030A0) -->
-    <div class="bg-[#7030A0] text-white px-6 py-5 flex items-center justify-between border-b-4 border-[#532277] print:py-3 print:px-4">
+    <!-- Purple Header Bar (Exact match to Sheet1 reference #126B58) -->
+    <div class="bg-[#126B58] text-white px-6 py-5 flex items-center justify-between border-b-4 border-[#174A40] print:py-3 print:px-4">
       <div class="text-start">
-        <div class="text-xs text-purple-200 font-medium">التاريخ:</div>
+        <div class="text-xs text-emerald- font-medium">التاريخ:</div>
         <div class="text-sm font-bold tracking-wide">{{ formattedDate }}</div>
       </div>
 
@@ -11,12 +11,12 @@
         <h1 class="text-2xl sm:text-3xl font-black tracking-wider text-white">
           عــــرض ســـعــــر
         </h1>
-        <div class="text-xs text-purple-200 mt-0.5">PRICE QUOTATION</div>
+        <div class="text-xs text-emerald- mt-0.5">PRICE QUOTATION</div>
       </div>
 
       <div class="text-end flex items-center gap-2">
         <div class="text-start hidden sm:block">
-          <div class="text-xs text-purple-200">المسوق الحصري</div>
+          <div class="text-xs text-emerald-">المسوق الحصري</div>
           <div class="text-sm font-bold">{{ projectConfig.marketer }}</div>
         </div>
         <div class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center font-bold text-lg border border-white/20">
@@ -26,10 +26,10 @@
     </div>
 
     <!-- Project & Parties Facts Banner -->
-    <div class="bg-purple-50/70 border-b border-purple-100 px-6 py-3.5 text-xs sm:text-sm font-semibold text-slate-700 flex flex-wrap items-center justify-between gap-y-2">
+    <div class="bg-emerald-/70 border-b border-emerald- px-6 py-3.5 text-xs sm:text-sm font-semibold text-slate-700 flex flex-wrap items-center justify-between gap-y-2">
       <div class="flex items-center gap-1.5">
         <span class="text-slate-500">المخطط:</span>
-        <span class="text-[#7030A0] font-bold">{{ projectConfig.planNo }}</span>
+        <span class="text-[#126B58] font-bold">{{ projectConfig.planNo }}</span>
       </div>
       <div class="flex items-center gap-1.5">
         <span class="text-slate-500">المشروع:</span>
@@ -41,7 +41,7 @@
       </div>
       <div class="flex items-center gap-1.5">
         <span class="text-slate-500">المسوق:</span>
-        <span class="text-[#7030A0] font-bold">{{ projectConfig.marketer }}</span>
+        <span class="text-[#126B58] font-bold">{{ projectConfig.marketer }}</span>
       </div>
     </div>
 
@@ -74,7 +74,7 @@
         <tbody class="divide-y divide-slate-200">
           <tr v-for="(item, idx) in items" :key="idx" class="hover:bg-slate-50/60 transition-colors">
             <td class="border border-slate-300 px-3 py-2.5 font-bold text-slate-900">{{ item.block }}</td>
-            <td class="border border-slate-300 px-3 py-2.5 font-bold text-[#7030A0] text-sm sm:text-base">{{ item.plotNo }}</td>
+            <td class="border border-slate-300 px-3 py-2.5 font-bold text-[#126B58] text-sm sm:text-base">{{ item.plotNo }}</td>
             <td class="border border-slate-300 px-3 py-2.5 font-medium">{{ formatCurrencyNumber(item.area) }}</td>
             <td class="border border-slate-300 px-3 py-2.5 font-medium">{{ formatCurrencyNumber(item.pricePerM2) }}</td>
             <td class="border border-slate-300 px-3 py-2.5 font-bold text-slate-900">{{ formatCurrencyNumber(item.landValue) }}</td>
@@ -84,7 +84,7 @@
         </tbody>
         <!-- Table Total Row -->
         <tfoot>
-          <tr class="bg-purple-100/60 font-bold text-slate-900 border-t-2 border-purple-300">
+          <tr class="bg-emerald-/60 font-bold text-slate-900 border-t-2 border-emerald-">
             <td colspan="2" class="border border-slate-300 px-3 py-3 text-center font-black text-sm">
               الإجمـــالــــــــي
             </td>
@@ -95,7 +95,7 @@
             <td class="border border-slate-300 px-3 py-3 text-center font-black text-slate-900">
               {{ formatCurrencyNumber(summary.totalLandValue) }}
             </td>
-            <td class="border border-slate-300 px-3 py-3 text-center font-black text-[#7030A0]">
+            <td class="border border-slate-300 px-3 py-3 text-center font-black text-[#126B58]">
               {{ formatCurrencyNumber(summary.totalBrokerage) }}
             </td>
             <td class="border border-slate-300 px-3 py-3 text-center font-black text-slate-900">
@@ -112,13 +112,13 @@
         <!-- Check #1: Land Value -->
         <div class="p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-lg bg-purple-100 text-[#7030A0] flex items-center justify-center font-bold text-sm shrink-0">
+            <div class="w-8 h-8 rounded-lg bg-emerald- text-[#126B58] flex items-center justify-center font-bold text-sm shrink-0">
               1
             </div>
             <div>
               <div class="font-bold text-slate-900 text-sm sm:text-base">
                 قيمة الأرض:
-                <span class="text-[#7030A0] font-black ms-2">{{ formatCurrency(summary.totalLandValue) }}</span>
+                <span class="text-[#126B58] font-black ms-2">{{ formatCurrency(summary.totalLandValue) }}</span>
               </div>
               <div class="text-xs text-slate-600 mt-0.5">
                 {{ projectConfig.texts.checkLand }}
@@ -133,13 +133,13 @@
         <!-- Check #2: Brokerage -->
         <div class="p-3.5 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-lg bg-purple-100 text-[#7030A0] flex items-center justify-center font-bold text-sm shrink-0">
+            <div class="w-8 h-8 rounded-lg bg-emerald- text-[#126B58] flex items-center justify-center font-bold text-sm shrink-0">
               2
             </div>
             <div>
               <div class="font-bold text-slate-900 text-sm sm:text-base">
                 سعي البيع (شامل ضريبة 15%):
-                <span class="text-[#7030A0] font-black ms-2">{{ formatCurrency(summary.totalBrokerage) }}</span>
+                <span class="text-[#126B58] font-black ms-2">{{ formatCurrency(summary.totalBrokerage) }}</span>
               </div>
               <div class="text-xs text-slate-600 mt-0.5">
                 {{ projectConfig.texts.checkBrokerage }}
@@ -173,7 +173,7 @@
         </div>
 
         <!-- Grand Total Banner -->
-        <div class="p-4 bg-gradient-to-r from-purple-900 to-[#7030A0] text-white flex items-center justify-between">
+        <div class="p-4 bg-gradient-to-r from-emerald- to-[#126B58] text-white flex items-center justify-between">
           <div class="text-sm sm:text-base font-bold">
             الإجمالي الشامل المطلوب سداده (أرض + سعي + ضريبة):
           </div>

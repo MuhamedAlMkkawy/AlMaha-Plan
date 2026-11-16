@@ -14,74 +14,100 @@ import {
 export default defineNuxtRouteMiddleware(async (to) => {
   const config = useRuntimeConfig();
 
-  const loginPath = String(config.public.loginPath || '/login');
+  // Admin login path (e.g. /c66dc3312779fefa)
+  const loginPath = String(config.public.loginPath || '/c66dc3312779fefa');
+  // Employee login path (e.g. /3fe97eb46687f5af)
   const employeeLoginPath = String(
-    config.public.employeeLoginPath || '/portal'
+    config.public.employeeLoginPath || '/3fe97eb46687f5af'
   );
   const homePath = '/';
 
   // 1. Routes accessible without authentication
   const openPaths = new Set([
-    homePath, // <-- homepage is public, so logout can land here
+    homePath,
     loginPath,
     employeeLoginPath,
+    '/portal',
     '/no-access',
   ]);
 
-  if (openPaths.has(to.path)) {
-    return;
-  }
-
-  // 2. Load authentication state
-  const { refreshAuth, user, isAdmin, isEmployee, permissions } =
+  // Load authentication state first
+  const { refreshAuth, user, isAdmin, isEmployee, permissions, can } =
     useAuthSession();
 
   if (!user.value) {
     await refreshAuth();
   }
 
-  // 3. Not logged in -> login page
-  if (!user.value) {
-    return navigateTo(loginPath, { replace: true });
+  // If visitor is on the public open paths
+  if (openPaths.has(to.path)) {
+    // If authenticated user visits the employee login page, redirect them inside
+    if (to.path === employeeLoginPath && user.value) {
+      if (isAdmin.value) return navigateTo('/admin', { replace: true });
+      const fallback = firstAllowedPath(permissions.value);
+      return navigateTo(fallback || '/no-access', { replace: true });
+    }
+
+    // Special check for root "/":
+    // If authenticated employee visits "/", check if they have 'view_stats'
+    if (to.path === homePath && isEmployee.value) {
+      if (!can('view_stats')) {
+        const fallback = firstAllowedPath(permissions.value);
+        return navigateTo(fallback && fallback !== '/' ? fallback : '/no-access', { replace: true });
+      }
+    }
+
+    return;
   }
 
-  // 4. Admin: full access
+  // 2. Unauthenticated visitor trying to access internal routes -> redirect to employee login page with redirect param
+  if (!user.value) {
+    // Keep internal redirect query parameter so user returns after login
+    const redirectQuery = to.fullPath !== '/' ? { redirect: to.fullPath } : undefined;
+    return navigateTo(
+      {
+        path: employeeLoginPath,
+        query: redirectQuery,
+      },
+      { replace: true }
+    );
+  }
+
+  // 3. Admin has full access to all routes
   if (isAdmin.value) {
     return;
   }
 
-  // 5. Authenticated but no valid role
+  // 4. Authenticated but not employee role (and not admin)
   if (!isEmployee.value) {
-    return navigateTo(loginPath, { replace: true });
+    return navigateTo(employeeLoginPath, { replace: true });
   }
 
-  // Helper to avoid repeating the fallback logic
+  // Helper for unauthorized employee fallback
   const redirectToFallback = () => {
     const fallback = firstAllowedPath(permissions.value);
-
     if (fallback && fallback !== to.path) {
       return navigateTo(fallback, { replace: true });
     }
-
     return navigateTo('/no-access', { replace: true });
   };
 
-  // 6. Determine route access requirements
+  // 5. Determine route access requirements from access rules
   const access = getRouteAccess(to.path);
 
-  // 7. Admin-only routes
+  // Admin-only routes (/admin, /admin/employees, /admin/audit)
   if (access.type === 'admin') {
     return redirectToFallback();
   }
 
-  // 8. Routes with explicit permission requirements
+  // Routes with explicit permission requirements
   if (access.type === 'permission') {
     return userCanAny(user.value, access.anyOf)
       ? undefined
       : redirectToFallback();
   }
 
-  // 9. Employee public/application routes (unknown routes denied by default)
+  // Internal application routes that require specific employee permissions
   const requiredPermissions = employeePermissionForPublicPath(to.path);
 
   if (!requiredPermissions?.length) {
@@ -92,6 +118,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
     return;
   }
 
-  // 10. Unauthorized employee
+  // Unauthorized employee
   return redirectToFallback();
-});``
+});

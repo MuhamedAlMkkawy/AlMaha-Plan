@@ -3,9 +3,9 @@
   <div class="admin-dashboard space-y-8 sm:space-y-10" dir="rtl">
 
     <!-- ================= PAGE HEADER ================= -->
-    <header class="relative overflow-hidden rounded-[28px] bg-[#171023] text-white shadow-xl shadow-purple-950/10">
+    <header class="relative overflow-hidden rounded-[28px] bg-[#171023] text-white shadow-xl shadow-emerald-/10">
       <div class="pointer-events-none absolute inset-0">
-        <div class="absolute -top-32 -left-20 h-80 w-80 rounded-full bg-purple-600/20 blur-[90px]"></div>
+        <div class="absolute -top-32 -left-20 h-80 w-80 rounded-full bg-emerald-/20 blur-[90px]"></div>
         <div class="absolute -bottom-40 right-1/3 h-80 w-80 rounded-full bg-amber-400/10 blur-[100px]"></div>
         <div class="admin-grid absolute inset-0 opacity-[0.06]"></div>
       </div>
@@ -66,7 +66,7 @@
     <section>
       <div class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.18em] text-[#7030A0]">
+          <div class="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.18em] text-[#126B58]">
             <span class="h-px w-6 bg-[#ffc928]"></span>
             Workspace navigation
           </div>
@@ -81,7 +81,7 @@
         </div>
 
         <span class="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-2 text-[10px] font-bold text-slate-500">
-          <i class="pi pi-th-large text-[#7030A0]"></i>
+          <i class="pi pi-th-large text-[#126B58]"></i>
           الأقسام الرئيسية
         </span>
       </div>
@@ -91,14 +91,14 @@
         <!-- Plots -->
         <NuxtLink to="/admin/plots" class="nav-card group">
           <div class="nav-card-top">
-            <div class="nav-icon bg-purple-50 text-[#7030A0] group-hover:bg-[#7030A0] group-hover:text-white">
+            <div class="nav-icon bg-emerald- text-[#126B58] group-hover:bg-[#126B58] group-hover:text-white">
               <i class="pi pi-map text-xl"></i>
             </div>
-            <span class="nav-number text-purple-100">01</span>
+            <span class="nav-number text-emerald-">01</span>
           </div>
 
           <div class="mt-5">
-            <h3 class="text-sm font-black text-slate-900 transition-colors group-hover:text-[#7030A0] sm:text-base">
+            <h3 class="text-sm font-black text-slate-900 transition-colors group-hover:text-[#126B58] sm:text-base">
               إدارة القطع والأسعار
             </h3>
 
@@ -196,11 +196,11 @@
 
       <!-- Audit Header -->
       <div class="relative overflow-hidden border-b border-slate-100 bg-gradient-to-l from-[#faf7fc] via-white to-white px-5 py-6 sm:px-7">
-        <div class="absolute right-0 top-0 h-full w-1 bg-gradient-to-b from-[#ffc928] to-[#7030A0]"></div>
+        <div class="absolute right-0 top-0 h-full w-1 bg-gradient-to-b from-[#ffc928] to-[#126B58]"></div>
 
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div class="flex items-center gap-4">
-            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#7030A0] text-white shadow-lg shadow-purple-900/15">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#126B58] text-white shadow-lg shadow-emerald-/15">
               <i class="pi pi-history text-xl"></i>
             </div>
 
@@ -210,7 +210,7 @@
                   سجل العمليات والتعديلات
                 </h2>
 
-                <span class="rounded-full border border-purple-100 bg-purple-50 px-2.5 py-1 text-[9px] font-black text-[#7030A0]">
+                <span class="rounded-full border border-emerald- bg-emerald- px-2.5 py-1 text-[9px] font-black text-[#126B58]">
                   AUDIT LOG
                 </span>
               </div>
@@ -226,7 +226,7 @@
               type="button"
               @click="refreshLogs"
               :disabled="logsPending"
-              class="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 text-xs font-bold text-slate-600 transition-all hover:border-purple-200 hover:bg-purple-50 hover:text-[#7030A0] disabled:cursor-not-allowed disabled:opacity-50"
+              class="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-3.5 text-xs font-bold text-slate-600 transition-all hover:border-emerald- hover:bg-emerald- hover:text-[#126B58] disabled:cursor-not-allowed disabled:opacity-50"
               title="تحديث السجل"
             >
               <i :class="logsPending ? 'pi pi-spin pi-spinner' : 'pi pi-refresh'"></i>
@@ -235,7 +235,7 @@
 
             <NuxtLink
               to="/admin/audit"
-              class="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#7030A0] px-4 text-xs font-bold text-white shadow-md shadow-purple-900/15 transition-all hover:-translate-y-0.5 hover:bg-[#57227f] hover:shadow-lg"
+              class="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#126B58] px-4 text-xs font-bold text-white shadow-md shadow-emerald-/15 transition-all hover:-translate-y-0.5 hover:bg-[#57227f] hover:shadow-lg"
             >
               عرض السجل كاملاً
               <i class="pi pi-arrow-left text-[10px]"></i>
@@ -245,7 +245,7 @@
 
         <div class="mt-5 flex flex-wrap items-center gap-2 text-[10px] font-semibold text-slate-400">
           <span class="inline-flex items-center gap-1.5">
-            <i class="pi pi-shield text-[#7030A0]"></i>
+            <i class="pi pi-shield text-[#126B58]"></i>
             سجل تعديلات النظام
           </span>
           <span class="text-slate-200">/</span>
@@ -259,9 +259,9 @@
         class="flex min-h-[280px] flex-col items-center justify-center px-6 py-12 text-center"
       >
         <div class="relative flex h-16 w-16 items-center justify-center">
-          <div class="absolute inset-0 rounded-full border-4 border-purple-100"></div>
-          <div class="absolute inset-0 animate-spin rounded-full border-4 border-transparent border-t-[#7030A0]"></div>
-          <i class="pi pi-history text-xl text-[#7030A0]"></i>
+          <div class="absolute inset-0 rounded-full border-4 border-emerald-"></div>
+          <div class="absolute inset-0 animate-spin rounded-full border-4 border-transparent border-t-[#126B58]"></div>
+          <i class="pi pi-history text-xl text-[#126B58]"></i>
         </div>
 
         <p class="mt-5 text-sm font-black text-slate-800">
@@ -293,7 +293,7 @@
         <button
           type="button"
           @click="refreshLogs"
-          class="mt-5 inline-flex h-10 items-center gap-2 rounded-xl bg-[#7030A0] px-5 text-xs font-bold text-white transition-all hover:bg-[#57227f]"
+          class="mt-5 inline-flex h-10 items-center gap-2 rounded-xl bg-[#126B58] px-5 text-xs font-bold text-white transition-all hover:bg-[#57227f]"
         >
           <i class="pi pi-refresh"></i>
           إعادة المحاولة
@@ -385,7 +385,7 @@
               <td class="px-5 py-5">
                 <span
                   v-if="log.plotNo"
-                  class="inline-flex items-center gap-1.5 rounded-xl border border-purple-100 bg-purple-50 px-3 py-2 font-black text-[#7030A0] whitespace-nowrap"
+                  class="inline-flex items-center gap-1.5 rounded-xl border border-emerald- bg-emerald- px-3 py-2 font-black text-[#126B58] whitespace-nowrap"
                 >
                   <i class="pi pi-map-marker text-[10px]"></i>
                   قطعة {{ log.plotNo }}
@@ -420,7 +420,7 @@
 
         <NuxtLink
           to="/admin/audit"
-          class="inline-flex items-center gap-2 text-xs font-black text-[#7030A0] transition-colors hover:text-[#57227f]"
+          class="inline-flex items-center gap-2 text-xs font-black text-[#126B58] transition-colors hover:text-[#57227f]"
         >
           عرض جميع العمليات
           <i class="pi pi-arrow-left text-[10px]"></i>
@@ -429,9 +429,9 @@
     </section>
 
     <!-- ================= BOTTOM NOTE ================= -->
-    <div class="flex flex-col gap-3 rounded-2xl border border-purple-100/80 bg-gradient-to-l from-purple-50/70 via-white to-amber-50/40 p-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+    <div class="flex flex-col gap-3 rounded-2xl border border-emerald-/80 bg-gradient-to-l from-emerald-/70 via-white to-amber-50/40 p-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
       <div class="flex items-center gap-3">
-        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#7030A0] text-white">
+        <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#126B58] text-white">
           <i class="pi pi-lock text-sm"></i>
         </div>
 
@@ -445,7 +445,7 @@
         </div>
       </div>
 
-      <span class="inline-flex items-center gap-2 text-[10px] font-bold text-[#7030A0]">
+      <span class="inline-flex items-center gap-2 text-[10px] font-bold text-[#126B58]">
         <i class="pi pi-shield"></i>
         إدارة ومراقبة مركزية
       </span>
@@ -877,7 +877,7 @@ const syncFromSheet = async () => {
 
 <style scoped>
 .admin-dashboard {
-  --admin-purple: #7030a0;
+  --admin-purple: #126B58;
   --admin-purple-dark: #57227f;
   --admin-gold: #ffc928;
 }
@@ -914,7 +914,7 @@ const syncFromSheet = async () => {
   inset-inline: 0;
   top: 0;
   height: 3px;
-  background: linear-gradient(90deg, transparent, #7030a0, #ffc928, transparent);
+  background: linear-gradient(90deg, transparent, #126B58, #ffc928, transparent);
   content: "";
   opacity: 0;
   transition: opacity 300ms ease;
@@ -966,7 +966,7 @@ const syncFromSheet = async () => {
   justify-content: space-between;
   margin-top: auto;
   padding-top: 17px;
-  color: #7030a0;
+  color: #126B58;
   font-size: 10px;
   font-weight: 900;
 }

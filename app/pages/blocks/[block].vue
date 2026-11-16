@@ -4,7 +4,7 @@
     <header class="pb-6 border-b border-slate-200 space-y-6">
       <NuxtLink
         to="/blocks"
-        class="group inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-[#7030A0] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40 rounded-lg"
+        class="group inline-flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-[#126B58] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#126B58]/40 rounded-lg"
       >
         <i class="pi pi-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-300 motion-reduce:transition-none"></i>
         <span>جميع البلوكات</span>
@@ -12,11 +12,11 @@
 
       <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
         <div class="flex items-center gap-5">
-          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#7030A0] text-white flex items-center justify-center shrink-0">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#126B58] text-white flex items-center justify-center shrink-0">
             <span class="text-3xl sm:text-4xl font-black">{{ blockNum }}</span>
           </div>
           <div class="min-w-0">
-            <div class="text-sm font-semibold text-[#7030A0]">مخطط المها</div>
+            <div class="text-sm font-semibold text-[#126B58]">مخطط المها</div>
             <h1 class="mt-1 text-2xl sm:text-4xl font-black text-slate-900">
               قطع بلك رقم {{ blockNum }}
             </h1>
@@ -32,10 +32,10 @@
             v-for="f in filters"
             :key="f.key"
             type="button"
-            class="inline-flex items-center gap-2 h-11 px-4 rounded-full border text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/40 focus-visible:ring-offset-2"
+            class="inline-flex items-center gap-2 h-11 px-4 rounded-full border text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#126B58]/40 focus-visible:ring-offset-2"
             :class="activeFilter === f.key
-              ? 'bg-[#7030A0] border-[#7030A0] text-white'
-              : 'bg-white border-slate-200 text-slate-700 hover:border-[#7030A0]/40 hover:text-[#7030A0]'"
+              ? 'bg-[#126B58] border-[#126B58] text-white'
+              : 'bg-white border-slate-200 text-slate-700 hover:border-[#126B58]/40 hover:text-[#126B58]'"
             :aria-pressed="activeFilter === f.key"
             @click="activeFilter = f.key"
           >
@@ -80,7 +80,7 @@
         v-for="plot in visiblePlots"
         :key="plot.plotNo"
         :to="`/plots/${plot.plotNo}`"
-        class="group relative flex flex-col overflow-hidden rounded-2xl bg-white border border-slate-200 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#7030A0]/40 hover:shadow-[0_16px_32px_-18px_rgba(76,29,115,0.35)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7030A0]/50 focus-visible:ring-offset-2"
+        class="group relative flex flex-col overflow-hidden rounded-2xl bg-white border border-slate-200 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#126B58]/40 hover:shadow-[0_16px_32px_-18px_rgba(76,29,115,0.35)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#126B58]/50 focus-visible:ring-offset-2"
       >
         <!-- Status edge -->
         <span class="h-1.5 w-full" :class="tone(plot.status).bar"></span>
@@ -101,7 +101,7 @@
           <!-- Plot number -->
           <div class="mt-5 mb-6">
             <div class="text-sm text-slate-500 font-medium">قطعة رقم</div>
-            <div class="mt-1 text-5xl font-black text-slate-900 leading-none transition-colors duration-300 group-hover:text-[#7030A0]">
+            <div class="mt-1 text-5xl font-black text-slate-900 leading-none transition-colors duration-300 group-hover:text-[#126B58]">
               {{ plot.plotNo }}
             </div>
           </div>
@@ -119,7 +119,7 @@
           </dl>
 
           <!-- Action -->
-          <div class="mt-4 flex items-center justify-between text-base font-bold text-[#7030A0]">
+          <div class="mt-4 flex items-center justify-between text-base font-bold text-[#126B58]">
             <span>عرض السعر</span>
             <i class="pi pi-arrow-left text-sm group-hover:-translate-x-1 transition-transform duration-300 motion-reduce:transition-none"></i>
           </div>

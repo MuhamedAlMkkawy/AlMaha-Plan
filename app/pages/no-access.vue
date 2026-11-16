@@ -11,7 +11,7 @@
       </p>
       <button
         type="button"
-        class="mt-6 inline-flex items-center gap-2 h-11 px-5 rounded-full bg-[#7030A0] text-white text-sm font-bold"
+        class="mt-6 inline-flex items-center gap-2 h-11 px-5 rounded-full bg-[#126B58] text-white text-sm font-bold"
         @click="handleLogout"
       >
         <i class="pi pi-sign-out text-xs"></i>

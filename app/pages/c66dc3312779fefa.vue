@@ -10,11 +10,11 @@
 
       <!-- Atmospheric lighting -->
       <div
-        class="absolute -right-64 -top-64 h-[850px] w-[850px] rounded-full bg-[#7030A0]/30 blur-[170px]"
+        class="absolute -right-64 -top-64 h-[850px] w-[850px] rounded-full bg-[#126B58]/30 blur-[170px]"
       ></div>
 
       <div
-        class="absolute -bottom-72 -left-64 h-[850px] w-[850px] rounded-full bg-[#8b45b5]/20 blur-[180px]"
+        class="absolute -bottom-72 -left-64 h-[850px] w-[850px] rounded-full bg-[#71998A]/20 blur-[180px]"
       ></div>
 
       <div
@@ -159,7 +159,7 @@
               class="feature-card group flex items-center gap-4 rounded-2xl border border-white/[0.09] bg-white/[0.045] p-5 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-[#ffc928]/30 hover:bg-white/[0.075]"
             >
               <div
-                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-purple-400/10 text-purple-300 transition-all group-hover:bg-purple-400/20"
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-/10 text-emerald- transition-all group-hover:bg-emerald-/20"
               >
                 <i class="pi pi-th-large text-xl"></i>
               </div>
@@ -229,7 +229,7 @@
           >
             <!-- Top accent -->
             <div class="absolute inset-x-0 top-0 flex h-[5px]">
-              <div class="w-[65%] bg-[#7030A0]"></div>
+              <div class="w-[65%] bg-[#126B58]"></div>
               <div class="flex-1 bg-[#ffc928]"></div>
             </div>
 
@@ -237,7 +237,7 @@
               <!-- Mobile brand -->
               <div class="mb-9 text-center lg:hidden">
                 <div
-                  class="mx-auto mb-4 flex h-[66px] w-[66px] items-center justify-center rounded-[22px] bg-gradient-to-br from-[#7030A0] to-[#45205f] text-white shadow-xl shadow-purple-900/20"
+                  class="mx-auto mb-4 flex h-[66px] w-[66px] items-center justify-center rounded-[22px] bg-gradient-to-br from-[#126B58] to-[#45205f] text-white shadow-xl shadow-emerald-/20"
                 >
                   <i class="pi pi-building text-2xl"></i>
                 </div>
@@ -255,10 +255,10 @@
               <div class="mb-9">
                 <div class="mb-6 flex items-center justify-between gap-3">
                   <div
-                    class="inline-flex items-center gap-2.5 rounded-xl border border-[#7030A0]/10 bg-[#7030A0]/[0.06] px-4 py-2.5"
+                    class="inline-flex items-center gap-2.5 rounded-xl border border-[#126B58]/10 bg-[#126B58]/[0.06] px-4 py-2.5"
                   >
-                    <i class="pi pi-shield text-xs text-[#7030A0]"></i>
-                    <span class="text-[11px] font-extrabold text-[#7030A0]">
+                    <i class="pi pi-shield text-xs text-[#126B58]"></i>
+                    <span class="text-[11px] font-extrabold text-[#126B58]">
                       دخول إداري محمي
                     </span>
                   </div>
@@ -353,7 +353,7 @@
                       required
                       autocomplete="username"
                       placeholder="mail@example.com"
-                      class="h-[62px] w-full rounded-xl border border-slate-200 bg-[#f8f7fa] pl-[58px] pr-5 text-sm font-semibold leading-7 text-slate-900 outline-none transition-all placeholder:font-normal placeholder:text-slate-400 hover:border-slate-300 focus:border-[#7030A0] focus:bg-white focus:ring-4 focus:ring-[#7030A0]/10"
+                      class="h-[62px] w-full rounded-xl border border-slate-200 bg-[#f8f7fa] pl-[58px] pr-5 text-sm font-semibold leading-7 text-slate-900 outline-none transition-all placeholder:font-normal placeholder:text-slate-400 hover:border-slate-300 focus:border-[#126B58] focus:bg-white focus:ring-4 focus:ring-[#126B58]/10"
                     />
                   </div>
                 </div>
@@ -384,7 +384,7 @@
                       @keyup="checkCapsLock"
                       @keydown="checkCapsLock"
                       @blur="capsLockOn = false"
-                      class="h-[62px] w-full rounded-xl border border-slate-200 bg-[#f8f7fa] pl-[58px] pr-[58px] text-sm font-semibold leading-7 text-slate-900 outline-none transition-all placeholder:text-slate-400 hover:border-slate-300 focus:border-[#7030A0] focus:bg-white focus:ring-4 focus:ring-[#7030A0]/10"
+                      class="h-[62px] w-full rounded-xl border border-slate-200 bg-[#f8f7fa] pl-[58px] pr-[58px] text-sm font-semibold leading-7 text-slate-900 outline-none transition-all placeholder:text-slate-400 hover:border-slate-300 focus:border-[#126B58] focus:bg-white focus:ring-4 focus:ring-[#126B58]/10"
                     />
 
                     <button
@@ -392,7 +392,7 @@
                       @click="showPassword = !showPassword"
                       :aria-label="showPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'"
                       :aria-pressed="showPassword"
-                      class="absolute inset-y-0 right-0 flex w-[54px] items-center justify-center rounded-r-xl text-slate-400 transition-colors hover:text-[#7030A0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#7030A0]"
+                      class="absolute inset-y-0 right-0 flex w-[54px] items-center justify-center rounded-r-xl text-slate-400 transition-colors hover:text-[#126B58] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#126B58]"
                     >
                       <i
                         :class="showPassword ? 'pi pi-eye-slash' : 'pi pi-eye'"
@@ -421,7 +421,7 @@
                 <button
                   type="submit"
                   :disabled="loading"
-                  class="admin-submit group relative mt-3 flex h-[64px] w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-gradient-to-l from-[#7030A0] via-[#64298f] to-[#4d206c] px-5 text-sm font-extrabold leading-7 text-white shadow-[0_10px_25px_rgba(112,48,160,.24)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_15px_32px_rgba(112,48,160,.32)] active:translate-y-0 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60"
+                  class="admin-submit group relative mt-3 flex h-[64px] w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-gradient-to-l from-[#126B58] via-[#64298f] to-[#4d206c] px-5 text-sm font-extrabold leading-7 text-white shadow-[0_10px_25px_rgba(112,48,160,.24)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_15px_32px_rgba(112,48,160,.32)] active:translate-y-0 disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   <span
                     class="absolute inset-0 translate-x-full bg-gradient-to-l from-transparent via-white/15 to-transparent transition-transform duration-700 group-hover:translate-x-[-100%]"
@@ -448,7 +448,7 @@
                 class="mt-9 flex items-center gap-3 border-t border-slate-100 pt-7"
               >
                 <div
-                  class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#7030A0]/[0.08] text-[#7030A0]"
+                  class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#126B58]/[0.08] text-[#126B58]"
                 >
                   <i class="pi pi-shield text-base"></i>
                 </div>
@@ -492,6 +492,7 @@ import { projectConfig } from '../config/project';
 
 definePageMeta({ layout: false });
 
+const route = useRoute();
 const email = ref('');
 const password = ref('');
 const showPassword = ref(false);
@@ -517,7 +518,12 @@ const handleLogin = async () => {
     });
 
     if (res.success) {
-      await navigateTo('/admin');
+      const redirectParam = typeof route.query.redirect === 'string' ? route.query.redirect : null;
+      if (redirectParam && redirectParam.startsWith('/') && !redirectParam.startsWith('//')) {
+        await navigateTo(redirectParam);
+      } else {
+        await navigateTo('/admin');
+      }
     }
   } catch (err: any) {
     console.error('Login error:', err);
@@ -543,7 +549,7 @@ const handleLogin = async () => {
 }
 
 .admin-field:focus-within > span {
-  color: #7030a0;
+  color: #126B58;
 }
 
 .feature-card {

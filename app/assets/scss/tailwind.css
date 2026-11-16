@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --brand-primary: #126B58;
+  --brand-dark: #174A40;
+  --brand-hover: #0D5143;
+  --brand-secondary: #71998A;
+  --brand-soft: #E5EEE9;
+
+  --accent-gold: #B89A68;
+  --accent-champagne: #D8C5A0;
+
+  --surface-main: #FAF9F5;
+  --surface-warm: #F5F1E8;
+  --surface-card: #FFFFFF;
+
+  --text-primary: #293B36;
+  --text-secondary: #718078;
+
+  --border-default: #E5E9E5;
+}
+
+body {
+  background-color: var(--surface-main);
+  color: var(--text-primary);
+  font-family: 'Cairo', 'Expo Arabic', sans-serif;
+}

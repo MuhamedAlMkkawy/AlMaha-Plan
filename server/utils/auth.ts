@@ -225,6 +225,42 @@ export async function requirePermission(
   return user;
 }
 
+export async function requireAnyPermission(
+  event: H3Event,
+  permissions: EmployeePermission[]
+): Promise<AuthUser> {
+  const user = await getLiveAuthSession(event);
+
+  if (!user) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: 'يرجى تسجيل الدخول أولاً',
+    });
+  }
+
+  const { userCanAny } = await import('../../shared/access');
+  if (!userCanAny(user, permissions)) {
+    throw createError({
+      statusCode: 403,
+      statusMessage: 'غير مصرح - ليس لديك الصلاحيات الكافية للوصول',
+    });
+  }
+
+  return user;
+}
+
+/**
+ * Requires authentication first (returns 401 if unauthenticated),
+ * then checks if employee has the given permission (returns 403 if forbidden).
+ * Admin always passes.
+ */
+export async function requireAuthAndPermission(
+  event: H3Event,
+  permission: EmployeePermission
+): Promise<AuthUser> {
+  return requirePermission(event, permission);
+}
+
 /** Guests stay allowed; logged-in employees must hold the given permission. */
 export async function enforceEmployeePermissionIfLoggedIn(
   event: H3Event,

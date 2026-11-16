@@ -19,7 +19,7 @@ export type EmployeePermission =
   | 'view_block_page'
   | 'edit_block_page'
   | 'create_block_page'
-  | 'delete_block_page';
+  | 'delete_block_page'
 
 export interface EmployeePermissionDef {
   key: EmployeePermission;

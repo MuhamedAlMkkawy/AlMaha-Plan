@@ -2,7 +2,7 @@
   {
     "id": "emp_6bce5bce3180",
     "name": "محمد المكاوي",
-    "username": "muhamedalmkkawy@gmail.com",
+    "username": "mkkawy@maha-plan",
     "password": "123456",
     "role": "employee",
     "status": "active",
@@ -10,12 +10,13 @@
       "view_plots",
       "create_plots",
       "create_plot_page",
-      "view_contracts"
+      "view_contracts",
+      "view_plot_page"
     ],
     "title": "موظف مبيعات",
     "phone": "",
     "createdAt": "2026-11-12T12:10:53.757Z",
-    "lastLoginAt": "2026-11-13T22:25:37.340Z",
-    "updatedAt": "2026-11-13T22:25:19.777Z"
+    "lastLoginAt": "2026-11-16T09:37:27.337Z",
+    "updatedAt": "2026-11-16T07:30:31.114Z"
   }
 ]

@@ -5,15 +5,15 @@
     <header class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div>
         <div class="mb-2 flex items-center gap-2 text-xs">
-          <NuxtLink to="/admin" class="font-medium text-slate-400 transition hover:text-[#7030A0]">
+          <NuxtLink to="/admin" class="font-medium text-slate-400 transition hover:text-[#126B58]">
             الإدارة
           </NuxtLink>
           <i class="pi pi-angle-left text-[10px] text-slate-300"></i>
-          <span class="font-bold text-[#7030A0]">فريق العمل</span>
+          <span class="font-bold text-[#126B58]">فريق العمل</span>
         </div>
 
         <div class="flex items-center gap-3">
-          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#8546B5] to-[#5B2188] text-white shadow-lg shadow-purple-900/15">
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#8546B5] to-[#5B2188] text-white shadow-lg shadow-emerald-/15">
             <i class="pi pi-users text-lg"></i>
           </div>
           <div>
@@ -30,7 +30,7 @@
       <div class="flex flex-wrap gap-2">
         <NuxtLink
           to="/admin/audit"
-          class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold text-slate-600 shadow-sm transition hover:border-violet-200 hover:bg-violet-50 hover:text-[#7030A0]"
+          class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold text-slate-600 shadow-sm transition hover:border-violet-200 hover:bg-violet-50 hover:text-[#126B58]"
         >
           <i class="pi pi-history"></i>
           سجل النشاط
@@ -39,7 +39,7 @@
         <button
           type="button"
           @click="openAddModal"
-          class="inline-flex items-center gap-2 rounded-xl bg-[#7030A0] px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-purple-900/20 transition hover:bg-[#532277] active:scale-[.98]"
+          class="inline-flex items-center gap-2 rounded-xl bg-[#126B58] px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-emerald-/20 transition hover:bg-[#174A40] active:scale-[.98]"
         >
           <i class="pi pi-user-plus"></i>
           إضافة موظف
@@ -116,7 +116,7 @@
     <section class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
       <div class="flex flex-col gap-3 border-b border-slate-100 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
         <div class="flex items-center gap-3">
-          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 text-[#7030A0]">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 text-[#126B58]">
             <i class="pi pi-id-card"></i>
           </div>
           <div>
@@ -131,7 +131,7 @@
           type="button"
           @click="refresh"
           :disabled="pending"
-          class="inline-flex items-center gap-2 self-start rounded-lg px-3 py-2 text-xs font-bold text-slate-500 transition hover:bg-violet-50 hover:text-[#7030A0] disabled:opacity-50"
+          class="inline-flex items-center gap-2 self-start rounded-lg px-3 py-2 text-xs font-bold text-slate-500 transition hover:bg-violet-50 hover:text-[#126B58] disabled:opacity-50"
         >
           <i :class="pending ? 'pi pi-spin pi-spinner' : 'pi pi-refresh'"></i>
           تحديث القائمة
@@ -139,13 +139,13 @@
       </div>
 
       <div v-if="pending" class="flex flex-col items-center justify-center px-4 py-16">
-        <i class="pi pi-spin pi-spinner text-3xl text-[#7030A0]"></i>
+        <i class="pi pi-spin pi-spinner text-3xl text-[#126B58]"></i>
         <p class="mt-4 text-sm font-bold text-slate-700">جاري تحميل الموظفين</p>
         <p class="mt-1 text-xs text-slate-400">يرجى الانتظار...</p>
       </div>
 
       <div v-else-if="employees.length === 0" class="flex flex-col items-center justify-center px-4 py-16 text-center">
-        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-violet-50 text-[#7030A0]">
+        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-violet-50 text-[#126B58]">
           <i class="pi pi-users text-2xl"></i>
         </div>
         <h3 class="mt-4 text-base font-black text-slate-900">لا يوجد موظفون حتى الآن</h3>
@@ -155,7 +155,7 @@
         <button
           type="button"
           @click="openAddModal"
-          class="mt-5 inline-flex items-center gap-2 rounded-xl bg-[#7030A0] px-5 py-3 text-xs font-bold text-white transition hover:bg-[#532277]"
+          class="mt-5 inline-flex items-center gap-2 rounded-xl bg-[#126B58] px-5 py-3 text-xs font-bold text-white transition hover:bg-[#174A40]"
         >
           <i class="pi pi-user-plus"></i>
           إضافة أول موظف
@@ -186,11 +186,11 @@
                   @click="openDetails(emp)"
                   class="flex items-center justify-center gap-3 text-start"
                 >
-                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-100 to-indigo-50 font-black text-[#7030A0]">
+                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-100 to-indigo-50 font-black text-[#126B58]">
                     {{ getInitials(emp.name) }}
                   </div>
                   <div class="min-w-0">
-                    <p class="font-extrabold text-slate-900 transition hover:text-[#7030A0]">{{ emp.name }}</p>
+                    <p class="font-extrabold text-slate-900 transition hover:text-[#126B58]">{{ emp.name }}</p>
                     <p class="mt-1 text-[11px] text-slate-500">{{ emp.title || 'لم يحدد المسمى الوظيفي' }}</p>
                     <p v-if="emp.phone" dir="ltr" class="mt-0.5 text-start font-mono text-[10px] text-slate-400">{{ emp.phone }}</p>
                   </div>
@@ -222,7 +222,7 @@
                   <span
                     v-for="permission in (emp.permissions || []).slice(0, 3)"
                     :key="permission"
-                    class="rounded-md border border-violet-100 bg-violet-50 px-2 py-1 text-[10px] font-bold text-[#7030A0]"
+                    class="rounded-md border border-violet-100 bg-violet-50 px-2 py-1 text-[10px] font-bold text-[#126B58]"
                   >
                     {{ getPermissionLabel(permission) }}
                   </span>
@@ -251,7 +251,7 @@
                   <button
                     type="button"
                     @click="openEditModal(emp)"
-                    class="flex h-9 w-9 items-center justify-center rounded-xl text-[#7030A0] transition hover:bg-violet-50"
+                    class="flex h-9 w-9 items-center justify-center rounded-xl text-[#126B58] transition hover:bg-violet-50"
                     title="تعديل الموظف"
                   >
                     <i class="pi pi-pencil text-xs"></i>
@@ -506,7 +506,7 @@
                       </div>
 
                       <div class="rounded-xl border border-violet-100 bg-white px-4 py-2 text-center">
-                        <span class="text-xl font-black text-[#7030A0]">{{ form.permissions.length }}</span>
+                        <span class="text-xl font-black text-[#126B58]">{{ form.permissions.length }}</span>
                         <span class="text-[10px] font-bold text-slate-400"> / {{ ALL_EMPLOYEE_PERMISSIONS.length }}</span>
                         <p class="text-[10px] font-bold text-slate-500">صلاحية محددة</p>
                       </div>
@@ -525,7 +525,7 @@
                         <button
                           type="button"
                           @click="selectAllPermissions"
-                          class="rounded-lg border border-violet-200 bg-white px-3 py-2 text-[10px] font-extrabold text-[#7030A0] transition hover:bg-violet-50"
+                          class="rounded-lg border border-violet-200 bg-white px-3 py-2 text-[10px] font-extrabold text-[#126B58] transition hover:bg-violet-50"
                         >
                           <i class="pi pi-check-square ms-1"></i>
                           تحديد الكل
@@ -560,7 +560,7 @@
                         <div>
                           <h5 class="text-xs font-black text-slate-900 sm:text-sm">{{ group.label }}</h5>
                           <p class="mt-1 text-[10px] text-slate-500">{{ group.description }}</p>
-                          <span class="mt-1 inline-block text-[10px] font-bold text-[#7030A0]">
+                          <span class="mt-1 inline-block text-[10px] font-bold text-[#126B58]">
                             {{ getGroupSelectedCount(group) }} من {{ group.keys.length }} محددة
                           </span>
                         </div>
@@ -572,7 +572,7 @@
                         class="rounded-lg border px-3 py-2 text-[10px] font-extrabold transition"
                         :class="isGroupFullySelected(group)
                           ? 'border-rose-200 bg-rose-50 text-rose-600'
-                          : 'border-violet-200 bg-violet-50 text-[#7030A0]'"
+                          : 'border-violet-200 bg-violet-50 text-[#126B58]'"
                       >
                         <i
                           :class="isGroupFullySelected(group) ? 'pi pi-minus-circle' : 'pi pi-check-circle'"
@@ -600,7 +600,7 @@
                         <span
                           class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border transition"
                           :class="form.permissions.includes(permission.key)
-                            ? 'border-[#7030A0] bg-[#7030A0] text-white'
+                            ? 'border-[#126B58] bg-[#126B58] text-white'
                             : 'border-slate-300 bg-white text-transparent group-hover:border-violet-300'"
                         >
                           <i class="pi pi-check text-[9px]"></i>
@@ -659,7 +659,7 @@
                   <button
                     type="submit"
                     :disabled="saving || !form.name.trim() || !form.title.trim() || !form.username.trim()"
-                    class="inline-flex items-center gap-2 rounded-xl bg-[#7030A0] px-6 py-3 text-xs font-extrabold text-white shadow-md transition hover:bg-[#532277] disabled:cursor-not-allowed disabled:opacity-50"
+                    class="inline-flex items-center gap-2 rounded-xl bg-[#126B58] px-6 py-3 text-xs font-extrabold text-white shadow-md transition hover:bg-[#174A40] disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <i v-if="saving" class="pi pi-spin pi-spinner"></i>
                     <i v-else :class="editingId ? 'pi pi-save' : 'pi pi-user-plus'"></i>
@@ -707,12 +707,12 @@
           <div class="min-h-0 flex-1 space-y-5 overflow-y-auto p-4 sm:p-6">
             <!-- Employee Overview -->
             <div class="flex flex-col gap-4 rounded-2xl border border-violet-100 bg-violet-50/50 p-4 sm:flex-row sm:items-center">
-              <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-100 to-indigo-100 text-xl font-black text-[#7030A0]">
+              <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-100 to-indigo-100 text-xl font-black text-[#126B58]">
                 {{ getInitials(detailsEmployee.name) }}
               </div>
               <div class="min-w-0 flex-1">
                 <h4 class="text-base font-black text-slate-900">{{ detailsEmployee.name }}</h4>
-                <p class="mt-1 text-xs font-semibold text-[#7030A0]">
+                <p class="mt-1 text-xs font-semibold text-[#126B58]">
                   {{ detailsEmployee.title || 'لم يحدد المسمى الوظيفي' }}
                 </p>
                 <span
@@ -733,7 +733,7 @@
             <!-- Basic Information -->
             <section>
               <h4 class="mb-3 flex items-center gap-2 text-xs font-black text-slate-800">
-                <i class="pi pi-id-card text-[#7030A0]"></i>
+                <i class="pi pi-id-card text-[#126B58]"></i>
                 البيانات الأساسية
               </h4>
               <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -756,7 +756,7 @@
             <!-- Login / Logout -->
             <section>
               <h4 class="mb-3 flex items-center gap-2 text-xs font-black text-slate-800">
-                <i class="pi pi-history text-[#7030A0]"></i>
+                <i class="pi pi-history text-[#126B58]"></i>
                 سجل الدخول والخروج
               </h4>
               <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -786,10 +786,10 @@
             <section>
               <div class="mb-3 flex items-center justify-between gap-2">
                 <h4 class="flex items-center gap-2 text-xs font-black text-slate-800">
-                  <i class="pi pi-shield text-[#7030A0]"></i>
+                  <i class="pi pi-shield text-[#126B58]"></i>
                   الصلاحيات الممنوحة
                 </h4>
-                <span class="rounded-lg bg-violet-50 px-2.5 py-1 text-[10px] font-black text-[#7030A0]">
+                <span class="rounded-lg bg-violet-50 px-2.5 py-1 text-[10px] font-black text-[#126B58]">
                   {{ detailsEmployee.permissions?.length || 0 }} صلاحية
                 </span>
               </div>
@@ -805,7 +805,7 @@
                     <span
                       v-for="key in group.keys.filter(key => detailsEmployee?.permissions?.includes(key))"
                       :key="key"
-                      class="rounded-lg border border-violet-100 bg-violet-50 px-2.5 py-1.5 text-[10px] font-bold text-[#7030A0]"
+                      class="rounded-lg border border-violet-100 bg-violet-50 px-2.5 py-1.5 text-[10px] font-bold text-[#126B58]"
                     >
                       {{ getPermissionLabel(key) }}
                     </span>
@@ -830,7 +830,7 @@
             <!-- Account Information -->
             <section>
               <h4 class="mb-2 flex items-center gap-2 text-xs font-black text-slate-800">
-                <i class="pi pi-calendar text-[#7030A0]"></i>
+                <i class="pi pi-calendar text-[#126B58]"></i>
                 معلومات الحساب
               </h4>
               <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -871,7 +871,7 @@
               <button
                 type="button"
                 @click="editFromDetails"
-                class="inline-flex items-center gap-2 rounded-xl bg-[#7030A0] px-4 py-2.5 text-xs font-bold text-white hover:bg-[#532277]"
+                class="inline-flex items-center gap-2 rounded-xl bg-[#126B58] px-4 py-2.5 text-xs font-bold text-white hover:bg-[#174A40]"
               >
                 <i class="pi pi-pencil"></i>
                 تعديل البيانات
@@ -925,7 +925,7 @@
               class="flex flex-1 items-center justify-center gap-2 rounded-xl px-4 py-3 text-xs font-extrabold text-white transition disabled:opacity-50"
               :class="confirmDialog.type === 'delete'
                 ? 'bg-rose-600 hover:bg-rose-700'
-                : 'bg-[#7030A0] hover:bg-[#532277]'"
+                : 'bg-[#126B58] hover:bg-[#174A40]'"
             >
               <i v-if="confirmDialog.loading" class="pi pi-spin pi-spinner"></i>
               <i
@@ -1015,7 +1015,7 @@ const permissionGroups: PermissionGroup[] = [
     description: 'التحكم في القطع وحالات البيع والحجز والأرشفة',
     icon: 'pi pi-map',
     iconBg: 'bg-violet-50',
-    iconColor: 'text-[#7030A0]',
+    iconColor: 'text-[#126B58]',
     keys: ['view_plots', 'create_plots', 'edit_plots', 'delete_plots'],
   },
   {
@@ -1086,9 +1086,9 @@ const stats = computed(() => [
     percentage: employees.value.length ? 100 : 0,
     icon: 'pi pi-users',
     iconBg: 'bg-violet-50',
-    iconColor: 'text-[#7030A0]',
+    iconColor: 'text-[#126B58]',
     valueColor: 'text-slate-900',
-    barColor: 'bg-[#7030A0]',
+    barColor: 'bg-[#126B58]',
   },
   {
     label: 'الموظفون النشطون',
@@ -1629,7 +1629,7 @@ const requestDelete = (employee: EmployeeWithActivity) => {
 
 /* Change icon color when input is focused */
 .form-input-wrapper:focus-within .form-input-icon {
-  color: #7030A0;
+  color: #126B58;
 }
 
 /* ========================================
@@ -1659,7 +1659,7 @@ const requestDelete = (employee: EmployeeWithActivity) => {
 
   outline: none;
 
-  caret-color: #7030A0;
+  caret-color: #126B58;
 
   transition:
     border-color 0.2s ease,
@@ -1695,7 +1695,7 @@ const requestDelete = (employee: EmployeeWithActivity) => {
 
 /* Focus */
 .form-input:focus {
-  border-color: #7030A0;
+  border-color: #126B58;
   background-color: #fff;
 
   box-shadow:

@@ -4,21 +4,21 @@
 
     <!-- ================= HEADER ================= -->
     <header class="relative overflow-hidden rounded-[26px] border border-slate-200/80 bg-white shadow-sm">
-      <div class="absolute inset-y-0 right-0 w-1.5 bg-[#7030A0]"></div>
-      <div class="absolute -left-16 -top-24 h-64 w-64 rounded-full bg-purple-50/80 blur-3xl pointer-events-none"></div>
+      <div class="absolute inset-y-0 right-0 w-1.5 bg-[#126B58]"></div>
+      <div class="absolute -left-16 -top-24 h-64 w-64 rounded-full bg-[#E5EEE9]/80 blur-3xl pointer-events-none"></div>
 
       <div class="relative flex flex-col xl:flex-row xl:items-center justify-between gap-6 p-5 sm:p-7">
         <div class="min-w-0">
           <div class="flex items-center gap-2 text-xs font-semibold">
-            <NuxtLink to="/admin" class="text-slate-400 transition hover:text-[#7030A0]">
+            <NuxtLink to="/admin" class="text-slate-400 transition hover:text-[#126B58]">
               الإدارة
             </NuxtLink>
             <i class="pi pi-angle-left text-[10px] text-slate-300"></i>
-            <span class="text-[#7030A0]">سجل العمليات</span>
+            <span class="text-[#126B58]">سجل العمليات</span>
           </div>
 
           <div class="mt-5 flex items-start gap-4">
-            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#7030A0]/10 text-[#7030A0]">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#126B58]/10 text-[#126B58]">
               <i class="pi pi-history text-xl"></i>
             </div>
 
@@ -33,7 +33,7 @@
           </div>
 
           <div class="mt-4 flex items-center gap-2 text-[11px] font-semibold text-slate-400">
-            <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+            <span class="h-2 w-2 rounded-full bg-[#E5EEE9]500"></span>
             سجل تدقيق مركزي لجميع العمليات
           </div>
         </div>
@@ -41,7 +41,7 @@
         <div class="flex flex-wrap items-center gap-2.5">
           <NuxtLink
             to="/admin/employees"
-            class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-xs font-bold text-slate-600 transition hover:border-purple-200 hover:bg-purple-50 hover:text-[#7030A0]"
+            class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-xs font-bold text-slate-600 transition hover:border-[#71998A] hover:bg-[#E5EEE9] hover:text-[#126B58]"
           >
             <i class="pi pi-users"></i>
             إدارة الموظفين
@@ -49,7 +49,7 @@
 
           <button
             @click="exportCsv"
-            class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-xs font-bold text-slate-600 transition hover:border-purple-200 hover:bg-purple-50 hover:text-[#7030A0]"
+            class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-xs font-bold text-slate-600 transition hover:border-[#71998A] hover:bg-[#E5EEE9] hover:text-[#126B58]"
           >
             <i class="pi pi-download"></i>
             تصدير CSV
@@ -58,7 +58,7 @@
           <button
             @click="refreshAll"
             :disabled="pending"
-            class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#7030A0] px-4 py-3 text-xs font-bold text-white shadow-sm shadow-purple-900/10 transition hover:bg-[#5d2588] disabled:cursor-not-allowed disabled:opacity-60"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#126B58] px-4 py-3 text-xs font-bold text-white shadow-sm shadow-[#126B58]/10 transition hover:bg-[#0D5143] disabled:cursor-not-allowed disabled:opacity-60"
           >
             <i class="pi pi-sync" :class="{ 'pi-spin': pending }"></i>
             تحديث السجل
@@ -73,7 +73,7 @@
       <!-- Total -->
       <div class="group relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-4 sm:p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
         <div class="flex items-center justify-between gap-2">
-          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-50 text-[#7030A0]">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E5EEE9] text-[#126B58]">
             <i class="pi pi-list text-base"></i>
           </div>
           <span class="text-[10px] font-bold text-slate-400">كل السجلات</span>
@@ -84,8 +84,8 @@
           </div>
           <div class="mt-1 text-xs font-semibold text-slate-500">إجمالي العمليات</div>
         </div>
-        <div class="absolute bottom-0 right-0 h-1 w-full bg-purple-100">
-          <div class="h-full w-1/3 bg-[#7030A0]"></div>
+        <div class="absolute bottom-0 right-0 h-1 w-full bg-[#E5EEE9]">
+          <div class="h-full w-1/3 bg-[#126B58]"></div>
         </div>
       </div>
 
@@ -152,7 +152,7 @@
 
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 px-5 py-4">
         <div class="flex items-center gap-3">
-          <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-purple-50 text-[#7030A0]">
+          <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E5EEE9] text-[#126B58]">
             <i class="pi pi-sliders-h"></i>
           </div>
           <div>
@@ -179,7 +179,7 @@
           <!-- Employee -->
           <div class="space-y-2">
             <label class="flex items-center gap-2 text-xs font-bold text-slate-600">
-              <i class="pi pi-user text-[#7030A0]"></i>
+              <i class="pi pi-user text-[#126B58]"></i>
               الموظف
             </label>
 
@@ -194,7 +194,7 @@
           <!-- Action -->
           <div class="space-y-2">
             <label class="flex items-center gap-2 text-xs font-bold text-slate-600">
-              <i class="pi pi-bolt text-[#7030A0]"></i>
+              <i class="pi pi-bolt text-[#126B58]"></i>
               نوع الإجراء
             </label>
 
@@ -209,7 +209,7 @@
           <!-- Role -->
           <div class="space-y-2">
             <label class="flex items-center gap-2 text-xs font-bold text-slate-600">
-              <i class="pi pi-shield text-[#7030A0]"></i>
+              <i class="pi pi-shield text-[#126B58]"></i>
               دور المنفذ
             </label>
 
@@ -223,7 +223,7 @@
           <!-- Search -->
           <div class="space-y-2">
             <label class="flex items-center gap-2 text-xs font-bold text-slate-600">
-              <i class="pi pi-search text-[#7030A0]"></i>
+              <i class="pi pi-search text-[#126B58]"></i>
               البحث
             </label>
 
@@ -232,9 +232,9 @@
                 v-model="search"
                 type="text"
                 placeholder="رقم القطعة، الاسم، التفاصيل..."
-                class="audit-input pr-10"
+                class="audit-input audit-input--with-icon" dir="rtl"
               />
-              <i class="pi pi-search absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-slate-400"></i>
+              <i class="pi pi-search audit-input-icon text-xs text-slate-400" aria-hidden="true"></i>
             </div>
           </div>
         </div>
@@ -252,10 +252,10 @@
           </div>
 
           <div class="flex items-end">
-            <div class="w-full rounded-xl bg-purple-50/70 px-4 py-3">
+            <div class="w-full rounded-xl bg-[#E5EEE9]/70 px-4 py-3">
               <div class="flex items-center justify-between gap-3">
                 <span class="text-xs font-semibold text-slate-500">النتائج المطابقة</span>
-                <span class="text-lg font-black tabular-nums text-[#7030A0]">
+                <span class="text-lg font-black tabular-nums text-[#126B58]">
                   {{ filteredLogs.length }}
                 </span>
               </div>
@@ -277,7 +277,7 @@
         </div>
 
         <div class="flex items-center gap-2">
-          <span class="rounded-lg bg-purple-50 px-3 py-1.5 text-[11px] font-bold text-[#7030A0]">
+          <span class="rounded-lg bg-[#E5EEE9] px-3 py-1.5 text-[11px] font-bold text-[#126B58]">
             {{ filteredLogs.length }} عملية
           </span>
 
@@ -289,7 +289,7 @@
 
       <!-- Loading -->
       <div v-if="pending" class="flex flex-col items-center justify-center gap-3 px-6 py-20">
-        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-purple-50 text-[#7030A0]">
+        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#E5EEE9] text-[#126B58]">
           <i class="pi pi-spin pi-spinner text-xl"></i>
         </div>
         <p class="text-sm font-semibold text-slate-500">
@@ -316,7 +316,7 @@
 
         <button
           @click="clearFilters"
-          class="mt-4 rounded-xl bg-[#7030A0] px-4 py-2.5 text-xs font-bold text-white transition hover:bg-[#5d2588]"
+          class="mt-4 rounded-xl bg-[#126B58] px-4 py-2.5 text-xs font-bold text-white transition hover:bg-[#0D5143]"
         >
           مسح جميع الفلاتر
         </button>
@@ -340,8 +340,8 @@
             <template v-for="log in filteredLogs" :key="log._key">
 
               <tr
-                class="group cursor-pointer transition-colors hover:bg-purple-50/40"
-                :class="expanded.has(log._key) ? 'bg-purple-50/50' : ''"
+                class="group cursor-pointer transition-colors hover:bg-[#E5EEE9]/40"
+                :class="expanded.has(log._key) ? 'bg-[#E5EEE9]/50' : ''"
                 @click="toggleRow(log._key)"
               >
                 <!-- Date -->
@@ -363,7 +363,7 @@
                       class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-xs font-black"
                       :class="log.userRole === 'employee'
                         ? 'bg-indigo-50 text-indigo-600'
-                        : 'bg-purple-50 text-[#7030A0]'"
+                        : 'bg-[#E5EEE9] text-[#126B58]'"
                     >
                       {{ (log.userName || log.adminEmail || '?').slice(0, 1).toUpperCase() }}
                     </div>
@@ -378,7 +378,7 @@
                           class="rounded-md px-1.5 py-0.5 text-[9px] font-bold"
                           :class="log.userRole === 'employee'
                             ? 'bg-indigo-50 text-indigo-600'
-                            : 'bg-purple-50 text-[#7030A0]'"
+                            : 'bg-[#E5EEE9] text-[#126B58]'"
                         >
                           {{ log.userRole === 'employee' ? 'موظف' : 'مدير' }}
                         </span>
@@ -409,7 +409,7 @@
                 <td class="px-5 py-4">
                   <span
                     v-if="log.plotNo"
-                    class="inline-flex items-center gap-1.5 rounded-lg bg-purple-50 px-2.5 py-1.5 font-black text-[#7030A0]"
+                    class="inline-flex items-center gap-1.5 rounded-lg bg-[#E5EEE9] px-2.5 py-1.5 font-black text-[#126B58]"
                   >
                     <i class="pi pi-map-marker text-[10px]"></i>
                     قطعة {{ log.plotNo }}
@@ -442,8 +442,8 @@
                   <span
                     class="inline-flex h-8 w-8 items-center justify-center rounded-lg transition"
                     :class="expanded.has(log._key)
-                      ? 'bg-[#7030A0] text-white'
-                      : 'bg-slate-100 text-slate-400 group-hover:bg-purple-100 group-hover:text-[#7030A0]'"
+                      ? 'bg-[#126B58] text-white'
+                      : 'bg-slate-100 text-slate-400 group-hover:bg-[#E5EEE9] group-hover:text-[#126B58]'"
                   >
                     <i
                       class="pi text-[11px]"
@@ -460,7 +460,7 @@
 
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 px-4 py-3.5">
                       <div class="flex items-center gap-2.5">
-                        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-purple-50 text-[#7030A0]">
+                        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-[#E5EEE9] text-[#126B58]">
                           <i class="pi pi-file-edit text-xs"></i>
                         </div>
 
@@ -487,7 +487,7 @@
                         class="grid grid-cols-1 gap-3 px-4 py-4 md:grid-cols-[170px_1fr] md:items-start"
                       >
                         <div class="flex items-center gap-2">
-                          <span class="h-1.5 w-1.5 rounded-full bg-[#7030A0]"></span>
+                          <span class="h-1.5 w-1.5 rounded-full bg-[#126B58]"></span>
                           <span class="text-xs font-bold text-slate-700">
                             {{ c.label }}
                           </span>
@@ -507,7 +507,7 @@
                             <span
                               v-for="x in c.added"
                               :key="'a' + x"
-                              class="rounded-lg border border-emerald-200 bg-emerald-50 px-2.5 py-1.5 text-[11px] font-bold text-emerald-700"
+                              class="rounded-lg border border-emerald-200 bg-[#E5EEE9]50 px-2.5 py-1.5 text-[11px] font-bold text-emerald-700"
                             >
                               <i class="pi pi-plus text-[9px]"></i>
                               {{ x }}
@@ -553,7 +553,7 @@
                             <i class="pi pi-arrow-left text-[10px]"></i>
                           </div>
 
-                          <div class="min-w-[100px] max-w-full flex-1 rounded-xl border border-emerald-100 bg-emerald-50/70 p-3">
+                          <div class="min-w-[100px] max-w-full flex-1 rounded-xl border border-emerald-100 bg-[#E5EEE9]50/70 p-3">
                             <div class="mb-1 text-[9px] font-bold text-emerald-600">
                               القيمة الجديدة
                             </div>
@@ -825,7 +825,7 @@ const getActionLabel = (action: string) =>
 const getActionBadgeClass = (action: string) => {
   switch (action) {
     case 'LOGIN':
-      return 'bg-emerald-50 text-emerald-700 border border-emerald-200';
+      return 'bg-[#E5EEE9]50 text-emerald-700 border border-emerald-200';
 
     case 'CONTRACT_EDIT':
       return 'bg-amber-50 text-amber-800 border border-amber-200';
@@ -1329,43 +1329,93 @@ const exportCsv = () => {
 
 <style scoped>
 .audit-input {
+  display: block;
   width: 100%;
-  min-height: 43px;
-  border: 1px solid #e2e8f0;
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid #e5e9e5;
   border-radius: 12px;
-  background: #fff;
+  background-color: #fff;
   padding: 10px 13px;
-  color: #334155;
+  color: #293b36;
   font-size: 12px;
   font-weight: 600;
+  line-height: 1.5;
   outline: none;
   transition:
-    border-color 0.2s,
-    box-shadow 0.2s,
-    background 0.2s;
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .audit-input:hover {
-  border-color: #c4b5d5;
+  border-color: #b8cfc4;
 }
 
 .audit-input:focus {
-  border-color: #7030A0;
-  box-shadow: 0 0 0 3px rgb(112 48 160 / 9%);
+  border-color: #126b58;
+  box-shadow: 0 0 0 3px rgb(18 107 88 / 10%);
 }
 
 .audit-input::placeholder {
-  color: #a1a1aa;
+  color: #94a39b;
   font-weight: 400;
+  opacity: 1;
 }
 
 .audit-input option {
-  color: #334155;
+  color: #293b36;
 }
 
 .audit-input:disabled {
   cursor: not-allowed;
-  background: #f8fafc;
-  opacity: 0.7;
+  background-color: #f5f7f5;
+  color: #87938c;
+  opacity: 0.8;
+}
+
+/* Icon is positioned independently from the text entry area.
+   Logical properties keep the spacing correct in RTL and LTR. */
+.audit-input--with-icon {
+  padding-inline-start: 2.75rem;
+}
+
+.audit-input-icon {
+  position: absolute;
+  inset-inline-start: 0.875rem;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Selects: hide the browser's native arrow and render one consistent arrow.
+   This prevents duplicate arrows when global select styles add their own indicator. */
+select.audit-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-inline-start: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23718078' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 13px center;
+  background-size: 14px 14px;
+  cursor: pointer;
+}
+
+/* Keep native date controls readable and consistent. */
+input.audit-input {
+  appearance: auto;
+}
+
+input[type="date"].audit-input {
+  direction: rtl;
+  text-align: right;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .audit-input {
+    transition: none;
+  }
 }
 </style>

@@ -171,8 +171,8 @@ const fmt = (n: number | string | null | undefined) => {
 
 <style>
 .contract-sheet {
-  --cs-accent: #7030a0;
-  --cs-accent-dark: #532277;
+  --cs-accent: #126B58;
+  --cs-accent-dark: #174A40;
   --cs-tint: #f4edf9;
   --cs-line: #cbd5e1;
   --cs-ink: #0f172a;
