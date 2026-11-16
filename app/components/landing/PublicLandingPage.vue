@@ -72,8 +72,11 @@
           ركائز التطوير
           <span class="w-6 h-px bg-[#126B58]"></span>
         </span>
-        <h2 class="text-3xl sm:text-4xl font-black text-[#293B36] tracking-tight">
-          تخطيط حضاري يجمع بين راحة السكن <br> وقوة الاستثمار
+        <h2 class="text-3xl sm:text-4xl font-black leading-[1.2] text-[#293B36] tracking-tight">
+          تخطيط حضاري يجمع بين راحة السكن
+
+          <br>
+            <span class="block mt-2">وقوة الاستثمار</span>
         </h2>
         <p class="text-sm sm:text-base text-[#718078]">
           تم تصميم المخطط وفق أحدث المعايير الهندسية والتنظيمية لتلبية تطلعات السكن الراقي والفرص التجارية المجدية.

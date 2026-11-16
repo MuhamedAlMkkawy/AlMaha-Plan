@@ -2,10 +2,10 @@
 <template>
   <main
     dir="rtl"
-    class="relative min-h-screen overflow-hidden bg-slate-50"
+    class="relative min-h-screen overflow-hidden"
   >
     <!-- Background decoration -->
-    <div
+    <!-- <div
       class="pointer-events-none absolute inset-0 overflow-hidden"
       aria-hidden="true"
     >
@@ -20,7 +20,7 @@
       <div
         class="absolute bottom-0 right-1/3 h-72 w-72 rounded-full bg-[#126B58]/[0.04] blur-3xl"
       ></div>
-    </div>
+    </div> -->
     
 
     <!-- Authenticated dashboard -->
