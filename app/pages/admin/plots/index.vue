@@ -80,9 +80,20 @@
 
     <!-- Table -->
     <section class="rounded-2xl bg-white border border-slate-200 overflow-hidden">
-      <!-- Loading -->
-      <div v-if="pending" class="p-5 space-y-3" aria-busy="true">
-        <div v-for="i in 8" :key="i" class="h-12 rounded-xl bg-slate-100 animate-pulse"></div>
+      <!-- Loading Skeleton -->
+      <div v-if="pending" class="p-6 space-y-4 animate-fadeIn" aria-busy="true">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <FeaturesAppSkeleton width="10rem" height="1.5rem" rounded="lg" />
+          <FeaturesAppSkeleton width="6rem" height="1.5rem" rounded="lg" />
+        </div>
+        <div v-for="i in 8" :key="i" class="flex items-center gap-4 py-2">
+          <FeaturesAppSkeleton width="3rem" height="2rem" rounded="lg" />
+          <FeaturesAppSkeleton width="18%" height="1.25rem" rounded="md" />
+          <FeaturesAppSkeleton width="14%" height="1.25rem" rounded="md" />
+          <FeaturesAppSkeleton width="20%" height="1.25rem" rounded="md" />
+          <FeaturesAppSkeleton width="15%" height="1.25rem" rounded="md" />
+          <FeaturesAppSkeleton width="10%" height="1.5rem" rounded="full" class="ms-auto" />
+        </div>
       </div>
 
       <!-- Empty -->

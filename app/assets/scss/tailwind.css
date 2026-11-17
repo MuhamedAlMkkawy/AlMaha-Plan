@@ -27,3 +27,53 @@ body {
   color: var(--text-primary);
   font-family: 'Cairo', 'Expo Arabic', sans-serif;
 }
+
+/* ========================================================
+   GLOBAL PAGE & ROUTE TRANSITIONS (Nuxt App)
+   ======================================================== */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+.layout-enter-active,
+.layout-leave-active {
+  transition: opacity 0.2s ease-in-out;
+}
+.layout-enter-from,
+.layout-leave-to {
+  opacity: 0;
+}
+
+/* Skeleton Pulse Animation */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-loading {
+  background: linear-gradient(
+    90deg,
+    #f3f6f4 25%,
+    #e7eee9 50%,
+    #f3f6f4 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s infinite ease-in-out;
+}
+

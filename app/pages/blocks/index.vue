@@ -49,8 +49,25 @@
     </header>
 
     <!-- Loading Skeleton -->
-    <div v-if="pending" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
-      <div v-for="i in 12" :key="i" class="h-56 rounded-3xl bg-gradient-to-br from-slate-100 to-slate-50 animate-pulse"></div>
+    <div v-if="pending" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6 animate-fadeIn" aria-busy="true">
+      <div
+        v-for="i in 8"
+        :key="i"
+        class="h-60 rounded-3xl bg-white border border-[#E5E9E5] p-6 space-y-4 shadow-sm"
+      >
+        <div class="flex items-center justify-between">
+          <FeaturesAppSkeleton width="45%" height="1.5rem" rounded="lg" />
+          <FeaturesAppSkeleton width="2.5rem" height="2.5rem" rounded="xl" />
+        </div>
+        <FeaturesAppSkeleton width="75%" height="1rem" rounded="md" />
+        <div class="h-2 rounded-full overflow-hidden bg-slate-100">
+          <FeaturesAppSkeleton width="100%" height="100%" rounded="full" />
+        </div>
+        <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+          <FeaturesAppSkeleton width="30%" height="0.875rem" rounded="md" />
+          <FeaturesAppSkeleton width="30%" height="0.875rem" rounded="md" />
+        </div>
+      </div>
     </div>
 
     <!-- ============ CARDS VIEW ============ -->

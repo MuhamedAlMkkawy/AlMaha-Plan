@@ -253,24 +253,21 @@
         </div>
       </div>
 
-      <!-- Loading -->
+      <!-- Loading Skeleton -->
       <div
         v-if="logsPending"
-        class="flex min-h-[280px] flex-col items-center justify-center px-6 py-12 text-center"
+        class="p-6 space-y-4 animate-fadeIn"
+        aria-busy="true"
       >
-        <div class="relative flex h-16 w-16 items-center justify-center">
-          <div class="absolute inset-0 rounded-full border-4 border-emerald-"></div>
-          <div class="absolute inset-0 animate-spin rounded-full border-4 border-transparent border-t-[#126B58]"></div>
-          <i class="pi pi-history text-xl text-[#126B58]"></i>
+        <div v-for="i in 5" :key="i" class="flex items-center gap-4 py-3 border-b border-slate-50 last:border-0">
+          <FeaturesAppSkeleton width="2.5rem" height="2.5rem" rounded="xl" />
+          <div class="space-y-1.5 flex-1">
+            <FeaturesAppSkeleton width="45%" height="1.25rem" rounded="md" />
+            <FeaturesAppSkeleton width="25%" height="0.875rem" rounded="sm" />
+          </div>
+          <FeaturesAppSkeleton width="15%" height="1.25rem" rounded="md" />
+          <FeaturesAppSkeleton width="10%" height="1.5rem" rounded="full" />
         </div>
-
-        <p class="mt-5 text-sm font-black text-slate-800">
-          جارٍ تحميل التعديلات الإدارية
-        </p>
-
-        <p class="mt-2 text-xs text-slate-400">
-          يرجى الانتظار قليلاً حتى يتم تحميل أحدث البيانات
-        </p>
       </div>
 
       <!-- Error -->

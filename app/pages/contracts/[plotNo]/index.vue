@@ -77,10 +77,38 @@
 
     <p v-if="errorMsg" class="notice">{{ errorMsg }}</p>
 
-    <!-- Loading -->
-    <div v-if="pending" class="state-card">
-      <i class="pi pi-spin pi-spinner state-icon"></i>
-      <div class="state-title">جاري تحميل العقد للقطعة {{ currentPlotNo }}...</div>
+    <!-- Loading Skeleton -->
+    <div v-if="pending" class="paper-stage animate-fadeIn" aria-busy="true">
+      <div class="paper bg-white p-8 sm:p-12 rounded-3xl border border-slate-200 space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-6">
+          <div class="space-y-2">
+            <FeaturesAppSkeleton width="14rem" height="1.75rem" rounded="lg" />
+            <FeaturesAppSkeleton width="10rem" height="1rem" rounded="md" />
+          </div>
+          <div class="space-y-2 text-start">
+            <FeaturesAppSkeleton width="8rem" height="1rem" rounded="md" />
+            <FeaturesAppSkeleton width="6rem" height="1rem" rounded="md" />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-4 bg-slate-50/70 rounded-2xl space-y-3">
+            <FeaturesAppSkeleton width="40%" height="1.25rem" rounded="md" />
+            <FeaturesAppSkeleton width="70%" height="1rem" rounded="md" />
+          </div>
+          <div class="p-4 bg-slate-50/70 rounded-2xl space-y-3">
+            <FeaturesAppSkeleton width="40%" height="1.25rem" rounded="md" />
+            <FeaturesAppSkeleton width="80%" height="1rem" rounded="md" />
+          </div>
+        </div>
+        <div class="space-y-3 pt-4">
+          <FeaturesAppSkeleton width="30%" height="1.25rem" rounded="md" />
+          <FeaturesAppSkeleton width="100%" height="8rem" rounded="2xl" />
+        </div>
+        <div class="space-y-2 pt-4">
+          <FeaturesAppSkeleton width="25%" height="1.25rem" rounded="md" />
+          <FeaturesAppSkeleton v-for="t in 4" :key="t" width="100%" height="1rem" rounded="sm" />
+        </div>
+      </div>
     </div>
 
     <!-- Error -->

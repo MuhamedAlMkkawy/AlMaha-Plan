@@ -21,12 +21,21 @@
     </div>
 
     <!-- Loading Skeleton -->
-    <div v-if="pending" class="space-y-6">
+    <div v-if="pending" class="space-y-6 animate-fadeIn" aria-busy="true">
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div v-for="i in 4" :key="i" class="h-24 bg-slate-100 rounded-2xl animate-pulse"></div>
+        <div v-for="i in 4" :key="i" class="h-24 bg-white border border-slate-200/80 rounded-2xl p-4 space-y-2">
+          <div class="flex items-center justify-between">
+            <FeaturesAppSkeleton width="45%" height="0.875rem" rounded="md" />
+            <FeaturesAppSkeleton width="2rem" height="2rem" rounded="lg" />
+          </div>
+          <FeaturesAppSkeleton width="60%" height="1.75rem" rounded="md" />
+        </div>
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div v-for="i in 2" :key="i" class="h-80 bg-slate-100 rounded-2xl animate-pulse"></div>
+        <div v-for="i in 2" :key="i" class="h-80 bg-white border border-slate-200/80 rounded-3xl p-6 space-y-4">
+          <FeaturesAppSkeleton width="40%" height="1.5rem" rounded="lg" />
+          <FeaturesAppSkeleton width="100%" height="13rem" rounded="2xl" />
+        </div>
       </div>
     </div>
 

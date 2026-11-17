@@ -75,10 +75,24 @@
       </div>
     </div>
 
-    <!-- Loading State -->
-    <div v-if="pending" class="bg-white rounded-2xl p-12 text-center text-slate-500 animate-pulse">
-      <i class="pi pi-spin pi-spinner text-3xl text-[#126B58] mb-3"></i>
-      <div class="font-bold">جاري تحميل عرض السعر للقطعة {{ currentPlotNo }}...</div>
+    <!-- Loading Skeleton -->
+    <div v-if="pending" class="space-y-6 animate-fadeIn" aria-busy="true">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-6">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+          <div class="space-y-2">
+            <FeaturesAppSkeleton width="12rem" height="1.75rem" rounded="lg" />
+            <FeaturesAppSkeleton width="8rem" height="1rem" rounded="md" />
+          </div>
+          <FeaturesAppSkeleton width="3rem" height="3rem" rounded="2xl" />
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div v-for="i in 4" :key="i" class="p-4 bg-slate-50/70 rounded-2xl space-y-2">
+            <FeaturesAppSkeleton width="50%" height="0.875rem" rounded="md" />
+            <FeaturesAppSkeleton width="75%" height="1.5rem" rounded="lg" />
+          </div>
+        </div>
+        <FeaturesAppSkeleton width="100%" height="18rem" rounded="2xl" />
+      </div>
     </div>
 
     <!-- Error State -->

@@ -40,13 +40,26 @@
       </div>
     </div>
 
-    <!-- Loading -->
+    <!-- Loading Skeleton -->
     <div
       v-if="pending"
-      class="bg-white rounded-2xl p-12 text-center text-slate-500"
+      class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-6 animate-fadeIn"
+      aria-busy="true"
     >
-      <i class="pi pi-spin pi-spinner text-3xl text-[#126B58]"></i>
-      <p class="mt-3 font-bold">جاري تحميل بيانات العقد...</p>
+      <div class="space-y-2 border-b border-slate-100 pb-4">
+        <FeaturesAppSkeleton width="40%" height="1.5rem" rounded="lg" />
+        <FeaturesAppSkeleton width="60%" height="1rem" rounded="md" />
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div v-for="i in 4" :key="i" class="space-y-2">
+          <FeaturesAppSkeleton width="35%" height="1rem" rounded="md" />
+          <FeaturesAppSkeleton width="100%" height="2.75rem" rounded="xl" />
+        </div>
+      </div>
+      <div class="space-y-2 pt-4">
+        <FeaturesAppSkeleton width="25%" height="1rem" rounded="md" />
+        <FeaturesAppSkeleton width="100%" height="6rem" rounded="xl" />
+      </div>
     </div>
 
     <!-- Error -->

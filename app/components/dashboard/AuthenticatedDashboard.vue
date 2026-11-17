@@ -64,13 +64,35 @@
       </div>
     </section>
 
-    <!-- ================= LOADING ================= -->
-    <div v-if="pending && !stats" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-      <div
-        v-for="i in 8"
-        :key="i"
-        class="h-36 animate-pulse rounded-3xl border border-[#E5E9E5] bg-white"
-      ></div>
+    <!-- ================= LOADING SKELETON ================= -->
+    <div v-if="pending && !stats" class="space-y-8 animate-fadeIn" aria-busy="true">
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div
+          v-for="i in 4"
+          :key="i"
+          class="rounded-3xl border border-[#E5E9E5] bg-white p-6 shadow-sm space-y-4"
+        >
+          <div class="flex items-center justify-between">
+            <FeaturesAppSkeleton width="40%" height="1rem" rounded="md" />
+            <FeaturesAppSkeleton width="2.75rem" height="2.75rem" rounded="2xl" />
+          </div>
+          <FeaturesAppSkeleton width="55%" height="2rem" rounded="lg" />
+          <FeaturesAppSkeleton width="70%" height="0.875rem" rounded="md" />
+          <div class="pt-4 border-t border-[#E5E9E5]">
+            <FeaturesAppSkeleton width="35%" height="0.875rem" rounded="md" />
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="rounded-3xl border border-[#E5E9E5] bg-white p-6 space-y-4">
+          <FeaturesAppSkeleton width="40%" height="1.5rem" rounded="lg" />
+          <FeaturesAppSkeleton width="100%" height="16rem" rounded="2xl" />
+        </div>
+        <div class="rounded-3xl border border-[#E5E9E5] bg-white p-6 space-y-4">
+          <FeaturesAppSkeleton width="40%" height="1.5rem" rounded="lg" />
+          <FeaturesAppSkeleton width="100%" height="16rem" rounded="2xl" />
+        </div>
+      </div>
     </div>
 
     <div v-else-if="stats" class="space-y-10">

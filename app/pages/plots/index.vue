@@ -175,12 +175,24 @@
     <section class="rounded-3xl bg-white border border-slate-200/70 shadow-[0_1px_2px_rgba(15,23,42,0.04)] overflow-hidden">
 
       <!-- Loading skeleton -->
-      <div v-if="pending" class="p-8 space-y-3">
+      <div v-if="pending" class="p-8 space-y-4 animate-fadeIn" aria-busy="true">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <FeaturesAppSkeleton width="12rem" height="1.5rem" rounded="lg" />
+          <FeaturesAppSkeleton width="8rem" height="1.5rem" rounded="lg" />
+        </div>
         <div
-          v-for="i in 10"
+          v-for="i in 8"
           :key="i"
-          class="h-11 rounded-xl bg-gradient-to-l from-slate-100 to-slate-50 animate-pulse"
-        ></div>
+          class="flex items-center gap-4 py-2"
+        >
+          <FeaturesAppSkeleton width="2rem" height="2rem" rounded="lg" />
+          <FeaturesAppSkeleton width="15%" height="1.25rem" rounded="md" />
+          <FeaturesAppSkeleton width="12%" height="1.25rem" rounded="md" />
+          <FeaturesAppSkeleton width="18%" height="1.25rem" rounded="md" />
+          <FeaturesAppSkeleton width="20%" height="1.25rem" rounded="md" />
+          <FeaturesAppSkeleton width="15%" height="1.25rem" rounded="md" />
+          <FeaturesAppSkeleton width="10%" height="1.5rem" rounded="full" class="ms-auto" />
+        </div>
       </div>
 
       <!-- Empty state -->

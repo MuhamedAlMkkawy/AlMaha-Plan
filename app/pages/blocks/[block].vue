@@ -58,8 +58,23 @@
     </header>
 
     <!-- Loading skeleton -->
-    <div v-if="pending" class="grid grid-cols-1 min-[480px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
-      <div v-for="i in 12" :key="i" class="h-60 rounded-2xl bg-slate-100 animate-pulse"></div>
+    <div v-if="pending" class="grid grid-cols-1 min-[480px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 animate-fadeIn" aria-busy="true">
+      <div
+        v-for="i in 8"
+        :key="i"
+        class="h-60 rounded-2xl bg-white border border-slate-200 p-5 space-y-4 shadow-sm"
+      >
+        <div class="flex items-center justify-between">
+          <FeaturesAppSkeleton width="40%" height="1.25rem" rounded="md" />
+          <FeaturesAppSkeleton width="25%" height="1.25rem" rounded="full" />
+        </div>
+        <FeaturesAppSkeleton width="70%" height="1rem" rounded="md" />
+        <FeaturesAppSkeleton width="55%" height="1.75rem" rounded="lg" />
+        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+          <FeaturesAppSkeleton width="45%" height="0.875rem" rounded="md" />
+          <FeaturesAppSkeleton width="30%" height="0.875rem" rounded="md" />
+        </div>
+      </div>
     </div>
 
     <!-- Empty state -->

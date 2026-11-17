@@ -138,10 +138,22 @@
         </button>
       </div>
 
-      <div v-if="pending" class="flex flex-col items-center justify-center px-4 py-16">
-        <i class="pi pi-spin pi-spinner text-3xl text-[#126B58]"></i>
-        <p class="mt-4 text-sm font-bold text-slate-700">جاري تحميل الموظفين</p>
-        <p class="mt-1 text-xs text-slate-400">يرجى الانتظار...</p>
+      <!-- Loading Skeleton -->
+      <div v-if="pending" class="p-6 space-y-4 animate-fadeIn" aria-busy="true">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <FeaturesAppSkeleton width="12rem" height="1.5rem" rounded="lg" />
+          <FeaturesAppSkeleton width="7rem" height="1.5rem" rounded="lg" />
+        </div>
+        <div v-for="i in 5" :key="i" class="flex items-center gap-4 py-3 border-b border-slate-50 last:border-0">
+          <FeaturesAppSkeleton width="2.75rem" height="2.75rem" rounded="full" />
+          <div class="space-y-1.5 flex-1">
+            <FeaturesAppSkeleton width="30%" height="1.25rem" rounded="md" />
+            <FeaturesAppSkeleton width="20%" height="0.875rem" rounded="sm" />
+          </div>
+          <FeaturesAppSkeleton width="18%" height="1.25rem" rounded="md" />
+          <FeaturesAppSkeleton width="12%" height="1.5rem" rounded="full" />
+          <FeaturesAppSkeleton width="15%" height="2rem" rounded="xl" />
+        </div>
       </div>
 
       <div v-else-if="employees.length === 0" class="flex flex-col items-center justify-center px-4 py-16 text-center">

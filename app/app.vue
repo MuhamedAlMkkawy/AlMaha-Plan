@@ -1,5 +1,6 @@
 <template>
   <NuxtLayout>
+    <NuxtLoadingIndicator color="#126B58" :height="3" :duration="2500" />
     <NuxtPage />
     <Toast />
     <FeaturesLoading v-if="loading" />

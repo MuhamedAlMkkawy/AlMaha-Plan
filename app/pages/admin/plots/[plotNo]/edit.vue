@@ -33,10 +33,25 @@
       <span>{{ errorMsg }}</span>
     </div>
 
-    <!-- Loading -->
-    <div v-if="pending" class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_26rem] xl:grid-cols-[minmax(0,1fr)_30rem] gap-6" aria-busy="true">
-      <div class="h-[32rem] rounded-2xl bg-slate-100 animate-pulse"></div>
-      <div class="h-96 rounded-2xl bg-slate-100 animate-pulse"></div>
+    <!-- Loading Skeleton -->
+    <div v-if="pending" class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_26rem] xl:grid-cols-[minmax(0,1fr)_30rem] gap-6 animate-fadeIn" aria-busy="true">
+      <div class="rounded-3xl bg-white border border-slate-200 p-6 sm:p-8 space-y-6">
+        <div class="space-y-2 border-b border-slate-100 pb-4">
+          <FeaturesAppSkeleton width="40%" height="1.5rem" rounded="lg" />
+          <FeaturesAppSkeleton width="60%" height="1rem" rounded="md" />
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div v-for="i in 6" :key="i" class="space-y-2">
+            <FeaturesAppSkeleton width="40%" height="1rem" rounded="md" />
+            <FeaturesAppSkeleton width="100%" height="2.75rem" rounded="xl" />
+          </div>
+        </div>
+      </div>
+      <div class="rounded-3xl bg-white border border-slate-200 p-6 space-y-4">
+        <FeaturesAppSkeleton width="50%" height="1.5rem" rounded="lg" />
+        <FeaturesAppSkeleton width="100%" height="12rem" rounded="2xl" />
+        <FeaturesAppSkeleton width="100%" height="3rem" rounded="xl" />
+      </div>
     </div>
 
     <!-- Form + live calculations (full width) -->

@@ -287,14 +287,17 @@
         </div>
       </div>
 
-      <!-- Loading -->
-      <div v-if="pending" class="flex flex-col items-center justify-center gap-3 px-6 py-20">
-        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#E5EEE9] text-[#126B58]">
-          <i class="pi pi-spin pi-spinner text-xl"></i>
+      <!-- Loading Skeleton -->
+      <div v-if="pending" class="p-6 space-y-4 animate-fadeIn" aria-busy="true">
+        <div v-for="i in 6" :key="i" class="flex items-center gap-4 py-3 border-b border-slate-50 last:border-0">
+          <FeaturesAppSkeleton width="2.5rem" height="2.5rem" rounded="xl" />
+          <div class="space-y-1.5 flex-1">
+            <FeaturesAppSkeleton width="45%" height="1.25rem" rounded="md" />
+            <FeaturesAppSkeleton width="25%" height="0.875rem" rounded="sm" />
+          </div>
+          <FeaturesAppSkeleton width="15%" height="1.25rem" rounded="md" />
+          <FeaturesAppSkeleton width="10%" height="1.5rem" rounded="full" />
         </div>
-        <p class="text-sm font-semibold text-slate-500">
-          جاري تحميل سجل العمليات...
-        </p>
       </div>
 
       <!-- Empty -->
