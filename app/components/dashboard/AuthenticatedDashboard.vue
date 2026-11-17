@@ -32,6 +32,19 @@
         </div>
 
         <div class="flex w-full flex-col items-stretch gap-3 sm:flex-row md:w-auto md:flex-col lg:flex-row lg:items-center">
+          <!-- Admin-Only Presentation Export Button -->
+          <button
+            v-if="isAdmin"
+            type="button"
+            @click="exportPresentation"
+            :disabled="exportingPresentation"
+            class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[#B89A68]/60 bg-gradient-to-l from-[#B89A68]/20 via-[#174A40] to-[#126B58] px-5 py-3.5 text-xs font-black text-[#D8C5A0] shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-[#D8C5A0] hover:text-white hover:shadow-xl active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+            title="تصدير عرض تقديمي تنفيذي (PowerPoint) للإدارة العليا"
+          >
+            <i :class="exportingPresentation ? 'pi pi-spin pi-spinner' : 'pi pi-file-export'" class="text-xs text-[#D8C5A0]"></i>
+            <span>{{ exportingPresentation ? 'جاري التجهيز...' : 'عرض تقديمي (PPTX)' }}</span>
+          </button>
+
           <NuxtLink
             to="/quote"
             class="hero-primary-button group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-gradient-to-b from-[#D8C5A0] to-[#B89A68] px-7 py-3.5 text-sm font-black text-[#174A40] shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-[0.98]"
@@ -656,12 +669,49 @@
 <script setup lang="ts">
 import type { Chart as ChartType } from 'chart.js';
 import { projectConfig } from '../../config/project';
+import { useAuthSession } from '../../composables/useAuthSession';
+import { useToastMsg } from '../../composables/useToastMsg';
 import {
   formatCurrencyNumber,
   formatInteger,
   formatPercent,
 } from '../../../lib/format';
 import type { PlotStatistics } from '../../../shared/types/plot';
+
+const { isAdmin } = useAuthSession();
+const { showSuccessToast, showErrorToast } = useToastMsg();
+const exportingPresentation = ref(false);
+
+const exportPresentation = async () => {
+  if (exportingPresentation.value) return;
+  exportingPresentation.value = true;
+
+  try {
+    const res = await fetch('/api/admin/presentation', {
+      method: 'GET',
+    });
+
+    if (!res.ok) {
+      throw new Error('فشل تحميل ملف العرض التقديمي');
+    }
+
+    const blob = await res.blob();
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `مخطط_المها_عرض_تنفيذي_${new Date().toISOString().slice(0, 10)}.pptx`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url);
+    showSuccessToast('تم تصدير العرض التقديمي التنفيذي بنجاح!');
+  } catch (err: any) {
+    console.error('Error downloading presentation:', err);
+    showErrorToast(err.message || 'حدث خطأ أثناء تحميل ملف العرض التقديمي');
+  } finally {
+    exportingPresentation.value = false;
+  }
+};
 
 /* ================= FETCH STATISTICS ================= */
 

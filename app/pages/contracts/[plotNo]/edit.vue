@@ -362,6 +362,29 @@
       </div>
     </div>
 
+    <!-- Confirm Leave Modal -->
+    <FeaturesConfirmModal
+      :is-open="confirmLeaveDialog.show"
+      title="تغييرات غير محفوظة"
+      message="لديك تعديلات لم يتم حفظها في بيانات العقد. هل تود المغادرة وتجاهل التعديلات؟"
+      confirm-text="مغادرة وتجاهل"
+      cancel-text="البقاء في الصفحة"
+      variant="warning"
+      @confirm="executeConfirmLeave"
+      @cancel="confirmLeaveDialog.show = false"
+    />
+
+    <!-- Confirm Reset Terms Modal -->
+    <FeaturesConfirmModal
+      :is-open="resetTermsDialog"
+      title="استعادة الشروط الافتراضية"
+      message="سيتم استبدال البنود الحالية بالشروط الافتراضية المعتمدة للمخطط. هل تود المتابعة؟"
+      confirm-text="استعادة الشروط"
+      cancel-text="إلغاء"
+      variant="warning"
+      @confirm="executeResetTerms"
+      @cancel="resetTermsDialog = false"
+    />
   </div>
 </template>
 
@@ -375,6 +398,9 @@ import {
   defaultContractTerms,
   type ContractPlot,
 } from '../../../../server/utils/contractTerms';
+import { useToastMsg } from '../../../composables/useToastMsg';
+
+const { showSuccessToast, showErrorToast } = useToastMsg();
 
 // =====================================================
 // ROUTE
@@ -533,14 +559,16 @@ const moveTerm = (i: number, dir: -1 | 1) => {
   ];
 };
 
+const resetTermsDialog = ref(false);
+
 const resetTerms = () => {
-  if (
-    confirm(
-      'سيتم استبدال البنود الحالية بالشروط الافتراضية. متابعة؟'
-    )
-  ) {
-    form.terms = [...defaultContractTerms];
-  }
+  resetTermsDialog.value = true;
+};
+
+const executeResetTerms = () => {
+  form.terms = [...defaultContractTerms];
+  resetTermsDialog.value = false;
+  showSuccessToast('تمت استعادة الشروط الافتراضية بنجاح');
 };
 
 // =====================================================
@@ -593,6 +621,7 @@ const save = async () => {
 
     message.type = 'ok';
     message.text = 'تم حفظ العقد بنجاح';
+    showSuccessToast('تم حفظ العقد بنجاح');
 
   } catch (e: unknown) {
     const err = e as {
@@ -611,6 +640,8 @@ const save = async () => {
       err.message ||
       'تعذر حفظ العقد، حاول مرة أخرى';
 
+    showErrorToast(message.text);
+
   } finally {
     saving.value = false;
   }
@@ -620,16 +651,28 @@ const save = async () => {
 // UNSAVED CHANGES PROTECTION
 // =====================================================
 
-onBeforeRouteLeave(() => {
-  if (
-    dirty.value &&
-    !confirm(
-      'لديك تغييرات غير محفوظة. هل تريد المغادرة؟'
-    )
-  ) {
+const router = useRouter();
+const confirmLeaveDialog = reactive({
+  show: false,
+  nextRoute: '' as string | null,
+});
+const allowNavigation = ref(false);
+
+onBeforeRouteLeave((to) => {
+  if (dirty.value && !allowNavigation.value) {
+    confirmLeaveDialog.nextRoute = to.fullPath;
+    confirmLeaveDialog.show = true;
     return false;
   }
 });
+
+const executeConfirmLeave = () => {
+  allowNavigation.value = true;
+  confirmLeaveDialog.show = false;
+  if (confirmLeaveDialog.nextRoute) {
+    router.push(confirmLeaveDialog.nextRoute);
+  }
+};
 
 const warnBeforeUnload = (e: BeforeUnloadEvent) => {
   if (dirty.value) {

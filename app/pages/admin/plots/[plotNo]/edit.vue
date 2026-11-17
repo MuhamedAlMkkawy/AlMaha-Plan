@@ -220,11 +220,13 @@
 <script setup lang="ts">
 import { calculatePlotPricing } from '../../../../../lib/pricing';
 import { formatCurrency } from '../../../../../lib/format';
+import { useToastMsg } from '../../../../composables/useToastMsg';
 import type { Plot } from '../../../../shared/types/plot';
 
 const route = useRoute();
 const plotNo = computed(() => parseInt(route.params.plotNo as string, 10));
 const { can } = useAuthSession();
+const { showSuccessToast, showErrorToast } = useToastMsg();
 const canEditContracts = computed(() => can('edit_contracts'));
 
 // Shared field styles
@@ -277,23 +279,35 @@ watchEffect(() => {
   }
 });
 
+// Check whether brokerage applies (handles 'لايوجد' and 'لا يوجد')
+const hasBrokerage = computed(() => !['لايوجد', 'لا يوجد'].includes(form.brokerageStatus?.trim()));
+
 const calcs = computed(() => {
-  return calculatePlotPricing({
+  const base = calculatePlotPricing({
     area: form.area,
     pricePerM2: form.pricePerM2,
+    brokerageStatus: form.brokerageStatus,
   });
+
+  if (!hasBrokerage.value) {
+    return {
+      ...base,
+      brokerage: 0,
+      totalWithTax: base.landValue + base.retTax,
+    };
+  }
+
+  return base;
 });
 
-/* ---------- Equations shown in the preview ----------
-   Rates are derived from the real results of calculatePlotPricing,
-   so the equations always match the numbers and never drift from lib/pricing. */
+/* ---------- Equations shown in the preview ---------- */
 const num = (n: number) => Number(n || 0).toLocaleString('en-US', { maximumFractionDigits: 2 });
 const ratePct = (part: number, whole: number) =>
   `${whole ? Number(((part / whole) * 100).toFixed(3)) : 0}%`;
 
 const calcRows = computed(() => {
   const c = calcs.value;
-  return [
+  const rows = [
     {
       key: 'land',
       label: 'قيمة الأرض',
@@ -301,28 +315,43 @@ const calcRows = computed(() => {
       formula: 'المساحة × سعر المتر',
       numbers: `${num(form.area)} × ${num(form.pricePerM2)}`,
     },
-    {
+  ];
+
+  // Only include brokerage row when brokerage is active
+  if (hasBrokerage.value) {
+    rows.push({
       key: 'brokerage',
       label: 'السعي شامل الضريبة',
       value: c.brokerage,
       formula: 'قيمة الأرض × نسبة السعي',
       numbers: `${num(c.landValue)} × ${ratePct(c.brokerage, c.landValue)}`,
-    },
-    {
-      key: 'ret',
-      label: 'ضريبة التصرفات',
-      value: c.retTax,
-      formula: 'قيمة الأرض × نسبة الضريبة',
-      numbers: `${num(c.landValue)} × ${ratePct(c.retTax, c.landValue)}`,
-    },
-  ];
+    });
+  }
+
+  rows.push({
+    key: 'ret',
+    label: 'ضريبة التصرفات',
+    value: c.retTax,
+    formula: 'قيمة الأرض × نسبة الضريبة',
+    numbers: `${num(c.landValue)} × ${ratePct(c.retTax, c.landValue)}`,
+  });
+
+  return rows;
 });
 
-// Shown only when the total really equals land + brokerage + tax
+// Adjust total equation depending on whether brokerage is included
 const totalEquation = computed(() => {
   const c = calcs.value;
-  const sum = c.landValue + c.brokerage + c.retTax;
+  const sum = c.landValue + (hasBrokerage.value ? c.brokerage : 0) + c.retTax;
   if (Math.abs(sum - c.totalWithTax) > 0.01) return null;
+
+  if (!hasBrokerage.value) {
+    return {
+      formula: 'قيمة الأرض + الضريبة',
+      numbers: `${num(c.landValue)} + ${num(c.retTax)}`,
+    };
+  }
+
   return {
     formula: 'قيمة الأرض + السعي + الضريبة',
     numbers: `${num(c.landValue)} + ${num(c.brokerage)} + ${num(c.retTax)}`,
@@ -343,11 +372,15 @@ const handleSubmit = async () => {
     });
 
     if (res.success) {
-      alert('تم تحديث بيانات القطعة بنجاح!');
-      navigateTo('/admin/plots');
+      showSuccessToast('تم تحديث بيانات القطعة بنجاح!');
+      setTimeout(() => {
+        navigateTo('/admin/plots');
+      }, 700);
     }
   } catch (err: any) {
-    errorMsg.value = err.data?.statusMessage || err.message || 'حدث خطأ أثناء تعديل القطعة';
+    const msg = err.data?.statusMessage || err.message || 'حدث خطأ أثناء تعديل القطعة';
+    errorMsg.value = msg;
+    showErrorToast(msg);
   } finally {
     saving.value = false;
   }

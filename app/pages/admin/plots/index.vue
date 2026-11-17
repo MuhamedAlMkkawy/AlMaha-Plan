@@ -229,17 +229,31 @@
         </div>
       </div>
     </section>
+
+    <!-- Confirm Archive Modal -->
+    <FeaturesConfirmModal
+      :is-open="archiveDialog.show"
+      title="تأكيد أرشفة القطعة"
+      :message="`هل أنت متأكد من رغبتك في أرشفة القطعة رقم ${archiveDialog.plotNo}؟ ستتم إزالتها من العرض النشط.`"
+      confirm-text="أرشفة القطعة"
+      cancel-text="تراجع"
+      variant="danger"
+      @confirm="executeArchive"
+      @cancel="archiveDialog.show = false"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { formatCurrencyNumber } from '../../../../lib/format';
 import { normalizeArabic } from '../../../../lib/arabic';
+import { useToastMsg } from '../../../composables/useToastMsg';
 import type { Plot } from '../../../shared/types/plot';
 
 const { data: response, pending, refresh } = await useFetch<{ success: boolean; data: Plot[] }>('/api/plots');
 const plots = computed(() => response.value?.data || []);
 const { can } = useAuthSession();
+const { showSuccessToast, showErrorToast } = useToastMsg();
 const canEdit = computed(() => can('edit_plots'));
 const canCreate = computed(() => can('create_plots'));
 const canDelete = computed(() => can('delete_plots'));
@@ -327,22 +341,35 @@ const handleQuickStatusChange = async (plot: Plot, newStatus: string) => {
       },
     });
     plot.status = newStatus;
+    showSuccessToast(`تم تحديث حالة القطعة ${plot.plotNo} إلى (${newStatus}) بنجاح`);
   } catch (err: any) {
-    alert(err.data?.statusMessage || 'حدث خطأ أثناء تغيير الحالة');
+    showErrorToast(err.data?.statusMessage || 'حدث خطأ أثناء تغيير الحالة');
     await refresh();
   }
 };
 
-const handleArchive = async (plotNo: number) => {
-  if (!confirm(`هل أنت متأكد من رغبتك في أرشفة القطعة رقم ${plotNo}؟`)) return;
+const archiveDialog = reactive({
+  show: false,
+  plotNo: 0,
+});
+
+const handleArchive = (plotNo: number) => {
+  archiveDialog.plotNo = plotNo;
+  archiveDialog.show = true;
+};
+
+const executeArchive = async () => {
+  const plotNo = archiveDialog.plotNo;
+  archiveDialog.show = false;
 
   try {
     await $fetch(`/api/admin/plots/${plotNo}`, {
       method: 'DELETE',
     });
+    showSuccessToast(`تم أرشفة القطعة رقم ${plotNo} بنجاح`);
     await refresh();
   } catch (err: any) {
-    alert(err.data?.statusMessage || 'حدث خطأ أثناء أرشفة القطعة');
+    showErrorToast(err.data?.statusMessage || 'حدث خطأ أثناء أرشفة القطعة');
   }
 };
 </script>

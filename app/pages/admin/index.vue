@@ -453,6 +453,9 @@
 
 <script setup lang="ts">
 import type { AuditLogEntry } from '../../../shared/types/audit';
+import { useToastMsg } from '../../composables/useToastMsg';
+
+const { showSuccessToast, showErrorToast } = useToastMsg();
 
 // ==========================================
 // STATE
@@ -860,9 +863,9 @@ const syncFromSheet = async () => {
 
     await refreshLogs();
 
-    alert('تمت مزامنة البيانات مع جداول بيانات Google بنجاح!');
+    showSuccessToast('تمت مزامنة البيانات مع جداول بيانات Google بنجاح!');
   } catch (err: any) {
-    alert(
+    showErrorToast(
       err.data?.statusMessage ||
       'حدث خطأ أثناء مزامنة البيانات. يرجى المحاولة مرة أخرى.'
     );
