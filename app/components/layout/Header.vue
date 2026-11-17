@@ -65,10 +65,10 @@
           <!-- ACTIONS -->
           <div class="flex shrink-0 items-center gap-3">
             <!-- Admin status badge -->
-            <div class="hidden xl:flex items-center gap-2 rounded-xl bg-black/20 border border-white/10 px-3 py-1.5 text-xs text-[#D5E4DC]">
+            <!-- <div class="hidden xl:flex items-center gap-2 rounded-xl bg-black/20 border border-white/10 px-3 py-1.5 text-xs text-[#D5E4DC]">
               <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
               <span class="font-bold text-white text-[11px]">جلسة مدير مبيعات</span>
-            </div>
+            </div> -->
 
             <!-- Logout -->
             <button

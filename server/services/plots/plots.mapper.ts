@@ -1,6 +1,6 @@
 import { normalizeArabic } from '../../../lib/arabic';
 import { Plot, PublicPlot, CreatePlotInput, UpdatePlotInput } from '../../../shared/types/plot';
-import { PricingService } from '../pricing/pricing.service';
+import { PricingService, isNoBrokerage } from '../pricing/pricing.service';
 
 export interface ColumnIndexMap {
   zone: number;
@@ -173,18 +173,19 @@ export class PlotsMapper {
 
     const area = this.parseNumber(row[colMap.area]);
     const pricePerM2 = this.parseNumber(row[colMap.pricePerM2]);
+    const brokerageStatus = (row[colMap.brokerageStatus] || '').trim() || 'كامل السعي';
+    const noBrokerage = isNoBrokerage(brokerageStatus);
 
-    const calcs = PricingService.calculatePlot({ area, pricePerM2 });
+    const calcs = PricingService.calculatePlot({ area, pricePerM2, brokerageStatus });
     const sheetLandValue = this.parseNumber(row[colMap.landValue]);
     const landValue = sheetLandValue > 0 ? sheetLandValue : calcs.landValue;
 
     const sheetBrokerage = this.parseNumber(row[colMap.brokerage]);
-    const brokerage = sheetBrokerage > 0 ? sheetBrokerage : calcs.brokerage;
+    const brokerage = noBrokerage ? 0 : (sheetBrokerage > 0 ? sheetBrokerage : calcs.brokerage);
 
     const sheetRetTax = this.parseNumber(row[colMap.retTax]);
     const retTax = sheetRetTax > 0 ? sheetRetTax : calcs.retTax;
 
-    const brokerageStatus = (row[colMap.brokerageStatus] || '').trim() || 'كامل السعي';
     const availableFlag = (row[colMap.availableFlag] || '').trim();
     const status = this.normalizeStatus(row[colMap.status], availableFlag);
 

@@ -3,6 +3,8 @@ import { projectConfig } from '../config/project';
 export interface PlotPricingInput {
   area: number;
   pricePerM2: number;
+  brokerageStatus?: string;
+  brokerage?: number;
 }
 
 export interface PlotPricingCalculation {
@@ -13,9 +15,24 @@ export interface PlotPricingCalculation {
 }
 
 /**
+ * Checks if a brokerage status string indicates zero brokerage
+ */
+export function isNoBrokerage(status?: string | null): boolean {
+  if (!status) return false;
+  const norm = status.replace(/\s+/g, '').trim();
+  return (
+    norm.includes('لايوجد') ||
+    norm.includes('لاأوجد') ||
+    norm.includes('بدونسعي') ||
+    norm === '0' ||
+    norm === 'لا'
+  );
+}
+
+/**
  * Calculates standard pricing values for a plot:
  * - landValue = area * pricePerM2
- * - brokerage = landValue * commissionRate (2.5%) * (1 + vatRate (15%))
+ * - brokerage = 0 if no brokerage, or landValue * commissionRate (2.5%) * (1 + vatRate (15%))
  * - retTax = landValue * rettRate (5%)
  * All rounded to 2 decimal places.
  */
@@ -26,8 +43,15 @@ export function calculatePlotPricing(input: PlotPricingInput): PlotPricingCalcul
   const rawLandValue = area * pricePerM2;
   const landValue = Math.round(rawLandValue * 100) / 100;
 
-  const rawBrokerage = landValue * projectConfig.commissionRate * (1 + projectConfig.vatRate);
-  const brokerage = Math.round(rawBrokerage * 100) / 100;
+  let brokerage = 0;
+  if (!isNoBrokerage(input.brokerageStatus) && input.brokerage !== 0) {
+    if (typeof input.brokerage === 'number' && input.brokerage > 0) {
+      brokerage = Math.round(input.brokerage * 100) / 100;
+    } else {
+      const rawBrokerage = landValue * projectConfig.commissionRate * (1 + projectConfig.vatRate);
+      brokerage = Math.round(rawBrokerage * 100) / 100;
+    }
+  }
 
   const rawRetTax = landValue * projectConfig.rettRate;
   const retTax = Math.round(rawRetTax * 100) / 100;

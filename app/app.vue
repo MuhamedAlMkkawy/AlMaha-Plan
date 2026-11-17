@@ -2,7 +2,7 @@
   <NuxtLayout>
     <NuxtLoadingIndicator color="#126B58" :height="3" :duration="2500" />
     <NuxtPage />
-    <Toast />
+    <Toast position="top-right" />
     <FeaturesLoading v-if="loading" />
   </NuxtLayout>
 </template>
@@ -24,7 +24,7 @@
   });
 </script>
 
-<!-- <style>
+<style>
   .page-enter-active,
   .page-leave-active {
     transition: all 0.4s;
@@ -35,4 +35,4 @@
     /* transform: scale(0.7) rotate(4deg); */
     transform: translateX(15px);
   }
-</style> -->
+</style>

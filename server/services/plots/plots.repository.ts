@@ -4,7 +4,7 @@ import { Plot, PublicPlot, CreatePlotInput, UpdatePlotInput, PlotStatistics, Blo
 import { GoogleSheetsClient } from '../../utils/google-sheets/client';
 import { PlotsMapper } from './plots.mapper';
 import { AuditService } from '../audit/audit.service';
-import { PricingService } from '../pricing/pricing.service';
+import { PricingService, isNoBrokerage } from '../pricing/pricing.service';
 
 interface CacheEntry {
   plots: Plot[];
@@ -17,9 +17,25 @@ const CACHE_TTL_MS = 60 * 1000; // 60 seconds TTL
 export class PlotsRepository {
   private static SHEET_ID = process.env.SHEET_ID || '1ssX3tDc_2g1VBhckLHyewPhk2aQB0sQlTxHuKdwT75A';
   private static FINAL_TAB = process.env.SHEET_TAB_FINAL || 'Final';
+  private static SEED_PATH = path.resolve(process.cwd(), 'server/data/plots-seed.json');
 
   public static invalidateCache(): void {
     memoryCache = null;
+  }
+
+  /**
+   * Save plots to local seed snapshot on disk to guarantee persistence
+   */
+  public static saveSeedPlots(plots: Plot[]): void {
+    try {
+      const dir = path.dirname(this.SEED_PATH);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+      fs.writeFileSync(this.SEED_PATH, JSON.stringify(plots, null, 2), 'utf8');
+    } catch (err) {
+      console.error('[PlotsRepository] Failed to save plots to seed file:', err);
+    }
   }
 
   /**
@@ -27,9 +43,8 @@ export class PlotsRepository {
    */
   private static loadSeedPlots(): Plot[] {
     try {
-      const seedPath = path.resolve(process.cwd(), 'server/data/plots-seed.json');
-      if (fs.existsSync(seedPath)) {
-        const data = fs.readFileSync(seedPath, 'utf8');
+      if (fs.existsSync(this.SEED_PATH)) {
+        const data = fs.readFileSync(this.SEED_PATH, 'utf8');
         return JSON.parse(data) as Plot[];
       }
     } catch (err) {
@@ -302,46 +317,57 @@ export class PlotsRepository {
     let rowNum = 975; // default fallback row
 
     if (client) {
-      // Re-read sheet to get current total rows
-      const rows = await GoogleSheetsClient.getValues(this.SHEET_ID, `${this.FINAL_TAB}!A:C`);
-      rowNum = rows.length + 1;
+      try {
+        // Re-read sheet to get current total rows
+        const rows = await GoogleSheetsClient.getValues(this.SHEET_ID, `${this.FINAL_TAB}!A:C`);
+        rowNum = rows.length + 1;
 
-      const rowValues = PlotsMapper.plotToRowValuesForCreate(input, rowNum);
-      await GoogleSheetsClient.appendValues(this.SHEET_ID, `${this.FINAL_TAB}!A:W`, [rowValues]);
-    } else {
-      // Offline fallback: update local seed memory
-      const current = await this.getAllPlots();
-      const calcs = PricingService.calculatePlot({ area: input.area, pricePerM2: input.pricePerM2 });
-      const newPlot: Plot = {
-        zone: input.zone || 'غير محدد',
-        block: input.block,
-        plotNo: input.plotNo,
-        usage: input.usage || 'سكنى',
-        area: input.area,
-        pricePerM2: input.pricePerM2,
-        landValue: calcs.landValue,
-        brokerage: calcs.brokerage,
-        brokerageStatus: input.brokerageStatus || 'كامل السعي',
-        status: input.status || 'متاح للبيع',
-        currentState: input.currentState || '',
-        retTax: calcs.retTax,
-        handoverStatus: input.handoverStatus || '',
-        handoverDate: input.handoverDate || '',
-        buyerName: input.buyerName || '',
-        buyerId: input.buyerId || '',
-        buyerPhone: input.buyerPhone || '',
-        deedNo: input.deedNo || '',
-        deedDate: input.deedDate || '',
-        invoice: input.invoice || '',
-        notes: input.notes || '',
-        rowNumber: current.length + 3,
-      };
-      newPlot.hash = PlotsMapper.generateHash(newPlot);
-      current.push(newPlot);
-      memoryCache = { plots: current, cachedAt: Date.now() };
+        const rowValues = PlotsMapper.plotToRowValuesForCreate(input, rowNum);
+        await GoogleSheetsClient.appendValues(this.SHEET_ID, `${this.FINAL_TAB}!A:W`, [rowValues]);
+      } catch (sheetErr) {
+        console.warn('[PlotsRepository] Failed to append to Google Sheets:', sheetErr);
+      }
     }
 
-    this.invalidateCache();
+    const isNoBrok = isNoBrokerage(input.brokerageStatus) || input.brokerage === 0;
+    const finalBrokerageStatus = isNoBrok ? 'لايوجد' : (input.brokerageStatus || 'كامل السعي');
+    const calcs = PricingService.calculatePlot({
+      area: input.area,
+      pricePerM2: input.pricePerM2,
+      brokerageStatus: finalBrokerageStatus,
+      brokerage: isNoBrok ? 0 : input.brokerage,
+    });
+    const finalBrokerage = isNoBrok ? 0 : (input.brokerage !== undefined && Number(input.brokerage) >= 0 ? Number(input.brokerage) : calcs.brokerage);
+
+    const current = await this.getAllPlots(true);
+    const newPlot: Plot = {
+      zone: input.zone || 'غير محدد',
+      block: input.block,
+      plotNo: input.plotNo,
+      usage: input.usage || 'سكنى',
+      area: input.area,
+      pricePerM2: input.pricePerM2,
+      landValue: calcs.landValue,
+      brokerage: finalBrokerage,
+      brokerageStatus: finalBrokerageStatus,
+      status: input.status || 'متاح للبيع',
+      currentState: input.currentState || '',
+      retTax: calcs.retTax,
+      handoverStatus: input.handoverStatus || '',
+      handoverDate: input.handoverDate || '',
+      buyerName: input.buyerName || '',
+      buyerId: input.buyerId || '',
+      buyerPhone: input.buyerPhone || '',
+      deedNo: input.deedNo || '',
+      deedDate: input.deedDate || '',
+      invoice: input.invoice || '',
+      notes: input.notes || '',
+      rowNumber: current.length + 3,
+    };
+    newPlot.hash = PlotsMapper.generateHash(newPlot);
+    current.push(newPlot);
+    this.saveSeedPlots(current);
+    memoryCache = { plots: current, cachedAt: Date.now() };
 
     await AuditService.log({
       adminEmail,
@@ -356,7 +382,7 @@ export class PlotsRepository {
   }
 
   /**
-   * Updates an existing plot in Google Sheet, protecting formulas G, H, T.
+   * Updates an existing plot in Google Sheet and local persistent storage, protecting formulas G, H, T.
    */
   public static async updatePlot(
     plotNo: number,
@@ -364,7 +390,7 @@ export class PlotsRepository {
     adminEmail: string,
     ipAddress?: string
   ): Promise<Plot> {
-    // 1. Re-read the spreadsheet to find current row
+    // 1. Re-read to find current plot
     const current = await this.getPlotByNumber(plotNo);
     if (!current) {
       throw new Error(`القطعة رقم ${plotNo} غير موجودة.`);
@@ -380,109 +406,135 @@ export class PlotsRepository {
     const beforeData = JSON.stringify(current);
     const client = GoogleSheetsClient.getClient();
 
+    const isNoBrok = isNoBrokerage(input.brokerageStatus) || input.brokerage === 0;
+    const finalBrokerageStatus = isNoBrok ? 'لايوجد' : (input.brokerageStatus || current.brokerageStatus || 'كامل السعي');
+
+    const area = input.area !== undefined ? Number(input.area) : current.area;
+    const pricePerM2 = input.pricePerM2 !== undefined ? Number(input.pricePerM2) : current.pricePerM2;
+    const calcs = PricingService.calculatePlot({
+      area,
+      pricePerM2,
+      brokerageStatus: finalBrokerageStatus,
+      brokerage: isNoBrok ? 0 : input.brokerage,
+    });
+
+    const finalBrokerage = isNoBrok ? 0 : (input.brokerage !== undefined && Number(input.brokerage) >= 0 ? Number(input.brokerage) : calcs.brokerage);
+
     if (client) {
-      // Find row index by re-scanning column C (PLOT No.)
-      const rows = await GoogleSheetsClient.getValues(this.SHEET_ID, `${this.FINAL_TAB}!C:C`);
-      let foundRow = -1;
-      for (let i = 0; i < rows.length; i++) {
-        if (parseInt(rows[i]?.[0], 10) === plotNo) {
-          foundRow = i + 1; // 1-based index
-          break;
+      try {
+        // Find row index by re-scanning column C (PLOT No.)
+        const rows = await GoogleSheetsClient.getValues(this.SHEET_ID, `${this.FINAL_TAB}!C:C`);
+        let foundRow = -1;
+        for (let i = 0; i < rows.length; i++) {
+          if (parseInt(rows[i]?.[0], 10) === plotNo) {
+            foundRow = i + 1; // 1-based index
+            break;
+          }
         }
-      }
 
-      if (foundRow === -1) {
-        throw new Error(`تعذر العثور على سطر القطعة ${plotNo} في جدول البيانات.`);
-      }
+        if (foundRow !== -1) {
+          const rangeAtoF = `${this.FINAL_TAB}!A${foundRow}:F${foundRow}`;
+          const valsAtoF = [
+            [
+              input.zone ?? current.zone ?? '',
+              input.block ?? current.block,
+              plotNo,
+              input.usage ?? current.usage,
+              area,
+              pricePerM2,
+            ],
+          ];
+          await GoogleSheetsClient.updateValues(this.SHEET_ID, rangeAtoF, valsAtoF);
 
-      // Update input fields:
-      // Note: Col A=Zone, B=Block, C=PlotNo, D=Usage, E=Area, F=PricePerM2
-      // G & H are formulas! DO NOT OVERWRITE!
-      // Col I=BrokerageStatus, K=Flag, L=Status, M=Buyer, N=ID, O=Phone, P=Deed, Q=DeedDate, R=Invoice, S=CurrentState
-      // T is formula! DO NOT OVERWRITE!
-      // Col U=HandoverStatus, V=HandoverDate, W=Notes
+          const rangeItoS = `${this.FINAL_TAB}!I${foundRow}:S${foundRow}`;
+          const statusVal = input.status ?? current.status ?? 'متاح للبيع';
+          const valsItoS = [
+            [
+              finalBrokerageStatus,
+              '', // J
+              statusVal === 'متاح للبيع' ? 'OK' : 'NO', // K
+              statusVal, // L
+              input.buyerName ?? current.buyerName ?? '',
+              input.buyerId ?? current.buyerId ?? '',
+              input.buyerPhone ?? current.buyerPhone ?? '',
+              input.deedNo ?? current.deedNo ?? '',
+              input.deedDate ?? current.deedDate ?? '',
+              input.invoice ?? current.invoice ?? '',
+              input.currentState ?? current.currentState ?? '',
+            ],
+          ];
+          await GoogleSheetsClient.updateValues(this.SHEET_ID, rangeItoS, valsItoS);
 
-      const rangeAtoF = `${this.FINAL_TAB}!A${foundRow}:F${foundRow}`;
-      const valsAtoF = [
-        [
-          input.zone ?? current.zone ?? '',
-          input.block ?? current.block,
-          plotNo,
-          input.usage ?? current.usage,
-          input.area ?? current.area,
-          input.pricePerM2 ?? current.pricePerM2,
-        ],
-      ];
-      await GoogleSheetsClient.updateValues(this.SHEET_ID, rangeAtoF, valsAtoF);
-
-      // Range I:S
-      const rangeItoS = `${this.FINAL_TAB}!I${foundRow}:S${foundRow}`;
-      const statusVal = input.status ?? current.status ?? 'متاح للبيع';
-      const valsItoS = [
-        [
-          input.brokerageStatus ?? current.brokerageStatus ?? 'كامل السعي',
-          '', // J
-          statusVal === 'متاح للبيع' ? 'OK' : 'NO', // K
-          statusVal, // L
-          input.buyerName ?? current.buyerName ?? '',
-          input.buyerId ?? current.buyerId ?? '',
-          input.buyerPhone ?? current.buyerPhone ?? '',
-          input.deedNo ?? current.deedNo ?? '',
-          input.deedDate ?? current.deedDate ?? '',
-          input.invoice ?? current.invoice ?? '',
-          input.currentState ?? current.currentState ?? '',
-        ],
-      ];
-      await GoogleSheetsClient.updateValues(this.SHEET_ID, rangeItoS, valsItoS);
-
-      // Range U:W
-      const rangeUtoW = `${this.FINAL_TAB}!U${foundRow}:W${foundRow}`;
-      const valsUtoW = [
-        [
-          input.handoverStatus ?? current.handoverStatus ?? '',
-          input.handoverDate ?? current.handoverDate ?? '',
-          input.notes ?? current.notes ?? '',
-        ],
-      ];
-      await GoogleSheetsClient.updateValues(this.SHEET_ID, rangeUtoW, valsUtoW);
-    } else {
-      // Offline fallback: update memory cache
-      const plots = await this.getAllPlots();
-      const idx = plots.findIndex((p) => p.plotNo === plotNo);
-      if (idx !== -1) {
-        const area = input.area ?? plots[idx].area;
-        const pricePerM2 = input.pricePerM2 ?? plots[idx].pricePerM2;
-        const calcs = PricingService.calculatePlot({ area, pricePerM2 });
-
-        plots[idx] = {
-          ...plots[idx],
-          zone: input.zone ?? plots[idx].zone,
-          block: input.block ?? plots[idx].block,
-          usage: input.usage ?? plots[idx].usage,
-          area,
-          pricePerM2,
-          landValue: calcs.landValue,
-          brokerage: calcs.brokerage,
-          retTax: calcs.retTax,
-          brokerageStatus: input.brokerageStatus ?? plots[idx].brokerageStatus,
-          status: input.status ?? plots[idx].status,
-          buyerName: input.buyerName ?? plots[idx].buyerName,
-          buyerId: input.buyerId ?? plots[idx].buyerId,
-          buyerPhone: input.buyerPhone ?? plots[idx].buyerPhone,
-          deedNo: input.deedNo ?? plots[idx].deedNo,
-          deedDate: input.deedDate ?? plots[idx].deedDate,
-          invoice: input.invoice ?? plots[idx].invoice,
-          currentState: input.currentState ?? plots[idx].currentState,
-          handoverStatus: input.handoverStatus ?? plots[idx].handoverStatus,
-          handoverDate: input.handoverDate ?? plots[idx].handoverDate,
-          notes: input.notes ?? plots[idx].notes,
-        };
-        plots[idx].hash = PlotsMapper.generateHash(plots[idx]);
-        memoryCache = { plots, cachedAt: Date.now() };
+          const rangeUtoW = `${this.FINAL_TAB}!U${foundRow}:W${foundRow}`;
+          const valsUtoW = [
+            [
+              input.handoverStatus ?? current.handoverStatus ?? '',
+              input.handoverDate ?? current.handoverDate ?? '',
+              input.notes ?? current.notes ?? '',
+            ],
+          ];
+          await GoogleSheetsClient.updateValues(this.SHEET_ID, rangeUtoW, valsUtoW);
+        }
+      } catch (sheetErr) {
+        console.warn('[PlotsRepository] Failed to update Google Sheet:', sheetErr);
       }
     }
 
-    this.invalidateCache();
+    // Always update local persistent storage (plots-seed.json) and memory cache
+    const plots = await this.getAllPlots();
+    const idx = plots.findIndex((p) => p.plotNo === plotNo);
+    let updatedPlot: Plot;
+    if (idx !== -1) {
+      updatedPlot = {
+        ...plots[idx],
+        zone: input.zone ?? plots[idx].zone,
+        block: input.block !== undefined ? Number(input.block) : plots[idx].block,
+        usage: input.usage ?? plots[idx].usage,
+        area,
+        pricePerM2,
+        landValue: calcs.landValue,
+        brokerage: finalBrokerage,
+        brokerageStatus: finalBrokerageStatus,
+        retTax: calcs.retTax,
+        status: input.status ?? plots[idx].status,
+        buyerName: input.buyerName !== undefined ? input.buyerName : plots[idx].buyerName,
+        buyerId: input.buyerId !== undefined ? input.buyerId : plots[idx].buyerId,
+        buyerPhone: input.buyerPhone !== undefined ? input.buyerPhone : plots[idx].buyerPhone,
+        deedNo: input.deedNo !== undefined ? input.deedNo : plots[idx].deedNo,
+        deedDate: input.deedDate !== undefined ? input.deedDate : plots[idx].deedDate,
+        invoice: input.invoice !== undefined ? input.invoice : plots[idx].invoice,
+        currentState: input.currentState !== undefined ? input.currentState : plots[idx].currentState,
+        handoverStatus: input.handoverStatus !== undefined ? input.handoverStatus : plots[idx].handoverStatus,
+        handoverDate: input.handoverDate !== undefined ? input.handoverDate : plots[idx].handoverDate,
+        notes: input.notes !== undefined ? input.notes : plots[idx].notes,
+      };
+      updatedPlot.hash = PlotsMapper.generateHash(updatedPlot);
+      plots[idx] = updatedPlot;
+      this.saveSeedPlots(plots);
+      memoryCache = { plots, cachedAt: Date.now() };
+    } else {
+      updatedPlot = current;
+    }
+
+    // Synchronize buyer details in ContractsRepository if present
+    if (input.buyerName !== undefined || input.buyerId !== undefined || input.buyerPhone !== undefined || input.notes !== undefined) {
+      try {
+        const { ContractsRepository } = await import('../contracts/contracts.repository');
+        const contracts = await ContractsRepository.getAllContracts();
+        const existingContract = contracts.get(plotNo);
+        if (existingContract) {
+          if (input.buyerName !== undefined) existingContract.buyerName = input.buyerName;
+          if (input.buyerId !== undefined) existingContract.buyerId = input.buyerId;
+          if (input.buyerPhone !== undefined) existingContract.buyerPhone = input.buyerPhone;
+          if (input.notes !== undefined) existingContract.contractNote = input.notes;
+          existingContract.updatedAt = new Date().toISOString();
+          contracts.set(plotNo, existingContract);
+          (ContractsRepository as any).saveToFile?.(contracts);
+        }
+      } catch (cErr) {
+        console.warn('[PlotsRepository] Error syncing contract data:', cErr);
+      }
+    }
 
     await AuditService.log({
       adminEmail,
@@ -493,8 +545,7 @@ export class PlotsRepository {
       ipAddress,
     });
 
-    const updated = await this.getPlotByNumber(plotNo);
-    return updated!;
+    return updatedPlot;
   }
 
   /**

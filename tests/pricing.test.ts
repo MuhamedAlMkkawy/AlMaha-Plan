@@ -28,6 +28,32 @@ describe('Pricing Formulas (Sheet1 Verification)', () => {
     expect(calc.totalWithTax).toBe(631068.75);
   });
 
+  it('should set brokerage to 0 when brokerageStatus is "لايوجد" or "لا يوجد سعي"', () => {
+    const calc1 = calculatePlotPricing({
+      area: 300,
+      pricePerM2: 1700,
+      brokerageStatus: 'لايوجد',
+    });
+    expect(calc1.brokerage).toBe(0);
+    expect(calc1.totalWithTax).toBe(510000 + 25500);
+
+    const calc2 = calculatePlotPricing({
+      area: 300,
+      pricePerM2: 1700,
+      brokerageStatus: 'لا يوجد سعي',
+    });
+    expect(calc2.brokerage).toBe(0);
+    expect(calc2.totalWithTax).toBe(510000 + 25500);
+
+    const calc3 = calculatePlotPricing({
+      area: 300,
+      pricePerM2: 1700,
+      brokerage: 0,
+    });
+    expect(calc3.brokerage).toBe(0);
+    expect(calc3.totalWithTax).toBe(510000 + 25500);
+  });
+
   it('should correctly aggregate quotation summary over multiple plots', () => {
     const summary = calculateQuotationSummary([
       { area: 300, pricePerM2: 1700 }, // Plot 673

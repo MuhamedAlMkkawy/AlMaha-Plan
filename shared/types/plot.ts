@@ -50,6 +50,7 @@ export interface CreatePlotInput {
   usage: string;
   area: number;
   pricePerM2: number;
+  brokerage?: number;
   brokerageStatus?: string;
   status?: string;
   buyerName?: string;

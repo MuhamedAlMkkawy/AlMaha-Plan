@@ -6,7 +6,7 @@ export function useToastMsg() {
   const globalStore = useGlobalStore()
 
 
-  const showToast = (severity, summary, detail, life = 2000) => {
+  const showToast = (severity, summary, detail, life = 1500) => {
     toast.add({ severity, summary, detail, life });
   };
 

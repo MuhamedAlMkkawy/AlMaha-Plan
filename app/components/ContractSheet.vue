@@ -70,8 +70,11 @@
           <td class="tabular-nums">{{ fmt(p.retTax) }} ريال سعودي</td>
         </tr>
         <tr>
-          <th>أتعاب الوساطة</th>
-          <td class="tabular-nums">{{ fmt(p.brokerage) }} ريال سعودي</td>
+          <th>أتعاب الوسيط</th>
+          <td class="tabular-nums">
+            <span v-if="Number(p.brokerage) > 0">{{ fmt(p.brokerage) }} ريال سعودي</span>
+            <span v-else>لايوجد</span>
+          </td>
         </tr>
         <tr>
           <th>بيان خاص</th>

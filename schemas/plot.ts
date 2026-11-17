@@ -63,6 +63,7 @@ export const PlotInputSchema = z.object({
   usage: z.string().min(1, 'نوع الاستخدام مطلوب'),
   area: z.number().positive('المساحة يجب أن تكون أكبر من صفر'),
   pricePerM2: z.number().nonnegative('سعر المتر يجب ألا يكون سالباً'),
+  brokerage: z.number().nonnegative().optional(),
   brokerageStatus: z.string().default('كامل السعي'),
   status: z.string().default('متاح للبيع'),
   buyerName: z.string().optional().default(''),
