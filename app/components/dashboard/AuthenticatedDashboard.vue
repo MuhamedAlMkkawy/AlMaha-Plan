@@ -2,80 +2,88 @@
 <template>
   <div class="dashboard-page space-y-10" dir="rtl">
 
-    <!-- ================= HERO / WELCOME ================= -->
-    <section class="hero-banner relative isolate overflow-hidden rounded-[2rem] bg-[#174A40] p-7 sm:p-10 text-white shadow-xl">
-      <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(120%_120%_at_100%_0%,#126B58_0%,#174A40_50%,#0D5143_100%)]"></div>
+<!-- ================= HERO / WELCOME ================= -->
+<section class="hero-banner relative isolate overflow-hidden rounded-[2rem] bg-[#174A40] p-6 text-white shadow-xl sm:p-10">
+  <!-- Backgrounds -->
+  <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(120%_120%_at_100%_0%,#126B58_0%,#174A40_50%,#0D5143_100%)]"></div>
 
-      <div
-        class="pointer-events-none absolute inset-0 -z-10 opacity-30"
-        style="background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px); background-size: 24px 24%;"
-      ></div>
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 opacity-30"
+    style="background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px); background-size: 24px 24px;"
+  ></div>
 
-      <div class="pointer-events-none absolute -left-20 -bottom-28 -z-10 h-96 w-96 rounded-full bg-[#B89A68]/20 blur-3xl"></div>
-      <div class="pointer-events-none absolute inset-x-10 top-0 h-[2px] bg-gradient-to-l from-transparent via-[#D8C5A0]/70 to-transparent"></div>
+  <div class="pointer-events-none absolute -left-20 -bottom-28 -z-10 h-96 w-96 rounded-full bg-[#B89A68]/20 blur-3xl"></div>
+  <div class="pointer-events-none absolute inset-x-10 top-0 h-[2px] bg-gradient-to-l from-transparent via-[#D8C5A0]/70 to-transparent"></div>
 
-      <div class="flex flex-col justify-between gap-8 md:flex-row md:items-center">
-        <div class="max-w-2xl">
-          <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-[#D8C5A0] ring-1 ring-white/20 backdrop-blur-sm">
-            <span class="relative flex h-2 w-2">
-              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60"></span>
-              <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
-            </span>
-            <span>مخطط معتمد برقم {{ projectConfig.planNo }}</span>
-          </div>
+  <!-- Title block -->
+  <div class="max-w-3xl">
+    <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-[#D8C5A0] ring-1 ring-white/20 backdrop-blur-sm">
+      <span class="relative flex h-2 w-2">
+        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60"></span>
+        <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
+      </span>
+      <span>مخطط معتمد برقم {{ projectConfig.planNo }}</span>
+    </div>
 
-          <h1 class="mt-5 text-3xl font-black leading-relaxed tracking-tight sm:text-5xl">
-            {{ projectConfig.name }}
-          </h1>
+    <h1 class="mt-5 text-3xl font-black leading-relaxed tracking-tight sm:text-4xl lg:text-5xl">
+      {{ projectConfig.name }}
+    </h1>
 
-          <div class="mt-4 h-[3px] w-24 rounded-full bg-gradient-to-l from-[#B89A68] to-transparent"></div>
-        </div>
+    <div class="mt-4 h-[3px] w-24 rounded-full bg-gradient-to-l from-[#B89A68] to-transparent"></div>
+  </div>
 
-        <div class="flex w-full flex-col items-stretch gap-3 sm:flex-row md:w-auto md:flex-col lg:flex-row lg:items-center">
-          <!-- Admin-Only Presentation Export Button -->
-          <button
-            v-if="isAdmin"
-            type="button"
-            @click="exportPresentation"
-            :disabled="exportingPresentation"
-            class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[#B89A68]/60 bg-gradient-to-l from-[#B89A68]/20 via-[#174A40] to-[#126B58] px-5 py-3.5 text-xs font-black text-[#D8C5A0] shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-[#D8C5A0] hover:text-white hover:shadow-xl active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
-            title="تصدير عرض تقديمي تنفيذي (PowerPoint) للإدارة العليا"
-          >
-            <i :class="exportingPresentation ? 'pi pi-spin pi-spinner' : 'pi pi-file-export'" class="text-xs text-[#D8C5A0]"></i>
-            <span>{{ exportingPresentation ? 'جاري التجهيز...' : 'عرض تقديمي (PPTX)' }}</span>
-          </button>
+  <!-- Actions -->
+  <div class="mt-8 border-t border-white/15 pt-6">
+    <div class="flex flex-wrap items-center gap-3">
+      <!-- Primary -->
+      <NuxtLink
+        to="/quote"
+        class="hero-primary-button group inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-b from-[#D8C5A0] to-[#B89A68] px-7 text-sm font-black text-[#174A40] shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98] sm:w-auto"
+      >
+        <i class="pi pi-file-edit text-xs"></i>
+        <span>إنشاء عرض سعر</span>
+        <i class="pi pi-arrow-left text-[10px] opacity-60 transition-transform group-hover:-translate-x-1"></i>
+      </NuxtLink>
 
-          <NuxtLink
-            to="/quote"
-            class="hero-primary-button group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-gradient-to-b from-[#D8C5A0] to-[#B89A68] px-7 py-3.5 text-sm font-black text-[#174A40] shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl active:scale-[0.98]"
-          >
-            <i class="pi pi-file-edit text-xs"></i>
-            <span>إنشاء عرض سعر</span>
-            <i class="pi pi-arrow-left text-[10px] opacity-60 transition-transform group-hover:-translate-x-1"></i>
-          </NuxtLink>
+      <!-- Secondary -->
+      <NuxtLink
+        to="/plots"
+        class="hero-secondary-button group inline-flex h-12 w-full items-center justify-center gap-2.5 rounded-full bg-white/10 px-6 text-sm font-bold text-white ring-1 ring-white/25 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-[#174A40] active:scale-[0.98] sm:w-auto"
+      >
+        <i class="pi pi-th-large text-xs transition-transform group-hover:scale-110"></i>
+        <span>استعراض جدول القطع</span>
+      </NuxtLink>
 
-          <NuxtLink
-            to="/plots"
-            class="hero-secondary-button group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-white/10 px-6 py-3.5 text-sm font-bold text-white ring-1 ring-white/25 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:text-[#174A40] active:scale-[0.98]"
-          >
-            <i class="pi pi-th-large text-xs transition-transform group-hover:scale-110"></i>
-            <span>استعراض جدول القطع</span>
-          </NuxtLink>
+      <!-- Spacer pushes utility actions to the far end on larger screens -->
+      <div class="hidden flex-1 sm:block"></div>
 
-          <button
-            type="button"
-            @click="refreshData"
-            :disabled="refreshing"
-            class="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white/10 px-5 text-sm font-semibold text-white ring-1 ring-white/25 transition-all duration-300 hover:bg-white/20 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 lg:w-12 lg:px-0"
-            title="تحديث البيانات"
-            aria-label="تحديث البيانات"
-          >
-            <i :class="['pi pi-sync text-sm transition-transform duration-500', refreshing ? 'pi-spin' : 'group-hover:rotate-180']"></i>
-            <span class="lg:hidden">تحديث البيانات</span>
-          </button>
-        </div>
-      </div>
-    </section>
+      <!-- Admin-only export -->
+      <button
+        v-if="isAdmin"
+        type="button"
+        @click="exportPresentation"
+        :disabled="exportingPresentation"
+        class="group inline-flex h-12 flex-1 items-center justify-center gap-2 rounded-full border border-[#B89A68]/60 bg-[#B89A68]/10 px-5 text-xs font-black text-[#D8C5A0] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#D8C5A0] hover:bg-[#B89A68]/20 hover:text-white active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 sm:flex-none"
+        title="تصدير عرض تقديمي تنفيذي (PowerPoint) للإدارة العليا"
+      >
+        <i :class="exportingPresentation ? 'pi pi-spin pi-spinner' : 'pi pi-file-export'" class="text-xs"></i>
+        <span>{{ exportingPresentation ? 'جاري التجهيز...' : 'عرض تقديمي (PPTX)' }}</span>
+      </button>
+
+      <!-- Refresh (icon only) -->
+      <button
+        type="button"
+        @click="refreshData"
+        :disabled="refreshing"
+        class="group inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/25 transition-all duration-300 hover:bg-white/20 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+        title="تحديث البيانات"
+        aria-label="تحديث البيانات"
+      >
+        <i :class="['pi pi-sync text-sm transition-transform duration-500', refreshing ? 'pi-spin' : 'group-hover:rotate-180']"></i>
+      </button>
+    </div>
+  </div>
+</section>
 
     <!-- ================= LOADING SKELETON ================= -->
     <div v-if="pending && !stats" class="space-y-8 animate-fadeIn" aria-busy="true">
