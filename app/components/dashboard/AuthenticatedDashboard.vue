@@ -111,102 +111,97 @@
     <div v-else-if="stats" class="space-y-10">
 
       <!-- ================= KPI CARDS ================= -->
-      <section class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+<section class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
 
-        <!-- Total Plots -->
-        <NuxtLink
-          to="/plots"
-          class="dashboard-card kpi-card group relative isolate overflow-hidden rounded-3xl border border-[#E5E9E5] bg-white p-6 shadow-sm transition-all duration-300"
-        >
-          <span class="absolute inset-x-0 top-0 h-1 bg-[#126B58]"></span>
+  <!-- Total Plots -->
+  <NuxtLink
+    to="/plots"
+    class="dashboard-card kpi-card group relative isolate overflow-hidden rounded-3xl border border-[#E5E9E5] bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#126B58]/40"
+  >
+    <span class="absolute inset-x-0 top-0 h-1 bg-[#126B58]"></span>
 
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-[#718078]">إجمالي القطع</span>
-            <div class="kpi-icon flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E5EEE9] text-[#126B58]">
-              <i class="pi pi-map-marker text-lg"></i>
-            </div>
-          </div>
+    <div class="flex items-center justify-between">
+      <span class="text-xs font-bold text-[#718078]">إجمالي القطع</span>
+      <div class="kpi-icon flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E5EEE9] text-[#126B58]">
+        <i class="pi pi-map-marker text-lg"></i>
+      </div>
+    </div>
 
-          <div class="mt-5 text-3xl font-black tracking-tight text-[#293B36] tabular-nums">
-            {{ formatInteger(stats.totalPlots) }}
-          </div>
+    <div class="mt-5 text-3xl font-black tracking-tight text-[#293B36] tabular-nums">
+      {{ formatInteger(stats.totalPlots) }}
+    </div>
 
-          <p class="mt-2 text-xs font-medium text-[#718078]">
-            موزعة على {{ stats.blocksCount }} بلك • {{ stats.zonesCount }} زون
-          </p>
+    <div class="mt-2 flex items-center justify-between gap-2">
+      <p class="text-xs font-medium text-[#718078]">
+        موزعة على {{ stats.blocksCount }} بلك • {{ stats.zonesCount }} زون
+      </p>
+      <span class="flex shrink-0 items-center gap-1 text-xs font-black text-[#126B58]">
+        استعراض
+        <i class="pi pi-arrow-left text-[10px] transition-transform duration-300 group-hover:-translate-x-1"></i>
+      </span>
+    </div>
+  </NuxtLink>
 
-          <div class="mt-5 flex items-center justify-between border-t border-[#E5E9E5] pt-4">
-            <span class="text-xs font-black text-[#126B58]">استعراض القطع</span>
-            <i class="pi pi-arrow-left text-[11px] text-[#126B58] transition-transform duration-300 group-hover:-translate-x-1"></i>
-          </div>
-        </NuxtLink>
+  <!-- Total Area -->
+  <div class="dashboard-card kpi-card group relative isolate overflow-hidden rounded-3xl border border-[#E5E9E5] bg-white p-6 shadow-sm transition-all duration-300">
+    <span class="absolute inset-x-0 top-0 h-1 bg-[#71998A]"></span>
 
-        <!-- Total Area -->
-        <div class="dashboard-card kpi-card group relative isolate overflow-hidden rounded-3xl border border-[#E5E9E5] bg-white p-6 shadow-sm transition-all duration-300">
-          <span class="absolute inset-x-0 top-0 h-1 bg-[#71998A]"></span>
+    <div class="flex items-center justify-between">
+      <span class="text-xs font-bold text-[#718078]">إجمالي المساحة</span>
+      <div class="kpi-icon flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E5EEE9] text-[#126B58]">
+        <i class="pi pi-compass text-lg"></i>
+      </div>
+    </div>
 
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-[#718078]">إجمالي المساحة</span>
-            <div class="kpi-icon flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E5EEE9] text-[#126B58]">
-              <i class="pi pi-compass text-lg"></i>
-            </div>
-          </div>
+    <div class="mt-5 text-3xl font-black tracking-tight text-[#293B36] tabular-nums">
+      {{ formatCurrencyNumber(stats.totalArea) }}
+    </div>
 
-          <div class="mt-5 text-3xl font-black tracking-tight text-[#293B36] tabular-nums">
-            {{ formatCurrencyNumber(stats.totalArea) }}
-          </div>
+    <p class="mt-2 text-xs font-medium text-[#718078]">
+      متر مربع (م²) مساحة الأراضي
+    </p>
+  </div>
 
-          <p class="mt-2 text-xs font-medium text-[#718078]">
-            متر مربع (م²) مساحة الأراضي
-          </p>
+  <!-- Total Value -->
+  <div class="dashboard-card kpi-card group relative isolate overflow-hidden rounded-3xl border border-[#E5E9E5] bg-white p-6 shadow-sm transition-all duration-300">
+    <span class="absolute inset-x-0 top-0 h-1 bg-[#B89A68]"></span>
 
-          <div class="mt-5 h-[37px] border-t border-[#E5E9E5] pt-4"></div>
-        </div>
+    <div class="flex items-center justify-between">
+      <span class="text-xs font-bold text-[#718078]">القيمة الإجمالية</span>
+      <div class="kpi-icon flex h-11 w-11 items-center justify-center rounded-2xl bg-[#F5F1E8] text-[#B89A68]">
+        <i class="pi pi-wallet text-lg"></i>
+      </div>
+    </div>
 
-        <!-- Total Value -->
-        <div class="dashboard-card kpi-card group relative isolate overflow-hidden rounded-3xl border border-[#E5E9E5] bg-white p-6 shadow-sm transition-all duration-300">
-          <span class="absolute inset-x-0 top-0 h-1 bg-[#B89A68]"></span>
+    <div class="mt-5 text-2xl font-black tracking-tight text-[#293B36] tabular-nums sm:text-3xl">
+      {{ formatCurrencyNumber(stats.totalLandValue) }}
+    </div>
 
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-[#718078]">القيمة الإجمالية</span>
-            <div class="kpi-icon flex h-11 w-11 items-center justify-center rounded-2xl bg-[#F5F1E8] text-[#B89A68]">
-              <i class="pi pi-wallet text-lg"></i>
-            </div>
-          </div>
+    <p class="mt-2 text-xs font-medium text-[#718078]">
+      ريال سعودي (صافي الأراضي)
+    </p>
+  </div>
 
-          <div class="mt-5 text-2xl font-black tracking-tight text-[#293B36] tabular-nums sm:text-3xl">
-            {{ formatCurrencyNumber(stats.totalLandValue) }}
-          </div>
+  <!-- Average Price -->
+  <div class="dashboard-card kpi-card group relative isolate overflow-hidden rounded-3xl border border-[#E5E9E5] bg-white p-6 shadow-sm transition-all duration-300">
+    <span class="absolute inset-x-0 top-0 h-1 bg-[#174A40]"></span>
 
-          <p class="mt-2 text-xs font-medium text-[#718078]">
-            ريال سعودي (صافي الأراضي)
-          </p>
+    <div class="flex items-center justify-between">
+      <span class="text-xs font-bold text-[#718078]">متوسط سعر المتر</span>
+      <div class="kpi-icon flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E5EEE9] text-[#126B58]">
+        <i class="pi pi-chart-line text-lg"></i>
+      </div>
+    </div>
 
-          <div class="mt-5 h-[37px] border-t border-[#E5E9E5] pt-4"></div>
-        </div>
+    <div class="mt-5 text-3xl font-black tracking-tight text-[#293B36] tabular-nums">
+      {{ formatCurrencyNumber(stats.averagePricePerM2) }}
+    </div>
 
-        <!-- Average Price -->
-        <div class="dashboard-card kpi-card group relative isolate overflow-hidden rounded-3xl border border-[#E5E9E5] bg-white p-6 shadow-sm transition-all duration-300">
-          <span class="absolute inset-x-0 top-0 h-1 bg-[#174A40]"></span>
-
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-[#718078]">متوسط سعر المتر</span>
-            <div class="kpi-icon flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E5EEE9] text-[#126B58]">
-              <i class="pi pi-chart-line text-lg"></i>
-            </div>
-          </div>
-
-          <div class="mt-5 text-3xl font-black tracking-tight text-[#293B36] tabular-nums">
-            {{ formatCurrencyNumber(stats.averagePricePerM2) }}
-          </div>
-
-          <p class="mt-2 text-xs font-medium text-[#718078]">
-            ر.س / م² متوسط لكامل المخطط
-          </p>
-
-          <div class="mt-5 h-[37px] border-t border-[#E5E9E5] pt-4"></div>
-        </div>
-      </section>
+    <p class="mt-2 text-xs font-medium text-[#718078]">
+      ر.س / م² متوسط لكامل المخطط
+    </p>
+  </div>
+</section>
 
       <!-- ================= SALES STATUS ================= -->
       <section class="dashboard-panel relative overflow-hidden rounded-3xl border border-[#E5E9E5] bg-white p-6 shadow-sm sm:p-8">

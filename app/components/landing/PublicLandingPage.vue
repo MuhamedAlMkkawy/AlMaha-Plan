@@ -21,21 +21,21 @@
         </div>
 
         <!-- Title -->
-<h1
-  class="mt-8 text-4xl sm:text-6xl font-black leading-[1.6] sm:leading-[1.5] tracking-normal"
-  dir="rtl"
-  lang="ar"
->
-  <span class="block mb-2">
-    مرحباً بكم في
-  </span>
+        <h1
+          class="mt-8 text-4xl sm:text-6xl font-black leading-[1.6] sm:leading-[1.5] tracking-normal"
+          dir="rtl"
+          lang="ar"
+        >
+          <span class="block mb-2">
+            مرحباً بكم في
+          </span>
 
-  <span
-    class="block mt-2 text-left pb-2 bg-gradient-to-l from-[#D8C5A0] via-[#F5F1E8] to-[white] bg-clip-text text-transparent"
-  >
-    {{ projectConfig.name }}
-  </span>
-</h1>
+          <span
+            class="block mt-2 text-left pb-2 bg-gradient-to-l from-[#D8C5A0] via-[#F5F1E8] to-[white] bg-clip-text text-transparent"
+          >
+            {{ projectConfig.name }}
+          </span>
+        </h1>
 
         <!-- Subtitle -->
         <p class="mt-6 text-base sm:text-xl text-[#E5EEE9]/90 leading-relaxed font-normal">
