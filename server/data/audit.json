@@ -4,6 +4,18 @@
     "action": "UPDATE",
     "plotNo": 500,
     "beforeData": "{\"zone\":\"B1\",\"block\":22,\"plotNo\":500,\"usage\":\"سكنى\",\"area\":300,\"pricePerM2\":1650,\"landValue\":495000,\"brokerage\":0,\"brokerageStatus\":\"لايوجد\",\"availableFlag\":\"NO\",\"status\":\"متاح للبيع\",\"buyerName\":\"محمد رجب\",\"buyerId\":\"\",\"buyerPhone\":\"21022201\",\"deedNo\":\"9858716416300000\",\"deedDate\":\"6/7/2026\",\"invoice\":\"\",\"currentState\":\"\",\"retTax\":24750,\"handoverStatus\":\"\",\"handoverDate\":\"\",\"notes\":\"\",\"rowNumber\":502,\"hash\":\"500|22|B1|300|1650|متاح للبيع|محمد رجب|21022201|9858716416300000\"}",
+    "afterData": "{\"block\":22,\"zone\":\"B1\",\"usage\":\"سكنى\",\"area\":300,\"pricePerM2\":1650,\"status\":\"متاح للبيع\",\"brokerageStatus\":\"لا يوجد سعي\",\"brokerage\":0,\"landValue\":495000,\"retTax\":24750,\"totalWithTax\":519750,\"buyerName\":\"محمد رجب\",\"buyerPhone\":\"21022201\",\"buyerId\":\"\",\"deedNo\":\"9858716416300000\",\"deedDate\":\"6/7/2026\",\"invoice\":\"\",\"notes\":\"لا يوجد سعي\",\"expectedHash\":\"500|22|B1|300|1650|متاح للبيع|محمد رجب|21022201|9858716416300000\"}",
+    "ipAddress": "",
+    "id": "audit-1794934604541-ftxbg",
+    "timestamp": "2026-11-17T16:56:44.541Z",
+    "userName": "مدير المبيعات (manager@almaha-plan.sa)",
+    "userRole": "admin"
+  },
+  {
+    "adminEmail": "مدير المبيعات (manager@almaha-plan.sa)",
+    "action": "UPDATE",
+    "plotNo": 500,
+    "beforeData": "{\"zone\":\"B1\",\"block\":22,\"plotNo\":500,\"usage\":\"سكنى\",\"area\":300,\"pricePerM2\":1650,\"landValue\":495000,\"brokerage\":0,\"brokerageStatus\":\"لايوجد\",\"availableFlag\":\"NO\",\"status\":\"متاح للبيع\",\"buyerName\":\"محمد رجب\",\"buyerId\":\"\",\"buyerPhone\":\"21022201\",\"deedNo\":\"9858716416300000\",\"deedDate\":\"6/7/2026\",\"invoice\":\"\",\"currentState\":\"\",\"retTax\":24750,\"handoverStatus\":\"\",\"handoverDate\":\"\",\"notes\":\"\",\"rowNumber\":502,\"hash\":\"500|22|B1|300|1650|متاح للبيع|محمد رجب|21022201|9858716416300000\"}",
     "afterData": "{\"block\":22,\"zone\":\"B1\",\"usage\":\"سكنى\",\"area\":300,\"pricePerM2\":1650,\"status\":\"متاح للبيع\",\"brokerageStatus\":\"لا يوجد سعي\",\"brokerage\":0,\"landValue\":495000,\"retTax\":24750,\"totalWithTax\":519750,\"buyerName\":\"محمد رجب\",\"buyerPhone\":\"21022201\",\"buyerId\":\"\",\"deedNo\":\"9858716416300000\",\"deedDate\":\"6/7/2026\",\"invoice\":\"\",\"notes\":\"\",\"expectedHash\":\"500|22|B1|300|1650|متاح للبيع|محمد رجب|21022201|9858716416300000\"}",
     "ipAddress": "",
     "id": "audit-1794921217383-sgvl5",

@@ -39,9 +39,10 @@
         <!-- Print / PDF Button -->
         <button
           @click="handlePrint"
-          class="px-4 py-2.5 rounded-xl bg-[#126B58] hover:bg-[#174A40] text-white font-bold text-xs sm:text-sm shadow-md flex items-center gap-2 transition-all"
+          :disabled="printing"
+          class="px-4 py-2.5 rounded-xl bg-[#126B58] hover:bg-[#174A40] text-white font-bold text-xs sm:text-sm shadow-md flex items-center gap-2 transition-all disabled:opacity-60 disabled:pointer-events-none"
         >
-          <i class="pi pi-print"></i>
+          <i :class="printing ? 'pi pi-spin pi-spinner' : 'pi pi-print'"></i>
           <span>طباعة / حفظ PDF</span>
         </button>
 
@@ -76,7 +77,7 @@
     </div>
 
     <!-- Loading Skeleton -->
-    <div v-if="pending" class="space-y-6 animate-fadeIn" aria-busy="true">
+    <div v-if="pending" class="space-y-6 animate-fadeIn print:hidden" aria-busy="true">
       <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-xs space-y-6">
         <div class="flex items-center justify-between pb-4 border-b border-slate-100">
           <div class="space-y-2">
@@ -96,7 +97,10 @@
     </div>
 
     <!-- Error State -->
-    <div v-else-if="error || !plot" class="bg-rose-50 border border-rose-200 rounded-2xl p-8 text-center text-rose-800">
+    <div
+      v-else-if="error || !plot"
+      class="bg-rose-50 border border-rose-200 rounded-2xl p-8 text-center text-rose-800 print:hidden"
+    >
       <i class="pi pi-exclamation-triangle text-3xl mb-2"></i>
       <h3 class="font-bold text-lg mb-1">تعذر العثور على القطعة رقم {{ currentPlotNo }}</h3>
       <p class="text-xs sm:text-sm mb-4">يرجى التحقق من صحة رقم القطعة في الرابط</p>
@@ -105,17 +109,19 @@
       </NuxtLink>
     </div>
 
-    <!-- Plot Content -->
-    <div v-else class="space-y-6">
+    <!-- Plot Content (everything inside .print-area is what gets printed / saved as PDF) -->
+    <div v-else class="print-area space-y-6">
       <!-- 1. The Official Quotation Card (Sheet1 View) -->
-      <PlotsQuotationView
-        :items="quotationItems"
-        :buyer-name="canSeePii ? plot.buyerName : ''"
-        :buyer-phone="canSeePii ? plot.buyerPhone : ''"
-      />
+      <div class="print-card">
+        <PlotsQuotationView
+          :items="quotationItems"
+          :buyer-name="canSeePii ? plot.buyerName : ''"
+          :buyer-phone="canSeePii ? plot.buyerPhone : ''"
+        />
+      </div>
 
       <!-- 2. Plot Facts Section (بيانات القطعة الإضافية) -->
-      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs print:hidden space-y-4">
+      <div class="print-card bg-white rounded-2xl border border-slate-200 p-6 shadow-xs print:shadow-none space-y-4">
         <div class="flex items-center justify-between border-b border-slate-100 pb-3">
           <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
             <i class="pi pi-info-circle text-[#126B58]"></i>
@@ -162,16 +168,19 @@
         </div>
       </div>
 
-      <!-- 3. Admin-Only Secure Panel (PII, Deed, SharePoint link) -->
-      <div v-if="canSeePii" class="bg-emerald-/70 border-2 border-emerald- rounded-2xl p-6 shadow-xs print:hidden space-y-4">
-        <div class="flex items-center justify-between border-b border-emerald- pb-3">
+      <!-- 3. Admin-Only Secure Panel (PII, Deed) — never printed -->
+      <div
+        v-if="canSeePii"
+        class="bg-emerald-50/70 border-2 border-emerald-200 rounded-2xl p-6 shadow-xs print:hidden space-y-4"
+      >
+        <div class="flex items-center justify-between border-b border-emerald-200 pb-3">
           <div class="flex items-center gap-2">
             <div class="w-8 h-8 rounded-lg bg-[#126B58] text-white flex items-center justify-center text-sm font-bold">
               <i class="pi pi-shield"></i>
             </div>
             <div>
-              <h3 class="font-bold text-emerald- text-base">لوحة بيانات الإدارة الحصرية (سري)</h3>
-              <p class="text-xs text-emerald-">هذه البيانات مشفرة وتظهر فقط للمسؤولين المعتمدين</p>
+              <h3 class="font-bold text-emerald-900 text-base">لوحة بيانات الإدارة الحصرية (سري)</h3>
+              <p class="text-xs text-emerald-700">هذه البيانات مشفرة وتظهر فقط للمسؤولين المعتمدين</p>
             </div>
           </div>
           <NuxtLink
@@ -184,32 +193,32 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs sm:text-sm">
-          <div class="bg-white p-3.5 rounded-xl border border-emerald- shadow-2xs">
+          <div class="bg-white p-3.5 rounded-xl border border-emerald-200 shadow-2xs">
             <div class="text-slate-500 text-xs mb-1">اسم المشتري</div>
             <div class="font-bold text-slate-900">{{ plot.buyerName || '—' }}</div>
           </div>
 
-          <div class="bg-white p-3.5 rounded-xl border border-emerald- shadow-2xs">
+          <div class="bg-white p-3.5 rounded-xl border border-emerald-200 shadow-2xs">
             <div class="text-slate-500 text-xs mb-1">الهوية / السجل التجاري</div>
             <div class="font-bold text-slate-900">{{ plot.buyerId || '—' }}</div>
           </div>
 
-          <div class="bg-white p-3.5 rounded-xl border border-emerald- shadow-2xs">
+          <div class="bg-white p-3.5 rounded-xl border border-emerald-200 shadow-2xs">
             <div class="text-slate-500 text-xs mb-1">رقم الجوال</div>
             <div class="font-bold text-slate-900 dir-ltr text-end">{{ plot.buyerPhone || '—' }}</div>
           </div>
 
-          <div class="bg-white p-3.5 rounded-xl border border-emerald- shadow-2xs">
+          <div class="bg-white p-3.5 rounded-xl border border-emerald-200 shadow-2xs">
             <div class="text-slate-500 text-xs mb-1">رقم صك القطعة</div>
             <div class="font-bold text-slate-900 tracking-wider">{{ plot.deedNo || '—' }}</div>
           </div>
 
-          <div class="bg-white p-3.5 rounded-xl border border-emerald- shadow-2xs">
+          <div class="bg-white p-3.5 rounded-xl border border-emerald-200 shadow-2xs">
             <div class="text-slate-500 text-xs mb-1">تاريخ الصك</div>
             <div class="font-bold text-slate-900">{{ plot.deedDate || '—' }}</div>
           </div>
 
-          <div class="bg-white p-3.5 rounded-xl border border-emerald- shadow-2xs">
+          <div class="bg-white p-3.5 rounded-xl border border-emerald-200 shadow-2xs">
             <div class="text-slate-500 text-xs mb-1">الفاتورة الضريبية</div>
             <div class="font-bold text-slate-900">{{ plot.invoice || '—' }}</div>
           </div>
@@ -259,8 +268,42 @@ const goToPlot = (num: number) => {
   }
 };
 
-const handlePrint = () => {
-  window.print();
+// Print / Save as PDF
+const printing = ref(false);
+
+const handlePrint = async () => {
+  if (!import.meta.client || printing.value || !plot.value) return;
+
+  printing.value = true;
+
+  // The browser uses document.title as the suggested PDF file name.
+  const previousTitle = document.title;
+  document.title = `عرض سعر - قطعة ${currentPlotNo.value}`;
+
+  const restore = () => {
+    document.title = previousTitle;
+    printing.value = false;
+    window.removeEventListener('afterprint', restore);
+  };
+
+  window.addEventListener('afterprint', restore);
+
+  try {
+    // Make sure web fonts (Arabic) are loaded before the print snapshot.
+    await (document as any).fonts?.ready;
+  } catch {
+    /* ignore */
+  }
+
+  await nextTick();
+
+  // Small delay so the DOM/styles settle before the print dialog opens.
+  setTimeout(() => {
+    window.print();
+
+    // Fallback for browsers that don't fire `afterprint` reliably.
+    setTimeout(restore, 1500);
+  }, 50);
 };
 
 const copied = ref(false);
@@ -277,3 +320,61 @@ const copyShareLink = async () => {
 };
 </script>
 
+<!-- Not scoped on purpose: print styles must reach the layout and child components -->
+<style>
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+
+  html,
+  body {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  /* Hide the whole app (sidebar, navbar, footer, etc.) ... */
+  body * {
+    visibility: hidden !important;
+  }
+
+  /* ... except the print area */
+  .print-area,
+  .print-area * {
+    visibility: visible !important;
+  }
+
+  .print-area {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Keep backgrounds, colors, borders exactly as on screen */
+  .print-area,
+  .print-area * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Don't split cards across pages */
+  .print-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Avoid animations/transitions affecting the snapshot */
+  .print-area * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>

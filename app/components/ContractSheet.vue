@@ -13,7 +13,8 @@
         </div>
         <div>
           <dt>التاريخ</dt>
-          <dd class="blank min-w-24 tabular-nums">{{ dateText }}</dd>
+          <!-- <dd class="blank min-w-24 tabular-nums">{{ dateText }}</dd> -->
+          <dd class="blank min-w-24 tabular-nums">{{ new Date().toLocaleDateString('en-GB') }}</dd>
         </div>
       </dl>
     </header>

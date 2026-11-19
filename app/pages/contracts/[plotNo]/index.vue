@@ -8,7 +8,8 @@
         <p v-if="plot" class="page-sub">
           <span v-if="contractNo">رقم العقد {{ contractNo }}</span>
           <span v-if="contractNo && contractDate" class="sep"></span>
-          <span v-if="contractDate">التاريخ {{ contractDate }}</span>
+          <!-- <span v-if="contractDate">التاريخ {{ contractDate }}</span> -->
+          <span>التاريخ {{ new Date().toLocaleDateString('en-GB') }}</span>
         </p>
       </div>
 
